@@ -1,5 +1,13 @@
 # Nhật ký thay đổi
 
+## 1.2.0 – 2026-10-27
+
+- Đổi giao diện theo ảnh mẫu: sidebar nền xanh két #045050, mục đang chọn #0f706e, chữ trắng, chữ phụ #bfe0de; màu nhấn chuyển từ #007db3 sang #0f706e (trang chủ, thẻ, bộ lọc).
+- Dòng phụ rút gọn thành "DSCKI Nguyễn Quý Tùng" (sidebar, meta author, manifest).
+- Logo BVĐK Vũ Thư đặt trên nền tròn trắng để nổi trên nền tối.
+- Tăng CACHE_VERSION lên cph-hub-v1.2.0.
+- Kiểm tra: desktop và điện thoại 375 px trên localhost:8080, không cuộn ngang, không lỗi console của ứng dụng.
+
 ## 1.1.0 – 2026-10-27
 
 - Đổi tên ứng dụng thành "DượcLâmSàng BVĐKVũThư", dòng phụ "DSCKI Nguyễn Quý Tùng - Phòng KHTH".

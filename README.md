@@ -1,6 +1,6 @@
 # DượcLâmSàng BVĐKVũThư – Cổng tra cứu dược lâm sàng
 
-DSCKI Nguyễn Quý Tùng - Phòng KHTH, Bệnh viện Đa khoa Vũ Thư.
+DSCKI Nguyễn Quý Tùng, Bệnh viện Đa khoa Vũ Thư.
 
 Web app tĩnh (PWA, chạy ngoại tuyến) gom các tài liệu dược lâm sàng vào một giao diện có **thanh điều hướng bên trái**:
 
@@ -14,7 +14,7 @@ Web app tĩnh (PWA, chạy ngoại tuyến) gom các tài liệu dược lâm s�
 ```
 index.html              Khung ứng dụng (sidebar + khung xem tài liệu)
 css/base.css            Lõi design system ClinPharmAI
-css/theme.css           Màu nhấn theo đơn vị (BVĐK Vũ Thư: #007db3, lấy từ logo)
+css/theme.css           Màu theo đơn vị (BVĐK Vũ Thư: sidebar #045050, nhấn #0f706e)
 icons/                  Logo BVĐK Vũ Thư, favicon, icon cài đặt (192, 512, maskable)
 js/core.js              Điều hướng, tìm kiếm không dấu, yêu thích, định tuyến #/p/<id>
 data/pages.json         Danh mục tài liệu (version, updated, source, records)

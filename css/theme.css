@@ -1,2 +1,10 @@
-/* Lớp theme theo đơn vị: chỉ đổi màu nhấn. Màu lấy từ logo BVĐK Vũ Thư (vành xanh dương #007db3). */
-:root[data-unit="vu-thu"]{--accent:#007db3}
+/* Lớp theme theo đơn vị. BVĐK Vũ Thư: tông xanh két (teal) theo ảnh giao diện mẫu người dùng cung cấp. */
+:root[data-unit="vu-thu"]{
+  --accent:#0f706e;
+  --sb-bg:#045050;       /* nền sidebar */
+  --sb-active:#0f706e;   /* mục đang chọn */
+  --sb-hover:rgba(255,255,255,.08);
+  --sb-line:rgba(255,255,255,.12);
+  --sb-tx:#ffffff;
+  --sb-mut:#bfe0de;      /* chữ phụ */
+}
