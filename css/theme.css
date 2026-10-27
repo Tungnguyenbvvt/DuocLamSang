@@ -1,4 +1,2 @@
-/* Lớp theme theo đơn vị: chỉ đổi màu nhấn. Tên đơn vị đặt trong UNITS của js/core.js.
-   Màu Phương Châu là giá trị tạm – cần thay bằng màu nhận diện chính thức của đơn vị. */
-:root[data-unit="phuong-nam"]{--accent:#0a8f9b}
-:root[data-unit="phuong-chau"]{--accent:#b0306a}
+/* Lớp theme theo đơn vị: chỉ đổi màu nhấn. Màu lấy từ logo BVĐK Vũ Thư (vành xanh dương #007db3). */
+:root[data-unit="vu-thu"]{--accent:#007db3}

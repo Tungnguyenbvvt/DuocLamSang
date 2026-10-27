@@ -1,16 +1,13 @@
-/* ClinPharmAI Hub – khung điều hướng (sidebar trái + khung xem tài liệu).
+/* DượcLâmSàng BVĐKVũThư – khung điều hướng (sidebar trái + khung xem tài liệu).
    Không thu thập dữ liệu bệnh nhân. localStorage chỉ lưu tùy chọn giao diện
-   (đơn vị, nhóm thu gọn, danh sách id tài liệu yêu thích / đã xem). */
+   (nhóm thu gọn, danh sách id tài liệu yêu thích / đã xem). */
 (function () {
   'use strict';
 
+  var APP_NAME = 'DượcLâmSàng BVĐKVũThư';
   var DATA_URL = 'data/pages.json';
   var MOBILE_MAX = 900;
   var RECENT_MAX = 6;
-  var UNITS = {
-    'phuong-nam': 'Khoa Dược – BVĐK Phương Nam',
-    'phuong-chau': 'Khoa Dược – BV Phương Châu'
-  };
 
   var $ = function (id) { return document.getElementById(id); };
   var app = $('app'), sidebar = $('sidebar'), scrim = $('scrim');
@@ -19,7 +16,7 @@
   var frame = $('docFrame'), docLoading = $('docLoading');
   var crumb = $('crumb'), tbActions = $('tbActions');
   var btnFav = $('btnFav'), btnReload = $('btnReload'), btnNewTab = $('btnNewTab');
-  var sbToggle = $('sbToggle'), unitSelect = $('unitSelect');
+  var sbToggle = $('sbToggle');
 
   var state = { data: null, byId: {}, catById: {}, current: null, tagFilter: null, catFilter: null };
 
@@ -285,7 +282,7 @@
     btnNewTab.setAttribute('href', href);
     setCrumb(rec);
     updateFavBtn();
-    document.title = rec.title + ' · ClinPharmAI Hub';
+    document.title = rec.title + ' · ' + APP_NAME;
 
     var recent = store.get('recent', []).filter(function (id) { return id !== rec.id; });
     recent.unshift(rec.id);
@@ -303,7 +300,7 @@
     tbActions.hidden = true;
     homeView.hidden = false;
     setCrumb(null);
-    document.title = 'ClinPharmAI Hub';
+    document.title = APP_NAME;
     renderHome();
     renderNav();
     $('main').scrollTop = 0;
@@ -342,18 +339,6 @@
   }
   window.addEventListener('hashchange', route);
 
-  /* ---------- Đơn vị (theme) ---------- */
-  function applyUnit(u) {
-    if (!UNITS[u]) u = 'phuong-nam';
-    document.documentElement.setAttribute('data-unit', u);
-    unitSelect.value = u;
-    document.querySelector('.unit-name').textContent = UNITS[u];
-    var accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta && accent) meta.setAttribute('content', accent);
-  }
-  unitSelect.addEventListener('change', function () { applyUnit(unitSelect.value); store.set('unit', unitSelect.value); });
-
   /* ---------- Trạng thái mạng ---------- */
   function updateNet() {
     var el = $('netStatus');
@@ -384,7 +369,6 @@
     homeView.innerHTML = '<div class="notice" role="alert">' + msg + '</div>';
   }
 
-  applyUnit(store.get('unit', 'phuong-nam'));
   if (store.get('collapsed', false)) app.classList.add('sb-collapsed');
   syncToggleState();
   updateNet();

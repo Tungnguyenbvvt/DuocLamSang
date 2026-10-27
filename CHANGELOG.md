@@ -1,5 +1,12 @@
 # Nhật ký thay đổi
 
+## 1.1.0 – 2026-10-27
+
+- Đổi tên ứng dụng thành "DượcLâmSàng BVĐKVũThư", dòng phụ "DSCKI Nguyễn Quý Tùng - Phòng KHTH".
+- Thay logo bằng logo BVĐK Vũ Thư (sidebar, favicon, icon cài đặt 192/512/maskable); màu nhấn #007db3 lấy từ logo.
+- Bỏ ô chọn đơn vị Phương Nam/Phương Châu (ứng dụng nay dùng riêng cho BVĐK Vũ Thư).
+- Tăng CACHE_VERSION lên cph-hub-v1.1.0 để người dùng nhận logo mới.
+
 ## 1.0.0 – 2026-10-27
 
 - Dựng cổng tích hợp có sidebar trái cho 24 tài liệu (chuyển vào `pages/`, không sửa nội dung).

@@ -1,13 +1,14 @@
 <!doctype html>
-<html lang="vi" data-unit="phuong-nam">
+<html lang="vi" data-unit="vu-thu">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>ClinPharmAI Hub</title>
-<meta name="description" content="Cổng tra cứu tài liệu dược lâm sàng: tóm tắt guideline, thông tin thuốc, so sánh dược lý, thẩm định EBM.">
-<meta name="theme-color" content="#164aa2">
+<title>DượcLâmSàng BVĐKVũThư</title>
+<meta name="description" content="Cổng tra cứu tài liệu dược lâm sàng BVĐK Vũ Thư: tóm tắt guideline, thông tin thuốc, so sánh dược lý, thẩm định EBM.">
+<meta name="author" content="DSCKI Nguyễn Quý Tùng - Phòng KHTH">
+<meta name="theme-color" content="#007db3">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="icon" href="icons/favicon-48.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,8 +23,8 @@
   <aside class="sidebar" id="sidebar" aria-label="Điều hướng chính">
     <div class="sb-head">
       <a class="brand" href="#/" aria-label="Trang chủ">
-        <svg class="brand-logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M14 7h4v7h7v4h-7v7h-4v-7H7v-4h7z" fill="#fff"/></svg>
-        <span class="brand-text"><b>ClinPharmAI</b><small class="unit-name">Khoa Dược</small></span>
+        <img class="brand-logo" src="icons/logo.png" width="44" height="44" alt="">
+        <span class="brand-text"><b>DượcLâmSàng BVĐKVũThư</b><small>DSCKI Nguyễn Quý Tùng - Phòng&nbsp;KHTH</small></span>
       </a>
       <button class="icon-btn sb-close" id="sbClose" type="button" aria-label="Đóng menu">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -44,13 +45,6 @@
     </nav>
 
     <div class="sb-foot">
-      <label class="unit-pick">
-        <span>Đơn vị</span>
-        <select id="unitSelect" aria-label="Chọn đơn vị">
-          <option value="phuong-nam">BVĐK Phương Nam</option>
-          <option value="phuong-chau">BV Phương Châu</option>
-        </select>
-      </label>
       <p class="data-ver" id="dataVer">Dữ liệu: –</p>
       <p class="net" id="netStatus"></p>
     </div>

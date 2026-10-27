@@ -1,16 +1,16 @@
 {
-  "name": "ClinPharmAI Hub – Cổng tra cứu dược lâm sàng",
-  "short_name": "ClinPharmAI",
-  "description": "Tóm tắt guideline, thông tin thuốc, so sánh dược lý, thẩm định EBM.",
+  "name": "DượcLâmSàng BVĐKVũThư",
+  "short_name": "DượcLâmSàng",
+  "description": "Tóm tắt guideline, thông tin thuốc, so sánh dược lý, thẩm định EBM. DSCKI Nguyễn Quý Tùng - Phòng KHTH.",
   "lang": "vi",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#c4ccda",
-  "theme_color": "#164aa2",
+  "background_color": "#ffffff",
+  "theme_color": "#007db3",
   "icons": [
-    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" },
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }
