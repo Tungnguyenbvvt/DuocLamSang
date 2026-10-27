@@ -1,5 +1,11 @@
 # Nhật ký thay đổi
 
+## 1.3.0 – 2026-10-27
+
+- Tiêu đề 4 module lớn trong sidebar đổi sang dải màu đặc, mỗi module một màu nhận diện: Guideline vàng #f2b84b, Thông tin thuốc hồng #f37fae, So sánh dược lý xanh #5fd4e8, EBM tím #b3a6ff; biểu tượng đặt trên ô trắng. Người dùng chọn phương án B trong 3 phương án (A thẻ nổi, B dải màu, C biểu tượng khối lớn).
+- Tăng CACHE_VERSION lên cph-hub-v1.3.0.
+- Kiểm tra: desktop và điện thoại 375 px, không cuộn ngang, không tài nguyên lỗi.
+
 ## 1.2.0 – 2026-10-27
 
 - Đổi giao diện theo ảnh mẫu: sidebar nền xanh két #045050, mục đang chọn #0f706e, chữ trắng, chữ phụ #bfe0de; màu nhấn chuyển từ #007db3 sang #0f706e (trang chủ, thẻ, bộ lọc).

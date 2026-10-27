@@ -53,15 +53,22 @@ svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-l
 .nav-home.active,.nav-item.active{background:var(--sb-active);font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .nav-loading,.nav-empty{color:var(--sb-mut);padding:8px 10px;margin:0}
 
-.nav-group{margin-top:6px}
-.nav-group-btn{display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;border:0;background:none;border-radius:8px;cursor:pointer;text-align:left;font-weight:700;font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--sb-mut)}
-.nav-group-btn:hover{background:var(--sb-hover)}
+/* Tiêu đề module: dải màu đặc, mỗi module một màu nhận diện (--cat) */
+.nav-group[data-cat="guideline"]{--cat:#f2b84b}
+.nav-group[data-cat="thong-tin-thuoc"]{--cat:#f37fae}
+.nav-group[data-cat="so-sanh"]{--cat:#5fd4e8}
+.nav-group[data-cat="ebm"]{--cat:#b3a6ff}
+.nav-group{--cat:var(--accent);margin-top:12px}
+.nav-group-btn{display:flex;align-items:center;gap:8px;width:100%;padding:12px;border:0;border-radius:10px;cursor:pointer;text-align:left;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);background:linear-gradient(90deg,color-mix(in srgb,var(--cat) 62%,#000) 0%,color-mix(in srgb,var(--cat) 40%,var(--sb-bg)) 100%)}
+.nav-group-btn:hover{filter:brightness(1.08)}
+.nav-group-btn > svg:first-child{width:24px;height:24px;padding:3px;border-radius:6px;background:rgba(255,255,255,.95);color:color-mix(in srgb,var(--cat) 70%,#000)}
+.sidebar .nav-group-btn .nav-count{background:rgba(0,0,0,.25);color:#fff;text-shadow:none}
 .nav-group-btn .chev{width:16px;height:16px;margin-left:auto;transition:transform .15s}
 .nav-group.closed .chev{transform:rotate(-90deg)}
 .nav-group.closed .nav-list{display:none}
 .nav-count{font-size:12px;font-weight:600;background:var(--card2);color:var(--mut);border-radius:999px;padding:1px 8px;text-transform:none}
 .sidebar .nav-count{background:rgba(255,255,255,.14);color:var(--sb-tx)}
-.nav-list{list-style:none;margin:0;padding:0 0 0 6px}
+.nav-list{list-style:none;margin:6px 0 2px;padding:0 0 0 4px}
 .nav-item{font-size:14px}
 .nav-item .dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.4);flex:none}
 .nav-item.active .dot{background:#fff}
