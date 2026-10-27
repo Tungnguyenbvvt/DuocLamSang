@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 ASH Iron Deficiency Guideline - Visual Clinical Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        ash: {
+                            50: '#EAF3F1',
+                            100: '#D2E8E2',
+                            200: '#A6D4C6',
+                            500: '#0F6E5C',
+                            600: '#0B4F42',
+                            700: '#0A3B34',
+                            800: '#0A2622',
+                            900: '#0C0A09',
+                            navy: '#0f172a'
+                        },
+                        hematology: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#0d9488',
+                            600: '#0f766e',
+                            700: '#115e59',
+                            800: '#134e4a',
+                            900: '#042f2e'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        h1, h2, h3, h4, h5, h6, p, span, li, button, input, select {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        .clinical-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+            border-radius: 0.875rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .clinical-card:hover {
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .cor-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.725rem;
+            font-weight: 800;
+            letter-spacing: 0.025em;
+            text-transform: uppercase;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .cor-strong-for { background-color: #059669; color: #ffffff; border: 1px solid #047857; }
+        .cor-cond-for { background-color: #0284c7; color: #ffffff; border: 1px solid #0369a1; }
+        .cor-cond-against { background-color: #d97706; color: #ffffff; border: 1px solid #b45309; }
+        .cor-strong-against { background-color: #dc2626; color: #ffffff; border: 1px solid #b91c1c; }
+        .cor-remark { background-color: #b45309; color: #ffffff; border: 1px solid #92400e; }
+
+        .ref-note {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 5px solid #d97706;
+            border-radius: 0.875rem;
+            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.08);
+        }
+
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0284c7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0369a1;
+        }
+
+        .clinical-warning-box {
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+            border-left: 5px solid #f43f5e;
+            border-radius: 0.875rem;
+            box-shadow: 0 4px 10px rgba(244, 63, 94, 0.08);
+        }
+
+        .clinical-pearl-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 5px solid #0284c7;
+            border-radius: 0.875rem;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.08);
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .clinical-card { background: white; color: black; border: 1px solid #cbd5e1; box-shadow: none; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-teal-600 selection:text-white">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-300 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-tr from-teal-700 to-teal-500 text-white p-2.5 rounded-xl font-black text-xl flex items-center justify-center shadow-md shadow-teal-600/30">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="font-black text-lg tracking-tight text-slate-900">ASH ID GUIDELINE 2026</span>
+                            <span class="bg-teal-100 text-teal-900 font-black text-[11px] px-2.5 py-0.5 rounded-full border border-teal-300">ASH APPROVED 2026</span>
+                        </div>
+                        <span class="text-[11px] text-slate-600 block font-semibold">Chẩn Đoán & Điều Trị Thiếu Sắt (Visual Clinical Hub)</span>
+                    </div>
+                </div>
+
+                <nav class="hidden xl:flex space-x-1 text-xs font-bold text-slate-700">
+                    <a href="#overview" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">1. Tổng Quan Paradigm</a>
+                    <a href="#recommendations" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">2. 5 Khuyến Nghị CDL</a>
+                    <a href="#therapeutics" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">3. Phác Đồ Điều Trị</a>
+                    <a href="#ganzoni" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">4. Tính Liều Ganzoni</a>
+                    <a href="#summary-table" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">5. Bảng Tra Cứu</a>
+                    <a href="#references" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">6. Tài Liệu Tham Khảo</a>
+                </nav>
+
+                <div class="flex items-center space-x-3">
+                    <a href="#finder" class="bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-extrabold px-3.5 py-2 rounded-xl text-xs transition-all shadow-md shadow-teal-600/30 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>Tra Cứu Ngưỡng CDL</span>
+                    </a>
+                    <button onclick="window.print()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 p-2 rounded-xl text-xs border border-slate-300 transition-all" title="In Infographic">
+                        <i class="fa-solid fa-print"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner (Vibrant Dark Theme with Crimson Accents) -->
+    <section class="relative bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 text-white py-12 px-4 border-b border-teal-800/40 shadow-inner">
+        <div class="max-w-7xl mx-auto relative z-10">
+            
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="bg-teal-500/20 text-teal-300 border border-teal-400/40 text-xs px-3 py-1 rounded-full font-extrabold flex items-center shadow-sm">
+                    <i class="fa-solid fa-circle-check mr-1.5 text-teal-400"></i> HƯỚNG DẪN CẬP NHẬT CHÍNH THỨC
+                </span>
+                <span class="bg-teal-500/20 text-teal-300 border border-teal-400/40 text-xs px-3 py-1 rounded-full font-extrabold">
+                    <i class="fa-solid fa-book-journal-whills mr-1.5"></i> BLOOD ADVANCES 2026
+                </span>
+                <span class="bg-amber-500/20 text-amber-300 border border-amber-400/40 text-xs px-3 py-1 rounded-full font-extrabold">
+                    <i class="fa-solid fa-award mr-1.5"></i> AMERICAN SOCIETY OF HEMATOLOGY
+                </span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-snug mb-3">
+                Hướng Dẫn Lâm Sàng Chẩn Đoán & Điều Trị Thiếu Sắt <br class="hidden md:inline">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-amber-200 to-teal-300">
+                    (Iron Deficiency & Iron Deficiency Anemia - ASH 2026)
+                </span>
+            </h1>
+
+            <p class="text-slate-300 text-xs sm:text-sm max-w-5xl leading-relaxed mb-6 font-medium">
+                Bản tóm tắt quy chuẩn lâm sàng thực hành dành cho Bác sĩ Huyết học, Chăm sóc Ban đầu, Sản Phụ khoa, Nhi khoa & Tiêu hóa. Thay thế tư duy Giới hạn Dưới Chuẩn (LLN) bằng <strong class="text-white">Ngưỡng Quyết định Lâm sàng (CDL)</strong> chuẩn hóa từ Hiệp hội Huyết học Hoa Kỳ (ASH).
+            </p>
+
+            <!-- COR / CERTAINTY Legend Banner -->
+            <div class="bg-slate-800/90 backdrop-blur-md p-3.5 rounded-xl border border-slate-700/80 flex flex-wrap items-center justify-between gap-3 text-xs shadow-lg">
+                <div class="flex items-center space-x-2 flex-wrap gap-y-1">
+                    <span class="text-slate-200 font-black uppercase text-[11px] tracking-wider">Phân Loại Khuyến Nghị (GRADE):</span>
+                    <span class="cor-badge cor-strong-against">Khuyến nghị mạnh - Không dùng</span>
+                    <span class="cor-badge cor-cond-for">Khuyến nghị có điều kiện</span>
+                    <span class="cor-badge cor-remark">Remark (Mở rộng ≤ 50, không phải khuyến nghị riêng)</span>
+                </div>
+                <div class="flex items-center space-x-2 text-slate-200 text-[11px] flex-wrap gap-y-1">
+                    <span class="text-slate-300 font-bold uppercase tracking-wider">Mức Bằng Chứng GRADE (chỉ 2/4 mức xuất hiện trong guideline này):</span>
+                    <span class="bg-slate-900 px-2 py-1 rounded text-teal-300 border border-slate-700 font-bold">⊕⊕◯◯ Low Certainty (Thấp)</span>
+                    <span class="bg-slate-900 px-2 py-1 rounded text-amber-300 border border-slate-700 font-bold">⊕◯◯◯ Very Low Certainty (Rất thấp)</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECTION 0: INTERACTIVE PATIENT DIAGNOSTIC & TREATMENT FINDER -->
+        <section id="finder" class="clinical-card overflow-hidden border-2 border-teal-600/50 shadow-lg no-print">
+            <div class="bg-gradient-to-r from-teal-900 via-slate-900 to-ash-900 p-4 text-white flex flex-wrap justify-between items-center gap-4 border-b border-teal-700">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-teal-500 text-white p-2.5 rounded-xl text-xl font-black shadow-md"><i class="fa-solid fa-calculator"></i></div>
+                    <div>
+                        <h2 class="text-base font-black flex items-center text-white tracking-wide">
+                            CÔNG CỤ TRA CỨU NGƯỠNG CHẨN ĐOÁN & PHÁC ĐỒ THEO NHÓM BỆNH NHÂN (ASH 2026 FINDER)
+                        </h2>
+                        <p class="text-xs text-teal-200 font-medium">Chọn nhóm đối tượng và các yếu tố nguy cơ để xuất tiêu chuẩn CDL Ferritin / TSAT & gợi ý xử trí</p>
+                    </div>
+                </div>
+                <span class="bg-teal-500/30 text-teal-200 text-xs px-3 py-1.5 rounded-lg border border-teal-400/40 font-extrabold flex items-center shadow-inner">
+                    <i class="fa-solid fa-bolt text-amber-300 mr-1.5"></i> Tra Cứu Tức Thời
+                </span>
+            </div>
+
+            <div class="p-5 bg-slate-100/70 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <!-- Select Patient Group -->
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-300 shadow-sm space-y-2">
+                        <label class="block font-black text-teal-900 uppercase tracking-wider text-[11px]">1. Nhóm Bệnh Nhân:</label>
+                        <select id="filter-group" onchange="runFilter()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none">
+                            <option value="pediatrics">Trẻ em (9 tháng – 4 tuổi)</option>
+                            <option value="pediatrics_older">Trẻ em (>4 tuổi – Chưa kinh nguyệt)</option>
+                            <option value="adults_standard">Người lớn (Không kinh nguyệt / Không thai)</option>
+                            <option value="menstruating">Người có kinh nguyệt (Thông thường)</option>
+                            <option value="pregnancy">Phụ nữ mang thai (Thai kỳ)</option>
+                            <option value="inflammation">Người trưởng thành CÓ tình trạng viêm</option>
+                        </select>
+                    </div>
+
+                    <!-- Select Risk / Symptom Status -->
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-300 shadow-sm space-y-2">
+                        <label class="block font-black text-teal-900 uppercase tracking-wider text-[11px]">2. Yếu Tố Triệu Chứng / Nguy Cơ:</label>
+                        <select id="filter-risk" onchange="runFilter()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none">
+                            <option value="none">Không có triệu chứng / Nguy cơ tiêu chuẩn</option>
+                            <option value="symptomatic">Mệt mỏi / Chân không nghỉ / Nguy cơ diễn tiến</option>
+                            <option value="hmb_aub">Mất máu nhiều (Rong kinh HMB, AUB, Tiền phẫu)</option>
+                            <option value="anemia">Đã phát hiện kèm Thiếu máu (Anemia)</option>
+                        </select>
+                    </div>
+
+                    <!-- Select Oral vs IV Capability -->
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-300 shadow-sm space-y-2">
+                        <label class="block font-black text-teal-900 uppercase tracking-wider text-[11px]">3. Khả Năng Dung Nạp Đường Uống:</label>
+                        <select id="filter-route" onchange="runFilter()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none">
+                            <option value="oral">Dung nạp tốt / Thiếu sắt nhẹ-trung bình</option>
+                            <option value="iv">Kém hấp thu / Tác dụng phụ nặng / Cần bù cấp tốc</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dynamic Output Card -->
+                <div id="finder-result" class="bg-white p-4 rounded-xl border border-teal-300 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <h4 id="finder-title" class="font-extrabold text-teal-950 text-sm flex items-center">
+                            <i class="fa-solid fa-vial-circle-check text-teal-600 mr-2"></i> Kết Quả Chẩn Đoán & Khuyên Dùng
+                        </h4>
+                        <span id="finder-grade" class="bg-teal-100 text-teal-900 text-[11px] font-black px-2.5 py-0.5 rounded-full border border-teal-300"></span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div class="bg-teal-50/80 p-3.5 rounded-xl border border-teal-300 space-y-2">
+                            <h5 class="font-black text-teal-950 uppercase text-[11px] flex items-center">
+                                <i class="fa-solid fa-microscope text-teal-600 mr-1.5 text-sm"></i> NGƯỠNG CHẨN ĐOÁN CỐT LÕI (CDL)
+                            </h5>
+                            <div id="finder-threshold" class="text-lg font-black text-teal-700"></div>
+                            <p id="finder-notes" class="text-slate-700 font-medium leading-relaxed"></p>
+                        </div>
+
+                        <div class="bg-emerald-50/80 p-3.5 rounded-xl border border-emerald-300 space-y-2">
+                            <h5 class="font-black text-emerald-950 uppercase text-[11px] flex items-center">
+                                <i class="fa-solid fa-pills text-emerald-600 mr-1.5 text-sm"></i> PHÁC ĐỒ ĐIỀU TRỊ KHUYẾN CÁO
+                            </h5>
+                            <div id="finder-tx" class="text-xs font-bold text-emerald-900 leading-relaxed"></div>
+                            <p id="finder-tx-detail" class="text-[11px] text-slate-700 font-medium"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: TỔNG QUAN PARADIGM ASH 2026 -->
+        <section id="overview" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-arrows-rotate"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 1: TỔNG QUAN CHUYỂN ĐỔI PARADIGM (LLN VS CDL)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Lý do ASH 2026 loại bỏ Giới hạn Dưới Chuẩn (LLN) và chuyển sang Ngưỡng Quyết định Lâm sàng (CDL)</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- Core Shift Pearl Box -->
+                <div class="clinical-pearl-box p-4 shadow-sm">
+                    <h3 class="font-black text-ash-950 text-sm flex items-center">
+                        <i class="fa-solid fa-lightbulb text-ash-600 mr-2 text-base"></i>
+                        3 Điểm Cốt Lõi Tạo Nên Bước Tiến Mới Trong Guideline ASH 2026:
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3 text-xs text-slate-800 font-medium">
+                        <div class="bg-white p-3 rounded-xl border border-ash-200 shadow-sm">
+                            <strong class="text-ash-950 font-black block mb-1">1. Từ LLN Sang CDL Cố Định:</strong>
+                            Giới hạn Dưới Chuẩn (LLN) từ phòng xét nghiệm truyền thống (thường ≤ 12–15 ng/mL) gây bỏ sót lượng lớn bệnh nhân thiếu sắt chưa có biểu hiện thiếu máu nặng. ASH 2026 áp dụng CDL cố định từ 20–30 ng/mL.
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-ash-200 shadow-sm">
+                            <strong class="text-ash-950 font-black block mb-1">2. Sai Số Phòng Xét Nghiệm (±30–40%):</strong>
+                            Ở mức Ferritin &lt; 50 ng/mL, sai lệch giữa các hệ thống máy xét nghiệm lên tới ±30% đến ±40%. Do đó, nếu bệnh nhân có Ferritin tiệm cận 30 ng/mL kèm triệu chứng, bác sĩ cần chủ động can thiệp.
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-ash-200 shadow-sm">
+                            <strong class="text-ash-950 font-black block mb-1">3. Chuẩn Nhuộm Sắt Tủy Xương:</strong>
+                            Các ngưỡng CDL mới được xây dựng dựa trên sự đối chiếu trực tiếp với Tiêu chuẩn vàng: Nhuộm sắt tủy xương (Bone marrow iron staining), đảm bảo độ nhạy chẩn đoán tối ưu.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Comparison Grid Old vs New -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-teal-600">
+                        <span class="text-[10px] font-black uppercase text-slate-500">Trẻ 9 tháng – 4 tuổi</span>
+                        <div class="text-2xl font-black text-ash-700">≤ 20 <span class="text-xs font-semibold text-slate-500">ng/mL</span></div>
+                        <div class="text-xs text-slate-400 line-through">Trước đây: ≤ 12 ng/mL</div>
+                        <span class="inline-block text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">↑ Phát hiện sớm thiếu sắt nhi</span>
+                    </div>
+
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-teal-600">
+                        <span class="text-[10px] font-black uppercase text-slate-500">Người lớn / Kinh nguyệt</span>
+                        <div class="text-2xl font-black text-ash-700">≤ 30 <span class="text-xs font-semibold text-slate-500">ng/mL</span></div>
+                        <div class="text-xs text-slate-400 line-through">Trước đây: ≤ 15 ng/mL</div>
+                        <span class="inline-block text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">↑ Tăng mạnh độ nhạy</span>
+                    </div>
+
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-amber-500">
+                        <span class="text-[10px] font-black uppercase text-slate-500">Triệu chứng / HMB / Risk</span>
+                        <div class="text-2xl font-black text-amber-700">≤ 50 <span class="text-xs font-semibold text-slate-500">ng/mL</span></div>
+                        <div class="text-xs text-slate-500">Ngưỡng mở rộng can thiệp</div>
+                        <span class="inline-block text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">★ Ngưỡng bảo vệ dự trữ</span>
+                    </div>
+
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-teal-600">
+                        <span class="text-[10px] font-black uppercase text-slate-500">Bệnh nhân Viêm Cấp/Mãn</span>
+                        <div class="text-xl font-black text-teal-700">TSAT &lt; 20%</div>
+                        <div class="text-xs text-slate-500">Hoặc Ferritin &lt; 100 ng/mL</div>
+                        <span class="inline-block text-[11px] font-bold text-teal-800 bg-teal-50 px-2 py-0.5 rounded border border-teal-200">⚠ Đo phối hợp (Nhịn ăn)</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: CHI TIẾT 5 KHUYẾN NGHỊ CHẨN ĐOÁN -->
+        <section id="recommendations" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-list-check"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 2: CHI TIẾT 5 KHUYẾN NGHỊ CHẨN ĐOÁN THEO HỆ THỐNG GRADE</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Bao gồm phân loại mức độ khuyến nghị, chất lượng bằng chứng và chú giải lâm sàng (Remarks)</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+
+                <!-- RECOMMENDATION 1 -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-ash-600">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-full bg-ash-100 text-ash-800 font-black flex items-center justify-center text-sm">1</span>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-base">Trẻ em từ 9 tháng đến 4 tuổi (Pediatrics 9m–4y)</h3>
+                                <span class="text-xs text-slate-500 font-medium">Đối tượng đặc thù phát triển hệ thần kinh & não bộ</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="cor-badge cor-cond-for">Khuyến nghị có điều kiện</span>
+                            <span class="bg-slate-100 text-slate-700 border border-slate-300 text-[11px] font-bold px-2 py-0.5 rounded">Low Certainty</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="md:col-span-2 space-y-2">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <strong class="text-ash-950 font-black block mb-1">Khuyến nghị cốt lõi:</strong>
+                                Sử dụng ngưỡng Serum Ferritin <span class="text-ash-700 font-black text-sm">≤ 20 ng/mL</span> để chẩn đoán thiếu sắt (chống lại việc tiếp tục dùng ngưỡng cũ ≤ 12 ng/mL).
+                            </div>
+                            <div class="text-slate-700 leading-relaxed pl-1">
+                                <strong class="text-slate-900">Mở rộng lâm sàng (Remarks):</strong>
+                                <ul class="list-disc pl-4 space-y-1 mt-1">
+                                    <li>Ngưỡng này áp dụng cho trẻ <strong class="text-slate-900">KHÔNG</strong> có tình trạng viêm đã biết hoặc nghi ngờ; trẻ có viêm có thể cần ngưỡng ferritin cao hơn (xem Khuyến nghị 5).</li>
+                                    <li>Trẻ &gt; 4 tuổi đến trước tuổi vị thành niên (AAP định nghĩa vị thành niên là ≥ 11 tuổi): áp dụng gián tiếp (indirect evidence) ngưỡng <strong class="text-slate-900">≤ 20 ng/mL</strong> từ dữ liệu trẻ nhỏ.</li>
+                                    <li>Vị thành niên (≥ 11 tuổi) <strong class="text-slate-900">chưa có kinh nguyệt</strong> (nhóm riêng biệt với nhóm trên): áp dụng gián tiếp ngưỡng <strong class="text-slate-900">&lt; 30 ng/mL</strong> từ dữ liệu người có kinh nguyệt/người trưởng thành.</li>
+                                    <li>Vị thành niên đã có kinh nguyệt: áp dụng theo Khuyến nghị 3.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="bg-ash-50 p-4 rounded-xl border border-ash-200 flex flex-col justify-center items-center text-center">
+                            <span class="text-[11px] font-black uppercase text-ash-800">Ngưỡng Chẩn Đoán (CDL)</span>
+                            <div class="text-3xl font-black text-ash-700 my-1">≤ 20 <span class="text-xs font-semibold text-slate-600">ng/mL</span></div>
+                            <span class="text-[10px] text-slate-500">Đánh giá sàng lọc & chẩn đoán nhi khoa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECOMMENDATION 2 -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-ash-600">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-full bg-ash-100 text-ash-800 font-black flex items-center justify-center text-sm">2</span>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-base">Người trưởng thành (Không có kinh nguyệt & Không mang thai)</h3>
+                                <span class="text-xs text-slate-500 font-medium">Nam giới & Phụ nữ đã mãn kinh / Không có hành kinh</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="cor-badge cor-cond-for">Khuyến nghị có điều kiện</span>
+                            <span class="bg-slate-100 text-slate-700 border border-slate-300 text-[11px] font-bold px-2 py-0.5 rounded">Low Certainty</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="md:col-span-2 space-y-2">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <strong class="text-ash-950 font-black block mb-1">Khuyến nghị cốt lõi:</strong>
+                                Sử dụng ngưỡng Serum Ferritin <span class="text-ash-700 font-black text-sm">≤ 30 ng/mL</span> để chẩn đoán thiếu sắt (thay thế ngưỡng cũ ≤ 15 ng/mL).
+                            </div>
+                            <div class="text-slate-700 leading-relaxed pl-1 space-y-1">
+                                <p><strong class="text-slate-900">Lưu ý triệu chứng (Remark):</strong>
+                                Ở người có dấu hiệu/triệu chứng liên quan thiếu sắt (mệt mỏi, giảm chất lượng cuộc sống, giảm nhận thức, hội chứng chân không nghỉ, Pica) hoặc có yếu tố nguy cơ thiếu sắt đang tiến triển (Bảng 1: mất máu, hấp thu kém, khẩu phần ăn hạn chế...), ngưỡng <strong class="text-amber-700 font-black">≤ 50 ng/mL</strong> là phù hợp để chẩn đoán và định hướng xử trí.</p>
+                                <p class="text-[11px] text-slate-500 italic">Ngưỡng này áp dụng cho người lớn KHÔNG có tình trạng viêm đã biết/nghi ngờ; xem khuyến nghị riêng cho người có viêm (Khuyến nghị 5).</p>
+                            </div>
+                        </div>
+                        <div class="bg-ash-50 p-4 rounded-xl border border-ash-200 flex flex-col justify-center items-center text-center">
+                            <span class="text-[11px] font-black uppercase text-ash-800">Ngưỡng Chẩn Đoán (CDL)</span>
+                            <div class="text-3xl font-black text-ash-700 my-1">≤ 30 <span class="text-xs font-semibold text-slate-600">ng/mL</span></div>
+                            <span class="text-[11px] font-bold text-amber-700">≤ 50 ng/mL nếu có Triệu chứng/Risk</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECOMMENDATION 3 -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-teal-600">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-full bg-teal-100 text-teal-800 font-black flex items-center justify-center text-sm">3</span>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-base">Người có kinh nguyệt (Menstruating Individuals)</h3>
+                                <span class="text-xs text-slate-500 font-medium">Phụ nữ độ tuổi sinh sản có chu kỳ kinh nguyệt</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="cor-badge cor-cond-for">Có điều kiện - Dùng ≤30</span>
+                            <span class="cor-badge cor-cond-against">Có điều kiện - Không dùng ≤15</span>
+                            <span class="bg-slate-100 text-slate-700 border border-slate-300 text-[11px] font-bold px-2 py-0.5 rounded">Low Certainty</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="md:col-span-2 space-y-2">
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                <strong class="text-teal-950 font-black block mb-1">Khuyến nghị cốt lõi:</strong>
+                                Sử dụng ngưỡng Serum Ferritin <span class="text-teal-700 font-black text-sm">≤ 30 ng/mL</span> và khuyến nghị KHÔNG dùng ngưỡng ≤ 15 ng/mL (2 khuyến nghị có điều kiện riêng biệt, cùng mức Low Certainty).
+                            </div>
+                            <div class="text-slate-700 leading-relaxed pl-1">
+                                <strong class="text-slate-900">Yếu tố mất máu cao (Remark):</strong> Áp dụng ngưỡng <strong class="text-amber-700 font-black">≤ 50 ng/mL</strong> nếu bệnh nhân có:
+                                <ul class="list-disc pl-4 space-y-0.5 mt-1">
+                                    <li>Chảy máu kinh nguyệt nhiều (HMB) / Chảy máu tử cung bất thường (AUB).</li>
+                                    <li>Triệu chứng liên quan thiếu sắt hoặc yếu tố nguy cơ khác (Bảng 1).</li>
+                                    <li>Chuẩn bị phẫu thuật lớn hoặc kế hoạch thụ thai / mang thai.</li>
+                                </ul>
+                            </div>
+                            <div class="clinical-pearl-box p-2.5 text-[11px]">
+                                <strong class="text-ash-950 font-black">✓ Thực hành tốt (Good Practice Statement):</strong> Cần khai thác tiền sử kinh nguyệt chi tiết để hỗ trợ chẩn đoán AUB, đặc biệt là HMB; cần xử trí tình trạng kinh nguyệt bất thường/HMB nếu phát hiện.
+                            </div>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-xl border border-teal-200 flex flex-col justify-center items-center text-center">
+                            <span class="text-[11px] font-black uppercase text-teal-800">Ngưỡng Chẩn Đoán (CDL)</span>
+                            <div class="text-3xl font-black text-teal-700 my-1">≤ 30 <span class="text-xs font-semibold text-slate-600">ng/mL</span></div>
+                            <span class="text-[11px] font-bold text-amber-800">Nâng lên ≤ 50 ng/mL với HMB/AUB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECOMMENDATION 4 -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-teal-600">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-full bg-teal-100 text-teal-800 font-black flex items-center justify-center text-sm">4</span>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-base">Phụ nữ mang thai (Pregnant Individuals)</h3>
+                                <span class="text-xs text-slate-500 font-medium">Đánh giá sắt thai kỳ toàn diện</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="cor-badge cor-strong-against">KHUYẾN NGHỊ MẠNH KHÔNG DÙNG ≤ 15</span>
+                            <span class="cor-badge cor-cond-for">≤ 30 (Conditional)</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="md:col-span-2 space-y-2">
+                            <div class="bg-teal-50 p-3 rounded-xl border border-teal-200">
+                                <strong class="text-teal-950 font-black block mb-1">Khuyến nghị cốt lõi:</strong>
+                                Sử dụng ngưỡng Serum Ferritin <span class="text-teal-700 font-black text-sm">≤ 30 ng/mL</span>. 
+                                <strong class="text-teal-900 underline ml-1">KHUYẾN NGHỊ MẠNH CỦA ASH 2026:</strong> Tuyệt đối không dùng ngưỡng ≤ 15 ng/mL vì gây bỏ sót nguy hiểm thiếu sắt thai kỳ.
+                            </div>
+                            <div class="text-slate-700 leading-relaxed pl-1">
+                                <strong class="text-slate-900">Sản phụ Thiếu máu (Remark):</strong> Ở thai phụ có thiếu máu (Anemia), có hoặc không kèm yếu tố nguy cơ/triệu chứng thiếu sắt khác (Bảng 2), ngưỡng <strong class="text-teal-800 font-black">≤ 50 ng/mL</strong> CÓ THỂ phù hợp để chẩn đoán thiếu sắt và định hướng xử trí (nguồn gốc không phải khuyến nghị đồng thuận tuyệt đối cho mọi trường hợp thiếu máu kèm ferritin 50 ng/mL).
+                            </div>
+                        </div>
+                        <div class="bg-teal-50 p-4 rounded-xl border border-teal-200 flex flex-col justify-center items-center text-center">
+                            <span class="text-[11px] font-black uppercase text-teal-800">Ngưỡng Chẩn Đoán (CDL)</span>
+                            <div class="text-3xl font-black text-teal-700 my-1">≤ 30 <span class="text-xs font-semibold text-slate-600">ng/mL</span></div>
+                            <span class="text-[11px] font-bold text-teal-900">Nâng lên ≤ 50 ng/mL nếu Thiếu Máu</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECOMMENDATION 5 -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-amber-500">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-8 h-8 rounded-full bg-amber-100 text-amber-800 font-black flex items-center justify-center text-sm">5</span>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-base">Người trưởng thành CÓ Tình Trạng Viêm (Inflammatory Conditions)</h3>
+                                <span class="text-xs text-slate-500 font-medium">Bệnh viêm mãn tính, Bệnh thận mãn (CKD), Viêm khớp dạng thấp, IBD...</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="cor-badge cor-cond-for">Khuyến nghị có điều kiện</span>
+                            <span class="bg-slate-100 text-slate-700 border border-slate-300 text-[11px] font-bold px-2 py-0.5 rounded">Very Low Certainty</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="md:col-span-2 space-y-2">
+                            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                                <strong class="text-amber-950 font-black block mb-1">Chỉ định xét nghiệm bắt buộc:</strong>
+                                Phải làm <strong class="text-amber-900">ĐỒNG THỜI Serum Ferritin + TSAT (%)</strong> (không bao giờ dùng Ferritin đơn độc vì Ferritin tăng giả tạo như 1 acute-phase reactant).
+                            </div>
+                            <div class="text-slate-700 leading-relaxed pl-1 space-y-1">
+                                <strong class="text-slate-900">Tiêu chuẩn chẩn đoán thiếu sắt khi viêm:</strong>
+                                <div class="flex flex-wrap gap-2 items-center my-1">
+                                    <span class="px-2.5 py-1 bg-teal-100 text-teal-900 font-bold rounded border border-teal-300">TSAT &lt; 20%</span>
+                                    <span class="font-bold text-slate-500">HOẶC</span>
+                                    <span class="px-2.5 py-1 bg-teal-100 text-teal-900 font-bold rounded border border-teal-300">Serum Ferritin &lt; 100 ng/mL</span>
+                                </div>
+                                <p class="text-teal-800 font-semibold mt-1">
+                                    ⚠ <strong>Lưu ý kỹ thuật:</strong> Bắt buộc làm xét nghiệm TSAT lúc <strong class="text-slate-900">nhịn ăn (5–9 giờ)</strong> để tránh sai lệch nồng độ sắt huyết thanh.
+                                </p>
+                                <p class="text-amber-800 font-semibold mt-1">
+                                    ⚠ Do thiếu dữ liệu, ASH 2026 KHÔNG đưa ra khuyến nghị riêng cho <strong>trẻ em</strong> có tình trạng viêm (áp dụng thận trọng theo Khuyến nghị 1 + đánh giá lâm sàng).
+                                </p>
+                            </div>
+                            <div class="clinical-pearl-box p-2.5 text-[11px] mt-2">
+                                <strong class="text-ash-950 font-black">✓ Thực hành tốt (Good Practice Statement):</strong> Thiếu máu do viêm có thể cùng tồn tại với các nguyên nhân thiếu máu khác. Cần phân tích Ferritin/TSAT trong bối cảnh toàn diện (bệnh sử, khám lâm sàng, bệnh nền, và các guideline chuyên khoa liên quan như KDIGO/ACC-AHA-HFSA có thể đề xuất ngưỡng cao hơn).
+                            </div>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 flex flex-col justify-center items-center text-center">
+                            <span class="text-[11px] font-black uppercase text-amber-900">Bộ Tiêu Chí Viêm</span>
+                            <div class="text-xl font-black text-teal-700 mt-1">TSAT &lt; 20%</div>
+                            <span class="text-xs font-bold text-slate-500 my-0.5">HOẶC</span>
+                            <div class="text-lg font-black text-teal-700">Ferritin &lt; 100 ng/mL</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: PHÁC ĐỒ ĐIỀU TRỊ THUỐC (THERAPEUTICS) -->
+        <section id="therapeutics" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-emerald-600 pl-3">
+                <div class="bg-emerald-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-pills"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 3: PHÁC ĐỒ ĐIỀU TRỊ THUỐC BỔ SUNG SẮT (ORAL VS IV IRON)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Lựa chọn đường dùng, liều lượng chuẩn, nguyên tắc Hepcidin & So sánh các chế phẩm</p>
+                </div>
+            </div>
+
+            <div class="ref-note p-4 shadow-sm text-xs text-amber-900 leading-relaxed">
+                <strong class="font-black block mb-1"><i class="fa-solid fa-circle-info mr-1"></i> Ghi chú nguồn quan trọng:</strong>
+                ASH 2026 (Blood Advances) là <strong>guideline CHẨN ĐOÁN</strong> (diagnostic guideline), KHÔNG bao gồm khuyến nghị điều trị/liều dùng. Toàn bộ nội dung Phần 3 &amp; Phần 4 (liều sắt uống/tiêm, nguyên tắc Hepcidin, công thức Ganzoni, gợi ý chế phẩm) là <strong>tài liệu tham khảo dược lý lâm sàng bổ sung</strong>, KHÔNG được phân độ theo GRADE và KHÔNG thuộc 5 khuyến nghị chính thức của ASH 2026 — xem mục Tài liệu tham khảo (#references) để biết nguồn cụ thể. Cần đối chiếu với phác đồ/hướng dẫn điều trị tại cơ sở và tờ hướng dẫn sử dụng thuốc trước khi áp dụng.
+            </div>
+
+            <!-- Oral vs IV Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Oral Iron Card -->
+                <div class="clinical-card p-5 space-y-4 border-t-4 border-t-emerald-600">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-capsules"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-base">1. Sắt Uống (Oral Iron Therapeutics)</h3>
+                                <span class="text-xs text-emerald-700 font-semibold">Lựa chọn ưu tiên hàng đầu</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 text-xs text-slate-700">
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                            <strong class="text-slate-900 block mb-1">Liều Dùng Chuẩn:</strong>
+                            <ul class="list-disc pl-4 space-y-1">
+                                <li><strong class="text-slate-900">Người lớn:</strong> 30–60 mg sắt nguyên tố/ngày <strong class="text-emerald-700">HOẶC 60–100 mg UỐNG CÁCH NGÀY (Alternate-day)</strong>.</li>
+                                <li><strong class="text-slate-900">Nhi khoa:</strong> 3–6 mg/kg/ngày sắt nguyên tố, chia 1–2 lần/ngày.</li>
+                            </ul>
+                        </div>
+
+                        <div class="clinical-pearl-box p-3 space-y-1 text-[11px]">
+                            <strong class="text-ash-950 block font-black">💡 Vì sao khuyến nghị Uống Cách Ngày (Alternate-day)?</strong>
+                            Uống sắt liều cao hàng ngày làm tăng hormone <strong class="text-slate-900">Hepcidin</strong> kéo dài trong 24h, làm ngưng trệ sự hấp thu sắt ở ruột cho liều tiếp theo. Uống cách ngày giúp tối ưu hóa phần trăm hấp thu và giảm rõ rệt tác dụng phụ tiêu hóa (táo bón, buồn nôn).
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IV Iron Card -->
+                <div class="clinical-card p-5 space-y-4 border-t-4 border-t-ash-600">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl bg-ash-100 text-ash-800 flex items-center justify-center font-bold text-lg">
+                                <i class="fa-solid fa-syringe"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-slate-900 text-base">2. Sắt Tiêm Tĩnh Mạch (IV Iron)</h3>
+                                <span class="text-xs text-ash-700 font-semibold">Bù sắt cấp tốc / Kém hấp thu / Nặng</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 text-xs text-slate-700">
+                        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                            <strong class="text-slate-900 block mb-1">Chỉ Định Tiêm Tĩnh Mạch Mới:</strong>
+                            <ul class="list-disc pl-4 space-y-1">
+                                <li>Tác dụng phụ tiêu hóa nặng hoặc thất bại với sắt uống.</li>
+                                <li>Bệnh lý ruột: IBD (Crohn, UC), Celiac, Sau phẫu thuật cắt dạ dày.</li>
+                                <li>Phụ nữ mang thai từ tuần thứ 14 trở đi có thiếu máu nặng (Hb &lt; 9 g/dL).</li>
+                                <li>Cần hồi phục nhanh trước phẫu thuật (&lt; 3–4 tuần).</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-ash-50 p-3 rounded-xl border border-ash-200 text-[11px] text-ash-950 font-medium">
+                            <strong class="font-black">Ưu điểm nổi bật:</strong> Khôi phục hoàn toàn tổng lượng sắt thiếu hụt (Total iron deficit) chỉ trong 1 đến 2 lần truyền tĩnh mạch.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Comparison Table Oral Iron Formulations -->
+            <div class="clinical-card p-5 space-y-4">
+                <h3 class="font-extrabold text-slate-900 text-sm flex items-center">
+                    <i class="fa-solid fa-table-list text-emerald-600 mr-2"></i> Bảng Hàm Lượng Sắt Nguyên Tố (Elemental Iron) Các Chế Phẩm Uống
+                </h3>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-100 text-slate-700 uppercase font-extrabold">
+                            <tr>
+                                <th class="p-3 rounded-l-lg">Tên Muối / Phức Hợp Sắt</th>
+                                <th class="p-3">Liều Viên Nén Chuẩn</th>
+                                <th class="p-3">Hàm Lượng Sắt Nguyên Tố (Elemental)</th>
+                                <th class="p-3 rounded-r-lg">Đặc Điểm Lâm Sàng</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 text-slate-800 font-medium">
+                            <tr>
+                                <td class="p-3 font-bold text-slate-900">Ferrous Sulfate (Sắt II Sulfat)</td>
+                                <td class="p-3">300 mg</td>
+                                <td class="p-3 font-bold text-emerald-700">~60 mg (20%)</td>
+                                <td class="p-3 text-slate-600">Thông dụng nhất, chi phí rẻ; dễ gây táo bón/kích ứng dạ dày.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-slate-900">Ferrous Fumarate</td>
+                                <td class="p-3">200 mg</td>
+                                <td class="p-3 font-bold text-emerald-700">~66 mg (33%)</td>
+                                <td class="p-3 text-slate-600">Tỷ lệ sắt nguyên tố cao trên mỗi mg muối.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-slate-900">Ferrous Gluconate</td>
+                                <td class="p-3">300 mg</td>
+                                <td class="p-3 font-bold text-emerald-700">~35 mg (12%)</td>
+                                <td class="p-3 text-slate-600">Liều nguyên tố thấp hơn; độ dung nạp dạ dày nhỉnh hơn chút.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-slate-900">Sắt Phức Hợp Polymaltose (IPC / Iron III)</td>
+                                <td class="p-3">100 mg</td>
+                                <td class="p-3 font-bold text-emerald-700">100 mg</td>
+                                <td class="p-3 text-slate-600">Phức hợp hữu cơ, ít tác dụng phụ, không bị ảnh hưởng bởi thức ăn.</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold text-slate-900">Sắt Bisglycinate (Iron Chelate)</td>
+                                <td class="p-3">25–30 mg</td>
+                                <td class="p-3 font-bold text-emerald-700">~25–30 mg</td>
+                                <td class="p-3 text-slate-600">Sinh khả dụng cao, êm dịu tiêu hóa; rất hợp cho thai phụ.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: GANZONI CALCULATOR WIDGET -->
+        <section id="ganzoni" class="clinical-card overflow-hidden border-2 border-ash-600/50 shadow-lg">
+            <div class="bg-gradient-to-r from-slate-900 via-ash-950 to-slate-900 p-5 text-white">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="bg-emerald-400 text-slate-950 p-2.5 rounded-xl text-xl font-black"><i class="fa-solid fa-calculator"></i></div>
+                    <div>
+                        <h3 class="text-base font-black text-white uppercase tracking-wide">CÔNG THỨC GANZONI TÍNH NHU CẦU SẮT TIÊM TĨNH MẠCH</h3>
+                        <p class="text-xs text-slate-300">Tính toán chính xác tổng lượng sắt thiếu hụt (mg) cần bù cho bệnh nhân</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                    <div class="lg:col-span-7 space-y-3 text-xs">
+                        <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700 text-emerald-300">
+                            Sắt thiếu (mg) = Cân nặng (kg) × (Hb<sub>đích</sub> - Hb<sub>thực tế</sub>) [g/dL] × 2.4 + Sắt dự trữ (mg)
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-slate-300 font-bold mb-1">Cân nặng (kg):</label>
+                                <input type="number" id="gz-weight" value="60" oninput="calcGanzoni()" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-2 font-bold focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-300 font-bold mb-1">Hb Thực tế (g/dL):</label>
+                                <input type="number" id="gz-hb-act" step="0.1" value="8.5" oninput="calcGanzoni()" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-2 font-bold focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-300 font-bold mb-1">Hb Đích (g/dL):</label>
+                                <input type="number" id="gz-hb-target" step="0.1" value="13.0" oninput="calcGanzoni()" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-2 font-bold focus:ring-2 focus:ring-emerald-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-slate-300 font-bold mb-1">Kho Sắt Dự Trữ:</label>
+                                <select id="gz-depot" onchange="calcGanzoni()" class="w-full bg-slate-800 border border-slate-700 text-white rounded-lg p-2 font-bold focus:ring-2 focus:ring-emerald-500 outline-none">
+                                    <option value="500">500 mg (Người lớn ≥35kg)</option>
+                                    <option value="15">15 mg/kg (Trẻ em &lt;35kg)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ganzoni Output Result Card -->
+                    <div class="lg:col-span-5 bg-slate-800/90 p-5 rounded-xl border border-emerald-500/40 text-center space-y-2">
+                        <span class="text-[11px] uppercase font-black tracking-wider text-slate-400">TỔNG NHU CẦU SẮT TIÊM (TOTAL IRON DEFICIT)</span>
+                        <div id="gz-result-value" class="text-4xl font-black text-emerald-400">1148 mg</div>
+                        <p id="gz-result-suggest" class="text-xs text-slate-200 font-medium"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CLINICAL SUMMARY TABLE WITH SEARCH -->
+        <section id="summary-table" class="clinical-card p-5 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-extrabold text-slate-900 flex items-center">
+                        <i class="fa-solid fa-table text-ash-600 mr-2"></i> BẢNG TRA CỨU TÓM TẮT LÂM SÀNG ASH 2026
+                    </h2>
+                    <p class="text-xs text-slate-500">Tra cứu nhanh ngưỡng chẩn đoán, loại khuyến nghị và phân hạng GRADE</p>
+                </div>
+                <div class="relative w-full sm:w-64">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                    <input type="text" id="table-search" onkeyup="searchTable()" placeholder="Tìm nhóm / ngưỡng..." class="w-full pl-8 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-ash-500">
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-slate-100 text-slate-700 uppercase font-extrabold">
+                        <tr>
+                            <th class="p-3 rounded-l-lg">Nhóm Đối Tượng</th>
+                            <th class="p-3">Ngưỡng Chẩn Đoán CDL Cốt Lõi</th>
+                            <th class="p-3">Ngưỡng Mở Rộng / Triệu Chứng</th>
+                            <th class="p-3">Loại Khuyến Nghị</th>
+                            <th class="p-3 rounded-r-lg">Mức Bằng Chứng GRADE</th>
+                        </tr>
+                    </thead>
+                    <tbody id="summary-table-body" class="divide-y divide-slate-200 text-slate-800 font-medium">
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-slate-900">Trẻ 9m – 4 tuổi</td>
+                            <td class="p-3 font-bold text-ash-700">Ferritin ≤ 20 ng/mL</td>
+                            <td class="p-3 text-slate-600">Trẻ >4t: ≤20; Chưa kinh nguyệt: ≤30</td>
+                            <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                            <td class="p-3 text-slate-500">Low Certainty</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-slate-900">Người lớn (Không kinh nguyệt/thai)</td>
+                            <td class="p-3 font-bold text-ash-700">Ferritin ≤ 30 ng/mL</td>
+                            <td class="p-3 text-slate-600">≤ 50 ng/mL (Triệu chứng / Risk)</td>
+                            <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                            <td class="p-3 text-slate-500">Low Certainty</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-slate-900">Người có kinh nguyệt</td>
+                            <td class="p-3 font-bold text-teal-700">Ferritin ≤ 30 ng/mL</td>
+                            <td class="p-3 text-slate-600">≤ 50 ng/mL (HMB, AUB, Tiền phẫu)</td>
+                            <td class="p-3 space-x-1"><span class="cor-badge cor-cond-for">Dùng ≤30</span><span class="cor-badge cor-cond-against">Không dùng ≤15</span></td>
+                            <td class="p-3 text-slate-500">Low Certainty</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-slate-900">Phụ nữ mang thai</td>
+                            <td class="p-3 font-bold text-teal-700">Ferritin ≤ 30 ng/mL</td>
+                            <td class="p-3 text-slate-600">≤ 50 ng/mL (Nếu có Thiếu máu)</td>
+                            <td class="p-3 space-x-1"><span class="cor-badge cor-cond-for">Dùng ≤30</span><span class="cor-badge cor-strong-against">Mạnh - Không dùng ≤15</span></td>
+                            <td class="p-3 text-slate-500">Low Certainty</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="p-3 font-bold text-slate-900">Người có tình trạng viêm</td>
+                            <td class="p-3 font-bold text-amber-700">TSAT &lt; 20% HOẶC Ferritin &lt; 100 ng/mL</td>
+                            <td class="p-3 text-slate-600">Yêu cầu TSAT nhịn ăn (5–9h)</td>
+                            <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                            <td class="p-3 text-slate-500">Very Low Certainty</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 6: REFERENCES (VANCOUVER STYLE) -->
+        <section id="references" class="clinical-card p-5 space-y-4">
+            <div class="flex items-center space-x-3 border-l-4 border-slate-700 pl-3">
+                <div class="bg-slate-700 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-book"></i></div>
+                <div>
+                    <h2 class="text-lg font-extrabold text-slate-900">TÀI LIỆU THAM KHẢO (Vancouver Style)</h2>
+                    <p class="text-xs text-slate-500">Nguồn chính cho Phần 1–2 &amp; Phần 5 (chẩn đoán) và nguồn bổ sung cho Phần 3–4 (điều trị, không thuộc ASH 2026)</p>
+                </div>
+            </div>
+
+            <div class="space-y-3 text-xs text-slate-800">
+                <div class="bg-teal-50 p-3 rounded-xl border border-teal-200">
+                    <strong class="text-teal-950 font-black block mb-1">Nguồn chính (Phần 1, 2, 5 – Ngưỡng chẩn đoán CDL):</strong>
+                    <ol class="list-decimal pl-4 space-y-1">
+                        <li>Powers JM, Lim MY, Achebe MO, Akpan IJ, Auerbach M, Brown MC, et al. American Society of Hematology 2026 guidelines for diagnosis of iron deficiency. Blood Adv. 2026. doi:10.1182/bloodadvances.2025015950.</li>
+                    </ol>
+                </div>
+
+                <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                    <strong class="text-amber-950 font-black block mb-1">Nguồn bổ sung (Phần 3, 4 – Phác đồ điều trị &amp; Công thức Ganzoni; KHÔNG thuộc ASH 2026):</strong>
+                    <ol class="list-decimal pl-4 space-y-1" start="2">
+                        <li>Ganzoni AM. Eisen-Dextran intravenös: therapeutische und experimentelle Möglichkeiten. Schweiz Med Wochenschr. 1970;100(7):301-3. (Nguồn gốc công thức Ganzoni)</li>
+                        <li>Stoffel NU, Cercamondi CI, Brittenham G, Zeder C, Geurts-Moespot AJ, Swinkels DW, et al. Iron absorption from oral iron supplements given on consecutive versus alternate days and as single morning doses versus twice-daily split dosing in iron-depleted women: two open-label, randomised controlled trials. Lancet Haematol. 2017;4(11):e524-33. (Cơ sở khuyến cáo uống sắt cách ngày qua cơ chế Hepcidin)</li>
+                        <li>Auerbach M, Adamson JW. How we diagnose and treat iron deficiency anemia. Am J Hematol. 2016;91(1):31-8. (Chỉ định IV iron, so sánh chế phẩm)</li>
+                        <li>Camaschella C. Iron-deficiency anemia. N Engl J Med. 2015;372(19):1832-43. (Hàm lượng sắt nguyên tố các muối sắt uống, sinh lý bệnh)</li>
+                    </ol>
+                    <p class="mt-2 text-amber-900 italic">Lưu ý: Liều lượng cụ thể, tên biệt dược (VD: FCM, Monoferric) cần đối chiếu với tờ hướng dẫn sử dụng thuốc và phác đồ hiện hành tại cơ sở y tế trước khi áp dụng lâm sàng.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2 font-medium">
+            <p>
+                Nguồn dữ liệu chẩn đoán (Phần 1, 2, 5): <em>"American Society of Hematology 2026 guidelines for diagnosis of iron deficiency"</em> (Blood Advances, 2026, doi:10.1182/bloodadvances.2025015950). Nội dung phác đồ điều trị (Phần 3, 4) tổng hợp từ các nguồn dược lý lâm sàng bổ sung — xem mục <a href="#references" class="underline hover:text-white">Tài liệu tham khảo</a>.
+            </p>
+            <p class="text-slate-500">
+                Visual Clinical Hub này được thiết kế nhằm mục đích hỗ trợ tra cứu nhanh cho Bác sĩ & Chuyên viên Y tế. Mọi chỉ định lâm sàng cần cá thể hóa dựa trên tình trạng toàn diện của từng bệnh nhân và không thay thế cho việc đọc trực tiếp guideline gốc.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript Engine -->
+    <script>
+        const finderData = {
+            pediatrics: {
+                threshold: "Ferritin ≤ 20 ng/mL",
+                grade: "Conditional Recommendation (Low Certainty)",
+                notes: "Nâng từ ngưỡng cũ (≤12 ng/mL) giúp phát hiện sớm thiếu sắt ở lứa tuổi phát triển não bộ quan trọng.",
+                oral: "Sắt uống 3–6 mg/kg/ngày sắt nguyên tố, chia 1–2 lần/ngày. Ưu tiên đường uống.",
+                iv: "Chỉ tiêm IV khi thất bại đường uống nặng hoặc có bệnh lý ruột kém hấp thu."
+            },
+            pediatrics_older: {
+                threshold: "Ferritin ≤ 20 ng/mL (>4t) / ≤ 30 ng/mL (Chưa kinh nguyệt)",
+                grade: "Conditional Recommendation (Low Certainty)",
+                notes: "Áp dụng gián tiếp từ dữ liệu nhi khoa và người lớn.",
+                oral: "Sắt uống cách ngày (alternate-day) hoặc hàng ngày 30-60 mg sắt nguyên tố.",
+                iv: "Xem xét tiêm IV nếu có bệnh lý ruột / viêm mãn tính."
+            },
+            adults_standard: {
+                threshold: "Ferritin ≤ 30 ng/mL (≤ 50 ng/mL nếu có triệu chứng/nguy cơ)",
+                grade: "Conditional Recommendation (Low Certainty)",
+                notes: "Thay thế ngưỡng cũ (≤ 15 ng/mL) giúp bắt kịp cạn kệt kho dự trữ sắt giai đoạn sớm.",
+                oral: "60–100 mg sắt nguyên tố uống CÁCH NGÀY (Alternate-day dosing).",
+                iv: "Chỉ định tiêm IV (FCM/Monoferric) nếu có bệnh tiêu hóa hoặc thất bại với sắt uống."
+            },
+            menstruating: {
+                threshold: "Ferritin ≤ 30 ng/mL (≤ 50 ng/mL nếu HMB / AUB / Tiền phẫu)",
+                grade: "Conditional Recommendation (Low Certainty)",
+                notes: "Đặc biệt chú trọng nhóm chảy máu kinh nguyệt nhiều (HMB) để bù sắt trước khi thiếu máu nặng.",
+                oral: "60–100 mg sắt nguyên tố cách ngày kèm Vitamin C.",
+                iv: "Chỉ định tiêm IV cấp tốc nếu mất máu nặng hoặc cần hồi phục trước phẫu thuật < 3-4 tuần."
+            },
+            pregnancy: {
+                threshold: "Ferritin ≤ 30 ng/mL (≤ 50 ng/mL nếu kèm Thiếu Máu)",
+                grade: "Strong Recommendation AGAINST ≤ 15 ng/mL",
+                notes: "KHUYẾN NGHỊ MẠNH không dùng ngưỡng ≤ 15 ng/mL. Cần phát hiện thiếu sắt thai kỳ sớm.",
+                oral: "Sắt Bisglycinate hoặc muối sắt 30–60 mg/ngày dung nạp tốt.",
+                iv: "BẮT BUỘC ưu tiên tiêm tĩnh mạch từ tuần 14 trở đi nếu Hb < 9 g/dL hoặc thiếu sắt nặng."
+            },
+            inflammation: {
+                threshold: "TSAT < 20% HOẶC Serum Ferritin < 100 ng/mL",
+                grade: "Conditional Recommendation (Very Low Certainty)",
+                notes: "Phải làm ĐỒNG THỜI Ferritin + TSAT lúc nhịn ăn (5–9h). Không dùng Ferritin đơn độc.",
+                oral: "Sắt uống ít hiệu quả do Hepcidin cao trong viêm.",
+                iv: "Sắt tiêm tĩnh mạch (FCM / Monoferric) là lựa chọn ưu tiên hàng đầu cho bệnh nhân viêm."
+            }
+        };
+
+        function runFilter() {
+            const group = document.getElementById('filter-group').value;
+            const risk = document.getElementById('filter-risk').value;
+            const route = document.getElementById('filter-route').value;
+            
+            const data = finderData[group] || finderData['adults_standard'];
+
+            let activeThreshold = data.threshold;
+            if (risk === 'symptomatic' || risk === 'hmb_aub' || risk === 'anemia') {
+                if (group === 'adults_standard' || group === 'menstruating' || group === 'pregnancy') {
+                    activeThreshold = "Ferritin ≤ 50 ng/mL (Đã điều chỉnh theo Nguy cơ / Triệu chứng)";
+                }
+            }
+
+            document.getElementById('finder-grade').innerText = data.grade;
+            document.getElementById('finder-threshold').innerText = activeThreshold;
+            document.getElementById('finder-notes').innerText = data.notes;
+
+            if (route === 'iv') {
+                document.getElementById('finder-tx').innerText = "ƯU TIÊN SẮT TIÊM TĨNH MẠCH (IV IRON)";
+                document.getElementById('finder-tx-detail').innerText = data.iv + " Liều tính theo công thức Ganzoni.";
+            } else {
+                document.getElementById('finder-tx').innerText = "ƯU TIÊN SẮT UỐNG (ORAL IRON)";
+                document.getElementById('finder-tx-detail').innerText = data.oral;
+            }
+        }
+
+        function calcGanzoni() {
+            const w = parseFloat(document.getElementById('gz-weight').value) || 0;
+            const act = parseFloat(document.getElementById('gz-hb-act').value) || 0;
+            const target = parseFloat(document.getElementById('gz-hb-target').value) || 0;
+            const depotOpt = document.getElementById('gz-depot').value;
+
+            const resElem = document.getElementById('gz-result-value');
+            const sugElem = document.getElementById('gz-result-suggest');
+
+            if (w <= 0 || act <= 0 || target <= act) {
+                resElem.innerText = "N/A";
+                sugElem.innerText = "Vui lòng nhập Hb đích lớn hơn Hb thực tế.";
+                return;
+            }
+
+            let depot = 500;
+            if (depotOpt === "15") {
+                depot = 15 * w;
+            }
+
+            const totalDeficit = Math.round((w * (target - act) * 2.4) + depot);
+            resElem.innerText = totalDeficit + " mg";
+
+            if (totalDeficit <= 500) {
+                sugElem.innerText = "Gợi ý: 1 liều truyền Ferric Carboxymaltose (FCM) 500mg.";
+            } else if (totalDeficit <= 1000) {
+                sugElem.innerText = "Gợi ý: 1 lần truyền FCM 1000mg hoặc Monoferric 1000mg.";
+            } else {
+                sugElem.innerText = `Gợi ý: 1 lần FCM 1000mg + 1 lần bổ sung ${totalDeficit - 1000}mg tuần sau, hoặc Monoferric liều đơn đủ ${totalDeficit}mg.`;
+            }
+        }
+
+        function searchTable() {
+            const query = document.getElementById('table-search').value.toLowerCase();
+            const rows = document.querySelectorAll('#summary-table-body tr');
+
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            runFilter();
+            calcGanzoni();
+        });
+    </script>
+</body>
+</html>

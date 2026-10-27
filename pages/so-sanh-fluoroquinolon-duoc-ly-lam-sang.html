@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>So sánh Ciprofloxacin – Levofloxacin – Moxifloxacin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js" defer></script>
+<style>
+:root{--bg:#c4ccda;--bg2:#b8c2d3;--card:#eef1f6;--card2:#dfe5ee;--line:#aab6c9;--tx:#0a1020;--mut:#2f3d54;--dim:#4a5a73;
+--cip:#db2777;--lev:#0284c7;--mox:#0d9488;--ok:#15803d;--warn:#b45309;--bad:#b91c1c;--info:#1d4ed8}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--tx);background:linear-gradient(180deg,#a9b5c9,#c4ccda);min-height:100vh;line-height:1.5}
+[x-cloak]{display:none!important}
+.wrap{max-width:1280px;margin:0 auto;padding:16px}
+.hero{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;box-shadow:0 6px 18px rgba(10,16,32,.12)}
+.hero h1{margin:0;font-size:1.35rem;font-weight:800}
+.hero p{margin:4px 0 0;color:var(--mut);font-size:.85rem}
+.spacer{flex:1}
+.btn{border:1px solid var(--line);background:var(--card2);color:var(--tx);border-radius:10px;padding:6px 12px;font-weight:700;font-size:.8rem;cursor:pointer;font-family:inherit}
+.btn:hover{background:#fff}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tab{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card2);border-radius:14px;padding:6px 14px 6px 8px;font-weight:700;font-size:.85rem;cursor:pointer;color:var(--mut);font-family:inherit}
+.tab.on{background:#fff;color:var(--tx);border-color:#6b7a94;box-shadow:0 3px 10px rgba(10,16,32,.15)}
+.ico{width:34px;height:34px;display:inline-block}
+.ico svg{width:100%;height:100%}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 18px rgba(10,16,32,.1)}
+.picker{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.dbtn{border:2px solid var(--c);color:var(--c);background:transparent;border-radius:999px;padding:5px 14px;font-weight:800;font-size:.82rem;cursor:pointer;opacity:.6;font-family:inherit}
+.dbtn.on{background:var(--c);color:#fff;opacity:1}
+.cnt{font-size:.8rem;color:var(--mut);font-weight:600}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.chip{border:1px solid var(--line);background:var(--card2);border-radius:999px;padding:3px 10px;font-size:.75rem;font-weight:700;cursor:pointer;color:var(--mut);font-family:inherit}
+.chip.on{background:#0a1020;color:#fff;border-color:#0a1020}
+table.cmp{width:100%;table-layout:fixed;border-collapse:collapse;font-size:.78rem}
+.cmp th,.cmp td{border:1px solid var(--line);padding:6px 8px;vertical-align:top;overflow-wrap:anywhere;text-align:left}
+.cmp thead th{color:#fff;font-size:.9rem;position:sticky;top:0}
+.cmp th.lab{width:15%;background:var(--card2);position:sticky;left:0;font-weight:700}
+.cmp tr.band td{background:#0a1020;color:#fff;font-weight:800;font-size:.76rem;letter-spacing:.03em;text-transform:uppercase}
+.cmp tr.z td,.cmp tr.z th.lab{background:#e4e9f1}
+.cmp td ul{margin:0;padding-left:14px}
+.cmp td li{margin:1px 0}
+.rf{color:var(--info);font-weight:700;font-size:.7rem;white-space:nowrap}
+.uf{color:var(--warn);font-weight:800}
+.qg{background:#c7e8d1!important}.qw{background:#f6dfa8!important}.qb{background:#f2bcbc!important}.qn{background:#d6deea!important}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.75rem;margin:8px 0;align-items:center}
+.legend span.k{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--line);vertical-align:middle;margin-right:4px}
+.scroll{overflow-x:auto}
+@media(max-width:860px){table.cmp{min-width:780px}}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+label.f{display:block;font-size:.76rem;font-weight:700;color:var(--mut);margin-bottom:2px}
+input,select{width:100%;border:1px solid var(--line);border-radius:8px;padding:6px 8px;font-family:inherit;font-size:.85rem;background:#fff;color:var(--tx)}
+.chk{display:flex;gap:6px;align-items:flex-start;font-size:.8rem;margin:3px 0}
+.chk input{width:auto;margin-top:3px}
+.res{border-radius:14px;border:2px solid var(--c);background:#fff;padding:12px}
+.res h3{margin:0 0 6px;color:var(--c);font-size:1rem}
+.st{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.72rem;font-weight:800;color:#fff;margin-bottom:6px}
+.st.ok{background:var(--ok)}.st.warn{background:var(--warn)}.st.avoid{background:var(--bad)}.st.contra{background:#450a0a}
+.dose{font-weight:800;font-size:.95rem;margin:4px 0}
+.res ul{margin:6px 0 0;padding-left:16px;font-size:.78rem}
+.case{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}
+.case h3{margin:0 0 6px;font-size:.95rem}
+.case .row{font-size:.8rem;margin:3px 0}
+.tag{font-weight:800;padding:1px 8px;border-radius:6px;font-size:.7rem;color:#fff;margin-right:4px}
+.tg{background:var(--ok)}.tw{background:var(--warn)}.tr{background:var(--bad)}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;margin:5px 0;font-family:inherit;font-size:.84rem;cursor:pointer}
+.opt.right{background:#c7e8d1;border-color:var(--ok)}.opt.wrong{background:#f2bcbc;border-color:var(--bad)}
+.note{font-size:.8rem;margin:6px 0}
+.sec{margin-top:18px}
+.sec h2{font-size:1.05rem;margin:0 0 8px}
+table.gl{width:100%;border-collapse:collapse;font-size:.76rem;table-layout:fixed}
+.gl th,.gl td{border:1px solid var(--line);padding:4px 8px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+.gl th{background:var(--card2)}
+.gl td:first-child{width:14%;font-weight:800}
+.refs ol{padding-left:20px;font-size:.76rem;margin:0}
+.refs li{margin:3px 0;overflow-wrap:anywhere}
+.disc{font-size:.76rem;color:var(--mut);margin-top:10px}
+a{color:var(--info)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="g-pink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9a8d4"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+<linearGradient id="g-blue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0369a1"/></linearGradient>
+<linearGradient id="g-teal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#0f766e"/></linearGradient>
+<linearGradient id="g-ind" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5b4fc"/><stop offset="1" stop-color="#3730a3"/></linearGradient>
+<linearGradient id="g-amb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#b45309"/></linearGradient>
+<radialGradient id="g-ped" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#c9d2e0"/></radialGradient>
+</defs></svg>
+
+<div class="wrap" x-data="app()" x-cloak>
+  <div class="hero">
+    <span class="ico" style="width:56px;height:56px" x-html="ic('capsule')"></span>
+    <div>
+      <h1 x-text="UI('title')"></h1>
+      <p x-text="UI('sub')"></p>
+    </div>
+    <div class="spacer"></div>
+    <button class="btn" @click="lang = (lang==='vi'?'en':'vi')" x-text="lang==='vi'?'English':'Tiếng Việt'"></button>
+  </div>
+
+  <div class="tabs">
+    <template x-for="t in tabs" :key="t.k">
+      <button class="tab" :class="{on:view===t.k}" @click="view=t.k">
+        <span class="ico" x-html="ic(t.ic)"></span><span x-text="UI(t.k)"></span>
+      </button>
+    </template>
+  </div>
+
+  <!-- picker for view 1-2 -->
+  <div class="panel" x-show="view==='table'||view==='matrix'">
+    <div class="picker">
+      <template x-for="d in drugs" :key="d.k">
+        <button class="dbtn" :style="'--c:'+d.c" :class="{on:sel.includes(d.k)}" @click="toggle(d.k)" x-text="(sel.includes(d.k)?'✓ ':'')+d.n[0]"></button>
+      </template>
+      <span class="cnt" x-text="UI('comparing')+' '+sel.length+'/3 · '+selNames()"></span>
+    </div>
+
+    <!-- VIEW 1 -->
+    <div x-show="view==='table'">
+      <div class="filters">
+        <button class="chip" :class="{on:grp==='all'}" @click="grp='all'" x-text="UI('all')"></button>
+        <template x-for="g in groups" :key="g.k">
+          <button class="chip" :class="{on:grp===g.k}" @click="grp=g.k" x-text="T(g.n)"></button>
+        </template>
+      </div>
+      <div class="scroll">
+      <table class="cmp">
+        <thead><tr><th class="lab" style="background:#0a1020;color:#fff" x-text="UI('crit')"></th>
+          <template x-for="d in selDrugs()" :key="d.k"><th :style="'background:'+d.c" x-text="d.n[0]"></th></template></tr></thead>
+        <tbody>
+          <template x-for="(r,i) in visibleRows()" :key="r.k">
+            <template x-if="true">
+              <tr :class="r.band?'band':(i%2?'z':'')">
+                <template x-if="r.band"><td :colspan="1+sel.length" x-text="T(r.n)"></td></template>
+                <template x-if="!r.band">
+                  <th class="lab" x-text="T(r.n)"></th>
+                </template>
+                <template x-if="!r.band">
+                  <template x-for="d in selDrugs()" :key="d.k">
+                    <td>
+                      <ul><template x-for="p in parts(cell(r,d.k))"><li x-text="p"></li></template></ul>
+                      <span class="rf" x-text="refTxt(r,d.k)"></span>
+                    </td>
+                  </template>
+                </template>
+              </tr>
+            </template>
+          </template>
+        </tbody>
+      </table>
+      </div>
+      <p class="note"><span class="uf">‡</span> <span x-text="UI('uflag')"></span></p>
+    </div>
+
+    <!-- VIEW 2 -->
+    <div x-show="view==='matrix'">
+      <div class="legend">
+        <span><span class="k qg"></span><span x-text="UI('lg')"></span></span>
+        <span><span class="k qw"></span><span x-text="UI('lw')"></span></span>
+        <span><span class="k qb"></span><span x-text="UI('lb')"></span></span>
+        <span><span class="k qn"></span><span x-text="UI('ln')"></span></span>
+        <a href="#gloss" x-text="UI('gotoGloss')"></a>
+      </div>
+      <div class="scroll">
+      <table class="cmp">
+        <thead><tr><th class="lab" style="background:#0a1020;color:#fff" x-text="UI('crit')"></th>
+          <template x-for="d in selDrugs()" :key="d.k"><th :style="'background:'+d.c" x-text="d.n[0]"></th></template></tr></thead>
+        <tbody>
+          <template x-for="q in quick" :key="q.k">
+            <tr>
+              <th class="lab" x-text="T(q.n)"></th>
+              <template x-for="d in selDrugs()" :key="d.k">
+                <td :class="q.v[d.k][0]"><span x-text="T([q.v[d.k][1],q.v[d.k][2]])"></span> <span class="rf" x-text="q.v[d.k][3]?'['+q.v[d.k][3]+']':''"></span></td>
+              </template>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+      </div>
+      <p class="note" x-text="UI('qnote')"></p>
+    </div>
+  </div>
+
+  <!-- VIEW 3 dose tool -->
+  <div class="panel" x-show="view==='dose'">
+    <div class="grid g2">
+      <div><label class="f" x-text="UI('age')"></label><input type="number" min="0" max="120" x-model.number="p.age"></div>
+      <div><label class="f" x-text="UI('wt')"></label><input type="number" min="1" max="300" x-model.number="p.wt"></div>
+      <div><label class="f" x-text="UI('sex')"></label>
+        <select x-model="p.sex"><option value="m" x-text="UI('male')"></option><option value="f" x-text="UI('female')"></option></select></div>
+      <div><label class="f" x-text="UI('scr')"></label><input type="number" step="0.01" min="0.1" x-model.number="p.scr"></div>
+      <div><label class="f" x-text="UI('unit')"></label>
+        <select x-model="p.unit"><option value="mg">mg/dL</option><option value="umol">µmol/L</option></select></div>
+      <div><label class="f" x-text="UI('ind')"></label>
+        <select x-model="p.ind"><template x-for="i in inds" :key="i.k"><option :value="i.k" x-text="T(i.n)"></option></template></select></div>
+      <div><label class="f" x-text="UI('child')"></label>
+        <select x-model="p.child"><option value="none" x-text="UI('noLiver')"></option><option value="A">Child-Pugh A</option><option value="B">Child-Pugh B</option><option value="C">Child-Pugh C</option></select></div>
+    </div>
+    <div class="grid g2" style="margin-top:10px">
+      <div>
+        <label class="chk"><input type="checkbox" x-model="p.hd"><span x-text="UI('hd')"></span></label>
+        <label class="chk"><input type="checkbox" x-model="p.round"><span x-text="UI('round')"></span></label>
+        <label class="chk"><input type="checkbox" x-model="p.mg"><span x-text="UI('mg')"></span></label>
+        <label class="chk"><input type="checkbox" x-model="p.preg"><span x-text="UI('preg')"></span></label>
+        <label class="chk"><input type="checkbox" x-model="p.tendon"><span x-text="UI('tendon')"></span></label>
+      </div>
+      <div>
+        <label class="chk"><input type="checkbox" x-model="p.cation"><span x-text="UI('cation')"></span></label>
+        <label class="chk"><input type="checkbox" x-model="p.qt"><span x-text="UI('qt')"></span></label>
+        <label class="chk"><input type="checkbox" x-model="p.cyp"><span x-text="UI('cyp')"></span></label>
+        <label class="chk"><input type="checkbox" x-model="p.tiz"><span x-text="UI('tiz')"></span></label>
+        <label class="chk"><input type="checkbox" x-model="p.dm"><span x-text="UI('dm')"></span></label>
+      </div>
+    </div>
+    <p class="note"><b>CrCl (Cockcroft–Gault, <span x-text="UI('actualWt')"></span>): </b><span x-text="crclTxt()"></span></p>
+    <div class="grid g3">
+      <template x-for="d in drugs" :key="d.k">
+        <div class="res" :style="'--c:'+d.c" x-data="{r:evalDose(d.k,p)}" x-effect="r=evalDose(d.k,p)">
+          <h3 x-text="d.n[0]"></h3>
+          <span class="st" :class="r.status" x-text="UI('st_'+r.status)"></span>
+          <div class="dose" x-text="T(r.dose)"></div>
+          <ul><template x-for="n in r.notes"><li x-text="T(n)"></li></template></ul>
+        </div>
+      </template>
+    </div>
+    <p class="note" x-text="UI('doseDisc')"></p>
+  </div>
+
+  <!-- VIEW 4 cases -->
+  <div class="panel" x-show="view==='cases'">
+    <div class="grid g3">
+      <template x-for="c in cases" :key="c.k">
+        <div class="case">
+          <h3 x-text="T(c.n)"></h3>
+          <div class="row"><span class="tag tg" x-text="UI('prefer')"></span><span x-text="T(c.pref)"></span></div>
+          <div class="row"><span class="tag tw" x-text="UI('alt')"></span><span x-text="T(c.alt)"></span></div>
+          <div class="row"><span class="tag tr" x-text="UI('avoid')"></span><span x-text="T(c.avoid)"></span></div>
+          <div class="row"><b x-text="UI('why')"></b> <span x-text="T(c.why)"></span> <span class="rf" x-text="'['+c.ref+']'"></span></div>
+        </div>
+      </template>
+    </div>
+    <p class="note" x-text="UI('caseNote')"></p>
+  </div>
+
+  <!-- VIEW 5 quiz -->
+  <div class="panel" x-show="view==='quiz'">
+    <template x-for="(q,qi) in quiz" :key="qi">
+      <div style="margin-bottom:14px">
+        <div style="font-weight:800;font-size:.9rem" x-text="(qi+1)+'. '+T(q.q)"></div>
+        <template x-for="(o,oi) in q.o" :key="oi">
+          <button class="opt" :class="optClass(qi,oi)" @click="answer(qi,oi)" x-text="T(o)"></button>
+        </template>
+        <div class="note" x-show="ans[qi]!==undefined"><b x-text="UI('expl')"></b> <span x-text="T(q.e)"></span></div>
+      </div>
+    </template>
+    <div style="font-weight:800" x-text="UI('score')+': '+score()+'/'+quiz.length"></div>
+    <button class="btn" style="margin-top:6px" @click="ans={}" x-text="UI('reset')"></button>
+  </div>
+
+  <!-- NOTES -->
+  <div class="sec panel">
+    <h2 x-text="UI('notes')"></h2>
+    <template x-for="(n,i) in notes" :key="i"><p class="note" x-text="(i+1)+'. '+T(n)"></p></template>
+  </div>
+
+  <!-- GLOSS -->
+  <div class="sec panel" id="gloss">
+    <h2 x-text="UI('gloss')"></h2>
+    <template x-for="g in gloss" :key="g.k">
+      <div style="margin-bottom:10px">
+        <div style="font-weight:800;font-size:.82rem;margin:4px 0" x-text="T(g.n)"></div>
+        <table class="gl"><thead><tr><th x-text="UI('abbr')"></th><th x-text="UI('full')"></th><th x-text="UI('mean')"></th></tr></thead>
+        <tbody><template x-for="r in g.r" :key="r[0]"><tr><td x-text="r[0]"></td><td x-text="T([r[1],r[2]])"></td><td x-text="T([r[3],r[4]])"></td></tr></template></tbody></table>
+      </div>
+    </template>
+  </div>
+
+  <!-- REFS -->
+  <div class="sec panel refs">
+    <h2 x-text="UI('refs')"></h2>
+    <ol><template x-for="r in refs"><li x-text="r"></li></template></ol>
+    <p class="disc" x-text="UI('disc')"></p>
+  </div>
+</div>
+
+<script>
+/* ===== 3D icon helpers ===== */
+function wrapSvg(inner){return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><ellipse cx="32" cy="55" rx="22" ry="6" fill="url(#g-ped)" stroke="#aab6c9" stroke-width=".8"/><ellipse cx="32" cy="53" rx="14" ry="3" fill="rgba(10,16,32,.12)"/>'+inner+'</svg>';}
+function tablet(g){return '<ellipse cx="32" cy="38" rx="18" ry="9" fill="url(#'+g+')" opacity=".55"/><ellipse cx="32" cy="32" rx="18" ry="9" fill="url(#'+g+')"/><ellipse cx="29" cy="29" rx="9" ry="3" fill="#fff" opacity=".35"/><line x1="16" y1="32" x2="48" y2="32" stroke="#fff" stroke-opacity=".5"/>';}
+function capsule(){return '<g transform="rotate(-30 32 34)"><rect x="12" y="24" width="40" height="18" rx="9" fill="url(#g-pink)"/><path d="M32 24h11a9 9 0 0 1 0 18H32z" fill="url(#g-blue)"/><rect x="16" y="27" width="28" height="4" rx="2" fill="#fff" opacity=".35"/></g>';}
+function sphere(g){return '<circle cx="32" cy="34" r="16" fill="url(#'+g+')"/><ellipse cx="26" cy="27" rx="6" ry="4" fill="#fff" opacity=".4"/>';}
+function tile(g){return '<rect x="14" y="18" width="36" height="28" rx="6" fill="url(#'+g+')"/><rect x="18" y="22" width="28" height="5" rx="2" fill="#fff" opacity=".4"/><rect x="18" y="31" width="20" height="3" rx="1.5" fill="#fff" opacity=".35"/><rect x="18" y="37" width="24" height="3" rx="1.5" fill="#fff" opacity=".35"/>';}
+var ICONS={
+ capsule:function(){return wrapSvg(capsule());},
+ table:function(){return wrapSvg(tile('g-ind'));},
+ matrix:function(){return wrapSvg('<rect x="14" y="18" width="16" height="12" rx="3" fill="url(#g-teal)"/><rect x="34" y="18" width="16" height="12" rx="3" fill="url(#g-amb)"/><rect x="14" y="34" width="16" height="12" rx="3" fill="url(#g-pink)"/><rect x="34" y="34" width="16" height="12" rx="3" fill="url(#g-blue)"/>');},
+ dose:function(){return wrapSvg(tablet('g-blue')+'<circle cx="46" cy="24" r="7" fill="url(#g-amb)"/>');},
+ cases:function(){return wrapSvg(sphere('g-teal')+'<rect x="29" y="26" width="6" height="18" rx="2" fill="#fff"/><rect x="23" y="32" width="18" height="6" rx="2" fill="#fff"/>');},
+ quiz:function(){return wrapSvg(sphere('g-ind')+'<text x="32" y="42" text-anchor="middle" font-size="22" font-weight="800" fill="#fff" font-family="Arial">?</text>');}
+};
+
+/* ===== Data ===== */
+var DRUGS=[
+ {k:'cip',n:['Ciprofloxacin','Ciprofloxacin'],c:'#db2777'},
+ {k:'lev',n:['Levofloxacin','Levofloxacin'],c:'#0284c7'},
+ {k:'mox',n:['Moxifloxacin','Moxifloxacin'],c:'#0d9488'}
+];
+var GROUPS=[
+ {k:'g1',n:['Dược lý & phổ kháng khuẩn','Pharmacology & spectrum']},
+ {k:'g2',n:['Dược động học','Pharmacokinetics']},
+ {k:'g3',n:['Chỉ định & liều theo nhãn','Labeled indications & dosing']},
+ {k:'g4',n:['Hiệu chỉnh thận & gan','Renal & hepatic adjustment']},
+ {k:'g5',n:['An toàn','Safety']},
+ {k:'g6',n:['Tương tác thuốc','Drug interactions']},
+ {k:'g7',n:['Dân số đặc biệt','Special populations']}
+];
+/* cell = [vi, en, refs, flag('u' = chưa đối chiếu lại từng dòng trong phiên này)] */
+var ROWS=[
+ {k:'g1',band:1,n:GROUPS[0].n,g:'g1'},
+ {k:'r_moa',g:'g1',n:['Cơ chế tác dụng','Mechanism'],
+  cip:['Ức chế DNA gyrase (topoisomerase II) và topoisomerase IV; diệt khuẩn phụ thuộc nồng độ','Inhibits DNA gyrase and topoisomerase IV; concentration-dependent bactericidal','1','u'],
+  lev:['Đồng phân L của ofloxacin; ức chế DNA gyrase và topoisomerase IV; diệt khuẩn phụ thuộc nồng độ','L-isomer of ofloxacin; inhibits DNA gyrase and topoisomerase IV; concentration-dependent','2','u'],
+  mox:['Ức chế DNA gyrase và topoisomerase IV; ái lực với topoisomerase IV của vi khuẩn Gram dương cao hơn','Inhibits DNA gyrase and topoisomerase IV; greater topoisomerase IV affinity in Gram-positive bacteria','3','u']},
+ {k:'r_gn',g:'g1',n:['Trực khuẩn Gram âm (Enterobacterales)','Gram-negative bacilli'],
+  cip:['Rất tốt; hoạt tính in vitro mạnh nhất nhóm trên Enterobacterales','Very good; strongest in vitro among the three on Enterobacterales','1','u'],
+  lev:['Tốt, thấp hơn ciprofloxacin một chút','Good, slightly lower than ciprofloxacin','2','u'],
+  mox:['Tốt nhưng không dùng cho nhiễm khuẩn tiết niệu (không có chỉ định)','Good, but not for urinary infections (no labeled indication)','3','u']},
+ {k:'r_pa',g:'g1',n:['Pseudomonas aeruginosa','Pseudomonas aeruginosa'],
+  cip:['Hoạt tính kháng Pseudomonas tốt nhất trong 3 thuốc; chọn theo kháng sinh đồ','Best antipseudomonal activity of the three; guide by susceptibility','1','u'],
+  lev:['Có hoạt tính, thường cần liều 750 mg; kém ciprofloxacin','Active, usually needs 750 mg; inferior to ciprofloxacin','2','u'],
+  mox:['Không có chỉ định kháng Pseudomonas; tránh','No antipseudomonal indication; avoid','3','u']},
+ {k:'r_gp',g:'g1',n:['Phế cầu và cầu khuẩn Gram dương','S. pneumoniae & Gram-positive cocci'],
+  cip:['Hoạt tính hạn chế; không phải lựa chọn đầu tay cho viêm phổi cộng đồng','Limited activity; not first choice for community-acquired pneumonia','1','u'],
+  lev:['Tốt ở liều 750 mg (“fluoroquinolon hô hấp”)','Good at 750 mg (“respiratory fluoroquinolone”)','2','u'],
+  mox:['Tốt nhất trong 3 thuốc trên phế cầu và Gram dương','Best of the three against pneumococci and Gram-positives','3','u']},
+ {k:'r_atyp',g:'g1',n:['Vi khuẩn không điển hình & kỵ khí','Atypicals & anaerobes'],
+  cip:['Hoạt tính không điển hình có, kỵ khí kém','Atypical activity present; poor anaerobic activity','1','u'],
+  lev:['Phủ không điển hình (Legionella, Mycoplasma, Chlamydophila); kỵ khí kém','Covers atypicals; poor anaerobic activity','2','u'],
+  mox:['Phủ không điển hình; có hoạt tính kỵ khí (nhãn có chỉ định nhiễm khuẩn ổ bụng phức tạp)','Covers atypicals; anaerobic activity (labeled for complicated intra-abdominal infection)','3','u']},
+
+ {k:'g2',band:1,n:GROUPS[1].n,g:'g2'},
+ {k:'r_f',g:'g2',n:['Sinh khả dụng đường uống','Oral bioavailability'],
+  cip:['Khoảng 70%','About 70%','1','u'],
+  lev:['Khoảng 99%; viên uống và đường tĩnh mạch hoán đổi theo mg/mg','About 99%; oral and IV interchangeable mg-for-mg','2,4'],
+  mox:['Khoảng 90%','About 90%','3','u']},
+ {k:'r_food',g:'g2',n:['Ảnh hưởng thức ăn','Food effect'],
+  cip:['Thức ăn làm chậm hấp thu, không giảm đáng kể tổng lượng thuốc hấp thu; tránh dùng chỉ với sữa hoặc nước ép bổ sung canxi','Food delays but does not substantially reduce absorption; avoid with dairy alone or calcium-fortified juice','1'],
+  lev:['Dùng viên không phụ thuộc bữa ăn','Tablets without regard to food','2,4'],
+  mox:['Dùng không phụ thuộc bữa ăn','Without regard to food','3','u']},
+ {k:'r_t',g:'g2',n:['Thời gian bán thải (t½)','Half-life (t½)'],
+  cip:['Khoảng 4 giờ','About 4 hours','1','u'],
+  lev:['Khoảng 6–8 giờ (người khỏe mạnh)','About 6–8 hours (healthy adults)','4'],
+  mox:['Khoảng 12 giờ; dùng một lần mỗi 24 giờ','About 12 hours; once daily','3','u']},
+ {k:'r_vd',g:'g2',n:['Phân bố mô','Tissue distribution'],
+  cip:['Thể tích phân bố lớn; thấm tốt vào mô và dịch cơ thể','Large volume of distribution; good tissue penetration','1','u'],
+  lev:['Thể tích phân bố 74–112 L; thấm tốt vào mô phổi; tỷ lệ AUC mô da/huyết tương khoảng 2','Vd 74–112 L; good lung penetration; skin/plasma AUC ratio about 2','4'],
+  mox:['Phân bố rộng vào mô hô hấp','Wide distribution including respiratory tissues','3','u']},
+ {k:'r_met',g:'g2',n:['Chuyển hóa & thải trừ','Metabolism & elimination'],
+  cip:['Thải trừ chủ yếu qua thận (lọc và bài tiết ở ống thận) và một phần qua đường tiêu hóa; ức chế CYP1A2','Renal (filtration and tubular secretion) plus some non-renal; CYP1A2 inhibitor','1','u'],
+  lev:['Chuyển hóa rất ít; thải trừ chủ yếu qua thận dạng không đổi; có bài tiết ở ống thận (cimetidin, probenecid giảm thanh thải qua thận lần lượt khoảng 24% và 35%)','Minimal metabolism; mainly renal unchanged; tubular secretion (cimetidine and probenecid reduce renal clearance about 24% and 35%)','4'],
+  mox:['Chuyển hóa pha II (liên hợp glucuronid và sulfat), không qua CYP; thải trừ qua phân và nước tiểu','Phase II conjugation (glucuronide, sulfate), not CYP; fecal and urinary elimination','3','u']},
+
+ {k:'g3',band:1,n:GROUPS[2].n,g:'g3'},
+ {k:'r_ind',g:'g3',n:['Chỉ định chính theo nhãn FDA','Main FDA-labeled indications'],
+  cip:['Nhiễm khuẩn tiết niệu, da–mô mềm, xương khớp, ổ bụng phức tạp, hô hấp dưới, tiêu chảy nhiễm khuẩn, thương hàn; than, dịch hạch','UTI, skin, bone/joint, complicated intra-abdominal, lower respiratory, infectious diarrhea, typhoid; anthrax, plague','1','u'],
+  lev:['Viêm phổi (cộng đồng, bệnh viện), viêm xoang, đợt cấp viêm phế quản mạn, da–mô mềm, nhiễm khuẩn tiết niệu, viêm tuyến tiền liệt; than, dịch hạch','Pneumonia (CAP, nosocomial), sinusitis, AECB, skin, UTI, prostatitis; anthrax, plague','2'],
+  mox:['Viêm phổi cộng đồng, da–mô mềm, ổ bụng phức tạp, viêm xoang, đợt cấp viêm phế quản mạn; dịch hạch. Không có chỉ định nhiễm khuẩn tiết niệu','CAP, skin, complicated intra-abdominal, sinusitis, AECB; plague. No UTI indication','3']},
+ {k:'r_dose',g:'g3',n:['Liều người lớn (chức năng thận bình thường)','Adult dose (normal renal function)'],
+  cip:['250–750 mg uống mỗi 12 giờ tùy chỉ định; tĩnh mạch 400 mg mỗi 8–12 giờ','250–750 mg PO q12h by indication; IV 400 mg q8–12h','1,5','u'],
+  lev:['250, 500 hoặc 750 mg mỗi 24 giờ; viêm phổi bệnh viện và nhiễm khuẩn da phức tạp 750 mg × 7–14 ngày; viêm phổi cộng đồng 500 mg × 7–14 ngày hoặc 750 mg × 5 ngày','250, 500 or 750 mg q24h; nosocomial pneumonia and complicated skin 750 mg × 7–14 d; CAP 500 mg × 7–14 d or 750 mg × 5 d','4'],
+  mox:['400 mg mỗi 24 giờ (uống hoặc tĩnh mạch); viêm phổi cộng đồng 7–14 ngày; đợt cấp viêm phế quản mạn 5 ngày; viêm xoang 10 ngày','400 mg q24h (PO or IV); CAP 7–14 d; AECB 5 d; sinusitis 10 d','3']},
+
+ {k:'g4',band:1,n:GROUPS[3].n,g:'g4'},
+ {k:'r_renal',g:'g4',n:['Suy thận','Renal impairment'],
+  cip:['CrCl 30–50: 250–500 mg mỗi 12 giờ. CrCl 5–29: 250–500 mg mỗi 18 giờ theo nhãn FDA (một số SmPC ghi mỗi 24 giờ). Lọc máu: 250–500 mg mỗi 24 giờ, dùng sau lọc','CrCl 30–50: 250–500 mg q12h. CrCl 5–29: 250–500 mg q18h per FDA (some SmPCs: q24h). Dialysis: 250–500 mg q24h after dialysis','1,5,6','u'],
+  lev:['Liều 750 mg: CrCl 20–49 → 750 mg mỗi 48 giờ; CrCl 10–19 hoặc lọc máu/CAPD → 750 mg liều đầu rồi 500 mg mỗi 48 giờ. Liều 500 mg: CrCl 20–49 → 500 mg liều đầu rồi 250 mg mỗi 24 giờ; CrCl 10–19 → 250 mg mỗi 48 giờ','750 mg regimen: CrCl 20–49 → 750 mg q48h; CrCl 10–19 or HD/CAPD → 750 mg then 500 mg q48h. 500 mg regimen: CrCl 20–49 → 500 mg then 250 mg q24h; CrCl 10–19 → 250 mg q48h','2,4'],
+  mox:['Không cần chỉnh liều ở mọi mức suy thận, kể cả lọc máu','No adjustment at any degree of renal impairment, including dialysis','3,7']},
+ {k:'r_hep',g:'g4',n:['Suy gan','Hepatic impairment'],
+  cip:['Nhãn FDA không nêu chỉnh liều; thận trọng khi suy gan kèm suy thận','No adjustment in FDA label; caution with combined hepatic and renal impairment','1,5','u'],
+  lev:['Chưa có nghiên cứu dược động học; do chuyển hóa hạn chế nên không dự kiến ảnh hưởng','No PK studies; limited metabolism so no effect expected','4'],
+  mox:['Nhãn FDA: không chỉnh liều. SmPC (Singapore/châu Âu): không khuyến cáo ở Child-Pugh C','FDA: no adjustment. SmPC: not recommended in Child-Pugh C','3,7']},
+
+ {k:'g5',band:1,n:GROUPS[4].n,g:'g5'},
+ {k:'r_box',g:'g5',n:['Cảnh báo đóng khung (boxed warning)','Boxed warning'],
+  cip:['Viêm gân, đứt gân, bệnh thần kinh ngoại biên, tác dụng trên thần kinh trung ương, nặng thêm bệnh nhược cơ','Tendinitis, tendon rupture, peripheral neuropathy, CNS effects, myasthenia gravis exacerbation','1'],
+  lev:['Cùng nhóm cảnh báo; tránh dùng khi có tiền sử nhược cơ (mục chống chỉ định/tránh dùng trong nhãn)','Same warning class; avoid with history of myasthenia gravis','2,4'],
+  mox:['Cùng nhóm cảnh báo đóng khung; tránh khi nhược cơ','Same boxed warning class; avoid in myasthenia gravis','3']},
+ {k:'r_qt',g:'g5',n:['Kéo dài khoảng QT','QT prolongation'],
+  cip:['Có cảnh báo chung của nhóm; mức độ thường được xem là thấp hơn levofloxacin và moxifloxacin (so sánh gián tiếp)','Class warning; generally viewed as lower than levofloxacin and moxifloxacin (indirect)','8','u'],
+  lev:['Có cảnh báo kéo dài QT, xoắn đỉnh; tránh khi QT kéo dài, hạ kali máu chưa điều chỉnh','QT/torsades warning; avoid with known QT prolongation or uncorrected hypokalemia','2','u'],
+  mox:['Nhãn nêu riêng nguy cơ QT/xoắn đỉnh; tránh khi QT kéo dài, hạ kali, hạ magie, nhịp chậm đáng kể, thiếu máu cơ tim cấp, hoặc dùng thuốc kéo dài QT','Dedicated QT/torsades warning; avoid with QT prolongation, hypoK/hypoMg, significant bradycardia, acute ischemia or QT-prolonging drugs','3']},
+ {k:'r_glu',g:'g5',n:['Rối loạn đường huyết','Dysglycemia'],
+  cip:['Cảnh báo hạ đường huyết, nhất là ở người đái tháo đường dùng insulin hoặc sulfonylure, người cao tuổi','Hypoglycemia warning, esp. diabetics on insulin/sulfonylureas, elderly','1,8','u'],
+  lev:['Cảnh báo tương tự','Similar warning','2,8','u'],
+  mox:['Mục 5.11 của nhãn: rối loạn đường huyết; tương tác với thuốc điều trị đái tháo đường (mục 7.3)','Label 5.11 dysglycemia; interaction with antidiabetics (7.3)','3']},
+ {k:'r_fda',g:'g5',n:['Hạn chế sử dụng theo FDA','FDA use restriction'],
+  cip:['Từ 2016: dành lựa chọn khác cho viêm xoang cấp, đợt cấp viêm phế quản mạn, nhiễm khuẩn tiết niệu không biến chứng khi còn thuốc thay thế','Since 2016: reserve for sinusitis, AECB, uncomplicated UTI only when no alternative','8','u'],
+  lev:['Hạn chế tương tự','Same restriction','8','u'],
+  mox:['Hạn chế tương tự đối với viêm xoang và đợt cấp viêm phế quản mạn','Same restriction for sinusitis and AECB','8','u']},
+
+ {k:'g6',band:1,n:GROUPS[5].n,g:'g6'},
+ {k:'r_cat',g:'g6',n:['Cation hóa trị đa (antacid, sắt, kẽm, canxi, sucralfat, vitamin tổng hợp)','Multivalent cations'],
+  cip:['Uống cách: thuốc trước ít nhất 2 giờ hoặc sau 6 giờ','Take ≥2 h before or 6 h after','1','u'],
+  lev:['Uống cách ít nhất 2 giờ (trước hoặc sau)','Separate by ≥2 h','2'],
+  mox:['Uống trước 4 giờ hoặc sau 8 giờ (viên)','Take 4 h before or 8 h after (tablets)','3']},
+ {k:'r_cyp',g:'g6',n:['Ức chế CYP1A2 (theophyllin, tizanidin, caffein, clozapin…)','CYP1A2 inhibition'],
+  cip:['Ức chế CYP1A2 rõ; chống chỉ định phối hợp với tizanidin','CYP1A2 inhibitor; contraindicated with tizanidine','1'],
+  lev:['Không có tương tác CYP1A2 đáng kể theo nhãn','No clinically relevant CYP1A2 interaction per label','2','u'],
+  mox:['Không qua CYP; không có tương tác CYP1A2 đáng kể','Not CYP-mediated; no relevant CYP1A2 interaction','3','u']},
+ {k:'r_oth',g:'g6',n:['Tương tác khác','Other interactions'],
+  cip:['Warfarin (tăng INR), NSAID (nguy cơ co giật), thuốc đái tháo đường, corticosteroid (tăng nguy cơ đứt gân)','Warfarin (INR), NSAIDs (seizures), antidiabetics, corticosteroids (tendon rupture)','1','u'],
+  lev:['Warfarin, NSAID, thuốc đái tháo đường, corticosteroid; thuốc kéo dài QT','Warfarin, NSAIDs, antidiabetics, corticosteroids; QT-prolonging drugs','2','u'],
+  mox:['Thuốc kéo dài QT (mục 7.5), warfarin (7.2), thuốc đái tháo đường (7.3), NSAID (7.4)','QT-prolonging drugs (7.5), warfarin (7.2), antidiabetics (7.3), NSAIDs (7.4)','3']},
+
+ {k:'g7',band:1,n:GROUPS[6].n,g:'g7'},
+ {k:'r_ped',g:'g7',n:['Trẻ em','Pediatrics'],
+  cip:['Có chỉ định ở trẻ 1–17 tuổi cho nhiễm khuẩn tiết niệu phức tạp/viêm đài bể thận (khi không có lựa chọn khác), than, dịch hạch; có cảnh báo tổn thương khớp','Labeled for ages 1–17 in complicated UTI/pyelonephritis (when no alternative), anthrax, plague; arthropathy warning','1,5','u'],
+  lev:['Có chỉ định ở trẻ từ 6 tháng cho than (phơi nhiễm qua đường hô hấp) và dịch hạch; có cảnh báo về khớp và gân','Labeled from 6 months for inhalational anthrax and plague; joint/tendon warnings','2,4'],
+  mox:['Chưa xác lập hiệu quả và an toàn ở trẻ em','Safety and efficacy not established in children','3,7']},
+ {k:'r_preg',g:'g7',n:['Thai kỳ & cho con bú','Pregnancy & lactation'],
+  cip:['Tránh nếu có lựa chọn khác; chỉ dùng khi lợi ích vượt nguy cơ','Avoid when alternatives exist; use only if benefit outweighs risk','1,5','u'],
+  lev:['Tránh tương tự; thận trọng khi cho con bú','Avoid similarly; caution in lactation','2,5','u'],
+  mox:['Nhãn FDA: dữ liệu động vật cho thấy có thể gây hại thai; SmPC chống chỉ định trong thai kỳ và cho con bú','FDA: animal data suggest fetal harm; SmPC contraindicates in pregnancy and lactation','3,7']},
+ {k:'r_eld',g:'g7',n:['Người cao tuổi','Elderly'],
+  cip:['Nguy cơ đứt gân tăng, nhất là khi dùng corticosteroid; hiệu chỉnh theo CrCl','Higher tendon rupture risk, especially with corticosteroids; adjust by CrCl','1','u'],
+  lev:['Nguy cơ gân tăng; hiệu chỉnh theo CrCl','Higher tendon risk; adjust by CrCl','2'],
+  mox:['Nguy cơ gân và kéo dài QT tăng (mục 8.5)','Higher tendon and QT risk (8.5)','3']}
+];
+
+var QUICK=[
+ {k:'q1',n:['Hoạt tính kháng Pseudomonas','Antipseudomonal activity'],v:{cip:['qg','Tốt nhất','Best','1'],lev:['qw','Có, kém hơn','Yes, inferior','2'],mox:['qb','Không có chỉ định','No indication','3']}},
+ {k:'q2',n:['Phế cầu / hô hấp','Pneumococcus / respiratory'],v:{cip:['qb','Hạn chế','Limited','1'],lev:['qg','Tốt (750 mg)','Good (750 mg)','2'],mox:['qg','Tốt nhất','Best','3']}},
+ {k:'q3',n:['Nhiễm khuẩn tiết niệu','Urinary tract infection'],v:{cip:['qg','Có chỉ định','Indicated','1'],lev:['qg','Có chỉ định','Indicated','2'],mox:['qb','Không có chỉ định','Not indicated','3']}},
+ {k:'q4',n:['Hoạt tính kỵ khí','Anaerobic activity'],v:{cip:['qb','Kém','Poor','1'],lev:['qb','Kém','Poor','2'],mox:['qg','Có','Yes','3']}},
+ {k:'q5',n:['Cần chỉnh liều thận','Renal dose adjustment'],v:{cip:['qw','Có (CrCl <50)','Yes (CrCl <50)','1'],lev:['qw','Có (CrCl <50)','Yes (CrCl <50)','2'],mox:['qg','Không','No','3']}},
+ {k:'q6',n:['Số lần dùng mỗi ngày','Doses per day'],v:{cip:['qw','2 lần','Twice','1'],lev:['qg','1 lần','Once','2'],mox:['qg','1 lần','Once','3']}},
+ {k:'q7',n:['Nguy cơ kéo dài QT','QT prolongation risk'],v:{cip:['qn','Thấp hơn (gián tiếp)','Lower (indirect)','8'],lev:['qw','Trung gian','Intermediate','2'],mox:['qb','Cao nhất trong 3 thuốc','Highest of the three','3']}},
+ {k:'q8',n:['Tương tác CYP1A2','CYP1A2 interaction'],v:{cip:['qb','Có; chống chỉ định tizanidin','Yes; tizanidine contraindicated','1'],lev:['qg','Không đáng kể','Not significant','2'],mox:['qg','Không đáng kể','Not significant','3']}},
+ {k:'q9',n:['Khoảng cách với cation','Cation separation'],v:{cip:['qw','2 giờ trước / 6 giờ sau','2 h before / 6 h after','1'],lev:['qw','≥2 giờ','≥2 h','2'],mox:['qb','4 giờ trước / 8 giờ sau','4 h before / 8 h after','3']}},
+ {k:'q10',n:['Sinh khả dụng đường uống','Oral bioavailability'],v:{cip:['qw','~70%','~70%','1'],lev:['qg','~99%','~99%','4'],mox:['qg','~90%','~90%','3']}}
+];
+
+var INDS=[
+ {k:'cap',n:['Viêm phổi cộng đồng','Community-acquired pneumonia']},
+ {k:'cuti',n:['Nhiễm khuẩn tiết niệu phức tạp / viêm đài bể thận','Complicated UTI / pyelonephritis']},
+ {k:'uuti',n:['Viêm bàng quang không biến chứng','Uncomplicated cystitis']},
+ {k:'ssti',n:['Nhiễm khuẩn da – mô mềm','Skin and soft tissue infection']},
+ {k:'ciai',n:['Nhiễm khuẩn ổ bụng phức tạp','Complicated intra-abdominal infection']},
+ {k:'pseudo',n:['Nghi/ xác định Pseudomonas aeruginosa','Suspected/confirmed P. aeruginosa']},
+ {k:'bone',n:['Nhiễm khuẩn xương khớp','Bone and joint infection']}
+];
+
+/* base regimens: [status, doseVi, doseEn, noteVi, noteEn, levoRegimen] */
+var BASE={
+ cip:{
+  cap:['warn','500–750 mg uống mỗi 12 giờ','500–750 mg PO q12h','Không ưu tiên cho viêm phổi cộng đồng do hoạt tính phế cầu hạn chế.','Not preferred for CAP because of limited pneumococcal activity.'],
+  cuti:['ok','500 mg uống mỗi 12 giờ × 7–14 ngày','500 mg PO q12h × 7–14 days','Chọn theo kháng sinh đồ; tỷ lệ đề kháng tại chỗ có thể cao.','Guide by susceptibility; local resistance may be high.'],
+  uuti:['warn','250 mg uống mỗi 12 giờ × 3 ngày','250 mg PO q12h × 3 days','FDA khuyến cáo dành fluoroquinolon cho khi không còn lựa chọn khác.','FDA advises reserving fluoroquinolones when no alternative exists.'],
+  ssti:['ok','500–750 mg uống mỗi 12 giờ × 7–14 ngày','500–750 mg PO q12h × 7–14 days','',''],
+  ciai:['ok','500 mg uống mỗi 12 giờ × 7–14 ngày','500 mg PO q12h × 7–14 days','Phối hợp thuốc có hoạt tính kỵ khí (ví dụ metronidazol).','Combine with an anaerobic agent (e.g. metronidazole).'],
+  pseudo:['ok','750 mg uống mỗi 12 giờ (thể nặng); tĩnh mạch 400 mg mỗi 8–12 giờ','750 mg PO q12h (severe); IV 400 mg q8–12h','Xác nhận theo kháng sinh đồ; cân nhắc phối hợp theo hướng dẫn điều trị cơ sở.','Confirm by susceptibility; consider combination per local guidance.'],
+  bone:['ok','500–750 mg uống mỗi 12 giờ × 4–8 tuần','500–750 mg PO q12h × 4–8 weeks','','']
+ },
+ lev:{
+  cap:['ok','750 mg mỗi 24 giờ × 5 ngày (hoặc 500 mg × 7–14 ngày)','750 mg q24h × 5 days (or 500 mg × 7–14 days)','','',750],
+  cuti:['ok','750 mg mỗi 24 giờ × 5 ngày','750 mg q24h × 5 days','','',750],
+  uuti:['warn','250 mg mỗi 24 giờ × 3 ngày','250 mg q24h × 3 days','FDA khuyến cáo dành fluoroquinolon cho khi không còn lựa chọn khác.','FDA advises reserving fluoroquinolones when no alternative exists.',250],
+  ssti:['ok','750 mg mỗi 24 giờ × 7–14 ngày (da phức tạp)','750 mg q24h × 7–14 days (complicated)','','',750],
+  ciai:['warn','750 mg mỗi 24 giờ','750 mg q24h','Ngoài chỉ định nhãn FDA; thường phối hợp metronidazol.','Outside FDA label; usually combined with metronidazole.',750],
+  pseudo:['warn','750 mg mỗi 24 giờ','750 mg q24h','Hoạt tính kháng Pseudomonas kém ciprofloxacin; chỉ dùng khi kháng sinh đồ nhạy.','Less antipseudomonal activity than ciprofloxacin; use only if susceptible.',750],
+  bone:['warn','750 mg mỗi 24 giờ','750 mg q24h','Không nằm trong chỉ định nhãn FDA; cần hội chẩn chuyên khoa.','Not an FDA-labeled indication; specialist input needed.',750]
+ },
+ mox:{
+  cap:['ok','400 mg mỗi 24 giờ × 7–14 ngày','400 mg q24h × 7–14 days','',''],
+  cuti:['avoid','Không khuyến cáo','Not recommended','Không có chỉ định tiết niệu trong nhãn.','No urinary indication in label.'],
+  uuti:['avoid','Không khuyến cáo','Not recommended','Không có chỉ định tiết niệu trong nhãn.','No urinary indication in label.'],
+  ssti:['ok','400 mg mỗi 24 giờ × 7–21 ngày','400 mg q24h × 7–21 days','',''],
+  ciai:['ok','400 mg mỗi 24 giờ × 5–14 ngày','400 mg q24h × 5–14 days','',''],
+  pseudo:['avoid','Không khuyến cáo','Not recommended','Không có hoạt tính kháng Pseudomonas đáng tin cậy.','No reliable antipseudomonal activity.'],
+  bone:['warn','400 mg mỗi 24 giờ','400 mg q24h','Ngoài chỉ định nhãn FDA; cần hội chẩn chuyên khoa.','Outside FDA label; specialist input needed.']
+ }
+};
+
+var CASES=[
+ {k:'c1',n:['Viêm phổi cộng đồng ngoại trú, có bệnh kèm','Outpatient CAP with comorbidities'],
+  pref:['Levofloxacin 750 mg mỗi 24 giờ hoặc moxifloxacin 400 mg mỗi 24 giờ','Levofloxacin 750 mg q24h or moxifloxacin 400 mg q24h'],
+  alt:['Phác đồ không dùng fluoroquinolon theo hướng dẫn cơ sở','Non-fluoroquinolone regimen per local guidance'],
+  avoid:['Ciprofloxacin','Ciprofloxacin'],
+  why:['Hoạt tính phế cầu của ciprofloxacin hạn chế; hai thuốc còn lại có chỉ định viêm phổi cộng đồng trong nhãn.','Ciprofloxacin has limited pneumococcal activity; the other two carry a CAP indication.'],ref:'1–3'},
+ {k:'c2',n:['Viêm đài bể thận / nhiễm khuẩn tiết niệu phức tạp','Pyelonephritis / complicated UTI'],
+  pref:['Ciprofloxacin 500 mg mỗi 12 giờ hoặc levofloxacin 750 mg mỗi 24 giờ khi chủng nhạy','Ciprofloxacin 500 mg q12h or levofloxacin 750 mg q24h if susceptible'],
+  alt:['Thuốc không thuộc nhóm fluoroquinolon theo kháng sinh đồ','Non-fluoroquinolone agent by susceptibility'],
+  avoid:['Moxifloxacin','Moxifloxacin'],
+  why:['Moxifloxacin không có chỉ định nhiễm khuẩn tiết niệu trong nhãn.','Moxifloxacin has no urinary tract indication in its label.'],ref:'1–3'},
+ {k:'c3',n:['Nhiễm Pseudomonas aeruginosa nhạy cảm','Susceptible Pseudomonas aeruginosa'],
+  pref:['Ciprofloxacin 750 mg uống mỗi 12 giờ hoặc 400 mg tĩnh mạch mỗi 8–12 giờ','Ciprofloxacin 750 mg PO q12h or 400 mg IV q8–12h'],
+  alt:['Levofloxacin 750 mg mỗi 24 giờ','Levofloxacin 750 mg q24h'],
+  avoid:['Moxifloxacin','Moxifloxacin'],
+  why:['Ciprofloxacin có hoạt tính kháng Pseudomonas tốt nhất trong 3 thuốc. Dữ liệu so sánh trực tiếp lâm sàng cần được đối chiếu thêm.','Ciprofloxacin has the best antipseudomonal activity; direct clinical comparisons need further verification.'],ref:'1,2'},
+ {k:'c4',n:['Suy thận nặng (CrCl 15 mL/phút)','Severe renal impairment (CrCl 15 mL/min)'],
+  pref:['Moxifloxacin 400 mg mỗi 24 giờ, không cần chỉnh liều (nếu chỉ định phù hợp)','Moxifloxacin 400 mg q24h, no adjustment (if indication fits)'],
+  alt:['Levofloxacin 750 mg liều đầu rồi 500 mg mỗi 48 giờ; ciprofloxacin 250–500 mg theo bảng chỉnh liều','Levofloxacin 750 mg then 500 mg q48h; ciprofloxacin 250–500 mg per adjustment table'],
+  avoid:['Dùng liều chuẩn của levofloxacin hoặc ciprofloxacin không chỉnh','Standard unadjusted levofloxacin or ciprofloxacin doses'],
+  why:['Levofloxacin thải trừ chủ yếu qua thận, dễ tích lũy khi CrCl <50 mL/phút.','Levofloxacin is mostly renally cleared and accumulates when CrCl <50 mL/min.'],ref:'3,4'},
+ {k:'c5',n:['QT kéo dài hoặc đang dùng thuốc kéo dài QT','Prolonged QT or on QT-prolonging drugs'],
+  pref:['Ưu tiên thuốc không thuộc nhóm fluoroquinolon','Prefer a non-fluoroquinolone agent'],
+  alt:['Ciprofloxacin kèm theo dõi điện tâm đồ và điện giải (so sánh gián tiếp, nguy cơ thấp hơn)','Ciprofloxacin with ECG and electrolyte monitoring (indirect, lower risk)'],
+  avoid:['Moxifloxacin','Moxifloxacin'],
+  why:['Nhãn moxifloxacin nêu riêng nguy cơ QT/xoắn đỉnh và khuyến cáo tránh khi có QT kéo dài, hạ kali, hạ magie.','Moxifloxacin label has dedicated QT/torsades warnings and advises avoidance with QT prolongation or hypokalemia/hypomagnesemia.'],ref:'3,8'},
+ {k:'c6',n:['Đang dùng tizanidin, theophyllin hoặc clozapin','On tizanidine, theophylline or clozapine'],
+  pref:['Levofloxacin hoặc moxifloxacin (ít tương tác CYP1A2)','Levofloxacin or moxifloxacin (little CYP1A2 interaction)'],
+  alt:['Ciprofloxacin với theo dõi nồng độ/triệu chứng độc tính (trừ tizanidin)','Ciprofloxacin with level/toxicity monitoring (except tizanidine)'],
+  avoid:['Ciprofloxacin phối hợp tizanidin (chống chỉ định)','Ciprofloxacin with tizanidine (contraindicated)'],
+  why:['Ciprofloxacin ức chế CYP1A2; nhãn FDA chống chỉ định phối hợp với tizanidin.','Ciprofloxacin inhibits CYP1A2; FDA label contraindicates tizanidine co-administration.'],ref:'1'},
+ {k:'c7',n:['Trẻ em hoặc phụ nữ có thai','Children or pregnancy'],
+  pref:['Ưu tiên kháng sinh không thuộc nhóm fluoroquinolon','Prefer a non-fluoroquinolone antibiotic'],
+  alt:['Ciprofloxacin hoặc levofloxacin chỉ khi không còn lựa chọn khác (ví dụ than, dịch hạch, nhiễm khuẩn tiết niệu phức tạp ở trẻ em theo nhãn)','Ciprofloxacin or levofloxacin only when no alternative (e.g. anthrax, plague, pediatric complicated UTI per label)'],
+  avoid:['Moxifloxacin ở trẻ em và trong thai kỳ','Moxifloxacin in children and pregnancy'],
+  why:['Cảnh báo tổn thương khớp ở động vật non và chưa xác lập an toàn của moxifloxacin ở trẻ em.','Arthropathy warning in juvenile animals; moxifloxacin pediatric safety not established.'],ref:'1–3,7'}
+];
+
+var QUIZ=[
+ {q:['Fluoroquinolon nào có hoạt tính kháng Pseudomonas aeruginosa tốt nhất trong ba thuốc?','Which fluoroquinolone has the best antipseudomonal activity of the three?'],
+  o:[['Ciprofloxacin','Ciprofloxacin'],['Levofloxacin','Levofloxacin'],['Moxifloxacin','Moxifloxacin']],c:0,
+  e:['Ciprofloxacin được xem là mạnh nhất trên Pseudomonas; moxifloxacin không có chỉ định này.','Ciprofloxacin is considered strongest on Pseudomonas; moxifloxacin has no such indication.']},
+ {q:['Thuốc nào KHÔNG cần chỉnh liều khi suy thận?','Which drug needs NO dose adjustment in renal impairment?'],
+  o:[['Ciprofloxacin','Ciprofloxacin'],['Levofloxacin','Levofloxacin'],['Moxifloxacin','Moxifloxacin']],c:2,
+  e:['Nhãn FDA của moxifloxacin: không chỉnh liều ở suy thận hoặc suy gan.','Moxifloxacin FDA label: no adjustment in renal or hepatic impairment.']},
+ {q:['Phối hợp nào bị chống chỉ định theo nhãn FDA?','Which combination is contraindicated per the FDA label?'],
+  o:[['Ciprofloxacin + tizanidin','Ciprofloxacin + tizanidine'],['Levofloxacin + warfarin','Levofloxacin + warfarin'],['Moxifloxacin + antacid','Moxifloxacin + antacid']],c:0,
+  e:['Ciprofloxacin ức chế CYP1A2 làm tăng nồng độ tizanidin.','Ciprofloxacin inhibits CYP1A2, raising tizanidine exposure.']},
+ {q:['Bệnh nhân CrCl 35 mL/phút dùng levofloxacin 750 mg mỗi 24 giờ. Liều đúng theo nhãn?','CrCl 35 mL/min on levofloxacin 750 mg q24h. Correct labeled dose?'],
+  o:[['750 mg mỗi 48 giờ','750 mg q48h'],['500 mg mỗi 12 giờ','500 mg q12h'],['Giữ nguyên 750 mg mỗi 24 giờ','Keep 750 mg q24h']],c:0,
+  e:['CrCl 20–49 mL/phút: 750 mg mỗi 48 giờ.','CrCl 20–49 mL/min: 750 mg q48h.']},
+ {q:['Khoảng cách dùng moxifloxacin viên với antacid chứa nhôm/magie?','Spacing of moxifloxacin tablets from aluminum/magnesium antacids?'],
+  o:[['Trước 4 giờ hoặc sau 8 giờ','4 h before or 8 h after'],['Trước 1 giờ hoặc sau 1 giờ','1 h before or 1 h after'],['Không cần cách','No spacing needed']],c:0,
+  e:['Cation hóa trị đa làm giảm hấp thu fluoroquinolon do tạo phức chelat.','Multivalent cations chelate fluoroquinolones and reduce absorption.']},
+ {q:['Thuốc nào không có chỉ định nhiễm khuẩn tiết niệu trong nhãn FDA?','Which drug has no urinary tract indication in the FDA label?'],
+  o:[['Ciprofloxacin','Ciprofloxacin'],['Levofloxacin','Levofloxacin'],['Moxifloxacin','Moxifloxacin']],c:2,
+  e:['Moxifloxacin không có chỉ định nhiễm khuẩn tiết niệu.','Moxifloxacin carries no urinary tract indication.']},
+ {q:['Ở bệnh nhân QT kéo dài, thuốc nào có cảnh báo QT riêng nổi bật nhất trong nhãn?','In prolonged QT, which label has the most prominent dedicated QT warning?'],
+  o:[['Moxifloxacin','Moxifloxacin'],['Ciprofloxacin','Ciprofloxacin'],['Không thuốc nào','None']],c:0,
+  e:['Nhãn moxifloxacin nêu rõ tránh khi QT kéo dài, hạ kali, hạ magie và thuốc kéo dài QT.','Moxifloxacin label says to avoid with QT prolongation, hypokalemia, hypomagnesemia and QT-prolonging drugs.']}
+];
+
+var NOTES=[
+ ['Nguồn nhãn: dữ liệu ưu tiên nhãn FDA (Cipro, Levaquin/levofloxacin, Avelox). SmPC châu Âu/Singapore được dùng để đối chiếu ở những điểm có khác biệt (moxifloxacin Child-Pugh C, thai kỳ, ciprofloxacin chỉnh liều thận).','Sources: FDA labels (Cipro, Levaquin/levofloxacin, Avelox) are primary. European/Singapore SmPCs are used where they differ (moxifloxacin Child-Pugh C, pregnancy, ciprofloxacin renal dosing).'],
+ ['Ký hiệu ‡ đánh dấu ô dữ liệu chưa được đọc lại trực tiếp từ nguồn gốc trong phiên soạn trang này; cần đối chiếu nhãn hiện hành trước khi dùng cho quyết định lâm sàng.','The ‡ mark flags cells not re-read directly from the source during this build; verify against the current label before clinical use.'],
+ ['Phương pháp CrCl: Cockcroft–Gault với cân nặng thực tế, nhân 0,85 nếu nữ. Nhãn FDA dùng CrCl theo Cockcroft–Gault cho hiệu chỉnh liều.','CrCl method: Cockcroft–Gault with actual weight, ×0.85 for females, consistent with FDA label dosing.'],
+ ['Ciprofloxacin ở CrCl 5–29 mL/phút: nhãn FDA ghi khoảng cách 18 giờ, một số SmPC ghi 24 giờ; kiểm tra bản nhãn lưu hành tại cơ sở.','Ciprofloxacin at CrCl 5–29 mL/min: FDA label gives an 18-hour interval while some SmPCs give 24 hours; check the locally marketed label.'],
+ ['Không có hệ số quy đổi liều tương đương giữa ba thuốc; so sánh hiệu quả lâm sàng chủ yếu là gián tiếp, không từ thử nghiệm đối đầu trực tiếp.','There is no dose-equivalence factor between the three drugs; clinical comparisons are mostly indirect, not from head-to-head trials.'],
+ ['Cảnh báo then chốt: cảnh báo đóng khung (viêm gân, đứt gân, bệnh thần kinh ngoại biên, tác dụng thần kinh trung ương, nặng thêm nhược cơ) áp dụng cho cả ba thuốc.','Key warning: the boxed warning (tendinitis, tendon rupture, peripheral neuropathy, CNS effects, myasthenia gravis exacerbation) applies to all three.'],
+ ['Cách đọc: số [n] là số tài liệu tham khảo; màu ô ở “Tổng quan nhanh” gồm lục (thuận lợi), vàng (thận trọng), đỏ (bất lợi/hạn chế), xám (trung tính).','How to read: [n] is the reference number; quick-matrix colors: green (favorable), amber (caution), red (unfavorable/restricted), grey (neutral).'],
+ ['Công cụ tính liều chạy hoàn toàn trên trình duyệt, không lưu dữ liệu người bệnh; chỉ hỗ trợ thẩm định, không thay thế đánh giá lâm sàng và hướng dẫn điều trị của cơ sở. Ngày đối chiếu dữ liệu: 24/10/2026.','The dose tool runs entirely in the browser and stores no patient data; it supports review only and does not replace clinical judgment or local guidance. Data reviewed: 24 Oct 2026.']
+];
+
+var GLOSS=[
+ {k:'a',n:['Bệnh lý & chỉ định','Conditions & indications'],r:[
+  ['CAP','Community-acquired pneumonia','Community-acquired pneumonia','Viêm phổi cộng đồng','Pneumonia acquired outside hospital'],
+  ['UTI','Urinary tract infection','Urinary tract infection','Nhiễm khuẩn tiết niệu','Infection of the urinary tract'],
+  ['AECB','Acute bacterial exacerbation of chronic bronchitis','Acute bacterial exacerbation of chronic bronchitis','Đợt cấp nhiễm khuẩn của viêm phế quản mạn','Bacterial flare of chronic bronchitis'],
+  ['SSTI','Skin and soft tissue infection','Skin and soft tissue infection','Nhiễm khuẩn da – mô mềm','Infection of skin and soft tissue'],
+  ['CNS','Central nervous system','Central nervous system','Thần kinh trung ương','Brain and spinal cord effects']]},
+ {k:'b',n:['Dược lý & dược động học','Pharmacology & PK'],r:[
+  ['PK','Pharmacokinetics','Pharmacokinetics','Dược động học','Absorption, distribution, metabolism, excretion'],
+  ['CYP','Cytochrome P450','Cytochrome P450','Hệ enzym cytochrom P450','Hepatic drug-metabolizing enzymes'],
+  ['AUC','Area under the curve','Area under the concentration–time curve','Diện tích dưới đường cong nồng độ – thời gian','Total drug exposure'],
+  ['Vd','Volume of distribution','Volume of distribution','Thể tích phân bố','Apparent volume the drug distributes into'],
+  ['CrCl','Creatinine clearance','Creatinine clearance','Độ thanh thải creatinin','Estimate of renal function (mL/min)'],
+  ['SCr','Serum creatinine','Serum creatinine','Creatinin huyết thanh','Marker of renal function']]},
+ {k:'c',n:['Lâm sàng & an toàn','Clinical & safety'],r:[
+  ['QT','QT interval','QT interval','Khoảng QT trên điện tâm đồ','Ventricular repolarization time'],
+  ['ECG','Electrocardiogram','Electrocardiogram','Điện tâm đồ','Records cardiac electrical activity'],
+  ['INR','International normalized ratio','International normalized ratio','Chỉ số INR','Coagulation monitoring for warfarin'],
+  ['NSAID','Non-steroidal anti-inflammatory drug','Non-steroidal anti-inflammatory drug','Thuốc kháng viêm không steroid','Anti-inflammatory analgesics'],
+  ['MG','Myasthenia gravis','Myasthenia gravis','Bệnh nhược cơ','Autoimmune muscle weakness disorder']]},
+ {k:'d',n:['Nhãn & nguồn','Labels & sources'],r:[
+  ['FDA','Food and Drug Administration','Food and Drug Administration','Cục Quản lý Thực phẩm và Dược phẩm Hoa Kỳ','United States regulator'],
+  ['SmPC','Summary of Product Characteristics','Summary of Product Characteristics','Tóm tắt đặc tính sản phẩm','European/other label format'],
+  ['HD','Hemodialysis','Hemodialysis','Lọc máu','Dialysis (hemodialysis)'],
+  ['CAPD','Continuous ambulatory peritoneal dialysis','Continuous ambulatory peritoneal dialysis','Thẩm phân phúc mạc liên tục ngoại trú','Peritoneal dialysis'],
+  ['PO','Per os','Per os (oral)','Đường uống','Oral route'],
+  ['IV','Intravenous','Intravenous','Đường tĩnh mạch','Intravenous route']]}
+];
+
+var REFS=[
+ 'Bayer HealthCare Pharmaceuticals. CIPRO (ciprofloxacin hydrochloride) tablets and oral suspension: prescribing information. Silver Spring (MD): US Food and Drug Administration; 2016 [cited 2026 Oct 24]. Available from: https://www.accessdata.fda.gov/drugsatfda_docs/Label/2016/019537s086lbl.pdf (bản lưu trên accessdata.fda.gov, không phải bản mới nhất)',
+ 'Levofloxacin tablets: prescribing information (Levaquin class labeling), Table 3 renal dosage adjustment. DailyMed copy [cited 2026 Oct 24]. Available from: https://medlibrary.org/lib/rx/meds/levofloxacin-38/page/3/',
+ 'Bayer HealthCare Pharmaceuticals. AVELOX (moxifloxacin) tablets and injection: prescribing information. Silver Spring (MD): US Food and Drug Administration; 2025 [cited 2026 Oct 24]. Available from: https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/021085s069%2C021277s065lbl.pdf',
+ 'Levofloxacin: clinical pharmacology and pharmacokinetics. Pfizer Medical Information; and Levofloxacin label page 8 (renal impairment, hepatic impairment, PK table) [cited 2026 Oct 24]. Available from: https://www.pfizermedicalinformation.com/levofloxacin/clinical-pharmacology',
+ 'Cipro (ciprofloxacin): renal and hepatic dosing summary. Epocrates [cited 2026 Oct 24]. Available from: https://www.epocrates.com/online/drugs/502/cipro (nguồn thứ cấp)',
+ 'Ciprofloxacin film-coated tablets: Summary of Product Characteristics, renal dosing table. Rwanda FDA registration dossier (Ultraflox 500) [cited 2026 Oct 24]. Available from: https://rwandafda.gov.rw/wp-content/uploads/2024/10/Ultraflox_500_Ciprofloxacin%20Tablets%20USP_500_mg_SmPC.pdf',
+ 'Avelox 400 mg film-coated tablets and solution for infusion: product information (SIN11351P, SIN11971P). Singapore: Health Sciences Authority/NDF [cited 2026 Oct 24]. Available from: https://www.ndf.gov.sg/about-drugs/product-information/sin11351p/',
+ 'US Food and Drug Administration. FDA Drug Safety Communications on fluoroquinolone antibiotics (2016 restriction for uncomplicated infections; 2018 dysglycemia and mental health effects) [cited 2026 Oct 24]. Chưa mở được bản gốc trong phiên này; cần xác nhận tại fda.gov.'
+];
+
+var UI_VI={title:'So sánh Ciprofloxacin – Levofloxacin – Moxifloxacin',sub:'Fluoroquinolon đường uống/tĩnh mạch · Visual Clinical Hub · ClinPharmAI',
+ table:'Bảng chi tiết',matrix:'Tổng quan nhanh',dose:'Công cụ tính liều',cases:'Tình huống lâm sàng',quiz:'Trắc nghiệm',
+ comparing:'Đang so sánh',all:'Tất cả',crit:'Tiêu chí',uflag:'Dữ liệu chưa được đọc lại trực tiếp từ nguồn gốc trong phiên soạn trang; cần đối chiếu nhãn hiện hành.',
+ lg:'Thuận lợi',lw:'Thận trọng',lb:'Bất lợi/hạn chế',ln:'Trung tính',gotoGloss:'Chú giải từ viết tắt',
+ qnote:'Màu ô chỉ phản ánh so sánh gián tiếp theo nhãn và đặc tính dược lý; không thay thế kháng sinh đồ và hướng dẫn điều trị của cơ sở.',
+ age:'Tuổi (năm)',wt:'Cân nặng thực tế (kg)',sex:'Giới',male:'Nam',female:'Nữ',scr:'Creatinin huyết thanh',unit:'Đơn vị creatinin',ind:'Chỉ định',child:'Chức năng gan',noLiver:'Không suy gan',
+ hd:'Đang lọc máu / thẩm phân',round:'Làm tròn creatinin tối thiểu 0,8 mg/dL (tùy chọn)',mg:'Có tiền sử nhược cơ',preg:'Đang mang thai hoặc cho con bú',tendon:'Tiền sử bệnh gân do quinolon / dùng corticosteroid / ghép tạng',
+ cation:'Đang dùng antacid, sắt, kẽm, canxi, sucralfat, vitamin tổng hợp',qt:'QT kéo dài, hạ kali/magie hoặc dùng thuốc kéo dài QT',cyp:'Đang dùng theophyllin, clozapin, duloxetin, caffein liều cao (nền CYP1A2)',tiz:'Đang dùng tizanidin',dm:'Đái tháo đường dùng insulin/sulfonylure',
+ actualWt:'cân nặng thực tế',st_ok:'Phù hợp',st_warn:'Thận trọng',st_avoid:'Tránh',st_contra:'Chống chỉ định',
+ doseDisc:'Công cụ hỗ trợ thẩm định, chạy hoàn toàn trên trình duyệt, không lưu dữ liệu người bệnh. Không có hệ số quy đổi tương đương giữa ba thuốc. Không thay thế đánh giá lâm sàng, nhãn hiện hành và phác đồ cơ sở.',
+ prefer:'Ưu tiên',alt:'Thay thế',avoid:'Tránh',why:'Cơ sở:',caseNote:'Các tình huống dựa trên so sánh gián tiếp theo nhãn; cần phối hợp kháng sinh đồ, tình trạng người bệnh và hướng dẫn điều trị của cơ sở.',
+ expl:'Giải thích:',score:'Điểm',reset:'Làm lại',notes:'Ghi chú',gloss:'Chú giải từ viết tắt',abbr:'Viết tắt',full:'Tên đầy đủ',mean:'Ý nghĩa',refs:'Tài liệu tham khảo',
+ disc:'Tuyên bố miễn trừ: trang này không thay thế đánh giá lâm sàng, nhãn thuốc hiện hành và phác đồ của cơ sở. Ngày đối chiếu dữ liệu: 24/10/2026. Một số mục chưa được đọc lại trực tiếp từ nguồn gốc (ký hiệu ‡).'};
+var UI_EN={title:'Ciprofloxacin vs Levofloxacin vs Moxifloxacin',sub:'Oral/IV fluoroquinolones · Visual Clinical Hub · ClinPharmAI',
+ table:'Detailed table',matrix:'Quick matrix',dose:'Dose tool',cases:'Clinical scenarios',quiz:'Quiz',
+ comparing:'Comparing',all:'All',crit:'Criterion',uflag:'Data not re-read directly from the primary source during this build; verify against the current label.',
+ lg:'Favorable',lw:'Caution',lb:'Unfavorable/restricted',ln:'Neutral',gotoGloss:'Abbreviations',
+ qnote:'Cell colors reflect indirect comparison from labeling and pharmacology; they do not replace susceptibility testing or local guidance.',
+ age:'Age (years)',wt:'Actual body weight (kg)',sex:'Sex',male:'Male',female:'Female',scr:'Serum creatinine',unit:'Creatinine unit',ind:'Indication',child:'Liver function',noLiver:'No hepatic impairment',
+ hd:'On hemodialysis / dialysis',round:'Round creatinine up to 0.8 mg/dL (optional)',mg:'History of myasthenia gravis',preg:'Pregnant or breastfeeding',tendon:'Prior quinolone tendon disorder / corticosteroid / transplant',
+ cation:'Taking antacid, iron, zinc, calcium, sucralfate, multivitamin',qt:'Prolonged QT, hypoK/hypoMg or QT-prolonging drugs',cyp:'Taking theophylline, clozapine, duloxetine, high-dose caffeine (CYP1A2 substrates)',tiz:'Taking tizanidine',dm:'Diabetes on insulin/sulfonylurea',
+ actualWt:'actual weight',st_ok:'Suitable',st_warn:'Caution',st_avoid:'Avoid',st_contra:'Contraindicated',
+ doseDisc:'Review aid running entirely in the browser; no patient data stored. There is no dose-equivalence factor between the three drugs. Does not replace clinical judgment, current labeling or local protocols.',
+ prefer:'Prefer',alt:'Alternative',avoid:'Avoid',why:'Rationale:',caseNote:'Scenarios rest on indirect label-based comparison; combine with susceptibility, patient status and local guidance.',
+ expl:'Explanation:',score:'Score',reset:'Restart',notes:'Notes',gloss:'Abbreviations',abbr:'Abbrev.',full:'Full name',mean:'Meaning',refs:'References',
+ disc:'Disclaimer: this page does not replace clinical judgment, current drug labeling or local protocols. Data reviewed 24 Oct 2026. Some items were not re-read from the primary source (‡).'};
+
+/* ===== Dose logic ===== */
+var RANK={ok:0,warn:1,avoid:2,contra:3};
+function crclOf(p){
+  if(!p.age||!p.wt||!p.scr||p.scr<=0) return null;
+  var s=p.scr; if(p.unit==='umol') s=s/88.4;
+  if(p.round && s<0.8) s=0.8;
+  var v=((140-p.age)*p.wt)/(72*s);
+  if(p.sex==='f') v*=0.85;
+  return v;
+}
+function evalDose(k,p){
+  var b=BASE[k][p.ind]; var st=b[0]; var dose=[b[1],b[2]]; var notes=[];
+  function up(s){ if(RANK[s]>RANK[st]) st=s; }
+  function add(vi,en){ notes.push([vi,en]); }
+  if(b[3]) add(b[3],b[4]);
+  var cl=crclOf(p);
+  if(st!=='avoid'){
+    if(k==='cip'){
+      if(p.hd){ dose=['250–500 mg mỗi 24 giờ, dùng sau lọc máu','250–500 mg q24h, given after dialysis']; }
+      else if(cl!==null && cl>=30 && cl<=50){ dose=['250–500 mg uống mỗi 12 giờ (CrCl 30–50)','250–500 mg PO q12h (CrCl 30–50)']; add('Chỉnh liều theo CrCl 30–50 mL/phút.','Adjusted for CrCl 30–50 mL/min.'); }
+      else if(cl!==null && cl>=5 && cl<30){ dose=['250–500 mg uống mỗi 18 giờ (nhãn FDA) hoặc mỗi 24 giờ (một số SmPC)','250–500 mg PO q18h (FDA label) or q24h (some SmPCs)']; add('CrCl 5–29 mL/phút: kiểm tra khoảng cách liều theo nhãn lưu hành tại cơ sở.','CrCl 5–29 mL/min: verify the dosing interval against the locally marketed label.'); }
+      else if(cl!==null && cl<5){ dose=['CrCl <5 mL/phút: nhãn không nêu rõ ngoài lọc máu; cần hội chẩn','CrCl <5 mL/min: label silent outside dialysis; seek specialist input']; up('warn'); }
+    }
+    if(k==='lev'){
+      var reg=b[5];
+      var dlv=null;
+      if(p.hd || (cl!==null && cl>=10 && cl<20)){
+        if(reg===750) dlv=['750 mg liều đầu, sau đó 500 mg mỗi 48 giờ','750 mg initial, then 500 mg q48h'];
+        else if(reg===250) dlv=['250 mg mỗi 48 giờ (lọc máu: nhãn không có thông tin)','250 mg q48h (dialysis: no label information)'];
+      } else if(cl!==null && cl>=20 && cl<50){
+        if(reg===750) dlv=['750 mg mỗi 48 giờ','750 mg q48h'];
+        else if(reg===250) dlv=['250 mg mỗi 24 giờ (không cần chỉnh liều; viêm bàng quang không biến chứng)','250 mg q24h (no adjustment; uncomplicated cystitis)'];
+      } else if(cl!==null && cl<10 && !p.hd){
+        dlv=['CrCl <10 mL/phút (không lọc máu): nhãn không nêu rõ; cần hội chẩn','CrCl <10 mL/min (no dialysis): label silent; seek specialist input']; up('warn');
+      }
+      if(dlv){ dose=dlv; add('Đã chỉnh liều theo bảng thận của nhãn (CrCl <50 mL/phút).','Adjusted per label renal table (CrCl <50 mL/min).'); }
+      if(p.ind==='cap' && cl!==null && cl<50 && cl>=20 && !p.hd){ add('Nếu dùng phác đồ 500 mg: 500 mg liều đầu rồi 250 mg mỗi 24 giờ.','If using the 500 mg regimen: 500 mg then 250 mg q24h.'); }
+    }
+    if(k==='mox'){
+      if(cl!==null && cl<30) add('Không cần chỉnh liều thận, kể cả lọc máu.','No renal adjustment needed, including dialysis.');
+    }
+  }
+  if(p.child==='C' && k==='mox'){ up('warn'); add('Child-Pugh C: nhãn FDA không chỉnh liều nhưng SmPC không khuyến cáo; cân nhắc thuốc khác.','Child-Pugh C: FDA no adjustment but SmPC advises against; consider another agent.'); }
+  if(p.child==='B' || p.child==='C'){ if(k!=='mox') add('Suy gan: nhãn không nêu chỉnh liều; theo dõi chặt.','Hepatic impairment: no adjustment in label; monitor closely.'); }
+  if(p.mg){ up('avoid'); add('Tiền sử nhược cơ: tránh fluoroquinolon (có thể nặng thêm yếu cơ).','Myasthenia gravis history: avoid fluoroquinolones (may worsen weakness).'); }
+  if(k==='cip' && p.tiz){ up('contra'); add('Chống chỉ định phối hợp ciprofloxacin với tizanidin.','Ciprofloxacin with tizanidine is contraindicated.'); }
+  if(k==='cip' && p.cyp){ up('warn'); add('Ciprofloxacin ức chế CYP1A2: theo dõi nồng độ/độc tính của thuốc nền CYP1A2.','Ciprofloxacin inhibits CYP1A2: monitor levels/toxicity of CYP1A2 substrates.'); }
+  if((k==='lev'||k==='mox') && p.tiz){ add('Tizanidin: không có tương tác CYP1A2 đáng kể với thuốc này theo nhãn (cần đối chiếu thêm).','Tizanidine: no significant CYP1A2 interaction per label for this drug (verify further).'); }
+  if(p.qt){ if(k==='mox'){ up('avoid'); add('Tránh khi QT kéo dài, hạ kali/magie hoặc thuốc kéo dài QT (nhãn).','Avoid with prolonged QT, hypoK/hypoMg or QT-prolonging drugs (label).'); } else { up('warn'); add('Có nguy cơ kéo dài QT dạng nhóm; theo dõi điện tâm đồ và điện giải.','Class QT risk; monitor ECG and electrolytes.'); } }
+  if(p.cation){ if(k==='cip') add('Uống cách cation: thuốc trước 2 giờ hoặc sau 6 giờ.','Separate from cations: 2 h before or 6 h after.'); if(k==='lev') add('Uống cách cation ít nhất 2 giờ.','Separate from cations by at least 2 h.'); if(k==='mox') add('Uống trước 4 giờ hoặc sau 8 giờ so với cation.','Take 4 h before or 8 h after cations.'); }
+  if(p.tendon){ up('warn'); add('Nguy cơ viêm/đứt gân tăng (corticosteroid, ghép tạng, tiền sử): cân nhắc thuốc khác.','Increased tendinitis/rupture risk (corticosteroid, transplant, history): consider another class.'); }
+  if(p.dm){ up('warn'); add('Theo dõi đường huyết chặt (nguy cơ hạ đường huyết).','Monitor glucose closely (hypoglycemia risk).'); }
+  if(p.preg){ up(k==='mox'?'avoid':'warn'); add('Thai kỳ/cho con bú: tránh nếu có lựa chọn khác.','Pregnancy/lactation: avoid if alternatives exist.'); }
+  if(p.age!==null && p.age!==undefined && p.age!=='' && p.age<18){ up(k==='mox'?'avoid':'warn'); add('Dưới 18 tuổi: chỉ dùng cho chỉ định nhãn dành cho trẻ em; liều theo cân nặng, cần dược sĩ/chuyên khoa xác nhận.','Under 18: only for pediatric-labeled indications; weight-based dosing needs specialist confirmation.'); }
+  if(p.age>=65) add('Người cao tuổi: tăng nguy cơ gân và (với moxifloxacin) QT.','Elderly: higher tendon risk and (moxifloxacin) QT risk.');
+  if((st==='avoid'||st==='contra') && dose[0]!=='Không khuyến cáo'){ dose=st==='contra'?['Không dùng phối hợp','Do not co-administer']:['Tránh trong tình huống này (xem lưu ý)','Avoid in this situation (see notes)']; }
+  return {status:st,dose:dose,notes:notes};
+}
+
+function app(){
+  return {
+    lang:'vi',view:'table',sel:['cip','lev','mox'],grp:'all',ans:{},
+    tabs:[{k:'table',ic:'table'},{k:'matrix',ic:'matrix'},{k:'dose',ic:'dose'},{k:'cases',ic:'cases'},{k:'quiz',ic:'quiz'}],
+    drugs:DRUGS,groups:GROUPS,quick:QUICK,inds:INDS,cases:CASES,quiz:QUIZ,notes:NOTES,gloss:GLOSS,
+    refs:REFS,
+    p:{age:60,wt:60,sex:'f',scr:1.0,unit:'mg',ind:'cap',child:'none',hd:false,round:false,mg:false,preg:false,tendon:false,cation:false,qt:false,cyp:false,tiz:false,dm:false},
+    evalDose:evalDose,
+    T:function(a){return this.lang==='vi'?a[0]:a[1];},
+    UI:function(k){var d=this.lang==='vi'?UI_VI:UI_EN;return d[k]!==undefined?d[k]:k;},
+    ic:function(n){return ICONS[n]();},
+    toggle:function(k){var i=this.sel.indexOf(k);if(i>=0){if(this.sel.length>2)this.sel.splice(i,1);}else this.sel.push(k);this.sel=DRUGS.map(function(d){return d.k;}).filter(function(x){return this.sel.indexOf(x)>=0;},this);},
+    selDrugs:function(){var s=this.sel;return DRUGS.filter(function(d){return s.indexOf(d.k)>=0;});},
+    selNames:function(){return this.selDrugs().map(function(d){return d.n[0];}).join(', ');},
+    visibleRows:function(){var g=this.grp;return ROWS.filter(function(r){return g==='all'||r.g===g;});},
+    cell:function(r,dk){var c=r[dk];return this.lang==='vi'?c[0]:c[1];},
+    refTxt:function(r,dk){var c=r[dk];return '['+c[2]+']'+(c[3]==='u'?' ‡':'');},
+    parts:function(s){if(s.length<=95)return [s];return s.split(/[.;]\s+/).map(function(x){return x.replace(/\.$/,'');}).filter(function(x){return x.length>0;});},
+    crclTxt:function(){var v=crclOf(this.p);return v===null?'—':(Math.round(v*10)/10).toString().replace('.',',')+' mL/'+(this.lang==='vi'?'phút':'min');},
+    answer:function(qi,oi){if(this.ans[qi]===undefined){this.ans=Object.assign({},this.ans,(function(){var o={};o[qi]=oi;return o;})());}},
+    optClass:function(qi,oi){var a=this.ans[qi];if(a===undefined)return '';var c=QUIZ[qi].c;if(oi===c)return 'right';if(oi===a)return 'wrong';return '';},
+    score:function(){var s=0;for(var i=0;i<QUIZ.length;i++){if(this.ans[i]===QUIZ[i].c)s++;}return s;}
+  };
+}
+</script>
+</body>
+</html>

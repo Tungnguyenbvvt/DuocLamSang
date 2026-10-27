@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic Thẩm Định Y Khoa: Azithromycin Trong Mổ Lấy Thai Ngoài Kế Hoạch (JAMA 2026)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        jamablue: {
+                            50: '#EAF3F1',
+                            100: '#D2E8E2',
+                            500: '#0F6E5C',
+                            800: '#0B4F42',
+                            900: '#0A3B34',
+                            950: '#0A2622'
+                        },
+                        medicalteal: {
+                            50: '#f0fdfa',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            900: '#134e4a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #0b1329 0%, #0c4a6e 50%, #0f766e 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+        }
+        .term-badge {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen">
+
+    <!-- Top Verification & Navigation Bar -->
+    <div class="bg-slate-900 text-slate-200 text-xs py-2 px-4 border-b border-slate-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                    <i class="fa-solid fa-circle-check mr-1.5"></i> Thẩm Định Y Khoa 100% Khớp JAMA 2026
+                </span>
+                <span class="hidden md:inline text-slate-400">| Editorial DOI: 10.1001/jama.2026.16532</span>
+            </div>
+            <div class="flex items-center gap-4 text-slate-300 font-medium">
+                <a href="#boicanh" class="hover:text-teal-400 transition-colors">Bối Cảnh Vi Sinh</a>
+                <a href="#csoap" class="hover:text-teal-400 transition-colors">Thử Nghiệm C/SOAP</a>
+                <a href="#epic" class="hover:text-teal-400 transition-colors">Thực Tế Epic Cosmos</a>
+                <a href="#bieudo" class="hover:text-teal-400 transition-colors">Biểu Đồ So Sánh</a>
+                <a href="#khuyenbao" class="hover:text-teal-400 transition-colors">Khuyến Cáo Lâm Sàng</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Header -->
+    <header class="hero-bg text-white py-12 px-4 sm:px-6 lg:px-8 shadow-2xl relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl text-white font-black select-none pointer-events-none">
+            JAMA
+        </div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+                <div class="space-y-3 max-w-4xl">
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="bg-teal-500/20 text-teal-300 border border-teal-400/30 text-xs px-3 py-1 rounded-full uppercase tracking-wider font-semibold">
+                            Y Học Thực Chứng (Evidence-Based Medicine)
+                        </span>
+                        <span class="bg-teal-500/20 text-teal-300 border border-teal-400/30 text-xs px-3 py-1 rounded-full uppercase tracking-wider font-semibold">
+                            Sản Phụ Khoa & Kháng Sinh Dự Phòng
+                        </span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+                        Kháng Sinh Azithromycin Dự Phòng Trong Mổ Lấy Thai Ngoài Kế Hoạch
+                    </h1>
+                    <p class="text-teal-100 text-base sm:text-lg font-light leading-relaxed">
+                        Phân tích đối chiếu toàn diện từ thử nghiệm lâm sàng ngẫu nhiên ngẫu nhiên mù đôi C/SOAP (2016) đến dữ liệu thực tế 202,234 ca mổ tại Hoa Kỳ (JAMA 2026).
+                    </p>
+                </div>
+                <!-- Source Box -->
+                <div class="bg-white/10 backdrop-blur-md p-4 rounded-xl border border-white/20 text-right shrink-0 min-w-[240px]">
+                    <div class="text-xs text-teal-200 uppercase font-bold tracking-wider">Tạp Chí Công Bố</div>
+                    <div class="text-3xl font-black text-white tracking-widest my-0.5">JAMA</div>
+                    <div class="text-xs text-slate-200">Xuất bản: 14/09/2026</div>
+                    <div class="text-[11px] text-teal-300 mt-1 italic">Alan T. N. Tita et al.</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 space-y-10 mb-16">
+
+        <!-- KPI Key Metrics Grid -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Metric 1 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 hover:shadow-md transition-all">
+                <div class="flex justify-between items-start mb-2">
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">C/SOAP (RCT 2016)</span>
+                    <span class="p-2 bg-teal-50 text-teal-600 rounded-lg"><i class="fa-solid fa-flask"></i></span>
+                </div>
+                <div class="text-3xl font-black text-slate-900">-50%</div>
+                <div class="text-xs font-bold text-emerald-600 mb-1">NNT = 17</div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Giảm tỷ lệ tiêu chí gộp nhiễm trùng (12% xuống 6%). Số ca cần điều trị để ngăn 1 ca nhiễm trùng là 17.
+                </p>
+            </div>
+
+            <!-- Metric 2 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 hover:shadow-md transition-all">
+                <div class="flex justify-between items-start mb-2">
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">Thực Tế (Epic Cosmos)</span>
+                    <span class="p-2 bg-teal-50 text-teal-600 rounded-lg"><i class="fa-solid fa-chart-line"></i></span>
+                </div>
+                <div class="text-3xl font-black text-slate-900">39.6%</div>
+                <div class="text-xs font-bold text-teal-600 mb-1">Đỉnh điểm 60% (2024)</div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Tỷ lệ áp dụng Azithromycin thực tế (2017–2024), tăng vọt từ mức 2.2% trước năm 2016.
+                </p>
+            </div>
+
+            <!-- Metric 3 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 hover:shadow-md transition-all">
+                <div class="flex justify-between items-start mb-2">
+                    <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Mức Giảm Thực Tế</span>
+                    <span class="p-2 bg-indigo-50 text-indigo-600 rounded-lg"><i class="fa-solid fa-shield-virus"></i></span>
+                </div>
+                <div class="text-3xl font-black text-slate-900">-20%</div>
+                <div class="text-xs font-bold text-indigo-600 mb-1">Đã hiệu chỉnh (Adjusted)</div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Mức giảm rủi ro tương đối của nhiễm trùng sau sinh (từ 9.2% xuống 8.0%) ở quy mô dân số toàn quốc.
+                </p>
+            </div>
+
+            <!-- Metric 4 -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 hover:shadow-md transition-all">
+                <div class="flex justify-between items-start mb-2">
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Cỡ Mẫu Khảo Sát</span>
+                    <span class="p-2 bg-amber-50 text-amber-600 rounded-lg"><i class="fa-solid fa-hospital-user"></i></span>
+                </div>
+                <div class="text-3xl font-black text-slate-900">202,234</div>
+                <div class="text-xs font-bold text-amber-600 mb-1">1,951 trung tâm y tế</div>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Ca mổ lấy thai ngoài kế hoạch trong tổng số 1.7 triệu ca sinh đủ điều kiện từ cơ sở dữ liệu Epic Cosmos.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 1: Bối Cảnh Vi Sinh & Lý Do Lâm Sàng -->
+        <section id="boicanh" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 scroll-mt-20">
+            <div class="border-l-4 border-teal-600 pl-4 mb-6">
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="text-teal-600 font-black">01.</span> Bối Cảnh Y Khoa & Cơ Sở Vi Sinh Học
+                </h2>
+                <p class="text-slate-600 text-sm mt-1">
+                    Vì sao phác đồ kháng sinh dự phòng đơn thuần truyền thống chưa đủ đáp ứng trong mổ lấy thai ngoài kế hoạch?
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/90">
+                    <div class="w-10 h-10 rounded-lg bg-teal-100 text-teal-700 flex items-center justify-center font-bold mb-3">
+                        <i class="fa-solid fa-bacteria text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">Nhiễm Trùng Đa Vi Khuẩn</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Nhiễm trùng sau mổ lấy thai mang tính chất <span class="term-badge">polymicrobial</span> (đa vi khuẩn). Các chủng vi khuẩn sinh dục và đường tiêu hóa xâm nhập qua đường âm đạo khi vỡ ối hoặc đã chuyển dạ.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/90">
+                    <div class="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold mb-3">
+                        <i class="fa-solid fa-capsules text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">Hạn Chế Của Kháng Sinh Đơn Độc</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Phác đồ chuẩn cũ chỉ sử dụng 1 liều đơn <span class="term-badge">cephalosporin</span> (như cefazolin) hoặc <span class="term-badge">ampicillin</span>. Phác đồ này không bao phủ được vi khuẩn yếm khí (<span class="term-badge">anaerobes</span>) và <span class="term-badge">Ureaplasma spp.</span>
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-50 p-5 rounded-xl border border-slate-200/90">
+                    <div class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold mb-3">
+                        <i class="fa-solid fa-syringe text-lg"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-2">Vai Trò Phối Hợp Azithromycin</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Bổ sung <strong>Azithromycin 500mg IV</strong> trước đường rạch mổ giúp lấp đầy khoảng trống phổ kháng sinh, nhắm trực tiếp vào <em>Ureaplasma spp.</em> và các tác nhân nhạy cảm, làm giảm tỷ lệ biến chứng rõ rệt.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Diagnostic terms banner -->
+            <div class="mt-6 bg-teal-50/80 rounded-xl p-4 border border-teal-100 flex flex-wrap items-center gap-4 text-xs text-teal-900">
+                <span class="font-bold text-teal-950 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-microscope text-teal-600"></i> Tiêu chí biến chứng gộp được đánh giá:
+                </span>
+                <span class="bg-white px-2.5 py-1 rounded border border-teal-200">Viêm nội mạc tử cung (Endometritis)</span>
+                <span class="bg-white px-2.5 py-1 rounded border border-teal-200">Nhiễm trùng vết mổ (Wound infection)</span>
+                <span class="bg-white px-2.5 py-1 rounded border border-teal-200">Bung/Tách vết mổ (Wound disruption)</span>
+                <span class="bg-white px-2.5 py-1 rounded border border-teal-200">Nhiễm trùng huyết (Sepsis)</span>
+                <span class="bg-white px-2.5 py-1 rounded border border-teal-200">Nhiễm trùng đường tiết niệu (UTI)</span>
+            </div>
+        </section>
+
+        <!-- SECTION 2: Thử Nghiệm C/SOAP (2016) & Nghiên Cứu Epic Cosmos (2026) -->
+        <section id="csoap" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 scroll-mt-20">
+            <div class="border-l-4 border-teal-600 pl-4 mb-6">
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="text-teal-600 font-black">02.</span> So Sánh Hai Công Trình Nghiên Cứu Cốt Lõi
+                </h2>
+                <p class="text-slate-600 text-sm mt-1">
+                    Đối chiếu chi tiết giữa Thử nghiệm lâm sàng ngẫu nhiên (RCT C/SOAP 2016) và Nghiên cứu thuần tập thực tế (Epic Cosmos 2026).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- C/SOAP Card -->
+                <div class="border border-teal-200 bg-teal-50/30 rounded-2xl p-6 relative">
+                    <div class="absolute -top-3 right-6 bg-teal-700 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase">
+                        RCT Chặt Chẽ (NEJM 2016)
+                    </div>
+                    <h3 class="text-lg font-extrabold text-teal-950 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-vial-circle-check text-teal-600"></i>
+                        Thử Nghiệm C/SOAP (2016)
+                    </h3>
+                    <ul class="space-y-3 text-xs text-slate-700">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Thiết kế:</strong> Thử nghiệm lâm sàng ngẫu nhiên, mù đôi, đối chứng giả dược (N=2,013 tại 14 trung tâm).</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Tiêu chuẩn chọn bệnh:</strong> Sản phụ mổ lấy thai ngoài kế hoạch khi đã chuyển dạ hoặc vỡ ối ≥ 4 giờ (nhóm nguy cơ rất cao).</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Mức độ bao phủ kháng sinh:</strong> <span class="font-bold text-teal-700">100%</span> nhóm can thiệp nhận Azithromycin 500mg IV.</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Kết quả chính:</strong> Giảm tỷ lệ nhiễm trùng phối hợp từ <strong>12% xuống 6%</strong> (giảm 50% rủi ro tương đối, NNT = 17).</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Tác động hướng dẫn:</strong> Khiến ACOG năm 2018 đưa vào danh mục "Gợi ý cân nhắc" (Consideration).</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Epic Cosmos Card -->
+                <div class="border border-teal-200 bg-teal-50/30 rounded-2xl p-6 relative">
+                    <div class="absolute -top-3 right-6 bg-teal-700 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase">
+                        Dữ Liệu Thực Tế (JAMA 2026)
+                    </div>
+                    <h3 class="text-lg font-extrabold text-teal-950 mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-database text-teal-600"></i>
+                        Nghiên Cứu Freret & CS (Epic Cosmos 2026)
+                    </h3>
+                    <ul class="space-y-3 text-xs text-slate-700">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Thiết kế:</strong> Nghiên cứu thuần tập hồi cứu toàn quốc trên hồ sơ sức khỏe điện tử (EHR) từ 1,951 trung tâm y tế (N=202,234).</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Phương pháp phân tích:</strong> Phân tích Khác biệt trong Khác biệt (<span class="term-badge">Difference-in-differences</span>) lấy sinh thường làm nhóm đối chứng.</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Mức độ bao phủ thực tế:</strong> Trung bình đạt <span class="font-bold text-teal-700">39.6%</span> (2017–2024), tăng từ 2.2% (trước 2016) và đạt đỉnh 60% vào 2024.</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Kết quả thực tế:</strong> Tỷ lệ nhiễm trùng mổ ngoài kế hoạch giảm từ <strong>9.2% xuống 8.0%</strong> (mức giảm rủi ro tương đối hiệu chỉnh là 20%).</div>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-angle-right text-teal-600 mt-0.5"></i>
+                            <div><strong>Ý nghĩa:</strong> Khẳng định hiệu quả bảo vệ ở quy mô dân số lớn, tạo cơ sở chuyển hướng dẫn ACOG sang "Khuyến cáo chính thức".</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Biểu Đồ So Sánh Trực Quan -->
+        <section id="bieudo" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 scroll-mt-20">
+            <div class="border-l-4 border-teal-600 pl-4 mb-6">
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="text-teal-600 font-black">03.</span> Dữ Liệu Thực Tế Hóa Theo Thời Gian (2013 – 2024)
+                </h2>
+                <p class="text-slate-600 text-sm mt-1">
+                    Biểu đồ thể hiện mức độ gia tăng sử dụng Azithromycin và sự đảo ngược xu hướng nhiễm trùng sau sinh.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <div class="mb-4 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base">Tỷ Lệ Tăng Trưởng Sử Dụng Azithromycin (%)</h3>
+                            <p class="text-[11px] text-slate-500">So sánh giữa mổ ngoài kế hoạch và sinh đường âm đạo</p>
+                        </div>
+                        <span class="text-xs bg-teal-100 text-teal-800 font-bold px-2 py-1 rounded">Mổ ngoài KH vs Sinh thường</span>
+                    </div>
+                    <div class="relative h-64">
+                        <canvas id="adoptionRateChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2 -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <div class="mb-4 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base">Tỷ Lệ Nhiễm Trùng Sau Sinh Gộp (%)</h3>
+                            <p class="text-[11px] text-slate-500">Giai đoạn Gốc (2013-2016) vs Giai đoạn Sau C/SOAP (2017-2024)</p>
+                        </div>
+                        <span class="text-xs bg-teal-100 text-teal-800 font-bold px-2 py-1 rounded">DiD Difference-in-Differences</span>
+                    </div>
+                    <div class="relative h-64">
+                        <canvas id="infectionComparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Thẩm Định Phương Pháp Học & Lý Giải Chênh lệch Hiệu Quả -->
+        <section id="epic" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80 scroll-mt-20">
+            <div class="border-l-4 border-teal-600 pl-4 mb-6">
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="text-teal-600 font-black">04.</span> Phân Tích Chuyên Sâu: RCT (50%) vs. Thực Tế Lâm Sàng (20%)
+                </h2>
+                <p class="text-slate-600 text-sm mt-1">
+                    Tại sao mức giảm nguy cơ tương đối trong nghiên cứu thực tế (20%) lại thấp hơn thử nghiệm C/SOAP (50%)?
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <div class="text-xs font-bold text-teal-700 uppercase mb-1">1. Tỷ lệ bao phủ kháng sinh</div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-2">Chưa Đạt 100% Bao Phủ</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Trong thử nghiệm C/SOAP, 100% bệnh nhân can thiệp được tiêm Azithromycin. Trong thực tế lâm sàng (2017–2024), tỷ lệ bao phủ trung bình chỉ đạt <strong>39.6%</strong>, dẫn đến hiệu ứng bảo vệ trung bình trên toàn quần thể bị giảm bớt.
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <div class="text-xs font-bold text-teal-700 uppercase mb-1">2. Đặc điểm quần thể</div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-2">Nguy Cơ Nền Thấp Hơn</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Thử nghiệm C/SOAP bắt buộc bệnh nhân phải có thời gian vỡ ối hoặc chuyển dạ ≥ 4 giờ (nguy cơ nền 12%). Thực tế bao gồm rộng rãi các ca mổ ít nguy cơ hơn, dẫn đến nguy cơ nhiễm trùng nền thấp hơn (9%).
+                    </p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <div class="text-xs font-bold text-teal-700 uppercase mb-1">3. Phương pháp ghi nhận</div>
+                    <h4 class="font-bold text-slate-900 text-sm mb-2">Thu Thập Hồ Sơ Điện Tử</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        C/SOAP đánh giá biến chứng chủ động và nghiêm ngặt qua hội đồng thẩm định độc lập. Dữ liệu Epic Cosmos dựa trên mã hóa chẩn đoán hồi cứu trong hồ sơ sức khỏe điện tử (EHR).
+                    </p>
+                </div>
+            </div>
+
+            <!-- Detailed Comparison Table -->
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 border-b border-slate-200">
+                            <th class="p-3 font-extrabold uppercase">Tài khoản & Tiêu chí</th>
+                            <th class="p-3 font-extrabold text-teal-800 uppercase">Thử Nghiệm C/SOAP (2016)</th>
+                            <th class="p-3 font-extrabold text-teal-800 uppercase">Khảo Sát Thực Tế Epic Cosmos (2026)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-700">
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">Thiết kế nghiên cứu</td>
+                            <td class="p-3">RCT ngẫu nhiên, mù đôi, kiểm soát giả dược</td>
+                            <td class="p-3">Thuần tập hồi cứu (Difference-in-differences)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">Cỡ mẫu nghiên cứu</td>
+                            <td class="p-3">2,013 bệnh nhân (14 trung tâm)</td>
+                            <td class="p-3">202,234 ca mổ ngoài kế hoạch (1,951 trung tâm)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">Tỷ lệ nhiễm trùng nhóm chứng (Baseline)</td>
+                            <td class="p-3 font-semibold text-amber-700">12.0% (Placebo)</td>
+                            <td class="p-3 font-semibold text-amber-700">9.2% (Giai đoạn 2013–2016)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">Tỷ lệ nhiễm trùng sau can thiệp</td>
+                            <td class="p-3 font-semibold text-emerald-700">6.0% (Azithromycin)</td>
+                            <td class="p-3 font-semibold text-emerald-700">8.0% (Giai đoạn 2017–2024)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">Mức giảm nguy cơ tương đối</td>
+                            <td class="p-3 font-bold text-emerald-700">-50% (RRR = 0.50)</td>
+                            <td class="p-3 font-bold text-emerald-700">-20% (Adjusted Relative Reduction)</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3 font-bold text-slate-900">Chi phí & Y tế công cộng</td>
+                            <td class="p-3">Tiết kiệm chi phí đáng kể (Highly cost saving)</td>
+                            <td class="p-3">Giảm tái nhập viện, giảm thăm khám khẩn cấp & giảm chi phí</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 5: Kháng Kháng Sinh (AMR) & An Toàn Sơ Sinh -->
+        <section class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200/80">
+            <div class="border-l-4 border-amber-500 pl-4 mb-6">
+                <h2 class="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
+                    <span class="text-amber-600 font-black">05.</span> Kháng Kháng Sinh (AMR) & Bằng Chứng An Toàn
+                </h2>
+                <p class="text-slate-600 text-sm mt-1">
+                    Đánh giá mối quan ngại về hiện tượng kháng thuốc và kết cục trên thai nhi / sơ sinh.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- AMR Box -->
+                <div class="bg-amber-50/50 p-5 rounded-xl border border-amber-200">
+                    <h3 class="font-bold text-amber-950 text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i>
+                        Vấn Đề Kháng Kháng Sinh (Antimicrobial Resistance)
+                    </h3>
+                    <p class="text-xs text-slate-700 leading-relaxed mb-3">
+                        Tổ chức Y tế Thế giới (WHO) bày tỏ lo ngại về việc sử dụng kháng sinh rộng rãi trong chuyển dạ có thể làm gia tăng vi khuẩn kháng azithromycin.
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-amber-200 text-xs text-slate-800 font-medium">
+                        <i class="fa-solid fa-circle-info text-amber-600 mr-1"></i>
+                        <strong>Kết luận từ nghiên cứu:</strong> Gia tăng kháng thuốc sau 1 liều azithromycin dự phòng chỉ diễn ra <span class="text-amber-800 font-bold">tạm thời</span> trên vi khuẩn thường trú (<span class="term-badge">flora</span>) và không làm tăng nguy cơ nhiễm trùng lâm sàng do vi khuẩn kháng thuốc. Cân bằng lợi ích lâm sàng vẫn rất tích cực.
+                    </div>
+                </div>
+
+                <!-- Neonatal Outcome Box -->
+                <div class="bg-teal-50/50 p-5 rounded-xl border border-teal-200">
+                    <h3 class="font-bold text-teal-950 text-base mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-baby text-teal-600"></i>
+                        An Toàn Cho Thai Nhi & Sơ Sinh
+                    </h3>
+                    <p class="text-xs text-slate-700 leading-relaxed mb-3">
+                        Trong phân tích của thử nghiệm C/SOAP và dữ liệu theo dõi:
+                    </p>
+                    <ul class="space-y-2 text-xs text-slate-700">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-600"></i>
+                            <span>Không phát hiện sự khác biệt có ý nghĩa thống kê về kết cục thai nhi hoặc tử vong/bệnh tật sơ sinh.</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-check text-emerald-600"></i>
+                            <span>Giảm tỷ lệ tái nhập viện của bà mẹ và giảm số lần khám cấp cứu ngoài kế hoạch.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: Khuyến Cáo Lâm Sàng Cho Y Bác Sĩ -->
+        <section id="khuyenbao" class="bg-gradient-to-br from-slate-900 via-jamablue-900 to-medicalteal-900 text-white rounded-2xl p-6 sm:p-8 shadow-xl scroll-mt-20">
+            <div class="max-w-3xl mb-6">
+                <span class="text-xs font-bold text-teal-300 uppercase tracking-widest bg-white/10 px-3 py-1 rounded-full border border-white/10">
+                    Khuyến Cáo Lâm Sàng Cập Nhật 2026
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mt-3 text-white">
+                    Đề Xuất Chuyển Đổi Hướng Dẫn Điều Trị
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <div class="bg-white/10 backdrop-blur-md p-5 rounded-xl border border-white/15">
+                    <div class="text-amber-300 text-xs font-bold uppercase mb-1">Hướng Dẫn ACOG 2018 (Cũ)</div>
+                    <div class="text-xl font-extrabold text-white mb-2">"Gợi Ý CÂN NHẮC"</div>
+                    <p class="text-xs text-slate-200 leading-relaxed">
+                        ACOG Bulletin No. 199 gợi ý bác sĩ "cân nhắc" (consideration) thêm Azithromycin cho mổ lấy thai ngoài kế hoạch dựa trên kết quả C/SOAP.
+                    </p>
+                </div>
+
+                <div class="bg-emerald-500/20 backdrop-blur-md p-5 rounded-xl border border-emerald-400/30">
+                    <div class="text-emerald-300 text-xs font-bold uppercase mb-1">Đề Xuất JAMA 2026 (Mới)</div>
+                    <div class="text-xl font-extrabold text-emerald-300 mb-2">"KHUYẾN CÁO SỬ DỤNG CHÍNH THỨC"</div>
+                    <p class="text-xs text-slate-100 leading-relaxed">
+                        Nâng cấp lên <strong>"Recommended Use"</strong> (Khuyến cáo sử dụng bắt buộc/chính thức) cho tất cả các ca mổ lấy thai ngoài kế hoạch có nguy cơ cao.
+                    </p>
+                </div>
+            </div>
+
+            <div class="p-4 bg-white/5 rounded-xl border border-white/10 text-xs text-slate-300 leading-relaxed">
+                <strong class="text-white">Tác động quy mô lớn:</strong> Với khoảng 600,000 đến 720,000 ca mổ lấy thai ngoài kế hoạch mỗi năm tại Mỹ (chiếm ~60% tổng số ca mổ đẻ), việc áp dụng nhất quán phác đồ phối hợp Azithromycin sẽ giúp ngăn ngừa <strong>hàng nghìn ca nhiễm trùng hậu phẫu</strong> mỗi năm, giảm gánh nặng chi phí y tế và tỷ lệ bệnh tật cho sản phụ.
+            </div>
+        </section>
+
+        <!-- References & Citations -->
+        <footer class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200/80 text-xs text-slate-600 space-y-3">
+            <h4 class="font-extrabold text-slate-900 uppercase tracking-wider text-xs flex items-center gap-2">
+                <i class="fa-solid fa-book-bookmark text-teal-600"></i> Nguồn Tài Liệu Trích Dẫn Y Khoa (References)
+            </h4>
+            <ol class="list-decimal list-inside space-y-2 leading-relaxed text-[11px] text-slate-600">
+                <li>
+                    <strong>Tita ATN, Szychowski JM, Boggess K.</strong> <em>Azithromycin for Cesarean Delivery—From Trial to Practice.</em> Editorial. <strong>JAMA.</strong> Published online September 14, 2026. doi:10.1001/jama.2026.16532.
+                </li>
+                <li>
+                    <strong>Freret TS, Litman E, Wen T, Guise JM, Little SE, Clapp MA.</strong> <em>Adoption of adjunctive azithromycin for unscheduled cesarean delivery and postpartum infections.</em> <strong>JAMA.</strong> Published online September 14, 2026. doi:10.1001/jama.2026.15010.
+                </li>
+                <li>
+                    <strong>Tita AT, Szychowski JM, Boggess K, et al.; C/SOAP Trial Consortium.</strong> <em>Adjunctive azithromycin prophylaxis for cesarean delivery.</em> <strong>N Engl J Med.</strong> 2016;375(13):1231-1241. doi:10.1056/NEJMoa1602044.
+                </li>
+                <li>
+                    <strong>Committee on Practice Bulletins-Obstetrics.</strong> <em>ACOG practice bulletin No. 199: use of prophylactic antibiotics in labor and delivery.</em> <strong>Obstet Gynecol.</strong> 2018;132(3):e103-e119. doi:10.1097/ACOG.0000000000002833.
+                </li>
+            </ol>
+            <div class="pt-3 border-t border-slate-100 flex flex-col sm:flex-row justify-between text-[11px] text-slate-400">
+                <span>Nội dung thẩm định trực tiếp dựa trên ấn bản JAMA công bố tháng 9/2026.</span>
+                <span>Ngôn ngữ y khoa chuẩn hóa: Sản Phụ Khoa Lâm Sàng</span>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Chart Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart 1: Adoption Rate (Mổ ngoài kế hoạch vs Vaginal Births)
+            const ctx1 = document.getElementById('adoptionRateChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'line',
+                data: {
+                    labels: ['2013–2016 (Trước C/SOAP)', '2017–2024 (Trung Bình)', '2024 (Đỉnh Điểm)'],
+                    datasets: [
+                        {
+                            label: 'Mổ lấy thai ngoài KH (%)',
+                            data: [2.2, 39.6, 60.0],
+                            borderColor: '#0284c7',
+                            backgroundColor: 'rgba(2, 132, 199, 0.15)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.2,
+                            pointBackgroundColor: '#0284c7',
+                            pointRadius: 6
+                        },
+                        {
+                            label: 'Sinh thường âm đạo (%)',
+                            data: [0.04, 0.04, 0.05],
+                            borderColor: '#94a3b8',
+                            borderWidth: 2,
+                            borderDash: [5, 5],
+                            fill: false,
+                            pointRadius: 3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 70,
+                            ticks: { callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Infection Rate Comparison (DiD analysis)
+            const ctx2 = document.getElementById('infectionComparisonChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Mổ ngoài kế hoạch (Unscheduled C-Section)', 'Sinh thường (Vaginal Deliveries)'],
+                    datasets: [
+                        {
+                            label: '2013–2016 (Giai đoạn gốc)',
+                            data: [9.2, 2.0],
+                            backgroundColor: '#94a3b8',
+                            borderRadius: 6
+                        },
+                        {
+                            label: '2017–2024 (Sau công bố C/SOAP)',
+                            data: [8.0, 2.7],
+                            backgroundColor: '#0d9488',
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '% nguy cơ nhiễm trùng';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 12,
+                            ticks: { callback: value => value + '%' }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

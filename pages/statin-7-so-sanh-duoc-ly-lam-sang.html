@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dược lý lâm sàng so sánh 7 statin: tra cứu, quy đổi liều và lựa chọn theo tình huống</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #0b1120; color: #f8fafc; }
+        .header-bg { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #030712 100%); }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0,0,0,.4), 0 8px 10px -6px rgba(0,0,0,.3); }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+    </style>
+</head>
+<body class="antialiased min-h-screen" x-data="statinApp()">
+
+<header class="header-bg border-b border-slate-800 text-white pt-8 pb-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-6 border-b border-slate-800/80 pb-6">
+            <div>
+                <div class="flex items-center gap-2 mb-2 flex-wrap">
+                    <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                        <i class="fa-solid fa-heart-pulse mr-1"></i> <span x-text="u('badge1')"></span>
+                    </span>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-sky-500/20 text-sky-300 border border-sky-500/30" x-text="u('badge2')"></span>
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">ACC/AHA 2018 · ESC/EAS 2019 · KDIGO 2013</span>
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white" x-text="u('title')"></h1>
+                <p class="text-slate-300 text-sm sm:text-base mt-2 max-w-3xl" x-text="u('subtitle')"></p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+                <button @click="toggleLang()" class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-3.5 py-2 rounded-xl border border-slate-600 text-xs font-semibold transition card-shadow">
+                    <i class="fa-solid fa-language text-amber-400 text-base"></i>
+                    <span x-text="lang === 'vi' ? 'English' : 'Tiếng Việt'"></span>
+                </button>
+                <template x-for="v in views" :key="v.id">
+                    <button @click="activeView = v.id"
+                            :class="activeView === v.id ? 'bg-rose-600 text-white font-bold' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'"
+                            class="px-3.5 py-2 rounded-xl text-xs font-medium border border-slate-700 transition">
+                        <i :class="v.icon + ' mr-1'"></i> <span x-text="u(v.label)"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <template x-for="c in summaryCards" :key="c.key">
+                <div class="bg-slate-800/80 border border-slate-700 rounded-2xl p-4 flex items-center gap-3">
+                    <div :class="c.iconBg" class="w-11 h-11 rounded-xl flex items-center justify-center text-xl shrink-0"><i :class="c.icon"></i></div>
+                    <div>
+                        <h4 class="font-bold text-[11px] uppercase tracking-wider text-slate-400" x-text="c.title[lang]"></h4>
+                        <p class="text-xs font-semibold text-slate-200 mt-0.5 leading-relaxed" x-html="c.body[lang]"></p>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <p class="mt-4 text-[11px] text-slate-400 leading-relaxed">
+            <i class="fa-solid fa-triangle-exclamation text-amber-400 mr-1"></i><span x-text="u('disclaimer')"></span>
+        </p>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- ============ SO SÁNH ĐỐI ĐẦU ============ -->
+    <section x-show="activeView === 'headToHead'" class="space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 card-shadow">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-code-compare text-rose-400"></i><span x-text="u('h2hTitle')"></span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1" x-text="u('h2hSub')"></p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-bold text-rose-400 uppercase" x-text="u('statin') + ' 1:'"></label>
+                        <select x-model="selectedStatin1" class="bg-slate-800 border border-slate-700 text-white text-xs rounded-xl p-2">
+                            <template x-for="s in statins" :key="s.id"><option :value="s.id" x-text="s.name"></option></template>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-bold text-sky-400 uppercase" x-text="u('statin') + ' 2:'"></label>
+                        <select x-model="selectedStatin2" class="bg-slate-800 border border-slate-700 text-white text-xs rounded-xl p-2">
+                            <template x-for="s in statins" :key="s.id"><option :value="s.id" x-text="s.name"></option></template>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-bold text-amber-400 uppercase" x-text="u('statin') + ' 3 (' + u('optional') + '):'"></label>
+                        <select x-model="selectedStatin3" class="bg-slate-800 border border-slate-700 text-white text-xs rounded-xl p-2">
+                            <option value="none" x-text="u('none')"></option>
+                            <template x-for="s in statins" :key="s.id"><option :value="s.id" x-text="s.name"></option></template>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <template x-for="slot in h2hSlots" :key="slot.n">
+                    <div x-show="slot.id !== 'none'" class="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden card-shadow">
+                        <div :class="getStatin(slot.id).badgeBg" class="p-5 text-white flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-widest opacity-80" x-text="getStatin(slot.id).brand"></span>
+                                <h3 class="text-2xl font-black" x-text="getStatin(slot.id).name"></h3>
+                                <p class="text-xs opacity-90" x-text="getStatin(slot.id).type[lang]"></p>
+                            </div>
+                            <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-xl"><i class="fa-solid fa-pills"></i></div>
+                        </div>
+                        <div class="p-4 space-y-3.5">
+                            <template x-for="p in paramKeys" :key="p.key">
+                                <div class="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/80">
+                                    <div :class="slot.color" class="text-[11px] font-bold uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                                        <i :class="p.icon"></i><span x-text="p.title[lang]"></span>
+                                    </div>
+                                    <div class="text-xs font-semibold text-slate-100 leading-relaxed" x-html="getStatin(slot.id)[p.key][lang]"></div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ MA TRẬN ============ -->
+    <section x-show="activeView === 'matrix'" class="space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 card-shadow overflow-hidden">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div>
+                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-table-cells text-sky-400"></i><span x-text="u('matrixTitle')"></span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-1" x-text="u('matrixSub')"></p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400 uppercase font-bold" x-text="u('filter')"></span>
+                    <select x-model="matrixFilter" class="bg-slate-800 border border-slate-700 text-white text-xs rounded-xl p-2">
+                        <template x-for="f in matrixFilters" :key="f.id"><option :value="f.id" x-text="f.label[lang]"></option></template>
+                    </select>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[1100px]">
+                    <thead>
+                        <tr class="bg-slate-800/90 text-slate-200 border-b border-slate-700 text-xs uppercase tracking-wider">
+                            <th class="p-3 font-extrabold w-48 sticky left-0 bg-slate-800 z-10" x-text="u('parameter')"></th>
+                            <template x-for="s in statins" :key="s.id">
+                                <th class="p-3 font-black text-center border-l border-slate-700/60 min-w-[140px]" :class="s.textHeaderColor">
+                                    <div class="text-sm" x-text="s.name"></div>
+                                    <div class="text-[10px] text-slate-400 font-medium" x-text="s.brand"></div>
+                                </th>
+                            </template>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800 text-xs">
+                        <template x-for="p in paramKeys" :key="p.key">
+                            <tr x-show="matrixFilter === 'all' || matrixFilter === p.group" class="hover:bg-slate-800/40 transition">
+                                <td class="p-3 font-bold text-slate-200 sticky left-0 bg-slate-900 border-r border-slate-800">
+                                    <i :class="p.icon + ' mr-1 text-rose-400'"></i><span x-text="p.title[lang]"></span>
+                                </td>
+                                <template x-for="s in statins" :key="s.id">
+                                    <td class="p-3 text-center border-l border-slate-800/60 align-top" x-html="s[p.key][lang]"></td>
+                                </template>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ QUY ĐỔI LIỀU ============ -->
+    <section x-show="activeView === 'calculator'" class="space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 card-shadow">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-2xl"><i class="fa-solid fa-calculator"></i></div>
+                <div>
+                    <h2 class="text-xl font-bold text-white" x-text="u('calcTitle')"></h2>
+                    <p class="text-xs text-slate-400" x-text="u('calcSub')"></p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-slate-800/80 p-6 rounded-2xl border border-slate-700">
+                <!-- Nhập liệu -->
+                <div class="lg:col-span-5 space-y-5">
+                    <div>
+                        <h3 class="text-xs font-bold text-rose-400 uppercase tracking-wider mb-3"><i class="fa-solid fa-pills mr-1"></i><span x-text="u('calcStep1')"></span></h3>
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5" x-text="u('statinLabel')"></label>
+                        <select x-model="calcDrug" @change="onDrugChange()" class="w-full bg-slate-900 border border-slate-700 text-white text-sm rounded-xl p-3">
+                            <template x-for="s in statins" :key="s.id"><option :value="s.id" :selected="s.id === calcDrug" x-text="s.name + ' (' + s.brand + ')'"></option></template>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5" x-text="u('doseLabel')"></label>
+                        <select x-model="calcDose" class="w-full bg-slate-900 border border-slate-700 text-white text-sm rounded-xl p-3">
+                            <template x-for="o in doseOptions" :key="o.v"><option :value="o.v" :selected="o.v === calcDose" x-text="o.t"></option></template>
+                        </select>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-700">
+                        <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider mb-3"><i class="fa-solid fa-kidneys mr-1"></i><span x-text="u('calcStep2')"></span></h3>
+                        <label class="block text-xs font-bold text-slate-300 mb-1.5" x-text="u('egfrLabel')"></label>
+                        <input type="number" min="0" max="200" x-model="calcEgfr" placeholder="25" class="w-full bg-slate-900 border border-slate-700 text-white text-sm rounded-xl p-3">
+                        <p class="text-[10px] text-slate-400 mt-1" x-text="u('egfrHint')"></p>
+                        <label class="flex items-center gap-2 mt-3 text-xs text-slate-200 cursor-pointer">
+                            <input type="checkbox" x-model="dialysis" class="accent-rose-500"> <span x-text="u('dialysis')"></span>
+                        </label>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-700">
+                        <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-3"><i class="fa-solid fa-capsules mr-1"></i><span x-text="u('calcStep3')"></span></h3>
+                        <div class="space-y-2 text-xs text-slate-200">
+                            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" x-model="fCyclosporin" class="accent-rose-500"><span x-text="u('fCyclosporin')"></span></label>
+                            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" x-model="fGemfibrozil" class="accent-rose-500"><span x-text="u('fGemfibrozil')"></span></label>
+                            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" x-model="fCyp3a4" class="accent-rose-500"><span x-text="u('fCyp3a4')"></span></label>
+                            <label class="flex items-center gap-2 cursor-pointer"><input type="checkbox" x-model="fAsian" class="accent-rose-500"><span x-text="u('fAsian')"></span></label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kết quả -->
+                <div class="lg:col-span-7 bg-slate-900 rounded-xl p-5 border border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                                <i class="fa-solid fa-arrows-rotate mr-1"></i><span x-text="u('analysis')"></span>
+                            </span>
+                            <span class="text-xs font-extrabold text-slate-300" x-text="calc.title"></span>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl border flex items-center gap-3 mb-3" :class="calc.intensityClass">
+                            <div class="text-2xl"><i class="fa-solid fa-chart-line"></i></div>
+                            <div>
+                                <div class="text-[10px] font-bold uppercase opacity-80" x-text="u('intensityTitle')"></div>
+                                <div class="text-sm font-black" x-text="calc.intensityText"></div>
+                                <div class="text-[11px] opacity-90" x-text="calc.pctText"></div>
+                            </div>
+                        </div>
+
+                        <div class="p-3.5 rounded-xl border text-xs leading-relaxed mb-4" :class="calc.checkClass">
+                            <strong class="block font-bold text-sm mb-1"><i class="fa-solid fa-shield-halved mr-1"></i><span x-text="u('safetyTitle')"></span></strong>
+                            <p x-text="calc.checkText"></p>
+                            <ul class="list-disc ml-4 mt-1.5 space-y-0.5">
+                                <template x-for="(n, i) in calc.notes" :key="i"><li x-text="n"></li></template>
+                            </ul>
+                        </div>
+
+                        <div class="bg-slate-800/90 rounded-xl p-4 border border-slate-700">
+                            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2.5 pb-1.5 border-b border-slate-700">
+                                <i class="fa-solid fa-scale-balanced text-amber-400 mr-1"></i><span x-text="u('equivTitle')"></span>
+                            </h4>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 text-xs">
+                                <template x-for="item in calc.equivalents" :key="item.id">
+                                    <div class="p-2.5 rounded-lg bg-slate-900/80 border flex flex-col" :class="item.border">
+                                        <span class="text-[10px] font-bold uppercase text-slate-400" x-text="item.name"></span>
+                                        <span class="text-sm font-extrabold" :class="item.color" x-text="item.dose"></span>
+                                        <span class="text-[10px] text-slate-300" x-text="item.pct"></span>
+                                        <span class="text-[9px] mt-0.5" :class="item.tagColor" x-text="item.tag"></span>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-400 italic mt-3 leading-relaxed" x-text="u('calcNote')"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ TƯ VẤN LÂM SÀNG ============ -->
+    <section x-show="activeView === 'helper'" class="space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 card-shadow">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-rose-500/20 text-rose-400 flex items-center justify-center text-2xl"><i class="fa-solid fa-user-doctor"></i></div>
+                <div>
+                    <h2 class="text-xl font-bold text-white" x-text="u('helperTitle')"></h2>
+                    <p class="text-xs text-slate-400" x-text="u('helperSub')"></p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <template x-for="sc in scenarioList" :key="sc.id">
+                    <button @click="activeScenario = sc.id"
+                            :class="activeScenario === sc.id ? 'border-rose-500 bg-rose-500/10' : 'border-slate-700 bg-slate-800/60 hover:bg-slate-800'"
+                            class="p-4 rounded-xl border text-left transition flex flex-col justify-between">
+                        <div>
+                            <div :class="sc.iconBg" class="w-8 h-8 rounded-lg flex items-center justify-center mb-2"><i :class="sc.icon"></i></div>
+                            <h4 class="font-bold text-sm text-slate-200" x-text="sc.title[lang]"></h4>
+                            <p class="text-xs text-slate-400 mt-1" x-text="sc.short[lang]"></p>
+                        </div>
+                        <span class="mt-3 text-[11px] font-bold text-rose-400" x-text="u('viewRec')"></span>
+                    </button>
+                </template>
+            </div>
+
+            <div class="bg-slate-800/90 border border-rose-500/40 rounded-2xl p-6 text-slate-200">
+                <span class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 text-xs font-bold uppercase tracking-wider" x-text="u('optimalRec')"></span>
+                <h3 class="text-lg font-bold text-white mt-3 mb-2" x-text="scenarioData.title[lang]"></h3>
+                <p class="text-sm text-slate-300 mb-4" x-text="scenarioData.desc[lang]"></p>
+
+                <div class="bg-slate-900 rounded-xl p-4 border border-slate-700 space-y-4">
+                    <div class="flex items-start gap-3">
+                        <i class="fa-solid fa-star text-amber-400 text-lg mt-0.5"></i>
+                        <div>
+                            <strong class="text-sm text-amber-300 block" x-text="u('preferred')"></strong>
+                            <span class="text-base font-extrabold text-white" x-text="scenarioData.preferred[lang]"></span>
+                            <p class="text-xs text-slate-300 mt-1 leading-relaxed" x-text="scenarioData.why[lang]"></p>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-800 pt-3 flex items-start gap-3">
+                        <i class="fa-solid fa-circle-info text-sky-400 text-lg mt-0.5"></i>
+                        <div>
+                            <strong class="text-sm text-sky-300 block mb-1" x-text="u('rationale')"></strong>
+                            <ul class="list-disc ml-4 space-y-1.5 text-xs text-slate-300 leading-relaxed">
+                                <template x-for="(p, i) in scenarioData.points[lang]" :key="i"><li x-text="p"></li></template>
+                            </ul>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-500 border-t border-slate-800 pt-2" x-text="u('refsShort') + ' ' + scenarioData.refs"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ TRẮC NGHIỆM ============ -->
+    <section x-show="activeView === 'quiz'" class="space-y-6">
+        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 card-shadow">
+            <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white" x-text="u('quizTitle')"></h2>
+                        <p class="text-xs text-slate-400" x-text="u('quizSub')"></p>
+                    </div>
+                </div>
+                <div class="bg-slate-800 px-4 py-2 rounded-xl text-xs font-bold text-rose-300 border border-slate-700">
+                    <span x-text="u('score') + ': '"></span><span class="text-lg text-white" x-text="quizScore"></span> / <span x-text="quizQuestions.length"></span>
+                </div>
+            </div>
+
+            <div x-show="currentQuestionIndex < quizQuestions.length" class="space-y-6">
+                <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700">
+                    <div class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2" x-text="u('question') + ' ' + (currentQuestionIndex + 1) + ' / ' + quizQuestions.length"></div>
+                    <h3 class="text-base font-bold text-white" x-text="currentQ.q[lang]"></h3>
+                </div>
+                <div class="grid grid-cols-1 gap-3">
+                    <template x-for="(opt, oIdx) in currentQ.options" :key="oIdx">
+                        <button @click="answerQuiz(oIdx)" :disabled="quizAnswered"
+                                :class="{
+                                    'bg-slate-800 hover:bg-slate-700 text-slate-200 border-slate-700': !quizAnswered,
+                                    'bg-emerald-600 text-white font-bold border-emerald-500': quizAnswered && oIdx === currentQ.correct,
+                                    'bg-rose-600/80 text-white border-rose-500': quizAnswered && selectedQuizOption === oIdx && oIdx !== currentQ.correct,
+                                    'bg-slate-800 text-slate-400 border-slate-700': quizAnswered && oIdx !== currentQ.correct && selectedQuizOption !== oIdx
+                                }"
+                                class="p-4 rounded-xl border text-left text-sm transition flex items-center justify-between">
+                            <span x-text="opt[lang]"></span>
+                            <i x-show="quizAnswered && oIdx === currentQ.correct" class="fa-solid fa-circle-check text-white text-lg"></i>
+                            <i x-show="quizAnswered && selectedQuizOption === oIdx && oIdx !== currentQ.correct" class="fa-solid fa-circle-xmark text-white text-lg"></i>
+                        </button>
+                    </template>
+                </div>
+                <div x-show="quizAnswered" class="bg-slate-800 p-4 rounded-xl border border-slate-700 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <p class="text-xs text-slate-300 leading-relaxed" x-text="currentQ.explanation[lang]"></p>
+                    <button @click="nextQuestion()" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-xs shrink-0 transition">
+                        <span x-text="u('next')"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div x-show="currentQuestionIndex >= quizQuestions.length" class="text-center py-8 space-y-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mx-auto"><i class="fa-solid fa-trophy"></i></div>
+                <h3 class="text-2xl font-bold text-white" x-text="u('quizDone')"></h3>
+                <p class="text-sm text-slate-300"><span x-text="u('finalScore') + ': '"></span><strong class="text-amber-400 text-lg" x-text="quizScore"></strong> / <span x-text="quizQuestions.length"></span></p>
+                <button @click="resetQuiz()" class="px-6 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl text-sm transition">
+                    <i class="fa-solid fa-rotate-right mr-1.5"></i><span x-text="u('retake')"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="mt-12 border-t border-slate-800 bg-slate-950 py-8 px-4 sm:px-6 lg:px-8 text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto space-y-3">
+        <h4 class="font-bold text-slate-300 uppercase tracking-wider" x-text="u('footNotes')"></h4>
+        <p x-text="u('footNote1')"></p>
+        <p x-text="u('footNote2')"></p>
+        <p x-text="u('footNote3')"></p>
+        <h4 class="font-bold text-slate-300 uppercase tracking-wider pt-3" x-text="u('refsTitle')"></h4>
+        <ol class="list-decimal ml-5 space-y-1 text-[11px] leading-relaxed">
+            <template x-for="(r, i) in refs" :key="i"><li x-text="r"></li></template>
+        </ol>
+        <p class="text-slate-500 text-[11px] pt-2 border-t border-slate-900" x-text="u('footCopy')"></p>
+    </div>
+</footer>
+
+<script>
+const UI = {
+    badge1: { vi: 'Dược lý lâm sàng – Rối loạn lipid máu', en: 'Clinical Pharmacology – Dyslipidaemia' },
+    badge2: { vi: '7 thuốc ức chế HMG-CoA reductase', en: '7 HMG-CoA reductase inhibitors' },
+    title: { vi: 'Dược lý lâm sàng so sánh 7 statin', en: 'Comparative Clinical Pharmacology of 7 Statins' },
+    subtitle: {
+        vi: 'Atorvastatin, rosuvastatin, simvastatin, lovastatin, pravastatin, pitavastatin và fluvastatin: đặc điểm dược lý, quy đổi liều tương đương (kèm giới hạn liều theo nhãn) và lựa chọn theo tình huống lâm sàng.',
+        en: 'Atorvastatin, rosuvastatin, simvastatin, lovastatin, pravastatin, pitavastatin and fluvastatin: pharmacology, dose equivalence (with label dose limits) and scenario-based selection.'
+    },
+    disclaimer: {
+        vi: 'Công cụ tham khảo dành cho nhân viên y tế, không thay thế đánh giá lâm sàng trên từng người bệnh. Số liệu đối chiếu với nhãn FDA và các tài liệu ở phần Tài liệu tham khảo (rà soát 04/10/2026); luôn kiểm tra lại nhãn thuốc đang lưu hành tại Việt Nam.',
+        en: 'Reference tool for healthcare professionals; it does not replace individual clinical assessment. Data were cross-checked against FDA labels and the listed references (reviewed 4 Oct 2026); always verify against the locally registered product information.'
+    },
+    statin: { vi: 'Statin', en: 'Statin' },
+    optional: { vi: 'tùy chọn', en: 'optional' },
+    none: { vi: '-- Không chọn --', en: '-- None --' },
+    v_h2h: { vi: 'So sánh đối đầu', en: 'Head-to-head' },
+    v_matrix: { vi: 'Ma trận 7 statin', en: '7-statin matrix' },
+    v_calc: { vi: 'Quy đổi liều', en: 'Dose equivalence' },
+    v_helper: { vi: 'Tư vấn lâm sàng', en: 'Clinical helper' },
+    v_quiz: { vi: 'Trắc nghiệm', en: 'Quiz' },
+    h2hTitle: { vi: 'So sánh đối đầu trực tiếp', en: 'Head-to-head comparison' },
+    h2hSub: { vi: 'Chọn 2 hoặc 3 statin để đặt cạnh nhau theo từng thông số dược lý', en: 'Select 2 or 3 statins to compare side by side across pharmacological parameters' },
+    matrixTitle: { vi: 'Ma trận so sánh dược lý 7 statin', en: 'Pharmacological comparison matrix of 7 statins' },
+    matrixSub: { vi: 'Toàn bộ 7 statin xếp cạnh nhau theo từng tiêu chí', en: 'All 7 statins aligned side by side for each criterion' },
+    filter: { vi: 'Lọc nhóm tiêu chí:', en: 'Filter group:' },
+    parameter: { vi: 'Tiêu chí', en: 'Parameter' },
+    calcTitle: { vi: 'Quy đổi liều tương đương và đánh giá cường độ statin', en: 'Statin dose equivalence and intensity assessment' },
+    calcSub: {
+        vi: 'Chọn statin và liều đang dùng để xem liều gần tương đương của 6 statin còn lại theo % giảm LDL-C ước tính, có áp dụng giới hạn liều theo chức năng thận, thuốc dùng kèm và chủng tộc.',
+        en: 'Select a statin and dose to see the closest equivalent dose of the other six statins by estimated LDL-C reduction, applying label limits for renal function, co-medication and ethnicity.'
+    },
+    calcStep1: { vi: '1. Statin và liều đang dùng', en: '1. Current statin and dose' },
+    calcStep2: { vi: '2. Chức năng thận', en: '2. Renal function' },
+    calcStep3: { vi: '3. Thuốc dùng kèm và chủng tộc', en: '3. Co-medication and ethnicity' },
+    statinLabel: { vi: 'Statin:', en: 'Statin:' },
+    doseLabel: { vi: 'Liều mỗi ngày (mg/ngày):', en: 'Daily dose (mg/day):' },
+    egfrLabel: { vi: 'eGFR hoặc ClCr (mL/phút):', en: 'eGFR or CrCl (mL/min):' },
+    egfrHint: {
+        vi: 'Nhãn thuốc hiệu chỉnh theo ClCr (Cockcroft–Gault) hoặc eGFR tùy hoạt chất; ứng dụng dùng chung một ngưỡng. Để trống nếu không áp dụng.',
+        en: 'Labels adjust by CrCl (Cockcroft–Gault) or eGFR depending on the agent; the tool applies one shared threshold. Leave blank if not applicable.'
+    },
+    dialysis: { vi: 'Người bệnh đang lọc máu (thận nhân tạo)', en: 'Patient on haemodialysis' },
+    fCyclosporin: { vi: 'Dùng cyclosporin', en: 'Taking cyclosporine' },
+    fGemfibrozil: { vi: 'Dùng gemfibrozil', en: 'Taking gemfibrozil' },
+    fCyp3a4: { vi: 'Dùng clarithromycin / itraconazol / chất ức chế CYP3A4 mạnh', en: 'Taking clarithromycin / itraconazole / strong CYP3A4 inhibitor' },
+    fAsian: { vi: 'Người gốc châu Á', en: 'Patient of Asian ancestry' },
+    analysis: { vi: 'Phân tích và quy đổi', en: 'Analysis and conversion' },
+    intensityTitle: { vi: 'Cường độ statin (ACC/AHA 2018)', en: 'Statin intensity (ACC/AHA 2018)' },
+    safetyTitle: { vi: 'Kiểm tra liều hiện tại theo nhãn thuốc', en: 'Current dose check against label' },
+    equivTitle: { vi: 'Liều gần tương đương của các statin còn lại', en: 'Closest equivalent doses of the other statins' },
+    intHigh: { vi: 'CƯỜNG ĐỘ CAO (giảm LDL-C ≥ 50%)', en: 'HIGH INTENSITY (LDL-C reduction ≥ 50%)' },
+    intMod: { vi: 'CƯỜNG ĐỘ TRUNG BÌNH (giảm LDL-C 30–49%)', en: 'MODERATE INTENSITY (LDL-C reduction 30–49%)' },
+    intLow: { vi: 'CƯỜNG ĐỘ THẤP (giảm LDL-C < 30%)', en: 'LOW INTENSITY (LDL-C reduction < 30%)' },
+    expectedLdl: { vi: 'Giảm LDL-C ước tính', en: 'Estimated LDL-C reduction' },
+    kMatch: { vi: 'Tương đương', en: 'Equivalent' },
+    kNearLow: { vi: 'Gần nhất (yếu hơn nguồn)', en: 'Closest (weaker than source)' },
+    kNearHigh: { vi: 'Gần nhất (mạnh hơn nguồn)', en: 'Closest (stronger than source)' },
+    kShort: { vi: 'Không đạt tương đương ở liều cho phép', en: 'Cannot match at permitted doses' },
+    kContra: { vi: 'Chống chỉ định', en: 'Contraindicated' },
+    kAvoid: { vi: 'Tránh dùng', en: 'Avoid' },
+    kNoDose: { vi: 'Không có liều phù hợp', en: 'No suitable dose' },
+    calcNote: {
+        vi: 'Phương pháp: % giảm LDL-C ước tính theo Law 2003 (tổng hợp 164 RCT ngắn hạn, chuẩn hóa LDL-C nền 4,8 mmol/L) cho 6 statin; pitavastatin lấy xấp xỉ theo nhãn và thử nghiệm pha 3 (không thuộc Law 2003). Liều gần tương đương là liều có % giảm gần nhất, sau khi loại các liều vượt giới hạn trong nhãn. Phân loại cường độ theo ACC/AHA 2018 dựa trên tiêu chí riêng nên có thể lệch vài điểm % so với Law 2003 (ví dụ rosuvastatin 20 mg ≈ 48% theo Law nhưng xếp cường độ cao). Đây là ước tính quần thể, không thay thế đáp ứng LDL-C thực tế của người bệnh.',
+        en: 'Method: estimated LDL-C reduction follows Law 2003 (164 short-term RCTs, standardised to baseline LDL-C 4.8 mmol/L) for six statins; pitavastatin is approximated from the label and phase 3 trials (not covered by Law 2003). The closest equivalent is the dose with the nearest reduction after excluding doses above label limits. ACC/AHA 2018 intensity uses separate criteria and can differ by a few percentage points from Law 2003 (e.g. rosuvastatin 20 mg ≈ 48% by Law yet classed high intensity). These are population estimates and do not replace the individual LDL-C response.'
+    },
+    helperTitle: { vi: 'Hướng dẫn lựa chọn statin theo tình huống lâm sàng', en: 'Scenario-based statin selection guide' },
+    helperSub: { vi: 'Chọn tình huống để xem khuyến cáo và cơ sở bằng chứng', en: 'Select a scenario to see the recommendation and its evidence base' },
+    viewRec: { vi: 'Xem khuyến cáo →', en: 'View recommendation →' },
+    optimalRec: { vi: 'Khuyến cáo tham khảo', en: 'Reference recommendation' },
+    preferred: { vi: 'Lựa chọn ưu tiên:', en: 'Preferred option:' },
+    rationale: { vi: 'Cơ sở dược lý, giới hạn và lựa chọn thay thế:', en: 'Pharmacological rationale, limits and alternatives:' },
+    refsShort: { vi: 'Tài liệu tham khảo (số thứ tự ở cuối trang):', en: 'References (numbered at page end):' },
+    quizTitle: { vi: 'Trắc nghiệm ôn tập dược lý 7 statin', en: '7-statin pharmacology quiz' },
+    quizSub: { vi: 'Kiểm tra kiến thức về tính chất, chuyển hóa, liều và an toàn', en: 'Test knowledge of properties, metabolism, dosing and safety' },
+    score: { vi: 'Điểm', en: 'Score' },
+    question: { vi: 'Câu hỏi', en: 'Question' },
+    next: { vi: 'Câu tiếp theo →', en: 'Next question →' },
+    quizDone: { vi: 'Hoàn thành bài trắc nghiệm', en: 'Quiz completed' },
+    finalScore: { vi: 'Điểm tổng kết', en: 'Final score' },
+    retake: { vi: 'Làm lại', en: 'Retake' },
+    footNotes: { vi: 'Ghi chú và nguồn đối chiếu', en: 'Notes and sources' },
+    footNote1: {
+        vi: 'Cường độ statin (ACC/AHA 2018): cường độ cao (giảm LDL-C ≥ 50%): atorvastatin 40–80 mg, rosuvastatin 20–40 mg. Cường độ trung bình (30–49%): atorvastatin 10–20 mg, rosuvastatin 5–10 mg, simvastatin 20–40 mg, pravastatin 40–80 mg, lovastatin 40–80 mg, fluvastatin XL 80 mg hoặc 40 mg ×2 lần/ngày, pitavastatin 1–4 mg. Cường độ thấp: simvastatin 10 mg, pravastatin 10–20 mg, lovastatin 20 mg, fluvastatin 20–40 mg [1].',
+        en: 'Statin intensity (ACC/AHA 2018): high (LDL-C reduction ≥ 50%): atorvastatin 40–80 mg, rosuvastatin 20–40 mg. Moderate (30–49%): atorvastatin 10–20 mg, rosuvastatin 5–10 mg, simvastatin 20–40 mg, pravastatin 40–80 mg, lovastatin 40–80 mg, fluvastatin XL 80 mg or 40 mg twice daily, pitavastatin 1–4 mg. Low: simvastatin 10 mg, pravastatin 10–20 mg, lovastatin 20 mg, fluvastatin 20–40 mg [1].'
+    },
+    footNote2: {
+        vi: 'Chuyển hóa qua CYP3A4 (atorvastatin, simvastatin, lovastatin) làm tăng nguy cơ tương tác với chất ức chế CYP3A4. Các statin còn lại ít phụ thuộc CYP3A4 nhưng vẫn bị ảnh hưởng bởi chất vận chuyển (OATP1B1, BCRP) và một số thuốc (cyclosporin, gemfibrozil, rifampicin, erythromycin).',
+        en: 'CYP3A4 metabolism (atorvastatin, simvastatin, lovastatin) raises interaction risk with CYP3A4 inhibitors. The other statins depend less on CYP3A4 but remain affected by transporters (OATP1B1, BCRP) and certain drugs (cyclosporine, gemfibrozil, rifampicin, erythromycin).'
+    },
+    footNote3: {
+        vi: 'Nhãn FDA là chuẩn đối chiếu chính; nhãn Việt Nam, SmPC châu Âu hoặc Úc có thể khác (ví dụ rosuvastatin 40 mg ở người châu Á).',
+        en: 'FDA labels are the primary reference; Vietnamese, European (SmPC) or Australian labels may differ (e.g. rosuvastatin 40 mg in Asian patients).'
+    },
+    refsTitle: { vi: 'Tài liệu tham khảo (Vancouver)', en: 'References (Vancouver)' },
+    footCopy: { vi: 'Ứng dụng thông tin lâm sàng tương tác, dựa trên các khuyến cáo ACC/AHA, ESC/EAS, KDIGO và nhãn thuốc FDA.', en: 'Interactive clinical information application based on ACC/AHA, ESC/EAS, KDIGO guidance and FDA labels.' }
+};
+
+const DOSES = {
+    atorvastatin: [10, 20, 40, 80],
+    rosuvastatin: [5, 10, 20, 40],
+    simvastatin: [10, 20, 40],
+    lovastatin: [20, 40, 80],
+    pravastatin: [10, 20, 40, 80],
+    pitavastatin: [1, 2, 4],
+    fluvastatin: [20, 40, 80]
+};
+
+// % giảm LDL-C: Law 2003 (BMJ 326:1423, Table 2); pitavastatin xấp xỉ theo nhãn/thử nghiệm pha 3
+const LDL = {
+    atorvastatin: { 10: 37, 20: 43, 40: 49, 80: 55 },
+    rosuvastatin: { 5: 38, 10: 43, 20: 48, 40: 53 },
+    simvastatin: { 10: 27, 20: 32, 40: 37 },
+    lovastatin: { 20: 29, 40: 37, 80: 45 },
+    pravastatin: { 10: 20, 20: 24, 40: 29, 80: 33 },
+    fluvastatin: { 20: 21, 40: 27, 80: 33 },
+    pitavastatin: { 1: 31, 2: 38, 4: 43 }
+};
+
+const NAMES = {
+    atorvastatin: 'Atorvastatin', rosuvastatin: 'Rosuvastatin', simvastatin: 'Simvastatin',
+    lovastatin: 'Lovastatin', pravastatin: 'Pravastatin', pitavastatin: 'Pitavastatin', fluvastatin: 'Fluvastatin'
+};
+
+const EQUIV_STYLE = {
+    atorvastatin: 'text-rose-400', rosuvastatin: 'text-sky-400', simvastatin: 'text-amber-400',
+    lovastatin: 'text-emerald-400', pravastatin: 'text-teal-400', pitavastatin: 'text-indigo-400', fluvastatin: 'text-purple-400'
+};
+
+function intensityOf(drug, dose) {
+    if (drug === 'atorvastatin') return dose >= 40 ? 'high' : 'moderate';
+    if (drug === 'rosuvastatin') return dose >= 20 ? 'high' : 'moderate';
+    if (drug === 'simvastatin') return dose <= 10 ? 'low' : 'moderate';
+    if (drug === 'lovastatin') return dose <= 20 ? 'low' : 'moderate';
+    if (drug === 'pravastatin') return dose <= 20 ? 'low' : 'moderate';
+    if (drug === 'fluvastatin') return dose >= 80 ? 'moderate' : 'low';
+    return 'moderate'; // pitavastatin 1–4 mg
+}
+
+// Giới hạn theo nhãn FDA khi dùng kèm thuốc / yếu tố nguy cơ (xem tài liệu tham khảo [10]–[16])
+const FACTORS = {
+    cyclosporin: { vi: 'Cyclosporin', en: 'Cyclosporine' },
+    gemfibrozil: { vi: 'Gemfibrozil', en: 'Gemfibrozil' },
+    cyp3a4: { vi: 'Clarithromycin/itraconazol/chất ức chế CYP3A4 mạnh', en: 'Clarithromycin/itraconazole/strong CYP3A4 inhibitor' },
+    asian: { vi: 'Người gốc châu Á', en: 'Asian ancestry' }
+};
+
+const LIMITS = {
+    cyclosporin: {
+        atorvastatin: { type: 'avoid' },
+        rosuvastatin: { type: 'cap', max: 5 },
+        simvastatin: { type: 'contra' },
+        lovastatin: { type: 'avoid' },
+        pravastatin: { type: 'cap', max: 20, start: 10 },
+        pitavastatin: { type: 'contra' },
+        fluvastatin: { type: 'avoid' }
+    },
+    gemfibrozil: {
+        atorvastatin: { type: 'caution' },
+        rosuvastatin: { type: 'cap', max: 10, start: 5 },
+        simvastatin: { type: 'contra' },
+        lovastatin: { type: 'avoid' },
+        pravastatin: { type: 'caution' },
+        pitavastatin: { type: 'avoid' },
+        fluvastatin: { type: 'avoid' }
+    },
+    cyp3a4: {
+        atorvastatin: { type: 'cap', max: 20 },
+        rosuvastatin: { type: 'none' },
+        simvastatin: { type: 'contra' },
+        lovastatin: { type: 'contra' },
+        pravastatin: { type: 'cap', max: 40, onlyNote: { vi: 'giới hạn 40 mg áp dụng cho clarithromycin', en: '40 mg limit applies to clarithromycin' } },
+        pitavastatin: { type: 'none' },
+        fluvastatin: { type: 'none' }
+    },
+    asian: {
+        rosuvastatin: { type: 'cap', max: 20, start: 5, onlyNote: { vi: 'FDA; SmPC châu Âu/Úc: 40 mg chống chỉ định ở người châu Á', en: 'FDA; EU/AU SmPC: 40 mg contraindicated in Asian patients' } }
+    }
+};
+
+const REFS = [
+    'Grundy SM, Stone NJ, Bailey AL, Beam C, Birtcher KK, Blumenthal RS, et al. 2018 AHA/ACC/AACVPR/AAPA/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA guideline on the management of blood cholesterol. Circulation. 2019;139(25):e1082-143.',
+    'Mach F, Baigent C, Catapano AL, Koskinas KC, Casula M, Badimon L, et al. 2019 ESC/EAS guidelines for the management of dyslipidaemias: lipid modification to reduce cardiovascular risk. Eur Heart J. 2020;41(1):111-88.',
+    'Lloyd-Jones DM, Morris PB, Ballantyne CM, Birtcher KK, Covington AM, DePalma SM, et al. 2022 ACC expert consensus decision pathway on the role of nonstatin therapies for LDL-cholesterol lowering in the management of atherosclerotic cardiovascular disease risk. J Am Coll Cardiol. 2022;80(14):1366-418.',
+    'KDIGO Lipid Work Group. KDIGO clinical practice guideline for lipid management in chronic kidney disease. Kidney Int Suppl. 2013;3(3):259-305.',
+    'Law MR, Wald NJ, Rudnicka AR. Quantifying effect of statins on low density lipoprotein cholesterol, ischaemic heart disease, and stroke: systematic review and meta-analysis. BMJ. 2003;326(7404):1423.',
+    'Wanner C, Krane V, März W, Olschewski M, Mann JF, Ruf G, et al. Atorvastatin in patients with type 2 diabetes mellitus undergoing hemodialysis. N Engl J Med. 2005;353(3):238-48.',
+    'Fellström BC, Jardine AG, Schmieder RE, Holdaas H, Bannister K, Beutler J, et al. Rosuvastatin and cardiovascular events in patients undergoing hemodialysis. N Engl J Med. 2009;360(14):1395-407.',
+    'Baigent C, Landray MJ, Reith C, Emberson J, Wheeler DC, Tomson C, et al. The effects of lowering LDL cholesterol with simvastatin plus ezetimibe in patients with chronic kidney disease (Study of Heart and Renal Protection): a randomised placebo-controlled trial. Lancet. 2011;377(9784):2181-92.',
+    'Cannon CP, Blazing MA, Giugliano RP, McCagg A, White JA, Theroux P, et al. Ezetimibe added to statin therapy after acute coronary syndromes. N Engl J Med. 2015;372(25):2387-97.',
+    'U.S. Food and Drug Administration. CRESTOR (rosuvastatin calcium) tablets: prescribing information [Internet]. Silver Spring (MD): FDA; [cited 2026 Oct 4]. Available from: DailyMed / Drugs@FDA.',
+    'U.S. Food and Drug Administration. ZOCOR (simvastatin) tablets: prescribing information [Internet]. Silver Spring (MD): FDA; [cited 2026 Oct 4]. Available from: Drugs@FDA.',
+    'U.S. Food and Drug Administration. LIVALO (pitavastatin) tablets: prescribing information [Internet]. Silver Spring (MD): FDA; [cited 2026 Oct 4]. Available from: Drugs@FDA.',
+    'U.S. Food and Drug Administration. PRAVACHOL (pravastatin sodium) tablets: prescribing information [Internet]. Silver Spring (MD): FDA; [cited 2026 Oct 4]. Available from: DailyMed.',
+    'U.S. Food and Drug Administration. LESCOL XL (fluvastatin) extended-release tablets: prescribing information [Internet]. Silver Spring (MD): FDA; [cited 2026 Oct 4]. Available from: Drugs@FDA.',
+    'U.S. Food and Drug Administration. LIPITOR (atorvastatin calcium) tablets: prescribing information [Internet]. Silver Spring (MD): FDA; [cited 2026 Oct 4]. Available from: DailyMed.',
+    'Lovastatin tablets: prescribing information (Mevacor-class labelling) [Internet]. Bethesda (MD): National Library of Medicine, DailyMed; [cited 2026 Oct 4].',
+    'U.S. Food and Drug Administration. FDA Drug Safety Communication: new restrictions, contraindications, and dose limitations for Zocor (simvastatin) to reduce the risk of muscle injury [Internet]. Silver Spring (MD): FDA; 2011 Jun 8 [updated 2011 Dec 15].'
+];
+
+function statinApp() {
+    return {
+        lang: 'vi',
+        activeView: 'headToHead',
+        views: [
+            { id: 'headToHead', icon: 'fa-solid fa-code-compare', label: 'v_h2h' },
+            { id: 'matrix', icon: 'fa-solid fa-table-cells', label: 'v_matrix' },
+            { id: 'calculator', icon: 'fa-solid fa-calculator', label: 'v_calc' },
+            { id: 'helper', icon: 'fa-solid fa-user-doctor', label: 'v_helper' },
+            { id: 'quiz', icon: 'fa-solid fa-circle-question', label: 'v_quiz' }
+        ],
+        selectedStatin1: 'atorvastatin',
+        selectedStatin2: 'rosuvastatin',
+        selectedStatin3: 'none',
+        matrixFilter: 'all',
+
+        calcDrug: 'atorvastatin',
+        calcDose: '20',
+        calcEgfr: '',
+        dialysis: false,
+        fCyclosporin: false,
+        fGemfibrozil: false,
+        fCyp3a4: false,
+        fAsian: false,
+
+        activeScenario: 'ckd',
+
+        currentQuestionIndex: 0,
+        quizScore: 0,
+        quizAnswered: false,
+        selectedQuizOption: null,
+
+        refs: REFS,
+
+        u(key) { return UI[key] ? UI[key][this.lang] : key; },
+        toggleLang() { this.lang = this.lang === 'vi' ? 'en' : 'vi'; },
+        getStatin(id) { return this.statins.find(s => s.id === id) || this.statins[0]; },
+
+        get h2hSlots() {
+            return [
+                { n: 1, id: this.selectedStatin1, color: 'text-rose-400' },
+                { n: 2, id: this.selectedStatin2, color: 'text-sky-400' },
+                { n: 3, id: this.selectedStatin3, color: 'text-amber-400' }
+            ];
+        },
+
+        summaryCards: [
+            {
+                key: 'sol', icon: 'fa-solid fa-droplet', iconBg: 'bg-rose-500/20 text-rose-400',
+                title: { vi: 'Tính ưa mỡ và ưa nước', en: 'Lipophilicity' },
+                body: {
+                    vi: '<span class="text-rose-400 font-bold">Ưa mỡ:</span> atorvastatin, simvastatin, lovastatin, fluvastatin, pitavastatin<br><span class="text-sky-400 font-bold">Ưa nước:</span> rosuvastatin, pravastatin',
+                    en: '<span class="text-rose-400 font-bold">Lipophilic:</span> atorvastatin, simvastatin, lovastatin, fluvastatin, pitavastatin<br><span class="text-sky-400 font-bold">Hydrophilic:</span> rosuvastatin, pravastatin'
+                }
+            },
+            {
+                key: 'cyp', icon: 'fa-solid fa-dna', iconBg: 'bg-amber-500/20 text-amber-400',
+                title: { vi: 'Chuyển hóa qua CYP3A4', en: 'CYP3A4 metabolism' },
+                body: {
+                    vi: '<span class="text-rose-400 font-bold">Phụ thuộc CYP3A4:</span> atorvastatin, simvastatin, lovastatin<br><span class="text-emerald-400 font-bold">Ít phụ thuộc:</span> rosuvastatin, pravastatin, pitavastatin, fluvastatin (CYP2C9)',
+                    en: '<span class="text-rose-400 font-bold">CYP3A4-dependent:</span> atorvastatin, simvastatin, lovastatin<br><span class="text-emerald-400 font-bold">Minimal:</span> rosuvastatin, pravastatin, pitavastatin, fluvastatin (CYP2C9)'
+                }
+            },
+            {
+                key: 'int', icon: 'fa-solid fa-bolt', iconBg: 'bg-emerald-500/20 text-emerald-400',
+                title: { vi: 'Cường độ cao (giảm LDL-C ≥ 50%)', en: 'High-intensity statins' },
+                body: {
+                    vi: '<span class="text-sky-400 font-bold">Rosuvastatin:</span> 20–40 mg<br><span class="text-rose-400 font-bold">Atorvastatin:</span> 40–80 mg',
+                    en: '<span class="text-sky-400 font-bold">Rosuvastatin:</span> 20–40 mg<br><span class="text-rose-400 font-bold">Atorvastatin:</span> 40–80 mg'
+                }
+            },
+            {
+                key: 'tim', icon: 'fa-solid fa-clock', iconBg: 'bg-purple-500/20 text-purple-400',
+                title: { vi: 'Thời điểm uống thuốc', en: 'Administration timing' },
+                body: {
+                    vi: '<span class="text-emerald-400 font-bold">Bất kỳ lúc nào:</span> atorvastatin, rosuvastatin, pitavastatin, pravastatin, fluvastatin XL<br><span class="text-amber-400 font-bold">Buổi tối:</span> simvastatin, fluvastatin giải phóng nhanh; lovastatin cùng bữa tối',
+                    en: '<span class="text-emerald-400 font-bold">Any time of day:</span> atorvastatin, rosuvastatin, pitavastatin, pravastatin, fluvastatin XL<br><span class="text-amber-400 font-bold">Evening:</span> simvastatin, immediate-release fluvastatin; lovastatin with evening meal'
+                }
+            }
+        ],
+
+        paramKeys: [
+            { key: 'solubility', group: 'solubility', icon: 'fa-solid fa-droplet', title: { vi: 'Tính ưa mỡ / ưa nước', en: 'Solubility profile' } },
+            { key: 'form', group: 'solubility', icon: 'fa-solid fa-flask', title: { vi: 'Dạng thuốc', en: 'Active drug vs prodrug' } },
+            { key: 'cyp', group: 'metabolism', icon: 'fa-solid fa-dna', title: { vi: 'Chuyển hóa', en: 'Metabolism' } },
+            { key: 'ddi', group: 'metabolism', icon: 'fa-solid fa-capsules', title: { vi: 'Tương tác thuốc và giới hạn liều', en: 'Drug interactions and dose limits' } },
+            { key: 'special', group: 'metabolism', icon: 'fa-solid fa-user-shield', title: { vi: 'Lưu ý đặc thù', en: 'Special considerations' } },
+            { key: 'doseRange', group: 'intensity', icon: 'fa-solid fa-chart-line', title: { vi: 'Khoảng liều và cường độ', en: 'Dose range and intensity' } },
+            { key: 'ldl', group: 'intensity', icon: 'fa-solid fa-arrow-trend-down', title: { vi: 'Giảm LDL-C ước tính', en: 'Estimated LDL-C reduction' } },
+            { key: 'halfLife', group: 'timing', icon: 'fa-solid fa-clock', title: { vi: 'Thời gian bán thải (t½)', en: 'Elimination half-life (t½)' } },
+            { key: 'timing', group: 'timing', icon: 'fa-solid fa-utensils', title: { vi: 'Thời điểm uống và thức ăn', en: 'Timing and food' } },
+            { key: 'renal', group: 'renal', icon: 'fa-solid fa-kidneys', title: { vi: 'Hiệu chỉnh liều khi suy thận', en: 'Renal dose adjustment' } }
+        ],
+
+        matrixFilters: [
+            { id: 'all', label: { vi: 'Tất cả tiêu chí', en: 'All parameters' } },
+            { id: 'solubility', label: { vi: 'Tính tan và dạng thuốc', en: 'Solubility and form' } },
+            { id: 'metabolism', label: { vi: 'Chuyển hóa và tương tác', en: 'Metabolism and interactions' } },
+            { id: 'intensity', label: { vi: 'Liều, cường độ và hiệu lực', en: 'Dose, intensity and efficacy' } },
+            { id: 'timing', label: { vi: 'Bán thải và thời điểm uống', en: 'Half-life and timing' } },
+            { id: 'renal', label: { vi: 'Chỉnh liều suy thận', en: 'Renal adjustment' } }
+        ],
+
+        statins: [
+            {
+                id: 'atorvastatin', name: 'Atorvastatin', brand: 'Lipitor®',
+                type: { vi: 'Statin cường độ cao (40–80 mg)', en: 'High-intensity statin (40–80 mg)' },
+                badgeBg: 'bg-gradient-to-r from-rose-600 to-rose-800', textHeaderColor: 'text-rose-400',
+                solubility: { vi: '<strong class="text-rose-400">Ưa mỡ</strong><br><span class="text-slate-400">Phân bố mô rộng</span>', en: '<strong class="text-rose-400">Lipophilic</strong><br><span class="text-slate-400">Wide tissue distribution</span>' },
+                form: { vi: '<span class="text-emerald-400">Dạng hoạt tính</span>', en: '<span class="text-emerald-400">Active drug</span>' },
+                cyp: { vi: '<strong class="text-amber-400">CYP3A4 (chính)</strong>', en: '<strong class="text-amber-400">CYP3A4 (major)</strong>' },
+                ddi: { vi: '<span class="text-rose-400 font-bold">Cao.</span> Clarithromycin, itraconazol: tối đa 20 mg. Cyclosporin, tipranavir/ritonavir, glecaprevir/pibrentasvir: tránh dùng [15]', en: '<span class="text-rose-400 font-bold">High.</span> Clarithromycin, itraconazole: max 20 mg. Cyclosporine, tipranavir/ritonavir, glecaprevir/pibrentasvir: avoid [15]' },
+                special: { vi: 'Không cần chỉnh liều theo chức năng thận; thận trọng khi suy gan [15]', en: 'No renal dose adjustment; caution in hepatic impairment [15]' },
+                doseRange: { vi: '10–80 mg/ngày<br><span class="text-amber-300 font-bold">Trung bình: 10–20 mg</span><br><span class="text-rose-400 font-bold">Cao: 40–80 mg</span>', en: '10–80 mg/day<br><span class="text-amber-300 font-bold">Moderate: 10–20 mg</span><br><span class="text-rose-400 font-bold">High: 40–80 mg</span>' },
+                ldl: { vi: '↓ 37–55% (10–80 mg) [5]', en: '↓ 37–55% (10–80 mg) [5]' },
+                halfLife: { vi: '≈ 14 giờ (hoạt chất ≈ 20–30 giờ)', en: '≈ 14 h (active metabolites ≈ 20–30 h)' },
+                timing: { vi: 'Bất kỳ lúc nào, cùng hoặc không cùng thức ăn', en: 'Any time of day, with or without food' },
+                renal: { vi: '<strong class="text-emerald-400">Không cần chỉnh liều</strong> (bệnh thận không ảnh hưởng nồng độ thuốc) [15]', en: '<strong class="text-emerald-400">No adjustment needed</strong> (renal disease does not affect exposure) [15]' }
+            },
+            {
+                id: 'rosuvastatin', name: 'Rosuvastatin', brand: 'Crestor®',
+                type: { vi: 'Statin cường độ cao (20–40 mg)', en: 'High-intensity statin (20–40 mg)' },
+                badgeBg: 'bg-gradient-to-r from-sky-600 to-sky-800', textHeaderColor: 'text-sky-400',
+                solubility: { vi: '<strong class="text-sky-400">Ưa nước</strong><br><span class="text-slate-400">Chọn lọc gan</span>', en: '<strong class="text-sky-400">Hydrophilic</strong><br><span class="text-slate-400">Hepatoselective</span>' },
+                form: { vi: '<span class="text-emerald-400">Dạng hoạt tính</span>', en: '<span class="text-emerald-400">Active drug</span>' },
+                cyp: { vi: '<strong class="text-emerald-400">Chuyển hóa tối thiểu (≈ 10%, chủ yếu CYP2C9)</strong>', en: '<strong class="text-emerald-400">Minimal metabolism (≈ 10%, mainly CYP2C9)</strong>' },
+                ddi: { vi: '<span class="text-emerald-400 font-bold">Không qua CYP3A4</span>, nhạy với chất vận chuyển (OATP1B1, BCRP). Cyclosporin: tối đa 5 mg. Gemfibrozil: khởi đầu 5 mg, tối đa 10 mg. Phối hợp ritonavir: tối đa 10 mg [10]', en: '<span class="text-emerald-400 font-bold">Not CYP3A4-dependent</span>, sensitive to transporters (OATP1B1, BCRP). Cyclosporine: max 5 mg. Gemfibrozil: start 5 mg, max 10 mg. Ritonavir combinations: max 10 mg [10]' },
+                special: { vi: '<strong class="text-amber-400">Người gốc châu Á: khởi đầu 5 mg</strong> (FDA). SmPC châu Âu/Úc: 40 mg chống chỉ định ở người châu Á [10]', en: '<strong class="text-amber-400">Asian ancestry: start 5 mg</strong> (FDA). EU/AU SmPC: 40 mg contraindicated in Asian patients [10]' },
+                doseRange: { vi: '5–40 mg/ngày<br><span class="text-amber-300 font-bold">Trung bình: 5–10 mg</span><br><span class="text-sky-400 font-bold">Cao: 20–40 mg</span><br><span class="text-slate-400">40 mg chỉ khi chưa đạt mục tiêu ở 20 mg [10]</span>', en: '5–40 mg/day<br><span class="text-amber-300 font-bold">Moderate: 5–10 mg</span><br><span class="text-sky-400 font-bold">High: 20–40 mg</span><br><span class="text-slate-400">40 mg only if goal not met on 20 mg [10]</span>' },
+                ldl: { vi: '↓ 38–53% (5–40 mg) [5]', en: '↓ 38–53% (5–40 mg) [5]' },
+                halfLife: { vi: '≈ 19 giờ', en: '≈ 19 h' },
+                timing: { vi: 'Bất kỳ lúc nào, cùng hoặc không cùng thức ăn [10]', en: 'Any time of day, with or without food [10]' },
+                renal: { vi: '<strong class="text-amber-400">ClCr < 30 mL/phút (chưa lọc máu): khởi đầu 5 mg, tối đa 10 mg</strong> [10]', en: '<strong class="text-amber-400">CrCl < 30 mL/min (not on dialysis): start 5 mg, max 10 mg</strong> [10]' }
+            },
+            {
+                id: 'simvastatin', name: 'Simvastatin', brand: 'Zocor®',
+                type: { vi: 'Statin cường độ trung bình', en: 'Moderate-intensity statin' },
+                badgeBg: 'bg-gradient-to-r from-amber-600 to-amber-800', textHeaderColor: 'text-amber-400',
+                solubility: { vi: '<strong class="text-rose-400">Ưa mỡ</strong>', en: '<strong class="text-rose-400">Lipophilic</strong>' },
+                form: { vi: '<strong class="text-amber-400">Tiền thuốc (prodrug)</strong><br><span class="text-slate-400">Vòng lactone được thủy phân thành dạng acid hoạt tính</span>', en: '<strong class="text-amber-400">Prodrug</strong><br><span class="text-slate-400">Lactone hydrolysed to active acid</span>' },
+                cyp: { vi: '<strong class="text-rose-400">CYP3A4 (chính, rất nhạy)</strong>', en: '<strong class="text-rose-400">CYP3A4 (major, highly sensitive)</strong>' },
+                ddi: { vi: '<span class="text-rose-400 font-bold">Rất cao.</span> Chống chỉ định: chất ức chế CYP3A4 mạnh, gemfibrozil, cyclosporin, danazol. Verapamil, diltiazem, dronedaron: tối đa 10 mg. Amiodaron, amlodipin, ranolazin: tối đa 20 mg [11]', en: '<span class="text-rose-400 font-bold">Very high.</span> Contraindicated: strong CYP3A4 inhibitors, gemfibrozil, cyclosporine, danazol. Verapamil, diltiazem, dronedarone: max 10 mg. Amiodarone, amlodipine, ranolazine: max 20 mg [11]' },
+                special: { vi: 'Người Trung Quốc: thận trọng khi liều > 20 mg kèm niacin liều hạ lipid [11]', en: 'Chinese patients: caution with doses > 20 mg plus lipid-modifying niacin [11]' },
+                doseRange: { vi: '10–40 mg/ngày<br><span class="text-sky-300 font-bold">Thấp: 10 mg</span><br><span class="text-amber-300 font-bold">Trung bình: 20–40 mg</span><br><span class="text-rose-400">80 mg: chỉ cho người đã dùng ≥ 12 tháng không có độc tính cơ [11,17]</span>', en: '10–40 mg/day<br><span class="text-sky-300 font-bold">Low: 10 mg</span><br><span class="text-amber-300 font-bold">Moderate: 20–40 mg</span><br><span class="text-rose-400">80 mg: only for patients on it ≥ 12 months without muscle toxicity [11,17]</span>' },
+                ldl: { vi: '↓ 27–37% (10–40 mg) [5]', en: '↓ 27–37% (10–40 mg) [5]' },
+                halfLife: { vi: '≈ 1,5–3 giờ (ngắn)', en: '≈ 1.5–3 h (short)' },
+                timing: { vi: '<strong class="text-amber-300">Uống buổi tối</strong> (theo nhãn) [11]', en: '<strong class="text-amber-300">Evening dosing</strong> (per label) [11]' },
+                renal: { vi: 'ClCr 15–29 mL/phút: khởi đầu 5 mg (nhãn Mỹ: không còn viên 5 mg, dùng chế phẩm simvastatin khác) [11]', en: 'CrCl 15–29 mL/min: start 5 mg (US: 5 mg tablet no longer marketed, use another simvastatin product) [11]' }
+            },
+            {
+                id: 'lovastatin', name: 'Lovastatin', brand: 'Mevacor®',
+                type: { vi: 'Statin cường độ thấp đến trung bình', en: 'Low-to-moderate intensity statin' },
+                badgeBg: 'bg-gradient-to-r from-emerald-600 to-emerald-800', textHeaderColor: 'text-emerald-400',
+                solubility: { vi: '<strong class="text-rose-400">Ưa mỡ</strong>', en: '<strong class="text-rose-400">Lipophilic</strong>' },
+                form: { vi: '<strong class="text-amber-400">Tiền thuốc (prodrug)</strong>', en: '<strong class="text-amber-400">Prodrug</strong>' },
+                cyp: { vi: '<strong class="text-rose-400">CYP3A4 (chính)</strong>', en: '<strong class="text-rose-400">CYP3A4 (major)</strong>' },
+                ddi: { vi: '<span class="text-rose-400 font-bold">Cao.</span> Chống chỉ định: chất ức chế CYP3A4 mạnh (itraconazol, clarithromycin...). Tránh: cyclosporin, gemfibrozil, danazol. Diltiazem, verapamil, dronedaron: tối đa 20 mg. Amiodaron: tối đa 40 mg [16]', en: '<span class="text-rose-400 font-bold">High.</span> Contraindicated: strong CYP3A4 inhibitors (itraconazole, clarithromycin...). Avoid: cyclosporine, gemfibrozil, danazol. Diltiazem, verapamil, dronedarone: max 20 mg. Amiodarone: max 40 mg [16]' },
+                special: { vi: 'Tránh uống nhiều nước bưởi chùm (> 1 lít/ngày) [16]', en: 'Avoid large amounts of grapefruit juice (> 1 L/day) [16]' },
+                doseRange: { vi: '20–80 mg/ngày (viên giải phóng nhanh)<br><span class="text-sky-300 font-bold">Thấp: 20 mg</span><br><span class="text-emerald-300 font-bold">Trung bình: 40–80 mg</span>', en: '20–80 mg/day (immediate-release)<br><span class="text-sky-300 font-bold">Low: 20 mg</span><br><span class="text-emerald-300 font-bold">Moderate: 40–80 mg</span>' },
+                ldl: { vi: '↓ 29–45% (20–80 mg) [5]', en: '↓ 29–45% (20–80 mg) [5]' },
+                halfLife: { vi: '≈ 2–3 giờ (ngắn)', en: '≈ 2–3 h (short)' },
+                timing: { vi: '<strong class="text-rose-400">Uống cùng bữa ăn tối</strong> (thức ăn tăng hấp thu) [16]', en: '<strong class="text-rose-400">Take with the evening meal</strong> (food increases absorption) [16]' },
+                renal: { vi: 'ClCr < 30 mL/phút: cân nhắc kỹ và thận trọng khi liều > 20 mg/ngày [16]', en: 'CrCl < 30 mL/min: doses > 20 mg/day need careful consideration and caution [16]' }
+            },
+            {
+                id: 'pravastatin', name: 'Pravastatin', brand: 'Pravachol®',
+                type: { vi: 'Statin cường độ thấp đến trung bình', en: 'Low-to-moderate intensity statin' },
+                badgeBg: 'bg-gradient-to-r from-teal-600 to-teal-800', textHeaderColor: 'text-teal-400',
+                solubility: { vi: '<strong class="text-sky-400">Ưa nước</strong>', en: '<strong class="text-sky-400">Hydrophilic</strong>' },
+                form: { vi: '<span class="text-emerald-400">Dạng hoạt tính</span>', en: '<span class="text-emerald-400">Active drug</span>' },
+                cyp: { vi: '<strong class="text-emerald-400">Không phụ thuộc CYP</strong> (chủ yếu liên hợp sulfat)', en: '<strong class="text-emerald-400">Not CYP-dependent</strong> (mainly sulfation)' },
+                ddi: { vi: '<span class="text-emerald-400 font-bold">Thấp.</span> Cyclosporin: khởi đầu 10 mg, tối đa 20 mg. Clarithromycin: tối đa 40 mg [13]', en: '<span class="text-emerald-400 font-bold">Low.</span> Cyclosporine: start 10 mg, max 20 mg. Clarithromycin: max 40 mg [13]' },
+                special: { vi: 'Ít tương tác qua CYP nên thuận lợi khi dùng nhiều thuốc, nhưng vẫn cần giới hạn liều với cyclosporin [13]', en: 'Few CYP interactions suit polypharmacy, but cyclosporine still requires a dose cap [13]' },
+                doseRange: { vi: '10–80 mg/ngày<br><span class="text-sky-300 font-bold">Thấp: 10–20 mg</span><br><span class="text-teal-300 font-bold">Trung bình: 40–80 mg</span>', en: '10–80 mg/day<br><span class="text-sky-300 font-bold">Low: 10–20 mg</span><br><span class="text-teal-300 font-bold">Moderate: 40–80 mg</span>' },
+                ldl: { vi: '↓ 20–33% (10–80 mg) [5]', en: '↓ 20–33% (10–80 mg) [5]' },
+                halfLife: { vi: '≈ 1,5–2 giờ', en: '≈ 1.5–2 h' },
+                timing: { vi: '<strong class="text-emerald-400">Bất kỳ lúc nào trong ngày</strong>, cùng hoặc không cùng thức ăn (theo nhãn) [13]', en: '<strong class="text-emerald-400">Any time of day</strong>, with or without food (per label) [13]' },
+                renal: { vi: 'Suy thận nặng: khởi đầu 10 mg/ngày [13]', en: 'Severe renal impairment: start 10 mg/day [13]' }
+            },
+            {
+                id: 'pitavastatin', name: 'Pitavastatin', brand: 'Livalo®',
+                type: { vi: 'Statin cường độ trung bình', en: 'Moderate-intensity statin' },
+                badgeBg: 'bg-gradient-to-r from-indigo-600 to-indigo-800', textHeaderColor: 'text-indigo-400',
+                solubility: { vi: '<strong class="text-rose-400">Ưa mỡ (mức vừa)</strong>', en: '<strong class="text-rose-400">Lipophilic (moderate)</strong>' },
+                form: { vi: '<span class="text-emerald-400">Dạng hoạt tính</span>', en: '<span class="text-emerald-400">Active drug</span>' },
+                cyp: { vi: '<strong class="text-emerald-400">Chuyển hóa CYP tối thiểu</strong> (chủ yếu liên hợp glucuronid)', en: '<strong class="text-emerald-400">Minimal CYP metabolism</strong> (mainly glucuronidation)' },
+                ddi: { vi: '<span class="text-amber-300 font-bold">Thấp qua CYP3A4, nhạy với chất vận chuyển.</span> Chống chỉ định cyclosporin. Tránh gemfibrozil. Erythromycin: tối đa 1 mg. Rifampicin: tối đa 2 mg [12]', en: '<span class="text-amber-300 font-bold">Low CYP3A4 risk, transporter-sensitive.</span> Cyclosporine contraindicated. Avoid gemfibrozil. Erythromycin: max 1 mg. Rifampin: max 2 mg [12]' },
+                special: { vi: 'Khởi đầu 2 mg/ngày ở người bệnh không suy thận; liều tối đa 4 mg [12]', en: 'Usual start 2 mg/day without renal impairment; maximum 4 mg [12]' },
+                doseRange: { vi: '1–4 mg/ngày<br><span class="text-indigo-300 font-bold">Trung bình: 1–4 mg (ACC/AHA 2018)</span>', en: '1–4 mg/day<br><span class="text-indigo-300 font-bold">Moderate: 1–4 mg (ACC/AHA 2018)</span>' },
+                ldl: { vi: '≈ 31–43% (1–4 mg), ước lượng từ nhãn/thử nghiệm', en: '≈ 31–43% (1–4 mg), estimated from label/trials' },
+                halfLife: { vi: '≈ 12 giờ', en: '≈ 12 h' },
+                timing: { vi: 'Bất kỳ lúc nào trong ngày', en: 'Any time of day' },
+                renal: { vi: '<strong class="text-amber-400">eGFR 15–59 mL/phút/1,73 m² và lọc máu: khởi đầu 1 mg, tối đa 2 mg</strong> [12]', en: '<strong class="text-amber-400">eGFR 15–59 mL/min/1.73 m² and dialysis: start 1 mg, max 2 mg</strong> [12]' }
+            },
+            {
+                id: 'fluvastatin', name: 'Fluvastatin', brand: 'Lescol®',
+                type: { vi: 'Statin cường độ thấp đến trung bình', en: 'Low-to-moderate intensity statin' },
+                badgeBg: 'bg-gradient-to-r from-purple-600 to-purple-800', textHeaderColor: 'text-purple-400',
+                solubility: { vi: '<strong class="text-rose-400">Ưa mỡ</strong>', en: '<strong class="text-rose-400">Lipophilic</strong>' },
+                form: { vi: '<span class="text-emerald-400">Dạng hoạt tính</span>', en: '<span class="text-emerald-400">Active drug</span>' },
+                cyp: { vi: '<strong class="text-sky-400">CYP2C9 (chính)</strong>', en: '<strong class="text-sky-400">CYP2C9 (major)</strong>' },
+                ddi: { vi: '<span class="text-sky-300 font-bold">Trung bình (tránh CYP3A4).</span> Lescol XL: tránh dùng với cyclosporin, fluconazol (ức chế CYP2C9) và gemfibrozil [14]', en: '<span class="text-sky-300 font-bold">Moderate (avoids CYP3A4).</span> Lescol XL: avoid with cyclosporine, fluconazole (CYP2C9 inhibitor) and gemfibrozil [14]' },
+                special: { vi: 'Dạng XL 80 mg dùng một lần/ngày; viên nang giải phóng nhanh 20 hoặc 40 mg (40 mg có thể chia 2 lần/ngày) [14]', en: 'XL 80 mg once daily; immediate-release capsules 20 or 40 mg (40 mg may be given twice daily) [14]' },
+                doseRange: { vi: '20–80 mg/ngày<br><span class="text-sky-300 font-bold">Thấp: 20–40 mg</span><br><span class="text-purple-300 font-bold">Trung bình: XL 80 mg hoặc 40 mg × 2 lần/ngày</span>', en: '20–80 mg/day<br><span class="text-sky-300 font-bold">Low: 20–40 mg</span><br><span class="text-purple-300 font-bold">Moderate: XL 80 mg or 40 mg twice daily</span>' },
+                ldl: { vi: '↓ 21–33% (20–80 mg) [5]', en: '↓ 21–33% (20–80 mg) [5]' },
+                halfLife: { vi: '≈ 1–3 giờ (dạng giải phóng nhanh)', en: '≈ 1–3 h (immediate-release)' },
+                timing: { vi: '<strong class="text-emerald-400">XL 80 mg: bất kỳ lúc nào.</strong><br>Viên nang giải phóng nhanh: buổi tối [14]', en: '<strong class="text-emerald-400">XL 80 mg: any time of day.</strong><br>Immediate-release capsule: evening [14]' },
+                renal: { vi: 'Chưa nghiên cứu liều > 40 mg ở suy thận nặng: thận trọng [14]', en: 'Doses > 40 mg not studied in severe renal impairment: use caution [14]' }
+            }
+        ],
+
+        /* ---------- Quy đổi liều ---------- */
+        get doseOptions() {
+            const drug = this.calcDrug;
+            return (DOSES[drug] || []).map(d => {
+                const lvl = intensityOf(drug, d);
+                const lvlTxt = lvl === 'high' ? (this.lang === 'vi' ? 'cường độ cao' : 'high intensity')
+                    : lvl === 'moderate' ? (this.lang === 'vi' ? 'cường độ trung bình' : 'moderate intensity')
+                    : (this.lang === 'vi' ? 'cường độ thấp' : 'low intensity');
+                const pct = LDL[drug][d];
+                return { v: String(d), t: d + ' mg/' + (this.lang === 'vi' ? 'ngày' : 'day') + ' — ' + lvlTxt + ' (' + (drug === 'pitavastatin' ? '≈' : '') + pct + '%)' };
+            });
+        },
+
+        onDrugChange() {
+            const list = DOSES[this.calcDrug];
+            this.calcDose = String(list[Math.min(1, list.length - 1)]);
+        },
+
+        // Đánh giá giới hạn nhãn cho một statin theo bối cảnh hiện tại
+        evaluate(drug) {
+            const L = this.lang;
+            const vi = L === 'vi';
+            let status = 'ok', max = null, start = null;
+            const notes = [];
+            const setMax = (m) => { max = (max === null) ? m : Math.min(max, m); };
+            const setStart = (s) => { start = (start === null) ? s : Math.min(start, s); };
+
+            const active = { cyclosporin: this.fCyclosporin, gemfibrozil: this.fGemfibrozil, cyp3a4: this.fCyp3a4, asian: this.fAsian };
+            Object.keys(active).forEach(key => {
+                if (!active[key]) return;
+                const lim = LIMITS[key][drug];
+                if (!lim || lim.type === 'none') return;
+                const f = FACTORS[key][L];
+                if (lim.type === 'contra') {
+                    status = 'contra';
+                    notes.push(f + ': ' + (vi ? 'chống chỉ định' : 'contraindicated'));
+                } else if (lim.type === 'avoid') {
+                    if (status !== 'contra') status = 'avoid';
+                    notes.push(f + ': ' + (vi ? 'tránh dùng phối hợp' : 'avoid combination'));
+                } else if (lim.type === 'cap') {
+                    setMax(lim.max);
+                    if (lim.start) setStart(lim.start);
+                    notes.push(f + ': ' + (vi ? 'tối đa ' : 'max ') + lim.max + ' mg/' + (vi ? 'ngày' : 'day') + (lim.start ? (vi ? ', khởi đầu ' : ', start ') + lim.start + ' mg' : '') + (lim.onlyNote ? ' (' + lim.onlyNote[L] + ')' : ''));
+                } else if (lim.type === 'caution') {
+                    notes.push(f + ': ' + (vi ? 'tăng nguy cơ bệnh cơ, thận trọng' : 'increased myopathy risk, use caution'));
+                }
+            });
+
+            // Chức năng thận
+            const egfrRaw = parseFloat(this.calcEgfr);
+            const egfr = (this.dialysis && isNaN(egfrRaw)) ? 10 : egfrRaw;
+            if (!isNaN(egfr)) {
+                const sev = egfr < 30;
+                const mod = egfr < 60;
+                if (drug === 'rosuvastatin' && sev) { setStart(5); setMax(10); notes.push(vi ? 'Suy thận nặng: khởi đầu 5 mg, tối đa 10 mg/ngày' : 'Severe renal impairment: start 5 mg, max 10 mg/day'); }
+                if (drug === 'pitavastatin' && (mod || this.dialysis)) { setStart(1); setMax(2); notes.push(vi ? 'Suy thận (eGFR 15–59) hoặc lọc máu: khởi đầu 1 mg, tối đa 2 mg/ngày' : 'Renal impairment (eGFR 15–59) or dialysis: start 1 mg, max 2 mg/day'); }
+                if (drug === 'simvastatin' && sev) { setStart(5); notes.push(vi ? 'Suy thận nặng: khởi đầu 5 mg/ngày (nhãn Mỹ không còn viên 5 mg)' : 'Severe renal impairment: start 5 mg/day (5 mg tablet no longer marketed in US)'); }
+                if (drug === 'pravastatin' && sev) { setStart(10); notes.push(vi ? 'Suy thận nặng: khởi đầu 10 mg/ngày' : 'Severe renal impairment: start 10 mg/day'); }
+                if (drug === 'lovastatin' && sev) { setMax(20); notes.push(vi ? 'ClCr < 30: liều > 20 mg cần cân nhắc kỹ, thận trọng' : 'CrCl < 30: doses > 20 mg need careful consideration'); }
+                if (drug === 'fluvastatin' && sev) { setMax(40); notes.push(vi ? 'Suy thận nặng: chưa nghiên cứu liều > 40 mg, thận trọng' : 'Severe renal impairment: doses > 40 mg not studied, use caution'); }
+                if (drug === 'atorvastatin' && sev) { notes.push(vi ? 'Không cần chỉnh liều theo chức năng thận' : 'No renal dose adjustment required'); }
+            }
+            return { status, max, start, notes };
+        },
+
+        get calc() {
+            const vi = this.lang === 'vi';
+            const drug = this.calcDrug;
+            const dose = parseInt(this.calcDose, 10);
+            const table = LDL[drug];
+            if (!table || table[dose] === undefined) {
+                return { title: '', intensityText: '', intensityClass: 'bg-slate-800 border-slate-700 text-slate-300', pctText: '', checkText: '', checkClass: 'bg-slate-800 border-slate-700 text-slate-300', notes: [], equivalents: [] };
+            }
+            const S = table[dose];
+            const approx = drug === 'pitavastatin' ? '≈' : '';
+            const lvl = intensityOf(drug, dose);
+            const intensityText = lvl === 'high' ? this.u('intHigh') : lvl === 'moderate' ? this.u('intMod') : this.u('intLow');
+            const intensityClass = lvl === 'high' ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+                : lvl === 'moderate' ? 'bg-amber-500/20 text-amber-300 border-amber-500/40'
+                : 'bg-sky-500/20 text-sky-300 border-sky-500/40';
+
+            // Kiểm tra liều hiện tại
+            const ev = this.evaluate(drug);
+            let checkText, checkClass;
+            const bad = 'bg-rose-500/20 border-rose-500/50 text-rose-200';
+            const warn = 'bg-amber-500/10 border-amber-500/30 text-amber-300';
+            const good = 'bg-emerald-500/10 border-emerald-500/30 text-emerald-300';
+            if (ev.status === 'contra') {
+                checkText = vi ? 'CHỐNG CHỈ ĐỊNH với thuốc/yếu tố đã chọn. Cần đổi thuốc.' : 'CONTRAINDICATED with the selected drug/factor. Switch agent.';
+                checkClass = bad;
+            } else if (ev.status === 'avoid') {
+                checkText = vi ? 'Nhãn thuốc khuyến cáo TRÁNH dùng phối hợp này. Cân nhắc đổi thuốc.' : 'The label advises AVOIDING this combination. Consider switching agent.';
+                checkClass = bad;
+            } else if (ev.max !== null && dose > ev.max) {
+                checkText = (vi ? 'VƯỢT giới hạn theo nhãn: tối đa ' : 'EXCEEDS label limit: max ') + ev.max + ' mg/' + (vi ? 'ngày' : 'day') + '.';
+                checkClass = bad;
+            } else if (ev.notes.length > 0) {
+                checkText = vi ? 'Liều hiện tại nằm trong giới hạn, cần lưu ý:' : 'Current dose is within limits; note:';
+                checkClass = warn;
+            } else {
+                checkText = vi ? 'Không có giới hạn đặc biệt theo các yếu tố đã chọn. Nhập eGFR/ClCr hoặc chọn thuốc dùng kèm để kiểm tra thêm.' : 'No special limit for the selected factors. Enter eGFR/CrCl or select co-medications to check further.';
+                checkClass = good;
+            }
+            const notes = ev.notes.slice();
+            if (ev.start !== null && ev.status !== 'contra' && ev.status !== 'avoid') {
+                notes.push((vi ? 'Liều khởi đầu khuyến cáo trong bối cảnh này: ' : 'Recommended starting dose in this context: ') + ev.start + ' mg/' + (vi ? 'ngày' : 'day'));
+            }
+
+            // Liều gần tương đương
+            const equivalents = Object.keys(DOSES).filter(id => id !== drug).map(id => {
+                const e = this.evaluate(id);
+                const base = { id: id, name: NAMES[id], color: EQUIV_STYLE[id] };
+                if (e.status === 'contra' || e.status === 'avoid') {
+                    return Object.assign(base, {
+                        dose: e.status === 'contra' ? this.u('kContra') : this.u('kAvoid'), pct: '—',
+                        border: 'border-rose-500/40', tag: e.notes.join('; '), tagColor: 'text-rose-300'
+                    });
+                }
+                const doses = DOSES[id].filter(d => e.max === null || d <= e.max);
+                if (doses.length === 0) {
+                    return Object.assign(base, { dose: this.u('kNoDose'), pct: '—', border: 'border-rose-500/40', tag: e.notes.join('; '), tagColor: 'text-rose-300' });
+                }
+                let best = doses[0];
+                doses.forEach(d => { if (Math.abs(LDL[id][d] - S) < Math.abs(LDL[id][best] - S)) best = d; });
+                const got = LDL[id][best];
+                const gap = S - got;
+                const ap = id === 'pitavastatin' ? '≈' : '';
+                let tag, tagColor, border;
+                if (gap > 5) { tag = this.u('kShort'); tagColor = 'text-rose-300'; border = 'border-rose-500/40'; }
+                else if (gap > 3) { tag = this.u('kNearLow'); tagColor = 'text-amber-300'; border = 'border-amber-500/40'; }
+                else if (gap < -3) { tag = this.u('kNearHigh'); tagColor = 'text-amber-300'; border = 'border-amber-500/40'; }
+                else { tag = this.u('kMatch'); tagColor = 'text-emerald-300'; border = 'border-slate-700/80'; }
+                if (e.notes.length > 0 && e.max !== null) { tag += ' · ' + (vi ? 'trần ' : 'cap ') + e.max + ' mg'; }
+                return Object.assign(base, { dose: best + ' mg', pct: ap + got + '%', border: border, tag: tag, tagColor: tagColor });
+            });
+
+            return {
+                title: NAMES[drug] + ' ' + dose + ' mg/' + (vi ? 'ngày' : 'day'),
+                intensityText: intensityText,
+                intensityClass: intensityClass,
+                pctText: this.u('expectedLdl') + ': ' + approx + S + '%',
+                checkText: checkText,
+                checkClass: checkClass,
+                notes: notes,
+                equivalents: equivalents
+            };
+        },
+
+        /* ---------- Tư vấn lâm sàng ---------- */
+        scenarioList: [
+            { id: 'ckd', icon: 'fa-solid fa-kidneys', iconBg: 'bg-emerald-500/20 text-emerald-400',
+              title: { vi: 'Bệnh thận mạn nặng / lọc máu', en: 'Severe CKD / dialysis' },
+              short: { vi: 'eGFR < 30 mL/phút/1,73 m² hoặc đang lọc máu', en: 'eGFR < 30 mL/min/1.73 m² or on dialysis' } },
+            { id: 'ddi', icon: 'fa-solid fa-capsules', iconBg: 'bg-amber-500/20 text-amber-400',
+              title: { vi: 'Dùng nhiều thuốc / chất ức chế CYP3A4', en: 'Polypharmacy / CYP3A4 inhibitors' },
+              short: { vi: 'Macrolid, azol kháng nấm, amiodaron, thuốc ức chế protease', en: 'Macrolides, azole antifungals, amiodarone, protease inhibitors' } },
+            { id: 'sams', icon: 'fa-solid fa-person-dots-from-line', iconBg: 'bg-purple-500/20 text-purple-400',
+              title: { vi: 'Triệu chứng cơ liên quan statin (SAMS)', en: 'Statin-associated muscle symptoms (SAMS)' },
+              short: { vi: 'Đau cơ hoặc không dung nạp với statin trước đó', en: 'Myalgia or intolerance on a previous statin' } },
+            { id: 'maxLdl', icon: 'fa-solid fa-arrow-trend-down', iconBg: 'bg-sky-500/20 text-sky-400',
+              title: { vi: 'Cần hạ LDL-C tối đa (hội chứng vành cấp)', en: 'Maximal LDL-C lowering (ACS)' },
+              short: { vi: 'Nguy cơ tim mạch rất cao, cần đạt mục tiêu LDL-C thấp', en: 'Very high cardiovascular risk needing a low LDL-C goal' } },
+            { id: 'timing', icon: 'fa-solid fa-utensils', iconBg: 'bg-indigo-500/20 text-indigo-400',
+              title: { vi: 'Tuân thủ giờ uống và bữa ăn', en: 'Timing and meal adherence' },
+              short: { vi: 'Hay quên liều buổi tối hoặc ăn uống không đều', en: 'Forgets evening doses or irregular meals' } },
+            { id: 'transplant', icon: 'fa-solid fa-syringe', iconBg: 'bg-teal-500/20 text-teal-400',
+              title: { vi: 'Ghép tạng dùng cyclosporin', en: 'Transplant on cyclosporine' },
+              short: { vi: 'Giới hạn liều statin khi dùng thuốc chống thải ghép', en: 'Statin dose limits with anti-rejection therapy' } }
+        ],
+
+        get scenarioData() { return this.scenarios[this.activeScenario]; },
+
+        scenarios: {
+            ckd: {
+                title: { vi: 'Bệnh thận mạn nặng (eGFR < 30 mL/phút/1,73 m²) hoặc đang lọc máu', en: 'Severe chronic kidney disease (eGFR < 30 mL/min/1.73 m²) or on dialysis' },
+                desc: { vi: 'Cần xác định người bệnh có đang lọc máu hay không trước khi quyết định khởi trị statin, sau đó mới chọn hoạt chất và liều.', en: 'Establish whether the patient is on dialysis before deciding to start a statin, then choose agent and dose.' },
+                preferred: { vi: 'Atorvastatin (nếu có chỉ định dùng statin)', en: 'Atorvastatin (when a statin is indicated)' },
+                why: {
+                    vi: 'Nồng độ và hiệu lực hạ LDL-C của atorvastatin không bị bệnh thận ảnh hưởng nên không cần chỉnh liều theo chức năng thận [15]. Đây là ưu điểm dược động học, không phải kết cục lâm sàng so sánh đối đầu giữa các statin.',
+                    en: 'Atorvastatin exposure and LDL-C lowering are unaffected by renal disease, so no renal dose adjustment is needed [15]. This is a pharmacokinetic advantage, not head-to-head clinical outcome evidence.'
+                },
+                points: {
+                    vi: [
+                        'Chưa lọc máu, ≥ 50 tuổi, eGFR < 60: KDIGO 2013 khuyến cáo statin hoặc statin phối hợp ezetimibe [4]. Thử nghiệm SHARP (simvastatin + ezetimibe) giảm biến cố xơ vữa động mạch chính ở bệnh thận mạn [8].',
+                        'Đang lọc máu: KDIGO 2013 đề nghị không khởi trị mới; nếu đã dùng từ trước khi lọc máu thì tiếp tục [4]. Các thử nghiệm 4D (atorvastatin) và AURORA (rosuvastatin) không giảm kết cục tim mạch chính ở nhóm này [6,7].',
+                        'Giới hạn liều theo nhãn khi chức năng thận giảm: rosuvastatin khởi đầu 5 mg, tối đa 10 mg; pitavastatin khởi đầu 1 mg, tối đa 2 mg; simvastatin khởi đầu 5 mg; pravastatin khởi đầu 10 mg; lovastatin > 20 mg và fluvastatin > 40 mg cần thận trọng [10,11,12,13,14,16].',
+                        'Tăng nguy cơ bệnh cơ ở bệnh thận mạn: theo dõi triệu chứng cơ, cân nhắc CK khi có triệu chứng.'
+                    ],
+                    en: [
+                        'Not on dialysis, age ≥ 50, eGFR < 60: KDIGO 2013 recommends a statin or statin plus ezetimibe [4]. SHARP (simvastatin + ezetimibe) reduced major atherosclerotic events in CKD [8].',
+                        'On dialysis: KDIGO 2013 suggests not initiating; continue if already taking before dialysis [4]. 4D (atorvastatin) and AURORA (rosuvastatin) showed no reduction in primary cardiovascular outcomes in this group [6,7].',
+                        'Label limits with reduced renal function: rosuvastatin start 5 mg, max 10 mg; pitavastatin start 1 mg, max 2 mg; simvastatin start 5 mg; pravastatin start 10 mg; lovastatin > 20 mg and fluvastatin > 40 mg require caution [10,11,12,13,14,16].',
+                        'Myopathy risk is higher in CKD: monitor muscle symptoms and consider CK when symptomatic.'
+                    ]
+                },
+                refs: '[4], [6]–[8], [10]–[16]'
+            },
+            ddi: {
+                title: { vi: 'Dùng nhiều thuốc hoặc dùng chất ức chế CYP3A4 / chất vận chuyển', en: 'Polypharmacy or CYP3A4 / transporter inhibitors' },
+                desc: { vi: 'Người bệnh đang dùng macrolid (clarithromycin), azol kháng nấm, amiodaron, thuốc ức chế protease hoặc cyclosporin.', en: 'Patients taking macrolides (clarithromycin), azole antifungals, amiodarone, protease inhibitors or cyclosporine.' },
+                preferred: { vi: 'Pravastatin, rosuvastatin, pitavastatin hoặc fluvastatin (tùy cặp tương tác)', en: 'Pravastatin, rosuvastatin, pitavastatin or fluvastatin (depending on the interacting pair)' },
+                why: {
+                    vi: 'Các statin này ít phụ thuộc CYP3A4 nên giảm nguy cơ tương tác với chất ức chế CYP3A4. Đây là giảm nguy cơ, không phải loại bỏ hoàn toàn: một số cặp tương tác đi qua chất vận chuyển hoặc CYP2C9.',
+                    en: 'These statins depend less on CYP3A4, lowering interaction risk with CYP3A4 inhibitors. This reduces rather than removes risk: some pairs act via transporters or CYP2C9.'
+                },
+                points: {
+                    vi: [
+                        'Simvastatin và lovastatin: chống chỉ định với chất ức chế CYP3A4 mạnh (itraconazol, ketoconazol, clarithromycin, erythromycin, thuốc ức chế protease HIV, cobicistat...) [11,16].',
+                        'Atorvastatin: clarithromycin hoặc itraconazol → tối đa 20 mg; cyclosporin → tránh dùng [15].',
+                        'Amiodaron ức chế CYP3A4 ở mức vừa: simvastatin tối đa 20 mg, lovastatin tối đa 40 mg [11,16].',
+                        'Tương tác qua chất vận chuyển: cyclosporin (rosuvastatin ≤ 5 mg, pravastatin ≤ 20 mg, pitavastatin chống chỉ định), gemfibrozil (rosuvastatin ≤ 10 mg, pitavastatin tránh dùng), rifampicin (pitavastatin ≤ 2 mg), erythromycin (pitavastatin ≤ 1 mg) [10,12,13].',
+                        'Fluvastatin chuyển hóa qua CYP2C9: tránh dùng Lescol XL với fluconazol (ức chế CYP2C9) [14].'
+                    ],
+                    en: [
+                        'Simvastatin and lovastatin: contraindicated with strong CYP3A4 inhibitors (itraconazole, ketoconazole, clarithromycin, erythromycin, HIV protease inhibitors, cobicistat...) [11,16].',
+                        'Atorvastatin: clarithromycin or itraconazole → max 20 mg; cyclosporine → avoid [15].',
+                        'Amiodarone is a moderate CYP3A4 inhibitor: simvastatin max 20 mg, lovastatin max 40 mg [11,16].',
+                        'Transporter-mediated interactions: cyclosporine (rosuvastatin ≤ 5 mg, pravastatin ≤ 20 mg, pitavastatin contraindicated), gemfibrozil (rosuvastatin ≤ 10 mg, pitavastatin avoid), rifampin (pitavastatin ≤ 2 mg), erythromycin (pitavastatin ≤ 1 mg) [10,12,13].',
+                        'Fluvastatin is metabolised by CYP2C9: avoid Lescol XL with fluconazole (CYP2C9 inhibitor) [14].'
+                    ]
+                },
+                refs: '[10]–[16]'
+            },
+            sams: {
+                title: { vi: 'Triệu chứng cơ liên quan statin (SAMS) với statin trước đó', en: 'Statin-associated muscle symptoms (SAMS) on a previous statin' },
+                desc: { vi: 'Người bệnh đau cơ hoặc yếu cơ khi dùng atorvastatin, simvastatin hoặc statin khác.', en: 'Patient with myalgia or weakness on atorvastatin, simvastatin or another statin.' },
+                preferred: { vi: 'Thử lại bằng statin khác hoặc liều thấp: rosuvastatin, pravastatin, pitavastatin hoặc fluvastatin XL', en: 'Rechallenge with a different or lower-dose statin: rosuvastatin, pravastatin, pitavastatin or fluvastatin XL' },
+                why: {
+                    vi: 'Trước khi kết luận không dung nạp, cần loại trừ nguyên nhân thứ phát (suy giáp, thiếu vitamin D, tương tác thuốc, vận động gắng sức, CK). Giả thuyết statin ưa nước ít thấm vào cơ chỉ là cơ chế đề xuất, chưa có đủ bằng chứng lâm sàng so sánh đối đầu để ưu tiên theo tính tan [1,2].',
+                    en: 'Before concluding intolerance, exclude secondary causes (hypothyroidism, vitamin D deficiency, drug interactions, strenuous exercise, CK). The idea that hydrophilic statins penetrate muscle less is a proposed mechanism without sufficient head-to-head clinical evidence to prioritise by solubility [1,2].'
+                },
+                points: {
+                    vi: [
+                        'Ngừng statin đến khi triệu chứng hết, sau đó thử lại liều thấp hoặc statin khác (ACC/AHA 2018, ESC/EAS 2019) [1,2].',
+                        'Có thể dùng cách ngày hoặc 2–3 lần/tuần với statin có thời gian bán thải dài (rosuvastatin, atorvastatin); bằng chứng chủ yếu từ nghiên cứu nhỏ [2].',
+                        'Phối hợp ezetimibe để giảm liều statin; khi không dung nạp hoàn toàn cân nhắc acid bempedoic hoặc thuốc ức chế PCSK9 [2].',
+                        'Người gốc châu Á dùng rosuvastatin: khởi đầu 5 mg [10].'
+                    ],
+                    en: [
+                        'Stop the statin until symptoms resolve, then rechallenge at a lower dose or with a different statin (ACC/AHA 2018, ESC/EAS 2019) [1,2].',
+                        'Alternate-day or 2–3 times weekly dosing is possible with long half-life statins (rosuvastatin, atorvastatin); evidence is mainly from small studies [2].',
+                        'Add ezetimibe to allow lower statin doses; for complete intolerance consider bempedoic acid or PCSK9 inhibitors [2].',
+                        'Asian patients on rosuvastatin: start 5 mg [10].'
+                    ]
+                },
+                refs: '[1], [2], [10]'
+            },
+            maxLdl: {
+                title: { vi: 'Hội chứng vành cấp hoặc nguy cơ rất cao: cần hạ LDL-C tối đa', en: 'Acute coronary syndrome or very high risk: maximal LDL-C lowering' },
+                desc: { vi: 'Người bệnh sau nhồi máu cơ tim hoặc bệnh tim mạch do xơ vữa (ASCVD) nguy cơ rất cao, cần hạ LDL-C sâu.', en: 'Post-myocardial infarction or very high-risk atherosclerotic cardiovascular disease (ASCVD) needing deep LDL-C lowering.' },
+                preferred: { vi: 'Atorvastatin 40–80 mg hoặc rosuvastatin 20–40 mg, phối hợp sớm ezetimibe nếu chưa đạt mục tiêu', en: 'Atorvastatin 40–80 mg or rosuvastatin 20–40 mg, adding ezetimibe early if the goal is not met' },
+                why: {
+                    vi: 'Đây là hai statin duy nhất đạt cường độ cao theo ACC/AHA 2018 (giảm LDL-C ≥ 50%) [1]. Theo Law 2003, ước tính giảm LDL-C: atorvastatin 80 mg ≈ 55%, rosuvastatin 40 mg ≈ 53% [5].',
+                    en: 'These are the only two statins reaching high intensity per ACC/AHA 2018 (LDL-C reduction ≥ 50%) [1]. Law 2003 estimates LDL-C reduction of ≈ 55% for atorvastatin 80 mg and ≈ 53% for rosuvastatin 40 mg [5].'
+                },
+                points: {
+                    vi: [
+                        'Mục tiêu LDL-C khác nhau giữa các khuyến cáo: ESC/EAS 2019 nguy cơ rất cao < 55 mg/dL (1,4 mmol/L) và giảm ≥ 50% so với nền [2]; ACC/AHA 2018 dùng ngưỡng 70 mg/dL để thêm thuốc không statin [1]; ACC ECDP 2022 hạ ngưỡng xuống 55 mg/dL cho nguy cơ rất cao [3].',
+                        'Nếu chưa đạt mục tiêu ở liều statin tối đa dung nạp: thêm ezetimibe 10 mg (IMPROVE-IT) [9], sau đó cân nhắc thuốc ức chế PCSK9 [2,3].',
+                        'Người gốc châu Á: rosuvastatin khởi đầu 5 mg; theo SmPC châu Âu/Úc, 40 mg chống chỉ định ở người châu Á, nên ưu tiên atorvastatin 40–80 mg hoặc rosuvastatin ≤ 20 mg kèm ezetimibe [10].',
+                        'Simvastatin 80 mg không còn được khuyến cáo (FDA 2011): nguy cơ bệnh cơ tăng, lợi ích giảm LDL-C thêm rất ít [11,17].'
+                    ],
+                    en: [
+                        'LDL-C goals differ between guidelines: ESC/EAS 2019 very high risk < 55 mg/dL (1.4 mmol/L) and ≥ 50% reduction from baseline [2]; ACC/AHA 2018 uses a 70 mg/dL threshold to add non-statin therapy [1]; the 2022 ACC ECDP lowers it to 55 mg/dL for very high risk [3].',
+                        'If the goal is not met on maximally tolerated statin: add ezetimibe 10 mg (IMPROVE-IT) [9], then consider PCSK9 inhibitors [2,3].',
+                        'Asian ancestry: start rosuvastatin 5 mg; per EU/AU SmPC 40 mg is contraindicated in Asian patients, so prefer atorvastatin 40–80 mg or rosuvastatin ≤ 20 mg plus ezetimibe [10].',
+                        'Simvastatin 80 mg is no longer recommended (FDA 2011): higher myopathy risk with little added LDL-C lowering [11,17].'
+                    ]
+                },
+                refs: '[1]–[3], [5], [9]–[11], [17]'
+            },
+            timing: {
+                title: { vi: 'Khó tuân thủ giờ uống hoặc bữa ăn tối', en: 'Difficulty with dosing time or evening meals' },
+                desc: { vi: 'Người bệnh hay quên liều buổi tối, làm ca hoặc ăn uống không đều.', en: 'Patients who forget evening doses, work shifts or have irregular meals.' },
+                preferred: { vi: 'Atorvastatin, rosuvastatin, pitavastatin, pravastatin hoặc fluvastatin XL', en: 'Atorvastatin, rosuvastatin, pitavastatin, pravastatin or fluvastatin XL' },
+                why: {
+                    vi: 'Theo nhãn FDA, rosuvastatin [10], pravastatin [13] và fluvastatin XL [14] dùng được bất kỳ lúc nào trong ngày; atorvastatin và pitavastatin có thời gian bán thải dài (≈ 14 và ≈ 12 giờ) nên không phụ thuộc buổi tối.',
+                    en: 'Per FDA labels, rosuvastatin [10], pravastatin [13] and fluvastatin XL [14] can be taken at any time of day; atorvastatin and pitavastatin have long half-lives (≈ 14 and ≈ 12 h) so evening dosing is not required.'
+                },
+                points: {
+                    vi: [
+                        'Simvastatin: nhãn ghi uống buổi tối [11]. Lovastatin dạng giải phóng nhanh: uống cùng bữa ăn tối vì thức ăn tăng hấp thu [16]. Fluvastatin dạng nang giải phóng nhanh: buổi tối [14].',
+                        'Pravastatin có thời gian bán thải ngắn nhưng nhãn hiện hành không yêu cầu uống buổi tối [13].',
+                        'Ưu tiên chọn thời điểm cố định mỗi ngày, gắn với thói quen sẵn có, để cải thiện tuân thủ.'
+                    ],
+                    en: [
+                        'Simvastatin: label states evening dosing [11]. Immediate-release lovastatin: with the evening meal because food increases absorption [16]. Immediate-release fluvastatin capsules: evening [14].',
+                        'Pravastatin has a short half-life, but the current label does not require evening dosing [13].',
+                        'Choose a fixed daily time tied to an existing routine to support adherence.'
+                    ]
+                },
+                refs: '[10], [11], [13], [14], [16]'
+            },
+            transplant: {
+                title: { vi: 'Ghép tạng dùng cyclosporin', en: 'Organ transplant on cyclosporine' },
+                desc: { vi: 'Cyclosporin làm tăng phơi nhiễm statin (ức chế OATP1B1 và CYP3A4), tăng nguy cơ bệnh cơ và tiêu cơ vân.', en: 'Cyclosporine raises statin exposure (OATP1B1 and CYP3A4 inhibition), increasing myopathy and rhabdomyolysis risk.' },
+                preferred: { vi: 'Pravastatin ≤ 20 mg/ngày (khởi đầu 10 mg) hoặc rosuvastatin ≤ 5 mg/ngày', en: 'Pravastatin ≤ 20 mg/day (start 10 mg) or rosuvastatin ≤ 5 mg/day' },
+                why: {
+                    vi: 'Nhãn FDA nêu giới hạn liều tường minh cho hai thuốc này khi dùng cùng cyclosporin; các statin còn lại bị chống chỉ định hoặc khuyến cáo tránh [10,13]. Không có statin nào hoàn toàn không bị ảnh hưởng.',
+                    en: 'FDA labels give explicit dose limits for these two agents with cyclosporine; the other statins are contraindicated or advised to be avoided [10,13]. No statin is entirely unaffected.'
+                },
+                points: {
+                    vi: [
+                        'Pravastatin: khởi đầu 10 mg, tối đa 20 mg [13]. Rosuvastatin: tối đa 5 mg [10].',
+                        'Atorvastatin: nhãn Mỹ hiện hành khuyến cáo tránh (nhãn cũ giới hạn 10 mg) [15]. Fluvastatin XL: tránh dùng (cyclosporin làm tăng AUC fluvastatin khoảng 90%) [14].',
+                        'Simvastatin và pitavastatin: chống chỉ định [11,12]. Lovastatin: tránh dùng [16].',
+                        'Theo dõi sát triệu chứng cơ và CK. Ezetimibe có thể bổ trợ nhưng cần theo dõi nồng độ cyclosporin.'
+                    ],
+                    en: [
+                        'Pravastatin: start 10 mg, max 20 mg [13]. Rosuvastatin: max 5 mg [10].',
+                        'Atorvastatin: current US label advises avoidance (older labels limited to 10 mg) [15]. Fluvastatin XL: avoid (cyclosporine raises fluvastatin AUC by about 90%) [14].',
+                        'Simvastatin and pitavastatin: contraindicated [11,12]. Lovastatin: avoid [16].',
+                        'Monitor closely for muscle symptoms and CK. Ezetimibe may be added but cyclosporine levels need monitoring.'
+                    ]
+                },
+                refs: '[10]–[16]'
+            }
+        },
+
+        /* ---------- Trắc nghiệm ---------- */
+        quizQuestions: [
+            {
+                q: { vi: 'Statin dạng giải phóng nhanh nào nên uống cùng bữa ăn tối vì thức ăn làm tăng hấp thu?', en: 'Which immediate-release statin should be taken with the evening meal because food increases absorption?' },
+                options: [
+                    { vi: 'Atorvastatin', en: 'Atorvastatin' }, { vi: 'Lovastatin', en: 'Lovastatin' },
+                    { vi: 'Rosuvastatin', en: 'Rosuvastatin' }, { vi: 'Pravastatin', en: 'Pravastatin' }
+                ],
+                correct: 1,
+                explanation: { vi: 'Lovastatin (viên giải phóng nhanh) được hấp thu tốt hơn khi uống cùng thức ăn. Pravastatin theo nhãn FDA dùng được bất kỳ lúc nào trong ngày.', en: 'Immediate-release lovastatin is better absorbed with food. Pravastatin may be taken at any time of day per the FDA label.' }
+            },
+            {
+                q: { vi: 'Người bệnh suy thận nặng (eGFR 20 mL/phút). Statin nào không cần chỉnh liều theo chức năng thận?', en: 'Severe renal impairment (eGFR 20 mL/min). Which statin needs no renal dose adjustment?' },
+                options: [
+                    { vi: 'Rosuvastatin', en: 'Rosuvastatin' }, { vi: 'Atorvastatin', en: 'Atorvastatin' },
+                    { vi: 'Pitavastatin', en: 'Pitavastatin' }, { vi: 'Pravastatin', en: 'Pravastatin' }
+                ],
+                correct: 1,
+                explanation: { vi: 'Bệnh thận không ảnh hưởng nồng độ atorvastatin. Rosuvastatin giới hạn tối đa 10 mg, pitavastatin tối đa 2 mg, pravastatin khởi đầu 10 mg.', en: 'Renal disease does not affect atorvastatin exposure. Rosuvastatin is capped at 10 mg, pitavastatin at 2 mg, and pravastatin starts at 10 mg.' }
+            },
+            {
+                q: { vi: 'Hai statin nào đạt cường độ cao (giảm LDL-C ≥ 50%) theo ACC/AHA 2018?', en: 'Which two statins reach high intensity (LDL-C reduction ≥ 50%) per ACC/AHA 2018?' },
+                options: [
+                    { vi: 'Simvastatin 40 mg và atorvastatin 20 mg', en: 'Simvastatin 40 mg and atorvastatin 20 mg' },
+                    { vi: 'Atorvastatin 40–80 mg và rosuvastatin 20–40 mg', en: 'Atorvastatin 40–80 mg and rosuvastatin 20–40 mg' },
+                    { vi: 'Pravastatin 80 mg và fluvastatin 80 mg', en: 'Pravastatin 80 mg and fluvastatin 80 mg' },
+                    { vi: 'Pitavastatin 4 mg và rosuvastatin 10 mg', en: 'Pitavastatin 4 mg and rosuvastatin 10 mg' }
+                ],
+                correct: 1,
+                explanation: { vi: 'Chỉ atorvastatin 40–80 mg và rosuvastatin 20–40 mg được xếp cường độ cao.', en: 'Only atorvastatin 40–80 mg and rosuvastatin 20–40 mg are classed as high intensity.' }
+            },
+            {
+                q: { vi: 'Hai statin nào là tiền thuốc (prodrug), cần thủy phân vòng lactone để có hoạt tính?', en: 'Which two statins are prodrugs requiring lactone ring hydrolysis for activity?' },
+                options: [
+                    { vi: 'Simvastatin và lovastatin', en: 'Simvastatin and lovastatin' },
+                    { vi: 'Atorvastatin và rosuvastatin', en: 'Atorvastatin and rosuvastatin' },
+                    { vi: 'Pravastatin và pitavastatin', en: 'Pravastatin and pitavastatin' },
+                    { vi: 'Fluvastatin và atorvastatin', en: 'Fluvastatin and atorvastatin' }
+                ],
+                correct: 0,
+                explanation: { vi: 'Simvastatin và lovastatin ở dạng lactone không hoạt tính, được thủy phân thành acid hoạt tính ức chế HMG-CoA reductase.', en: 'Simvastatin and lovastatin are inactive lactones hydrolysed to the active acid that inhibits HMG-CoA reductase.' }
+            },
+            {
+                q: { vi: 'Với người gốc châu Á, nhãn FDA khuyến cáo liều khởi đầu rosuvastatin là bao nhiêu?', en: 'In patients of Asian ancestry, what starting dose of rosuvastatin does the FDA label advise?' },
+                options: [
+                    { vi: '5 mg/ngày', en: '5 mg/day' }, { vi: '10 mg/ngày', en: '10 mg/day' },
+                    { vi: '20 mg/ngày', en: '20 mg/day' }, { vi: '40 mg/ngày', en: '40 mg/day' }
+                ],
+                correct: 0,
+                explanation: { vi: 'Phơi nhiễm rosuvastatin ở người châu Á cao hơn nên khởi đầu 5 mg. SmPC châu Âu/Úc còn chống chỉ định liều 40 mg ở nhóm này.', en: 'Rosuvastatin exposure is higher in Asian patients, so start at 5 mg. EU/AU SmPC also contraindicates the 40 mg dose in this group.' }
+            },
+            {
+                q: { vi: 'Liều simvastatin tối đa được khuyến cáo cho người bệnh mới điều trị theo nhãn FDA là?', en: 'What is the maximum recommended simvastatin dose for newly treated patients per the FDA label?' },
+                options: [
+                    { vi: '20 mg/ngày', en: '20 mg/day' }, { vi: '40 mg/ngày', en: '40 mg/day' },
+                    { vi: '80 mg/ngày', en: '80 mg/day' }, { vi: '160 mg/ngày', en: '160 mg/day' }
+                ],
+                correct: 1,
+                explanation: { vi: 'Tối đa 40 mg/ngày. Liều 80 mg chỉ dành cho người đã dùng liên tục ≥ 12 tháng mà không có độc tính cơ.', en: 'Maximum 40 mg/day. The 80 mg dose is restricted to patients already on it ≥ 12 months without muscle toxicity.' }
+            },
+            {
+                q: { vi: 'Khi dùng cùng cyclosporin, hai statin nào bị chống chỉ định theo nhãn FDA?', en: 'With concomitant cyclosporine, which two statins are contraindicated per FDA labels?' },
+                options: [
+                    { vi: 'Simvastatin và pitavastatin', en: 'Simvastatin and pitavastatin' },
+                    { vi: 'Pravastatin và rosuvastatin', en: 'Pravastatin and rosuvastatin' },
+                    { vi: 'Atorvastatin và fluvastatin', en: 'Atorvastatin and fluvastatin' },
+                    { vi: 'Lovastatin và pravastatin', en: 'Lovastatin and pravastatin' }
+                ],
+                correct: 0,
+                explanation: { vi: 'Simvastatin và pitavastatin chống chỉ định. Pravastatin (≤ 20 mg) và rosuvastatin (≤ 5 mg) có giới hạn liều; atorvastatin, lovastatin và fluvastatin XL khuyến cáo tránh dùng.', en: 'Simvastatin and pitavastatin are contraindicated. Pravastatin (≤ 20 mg) and rosuvastatin (≤ 5 mg) carry dose limits; atorvastatin, lovastatin and fluvastatin XL are advised to be avoided.' }
+            },
+            {
+                q: { vi: 'Pitavastatin ở người suy thận trung bình (eGFR 30–59 mL/phút/1,73 m²) theo nhãn FDA?', en: 'Pitavastatin in moderate renal impairment (eGFR 30–59 mL/min/1.73 m²) per the FDA label?' },
+                options: [
+                    { vi: 'Không cần chỉnh liều', en: 'No adjustment needed' },
+                    { vi: 'Khởi đầu 1 mg, tối đa 2 mg/ngày', en: 'Start 1 mg, max 2 mg/day' },
+                    { vi: 'Khởi đầu 2 mg, tối đa 4 mg/ngày', en: 'Start 2 mg, max 4 mg/day' },
+                    { vi: 'Chống chỉ định', en: 'Contraindicated' }
+                ],
+                correct: 1,
+                explanation: { vi: 'Nhãn áp dụng giới hạn 1–2 mg từ eGFR 30–59, cũng như eGFR 15–29 và lọc máu, không chỉ ở suy thận nặng.', en: 'The label applies the 1–2 mg limit from eGFR 30–59 as well as eGFR 15–29 and dialysis, not only severe impairment.' }
+            }
+        ],
+
+        get currentQ() { return this.quizQuestions[Math.min(this.currentQuestionIndex, this.quizQuestions.length - 1)]; },
+
+        answerQuiz(idx) {
+            if (this.quizAnswered) return;
+            this.selectedQuizOption = idx;
+            this.quizAnswered = true;
+            if (idx === this.currentQ.correct) this.quizScore++;
+        },
+        nextQuestion() {
+            this.quizAnswered = false;
+            this.selectedQuizOption = null;
+            this.currentQuestionIndex++;
+        },
+        resetQuiz() {
+            this.currentQuestionIndex = 0;
+            this.quizScore = 0;
+            this.quizAnswered = false;
+            this.selectedQuizOption = null;
+        }
+    };
+}
+
+if (typeof module !== 'undefined') { module.exports = { statinApp, DOSES, LDL, intensityOf }; }
+</script>
+</body>
+</html>

@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đồng Thuận ADA/EASD 2026 - Quản Lý Đái Tháo Đường Típ 2</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        [x-cloak]{display:none!important}
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc; /* Nền sáng Slate-50 */
+            color: #0f172a; /* Chữ tối Slate-900 tương phản cao */
+        }
+        .header-light-gradient {
+            background: linear-gradient(135deg, #065f46 0%, #047857 50%, #0f766e 100%);
+        }
+        .card-light {
+            background-color: #ffffff; /* Thẻ màu trắng tinh khiết */
+            border: 1px solid #e2e8f0;  /* Viền xám nhạt sắc nét */
+            box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.06);
+            transition: all 0.25s ease-in-out;
+        }
+        .card-light:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.12);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-900 antialiased min-h-screen" x-data="diabetesApp()">
+
+    <!-- Header Section (Bright Professional Medical Theme) -->
+    <header class="header-light-gradient border-b border-teal-700/40 pt-8 pb-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden shadow-md">
+        <div class="absolute -right-8 -top-8 opacity-15 text-emerald-100 text-9xl pointer-events-none">
+            <i class="fa-solid fa-notes-medical"></i>
+        </div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- Top Nav Info & Controls -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-emerald-600/50 mb-6">
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-950/80 text-emerald-200 border border-emerald-400/50 shadow-sm">
+                            <i class="fa-solid fa-certificate text-emerald-300"></i> ADA / EASD 2026 Consensus Report
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-teal-950/80 text-teal-200 border border-teal-400/50 shadow-sm">
+                            <i class="fa-solid fa-book-bookmark"></i> Diabetologia DOI: 10.1007/s00125-026-06855-7
+                        </span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight drop-shadow-sm">
+                        <span x-text="lang === 'vi' ? 'QUẢN LÝ ĐÁI THÁO ĐƯỜNG TÍP 2' : 'MANAGEMENT OF TYPE 2 DIABETES'"></span>
+                    </h1>
+                    <p class="text-emerald-100 text-sm sm:text-base mt-1.5 font-medium max-w-3xl leading-relaxed">
+                        <span x-text="lang === 'vi' ? 'Báo cáo đồng thuận ADA/EASD 2026: điều trị cá thể hóa theo nguy cơ tim mạch–thận, bệnh đồng mắc (MASLD) và mục tiêu đường huyết/cân nặng.' : '2026 ADA/EASD Consensus Report: personalised care based on cardio-kidney risk, comorbidities (MASLD) and glycaemic/weight goals.'"></span>
+                    </p>
+                </div>
+
+                <!-- Action Controls -->
+                <div class="flex flex-wrap items-center gap-2 sm:gap-3 shrink-0">
+                    <button @click="toggleLang()" class="flex items-center gap-2 bg-emerald-950/80 hover:bg-emerald-900 text-white px-4 py-2 rounded-xl border border-emerald-400/40 text-sm font-bold shadow-md transition">
+                        <i class="fa-solid fa-globe text-teal-300"></i>
+                        <span x-text="lang === 'vi' ? 'English' : 'Tiếng Việt'"></span>
+                    </button>
+                    <button @click="showFilter = !showFilter" class="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold shadow-md transition"
+                            :class="showFilter ? 'bg-white text-teal-900 border border-white font-extrabold' : 'bg-emerald-950/80 hover:bg-emerald-900 text-white border border-emerald-400/40'">
+                        <i class="fa-solid fa-filter"></i>
+                        <span x-text="lang === 'vi' ? 'Lọc theo Bệnh nhân' : 'Filter Pathway'"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Foundational Treatment Pillars -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Pillar 1: Nutrition & Physical Activity -->
+                <button @click="openPillar('nutrition')" class="bg-white/10 hover:bg-white/20 transition-all duration-200 rounded-xl p-3.5 border border-white/25 shadow-sm flex items-center justify-between gap-3 text-left group cursor-pointer w-full focus:outline-none focus:ring-2 focus:ring-white">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-lg bg-emerald-900/60 group-hover:bg-white group-hover:text-emerald-800 text-emerald-200 flex items-center justify-center text-lg shrink-0 transition-colors">
+                            <i class="fa-solid fa-apple-whole"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <h4 class="font-extrabold text-xs sm:text-sm text-white" x-text="lang === 'vi' ? 'Dinh Dưỡng & Vận Động' : 'Nutrition & Physical Activity'"></h4>
+                                <i class="fa-solid fa-circle-info text-xs text-emerald-200"></i>
+                            </div>
+                            <p class="text-xs text-emerald-100 font-medium" x-text="lang === 'vi' ? 'Dinh dưỡng y khoa cá thể hóa & vận động 24h' : 'Personalized MNT & 24h physical activity'"></p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-extrabold px-2 py-1 bg-white text-emerald-900 rounded-md shrink-0 border border-emerald-200 shadow-sm">
+                        <span x-text="lang === 'vi' ? 'Xem HD' : 'Clinical'"></span>
+                    </span>
+                </button>
+
+                <!-- Pillar 2: DSMES -->
+                <button @click="openPillar('dsmes')" class="bg-white/10 hover:bg-white/20 transition-all duration-200 rounded-xl p-3.5 border border-white/25 shadow-sm flex items-center justify-between gap-3 text-left group cursor-pointer w-full focus:outline-none focus:ring-2 focus:ring-white">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-lg bg-teal-900/60 group-hover:bg-white group-hover:text-teal-800 text-teal-200 flex items-center justify-center text-lg shrink-0 transition-colors">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <h4 class="font-extrabold text-xs sm:text-sm text-white" x-text="lang === 'vi' ? 'Giáo Dục Tự Quản Lý (DSMES)' : 'Diabetes Education (DSMES)'"></h4>
+                                <i class="fa-solid fa-circle-info text-xs text-teal-200"></i>
+                            </div>
+                            <p class="text-xs text-emerald-100 font-medium" x-text="lang === 'vi' ? 'Giáo dục & hỗ trợ tự quản lý liên tục' : 'Diabetes self-management education & support'"></p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-extrabold px-2 py-1 bg-white text-emerald-900 rounded-md shrink-0 border border-emerald-200 shadow-sm">
+                        <span x-text="lang === 'vi' ? 'Xem HD' : 'Clinical'"></span>
+                    </span>
+                </button>
+
+                <!-- Pillar 3: SDOH -->
+                <button @click="openPillar('sdoh')" class="bg-white/10 hover:bg-white/20 transition-all duration-200 rounded-xl p-3.5 border border-white/25 shadow-sm flex items-center justify-between gap-3 text-left group cursor-pointer w-full focus:outline-none focus:ring-2 focus:ring-white">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-lg bg-emerald-900/60 group-hover:bg-white group-hover:text-emerald-800 text-emerald-200 flex items-center justify-center text-lg shrink-0 transition-colors">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <h4 class="font-extrabold text-xs sm:text-sm text-white" x-text="lang === 'vi' ? 'Yếu Tố Xã Hội (SDOH)' : 'Social Factors (SDOH)'"></h4>
+                                <i class="fa-solid fa-circle-info text-xs text-emerald-200"></i>
+                            </div>
+                            <p class="text-xs text-emerald-100 font-medium" x-text="lang === 'vi' ? 'Đánh giá & giải quyết rào cản xã hội' : 'Address social determinants of health'"></p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-extrabold px-2 py-1 bg-white text-emerald-900 rounded-md shrink-0 border border-emerald-200 shadow-sm">
+                        <span x-text="lang === 'vi' ? 'Xem HD' : 'Clinical'"></span>
+                    </span>
+                </button>
+
+                <!-- Pillar 4: Regular Reassessment -->
+                <button @click="openPillar('reassessment')" class="bg-white/10 hover:bg-white/20 transition-all duration-200 rounded-xl p-3.5 border border-white/25 shadow-sm flex items-center justify-between gap-3 text-left group cursor-pointer w-full focus:outline-none focus:ring-2 focus:ring-white">
+                    <div class="flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-lg bg-teal-900/60 group-hover:bg-white group-hover:text-teal-800 text-teal-200 flex items-center justify-center text-lg shrink-0 transition-colors">
+                            <i class="fa-solid fa-arrows-rotate"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1.5">
+                                <h4 class="font-extrabold text-xs sm:text-sm text-white" x-text="lang === 'vi' ? 'Tái Đánh Giá Định Kỳ' : 'Regular Reassessment'"></h4>
+                                <i class="fa-solid fa-circle-info text-xs text-teal-200"></i>
+                            </div>
+                            <p class="text-xs text-emerald-100 font-medium" x-text="lang === 'vi' ? 'Rà soát định kỳ, tránh therapeutic inertia' : 'Regular review, avoid therapeutic inertia'"></p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-extrabold px-2 py-1 bg-white text-emerald-900 rounded-md shrink-0 border border-emerald-200 shadow-sm">
+                        <span x-text="lang === 'vi' ? 'Xem HD' : 'Clinical'"></span>
+                    </span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Interactive Patient Selector Banner (Light Aesthetic) -->
+    <section x-show="showFilter" x-transition class="bg-slate-200/80 border-b border-slate-300 py-3.5 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-extrabold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                    <i class="fa-solid fa-sliders text-teal-700"></i> <span x-text="lang === 'vi' ? 'Chọn đặc điểm lâm sàng bệnh nhân để làm nổi bật phác đồ tương ứng:' : 'Select clinical patient profiles to highlight pathway:'"></span>
+                </span>
+                <button @click="resetFilter()" class="text-xs text-teal-800 hover:text-teal-900 font-extrabold underline">
+                    <span x-text="lang === 'vi' ? 'Xem tất cả' : 'Show All'"></span>
+                </button>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <template x-for="filter in filters" :key="filter.id">
+                    <button @click="activeFilter = (activeFilter === filter.id ? null : filter.id)"
+                            :class="activeFilter === filter.id ? 'bg-teal-700 text-white font-extrabold shadow ring-2 ring-teal-500 border border-teal-600' : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-300 font-bold'"
+                            class="px-3.5 py-1.5 rounded-lg text-xs flex items-center gap-2 transition duration-200 shadow-sm">
+                        <i :class="filter.icon"></i>
+                        <span x-text="lang === 'vi' ? filter.labelVi : filter.labelEn"></span>
+                    </button>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Body -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- Core Goal Banner -->
+        <div class="bg-gradient-to-r from-rose-800 via-rose-700 to-red-800 text-white rounded-2xl p-5 shadow-lg border border-rose-600 mb-8 text-center relative overflow-hidden">
+            <div class="relative z-10">
+                <h2 class="text-lg sm:text-xl font-black uppercase tracking-wide flex items-center justify-center gap-2 text-rose-100">
+                    <i class="fa-solid fa-bullseye text-amber-300 text-xl"></i>
+                    <span x-text="lang === 'vi' ? 'MỤC TIÊU CỐT LÕI: PHÒNG NGỪA BIẾN CHỨNG DÀI HẠN Ở BỆNH NHÂN ĐÁI THÁO ĐƯỜNG TÍP 2' : 'CORE GOAL: PREVENT LONGITUDINAL COMPLICATIONS IN TYPE 2 DIABETES'"></span>
+                </h2>
+                <p class="text-rose-50 text-xs sm:text-sm mt-2 font-medium max-w-4xl mx-auto leading-relaxed">
+                    <span x-text="lang === 'vi' ? 'Cân nhắc SGLT2i và/hoặc liệu pháp GLP-1 (GLP-1 RA, tirzepatide) từ sớm, có thể ngay khi chẩn đoán và độc lập với metformin, để bảo vệ tim mạch–thận và đạt mục tiêu HbA1c/cân nặng.' : 'Consider SGLT2i and/or GLP-1-based therapy (GLP-1 RA, tirzepatide) early, potentially from diagnosis and independent of metformin, for cardio-kidney protection and HbA1c/weight goals.'"></span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Treatment Targets (Light Card Grid) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="card-light rounded-2xl p-4 border-t-4 border-purple-600">
+                <p class="text-xs font-black uppercase tracking-wider text-purple-700" x-text="lang === 'vi' ? 'HbA1c' : 'HbA1c'"></p>
+                <p class="text-xl font-black text-slate-900 mt-1">48–53 mmol/mol <span class="text-purple-800 text-base font-extrabold">(6,5–7%)</span></p>
+                <p class="text-xs text-slate-600 font-medium mt-2 leading-relaxed" x-text="lang === 'vi' ? '≤48 mmol/mol (6,5%) nếu chỉ dùng lối sống/thuốc không gây hạ glucose máu hoặc khởi phát sớm (<40 tuổi). Nới lỏng mục tiêu khi thời gian sống kỳ vọng hạn chế, có biến chứng tiến triển hoặc thể trạng yếu (frailty).' : '≤48 mmol/mol (6.5%) if lifestyle-only, non-hypoglycaemic drugs, or early-onset (<40 y). Relax targets if limited life expectancy, advanced complications or frailty.'"></p>
+            </div>
+            <div class="card-light rounded-2xl p-4 border-t-4 border-teal-600">
+                <p class="text-xs font-black uppercase tracking-wider text-teal-700" x-text="lang === 'vi' ? 'CGM' : 'CGM'"></p>
+                <p class="text-xl font-black text-slate-900 mt-1">TIR >70%</p>
+                <p class="text-xs text-slate-600 font-medium mt-2 leading-relaxed" x-text="lang === 'vi' ? 'Time in range 3,9–10,0 mmol/L (70–180 mg/dL); time in tight range 3,9–7,8 mmol/L nếu đạt được an toàn.' : 'Time in range 3.9–10.0 mmol/L (70–180 mg/dL); time in tight range 3.9–7.8 mmol/L if achievable safely.'"></p>
+            </div>
+            <div class="card-light rounded-2xl p-4 border-t-4 border-rose-600">
+                <p class="text-xs font-black uppercase tracking-wider text-rose-700" x-text="lang === 'vi' ? 'Huyết áp' : 'Blood pressure'"></p>
+                <p class="text-xl font-black text-slate-900 mt-1"><130/80 mmHg</p>
+                <p class="text-xs text-slate-600 font-medium mt-2 leading-relaxed" x-text="lang === 'vi' ? 'Huyết áp tâm thu <120 mmHg ở người nguy cơ tim mạch hoặc thận cao.' : 'Systolic <120 mmHg in people at high cardiovascular or kidney risk.'"></p>
+            </div>
+            <div class="card-light rounded-2xl p-4 border-t-4 border-amber-600">
+                <p class="text-xs font-black uppercase tracking-wider text-amber-700" x-text="lang === 'vi' ? 'LDL-C' : 'LDL-C'"></p>
+                <p class="text-xl font-black text-slate-900 mt-1">Statin <span class="text-amber-800 text-sm font-extrabold">nếu >40 tuổi</span></p>
+                <p class="text-xs text-slate-600 font-medium mt-2 leading-relaxed" x-text="lang === 'vi' ? 'Thêm ezetimibe hoặc PCSK9i nếu LDL-C ≥1,8 mmol/L (70 mg/dL) dù đã dùng statin tối đa dung nạp. ESC: <1,4 mmol/L (55 mg/dL) ở nguy cơ rất cao.' : 'Add ezetimibe or a PCSK9 inhibitor if LDL-C ≥1.8 mmol/L (70 mg/dL) on maximally tolerated statin. ESC: <1.4 mmol/L (55 mg/dL) at very high risk.'"></p>
+            </div>
+        </div>
+
+        <div class="mb-5 text-center">
+            <span class="inline-block bg-white text-teal-800 text-xs sm:text-sm font-extrabold uppercase tracking-widest px-5 py-2 rounded-full border border-teal-300 shadow-sm">
+                <i class="fa-solid fa-user-doctor text-teal-700 mr-2"></i> <span x-text="lang === 'vi' ? 'CÁ THỂ HÓA TIẾP CẬN ĐIỀU TRỊ LÂM SÀNG' : 'PERSONALIZED CLINICAL MANAGEMENT PATHWAYS'"></span>
+            </span>
+        </div>
+
+        <!-- Pathways Grid (Light Theme Cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+
+            <!-- Column 1: Glycaemic Goals -->
+            <div class="card-light rounded-2xl flex flex-col"
+                 :class="{'ring-2 ring-purple-500 shadow-xl scale-[1.01]': activeFilter === 'glycaemic', 'opacity-40': activeFilter !== null && activeFilter !== 'glycaemic'}">
+                <div class="bg-purple-700 border-b border-purple-800 p-3.5 rounded-t-2xl">
+                    <div class="flex items-center gap-2 text-white font-extrabold text-sm">
+                        <i class="fa-solid fa-chart-line text-lg text-purple-200"></i>
+                        <h3 x-text="lang === 'vi' ? 'Mục Tiêu Đường Huyết' : 'Glycaemic Goals'"></h3>
+                    </div>
+                </div>
+                <div class="p-3.5 space-y-3 flex-1 text-xs">
+                    <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200">
+                        <p class="text-purple-900 font-semibold" x-text="lang === 'vi' ? 'Kế hoạch điều trị đảm bảo HIỆU QUẢ HẠ GLUCOSE MÁU đủ mạnh để đạt & duy trì mục tiêu HbA1c cá thể hóa.' : 'Treatment plan providing adequate GLUCOSE-LOWERING EFFICACY to achieve and maintain personalized HbA1c targets.'"></p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 mb-2 border-b border-slate-200 pb-1" x-text="lang === 'vi' ? 'Phân Cấp Hiệu Quả Hạ Glucose Máu' : 'Glucose-Lowering Efficacy'"></h4>
+                        
+                        <div class="space-y-2">
+                            <div class="bg-purple-100/70 p-2 rounded-lg border border-purple-200">
+                                <span class="font-black text-purple-900 block mb-0.5" x-text="lang === 'vi' ? 'Rất Cao (Very High):' : 'Very High:'"></span>
+                                <p class="text-slate-800 font-medium">Tirzepatide, Semaglutide (tiêm/uống), Dulaglutide (liều cao), Insulin, Phối hợp nhiều nhóm thuốc</p>
+                            </div>
+
+                            <div class="bg-slate-100 p-2 rounded-lg border border-slate-200">
+                                <span class="font-bold text-purple-800 block mb-0.5" x-text="lang === 'vi' ? 'Cao (High):' : 'High:'"></span>
+                                <p class="text-slate-700 font-medium">GLP-1 RA khác, Metformin, Pioglitazone, SGLT2i, Sulfonylureas</p>
+                            </div>
+
+                            <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                                <span class="font-bold text-slate-600 block mb-0.5" x-text="lang === 'vi' ? 'Trung Bình (Intermediate):' : 'Intermediate:'"></span>
+                                <p class="text-slate-600 font-medium">DPP-4i</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 text-amber-900 text-xs font-medium">
+                        <i class="fa-solid fa-bell text-amber-600 mr-1"></i>
+                        <span x-text="lang === 'vi' ? 'Mục tiêu HbA1c khoảng 48–53 mmol/mol (6,5–7%) hoặc thấp hơn; TIR >70% (3,9–10,0 mmol/L). Cân nhắc CGM, đặc biệt ở người dùng insulin.' : 'HbA1c target ~48–53 mmol/mol (6.5–7%) or lower; TIR >70% (3.9–10.0 mmol/L). Consider CGM, especially in insulin users.'"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2: Weight Management -->
+            <div class="card-light rounded-2xl flex flex-col"
+                 :class="{'ring-2 ring-orange-500 shadow-xl scale-[1.01]': activeFilter === 'weight', 'opacity-40': activeFilter !== null && activeFilter !== 'weight'}">
+                <div class="bg-orange-600 border-b border-orange-700 p-3.5 rounded-t-2xl">
+                    <div class="flex items-center gap-2 text-white font-extrabold text-sm">
+                        <i class="fa-solid fa-weight-scale text-lg text-orange-200"></i>
+                        <h3 x-text="lang === 'vi' ? 'Quản Lý Cân Nặng' : 'Weight Management'"></h3>
+                    </div>
+                </div>
+                <div class="p-3.5 space-y-3 flex-1 text-xs">
+                    <div class="bg-orange-50 p-2.5 rounded-xl border border-orange-200">
+                        <p class="text-orange-950 font-semibold" x-text="lang === 'vi' ? 'Đặt mục tiêu giảm cân cụ thể. Thay đổi lối sống + Chương trình quản lý cân nặng có cấu trúc.' : 'Set clear weight loss targets. General lifestyle + Structured weight management program.'"></p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-1.5 text-xs">
+                        <span class="bg-orange-100 text-orange-900 border border-orange-300 p-1.5 rounded text-center font-extrabold" x-text="lang === 'vi' ? 'Thuốc giảm cân' : 'Weight Meds'"></span>
+                        <span class="bg-orange-100 text-orange-900 border border-orange-300 p-1.5 rounded text-center font-extrabold" x-text="lang === 'vi' ? 'Phẫu thuật' : 'Surgery'"></span>
+                    </div>
+                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-medium leading-relaxed" x-text="lang === 'vi' ? 'Ưu tiên thuốc hạ glucose có tác dụng giảm cân khi thừa cân/béo phì. Phẫu thuật chuyển hóa: có thể cân nhắc khi BMI ≥30 kg/m² (≥27,5 ở người gốc Á), nên cân nhắc khi BMI ≥35 (≥32,5 ở người gốc Á). Cần duy trì cân nặng vì ngừng liệu pháp GLP-1 gây tăng cân trở lại.' : 'Prefer glucose-lowering drugs that reduce weight in overweight/obesity. Metabolic surgery: may be considered at BMI ≥30 kg/m² (≥27.5 in Asian ancestry), should be considered at BMI ≥35 (≥32.5). Plan weight maintenance, as weight regain follows stopping GLP-1-based therapy.'"></div>
+
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 mb-2 border-b border-slate-200 pb-1" x-text="lang === 'vi' ? 'Hiệu Quả Giảm Cân Ở T2D' : 'Weight Loss Efficacy in T2D'"></h4>
+                        
+                        <div class="space-y-2">
+                            <div class="bg-orange-100/70 p-2 rounded-lg border border-orange-200">
+                                <span class="font-black text-orange-900 block mb-0.5" x-text="lang === 'vi' ? 'Rất Cao (Very High):' : 'Very High:'"></span>
+                                <p class="text-slate-800 font-medium">Tirzepatide, Semaglutide (liều cao)</p>
+                            </div>
+
+                            <div class="bg-slate-100 p-2 rounded-lg border border-slate-200">
+                                <span class="font-bold text-orange-800 block mb-0.5" x-text="lang === 'vi' ? 'Cao (High):' : 'High:'"></span>
+                                <p class="text-slate-700 font-medium">Dulaglutide, Liraglutide</p>
+                            </div>
+
+                            <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                                <span class="font-bold text-slate-700 block mb-0.5" x-text="lang === 'vi' ? 'Trung Bình (Intermediate):' : 'Intermediate:'"></span>
+                                <p class="text-slate-600 font-medium">GLP-1 RA khác, SGLT2i</p>
+                            </div>
+
+                            <div class="bg-slate-50/80 p-2 rounded-lg border border-slate-200">
+                                <span class="font-bold text-slate-600 block mb-0.5" x-text="lang === 'vi' ? 'Trung Tính (Neutral):' : 'Neutral:'"></span>
+                                <p class="text-slate-600 font-medium">Metformin, DPP-4i</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 3: ASCVD -->
+            <div class="card-light rounded-2xl flex flex-col"
+                 :class="{'ring-2 ring-rose-500 shadow-xl scale-[1.01]': activeFilter === 'ascvd', 'opacity-40': activeFilter !== null && activeFilter !== 'ascvd'}">
+                <div class="bg-rose-700 border-b border-rose-800 p-3.5 rounded-t-2xl">
+                    <div class="flex items-center gap-2 text-white font-extrabold text-sm">
+                        <i class="fa-solid fa-heart-crack text-lg text-rose-200"></i>
+                        <h3 x-text="lang === 'vi' ? '+ Bệnh Tim Mạch Do Xơ Vữa' : '+ ASCVD / CVD Risk'"></h3>
+                    </div>
+                </div>
+                <div class="p-3.5 space-y-3 flex-1 text-xs">
+                    <div class="bg-rose-50 p-3 rounded-xl border border-rose-200 text-rose-950">
+                        <p class="font-black mb-1.5 text-rose-900 text-xs" x-text="lang === 'vi' ? 'Đã có ASCVD (hoặc nhiều yếu tố nguy cơ):' : 'Established ASCVD or High CVD Risk:'"></p>
+                        <ul class="space-y-1.5 text-slate-800 font-semibold">
+                            <li class="flex items-start gap-1.5">
+                                <i class="fa-solid fa-circle-check text-rose-600 mt-0.5 shrink-0"></i>
+                                <span><strong class="text-rose-900">GLP-1 RA</strong> <span x-text="lang === 'vi' ? 'có chứng minh lợi ích tim mạch' : 'with proven CVD benefit'"></span></span>
+                            </li>
+                            <li class="text-center font-extrabold text-slate-500 my-0.5" x-text="lang === 'vi' ? 'HOẶC / VÀ' : 'AND / OR'"></li>
+                            <li class="flex items-start gap-1.5">
+                                <i class="fa-solid fa-circle-check text-rose-600 mt-0.5 shrink-0"></i>
+                                <span><strong class="text-rose-900">SGLT2i</strong> <span x-text="lang === 'vi' ? 'có chứng minh lợi ích tim mạch' : 'with proven CVD benefit'"></span></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-700 font-medium">
+                        <p x-text="lang === 'vi' ? 'Có thể phối hợp cả hai nhóm khi nguy cơ cao hoặc đã có bệnh tim–thận, bất kể HbA1c. Không cần dùng metformin trước.' : 'Combination can be considered in high risk or established cardio-kidney disease irrespective of HbA1c. Metformin is not required first.'" class="leading-relaxed"></p>
+                        <div class="mt-2 pt-2 border-t border-slate-200 text-xs font-bold text-rose-800" x-text="lang === 'vi' ? 'Bệnh động mạch ngoại biên: semaglutide cải thiện triệu chứng.' : 'Peripheral artery disease: semaglutide can improve symptoms.'"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 4: CKD -->
+            <div class="card-light rounded-2xl flex flex-col"
+                 :class="{'ring-2 ring-indigo-500 shadow-xl scale-[1.01]': activeFilter === 'ckd', 'opacity-40': activeFilter !== null && activeFilter !== 'ckd'}">
+                <div class="bg-indigo-700 border-b border-indigo-800 p-3.5 rounded-t-2xl">
+                    <div class="flex items-center gap-2 text-white font-extrabold text-sm">
+                        <i class="fa-solid fa-kidney text-lg text-indigo-200"></i>
+                        <h3 x-text="lang === 'vi' ? '+ Bệnh Thận Mạn (CKD)' : '+ Chronic Kidney Disease'"></h3>
+                    </div>
+                </div>
+                <div class="p-3.5 space-y-3 flex-1 text-xs">
+                    <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-200 text-indigo-950">
+                        <p class="font-extrabold mb-1 text-indigo-900 text-xs" x-text="lang === 'vi' ? 'Bệnh Thận Mạn (eGFR < 60 hoặc Albumin niệu):' : 'Established CKD (eGFR < 60 or Albuminuria):'"></p>
+                        
+                        <div class="p-2.5 bg-white rounded-lg border border-indigo-300 shadow-sm my-2">
+                            <strong class="text-indigo-900 block text-xs mb-0.5" x-text="lang === 'vi' ? 'Ưu Tiên Hàng Đầu:' : 'Primary Recommendation:'"></strong>
+                            <p class="text-indigo-700 font-black text-base"><i class="fa-solid fa-star text-amber-500 mr-1"></i> SGLT2i</p>
+                            <p class="text-xs text-slate-700 mt-0.5 font-medium" x-text="lang === 'vi' ? 'Làm chậm tiến triển bệnh thận mạn & giảm biến cố tim mạch' : 'Proven reduction in CKD progression & CV events'"></p>
+                        </div>
+                        
+                        <p class="text-slate-800 font-medium" x-text="lang === 'vi' ? 'Thêm liệu pháp GLP-1 có bằng chứng (semaglutide được chỉ định làm chậm tiến triển CKD).' : 'Add GLP-1-based therapy with proven benefit (semaglutide is indicated to slow CKD progression).'"></p>
+                    </div>
+
+                    <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-slate-700 font-medium">
+                        <p x-text="lang === 'vi' ? 'Khi UACR >3,0 mg/mmol (>30 mg/g) và eGFR >25 mL/phút/1,73 m²: thêm MRA không steroid (finerenone). Metformin: không dùng nếu eGFR <30; cân nhắc giảm liều nếu <45.' : 'If UACR >3.0 mg/mmol (>30 mg/g) and eGFR >25: add a non-steroidal MRA (finerenone). Metformin: avoid if eGFR <30; consider dose reduction if <45.'" class="text-xs leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 5: Heart Failure -->
+            <div class="card-light rounded-2xl flex flex-col"
+                 :class="{'ring-2 ring-sky-500 shadow-xl scale-[1.01]': activeFilter === 'hf', 'opacity-40': activeFilter !== null && activeFilter !== 'hf'}">
+                <div class="bg-sky-700 border-b border-sky-800 p-3.5 rounded-t-2xl">
+                    <div class="flex items-center gap-2 text-white font-extrabold text-sm">
+                        <i class="fa-solid fa-heart-pulse text-lg text-sky-200"></i>
+                        <h3 x-text="lang === 'vi' ? '+ Suy Tim (Heart Failure)' : '+ Heart Failure (HF)'"></h3>
+                    </div>
+                </div>
+                <div class="p-3.5 space-y-3 flex-1 text-xs">
+                    <div class="bg-sky-50 p-3 rounded-xl border border-sky-200">
+                        <p class="font-extrabold text-sky-900 mb-1 text-xs" x-text="lang === 'vi' ? 'Suy tim HFrEF hoặc HFpEF:' : 'HFrEF or HFpEF:'"></p>
+                        <div class="p-2.5 bg-white rounded-lg border border-sky-300 text-center shadow-sm">
+                            <span class="font-black text-sky-700 text-lg block">SGLT2i</span>
+                            <span class="text-xs text-slate-700 font-semibold" x-text="lang === 'vi' ? 'Bằng chứng lâm sàng giảm nhập viện do suy tim & tử vong tim mạch' : 'Proven reduction in HF hospitalization & CV death'"></span>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+                        <p class="font-extrabold text-sky-900 mb-1 text-xs" x-text="lang === 'vi' ? 'HFpEF kèm Béo Phì:' : 'HFpEF and Obesity:'"></p>
+                        <p class="text-slate-800 font-medium leading-relaxed">
+                            <strong class="text-slate-900">Semaglutide</strong> <span x-text="lang === 'vi' ? 'hoặc' : 'or'"></span> <strong class="text-slate-900">Tirzepatide</strong> <span x-text="lang === 'vi' ? 'để cải thiện triệu chứng suy tim.' : 'to improve HF symptoms.'"></span><br><strong>MRA</strong> <span x-text="lang === 'vi' ? 'không steroid (finerenone) cho HFpEF/HFmrEF; thận trọng pioglitazone.' : 'non-steroidal (finerenone) for HFpEF/HFmrEF; caution with pioglitazone.'"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 6: MASLD / MASH -->
+            <div class="card-light rounded-2xl flex flex-col"
+                 :class="{'ring-2 ring-emerald-500 shadow-xl scale-[1.01]': activeFilter === 'masld', 'opacity-40': activeFilter !== null && activeFilter !== 'masld'}">
+                <div class="bg-emerald-700 border-b border-emerald-800 p-3.5 rounded-t-2xl">
+                    <div class="flex items-center gap-2 text-white font-extrabold text-sm">
+                        <i class="fa-solid fa-liver text-lg text-emerald-200"></i>
+                        <h3 x-text="lang === 'vi' ? '+ Gan Nhiễm Mỡ MASLD/MASH' : '+ MASLD / MASH'"></h3>
+                    </div>
+                </div>
+                <div class="p-3.5 space-y-3 flex-1 text-xs">
+                    <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                        <p class="font-extrabold text-emerald-950 mb-2 text-xs" x-text="lang === 'vi' ? 'Thuốc ưu tiên trong MASLD / MASH:' : 'Preferred agents in MASLD / MASH:'"></p>
+                        <ul class="space-y-2 text-slate-800 font-bold">
+                            <li class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-square-check text-emerald-600 text-sm"></i> GLP-1 RA / Tirzepatide (semaglutide: dữ liệu mạnh nhất)
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-square-check text-emerald-600 text-sm"></i> Pioglitazone
+                            </li>
+                            <li class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-square-check text-emerald-600 text-sm"></i> Resmetirom (F2–F3: chuyển hepatologist)
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-rose-50 p-2.5 rounded-xl border border-rose-200 text-rose-950 text-xs font-medium leading-relaxed">
+                        <i class="fa-solid fa-triangle-exclamation text-rose-600 mr-1"></i>
+                        <span x-text="lang === 'vi' ? 'Xơ gan mất bù: ưu tiên insulin. SGLT2i tiếp tục vì lợi ích khác, không chọn chủ yếu để điều trị gan.' : 'Decompensated cirrhosis: prefer insulin. Continue SGLT2i for other benefits, not primarily for liver disease.'"></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Continuous Review Footer Bar -->
+        <div class="mt-8 bg-gradient-to-r from-teal-800 via-teal-900 to-slate-900 text-white rounded-2xl p-5 shadow-lg border border-teal-700">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-xl bg-white/10 border border-white/20 text-teal-200 flex items-center justify-center text-2xl shrink-0">
+                        <i class="fa-solid fa-rotate"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-black text-sm sm:text-base text-teal-200" x-text="lang === 'vi' ? 'RÀ SOÁT LIÊN TỤC VÀ ĐIỀU CHỈNH MỤC TIÊU CÁ THỂ HÓA' : 'ITERATIVE REVIEW OF PERSONALISED CARE GOALS'"></h4>
+                        <p class="text-xs sm:text-sm text-slate-100 font-medium mt-0.5" x-text="lang === 'vi' ? 'Đánh giá định kỳ đường huyết, cân nặng, chức năng Tim-Thận-Gan và sự tuân thủ điều trị của bệnh nhân để tối ưu hóa phác đồ kịp thời.' : 'Reassess glycaemia, weight, cardio-renal-hepatic status, and adherence periodically to optimize therapy.'"></p>
+                    </div>
+                </div>
+                <div class="shrink-0 text-center">
+                    <span class="inline-block bg-white text-slate-950 font-black text-xs px-4 py-2 rounded-xl uppercase tracking-wider shadow">
+                        <i class="fa-solid fa-heart text-rose-600 mr-1.5"></i> Person-Centred Care
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drug Classes Comparison Quick Table (Light Aesthetic) -->
+        <section class="mt-10 bg-white rounded-2xl card-light p-6 shadow-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-200">
+                <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-table text-teal-700"></i>
+                    <span x-text="lang === 'vi' ? 'Bảng Tra Cứu Đặc Tính Các Nhóm Thuốc Điều Trị Đái Tháo Đường Típ 2 (ADA/EASD 2026)' : 'Summary of Major T2D Drug Classes (ADA/EASD 2026 Guidelines)'"></span>
+                </h3>
+                <span class="text-xs text-slate-500 font-semibold" x-text="lang === 'vi' ? '* Dựa trên bằng chứng từ các thử nghiệm lâm sàng ngẫu nhiên đối chứng (RCTs)' : '* Based on evidence from randomized controlled trials (RCTs)'"></span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-800 uppercase tracking-wider font-black border-b-2 border-slate-300">
+                            <th class="p-3" x-text="lang === 'vi' ? 'Nhóm Thuốc' : 'Drug Class'"></th>
+                            <th class="p-3" x-text="lang === 'vi' ? 'Hoạt Chất Tiêu Biểu' : 'Representative Agents'"></th>
+                            <th class="p-3" x-text="lang === 'vi' ? 'Tim Mạch – Thận' : 'Cardio-Kidney Effect'"></th>
+                            <th class="p-3" x-text="lang === 'vi' ? 'Cân Nặng †' : 'Weight †'"></th>
+                            <th class="p-3" x-text="lang === 'vi' ? 'Hạ Glucose Máu †' : 'Hypoglycaemia †'"></th>
+                            <th class="p-3" x-text="lang === 'vi' ? 'Lưu Ý An Toàn' : 'Safety Notes'"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 text-slate-800 font-medium">
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="p-3 font-black text-teal-700">SGLT2i</td>
+                            <td class="p-3 font-semibold text-slate-900">Empagliflozin, Dapagliflozin, Canagliflozin</td>
+                            <td class="p-3">Giảm MACE, nhập viện do suy tim, tiến triển CKD</td>
+                            <td class="p-3">Giảm</td>
+                            <td class="p-3">Thấp</td>
+                            <td class="p-3 text-slate-600">Nhiễm nấm sinh dục; DKA hiếm (kể cả euglycaemic); hiệu quả hạ glucose giảm khi eGFR thấp</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="p-3 font-black text-rose-700">GLP-1 RA</td>
+                            <td class="p-3 font-semibold text-slate-900">Semaglutide, Liraglutide, Dulaglutide</td>
+                            <td class="p-3">Giảm MACE; semaglutide làm chậm tiến triển CKD và cải thiện triệu chứng HFpEF</td>
+                            <td class="p-3">Giảm (semaglutide mạnh nhất)</td>
+                            <td class="p-3">Thấp</td>
+                            <td class="p-3 text-slate-600">Tiêu hóa; biến cố túi mật–đường mật; chống chỉ định khi có tiền sử ung thư tuyến giáp thể tủy hoặc MEN2; theo dõi võng mạc</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="p-3 font-black text-amber-700">Đồng vận GLP-1/GIP</td>
+                            <td class="p-3 font-semibold text-slate-900">Tirzepatide</td>
+                            <td class="p-3">Không thua kém dulaglutide về MACE (SURPASS-CVOT); được phê duyệt giảm MACE ở nguy cơ cao</td>
+                            <td class="p-3">Giảm rất mạnh</td>
+                            <td class="p-3">Thấp</td>
+                            <td class="p-3 text-slate-600">Tác dụng phụ tiêu hóa nhiều hơn dulaglutide; lưu ý khác như GLP-1 RA</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="p-3 font-black text-sky-700">Metformin</td>
+                            <td class="p-3 font-semibold text-slate-900">Metformin</td>
+                            <td class="p-3">Trung tính</td>
+                            <td class="p-3">Trung tính hoặc giảm nhẹ</td>
+                            <td class="p-3">Rất thấp (đơn trị)</td>
+                            <td class="p-3 text-slate-600">Không dùng khi eGFR <30; giảm liều khi eGFR <45; theo dõi vitamin B12</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="p-3 font-black text-purple-700">DPP-4i</td>
+                            <td class="p-3 font-semibold text-slate-900">Sitagliptin, Linagliptin, Alogliptin, Saxagliptin</td>
+                            <td class="p-3">An toàn tim mạch, không giảm biến cố; saxagliptin làm tăng nhập viện do suy tim</td>
+                            <td class="p-3">Trung tính</td>
+                            <td class="p-3">Rất thấp</td>
+                            <td class="p-3 text-slate-600">Biến cố túi mật; dùng được khi eGFR thấp</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="p-3 font-black text-orange-700">Pioglitazone (TZD)</td>
+                            <td class="p-3 font-semibold text-slate-900">Pioglitazone</td>
+                            <td class="p-3">Giảm biến cố thứ phát (PROactive), tiêu chí chính không đạt ý nghĩa; có lợi trên MASH</td>
+                            <td class="p-3">Tăng</td>
+                            <td class="p-3">Thấp</td>
+                            <td class="p-3 text-slate-600">Giữ nước/suy tim, gãy xương, nghi ngờ tăng nguy cơ ung thư bàng quang</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="p-3 font-black text-red-700">Sulfonylurea</td>
+                            <td class="p-3 font-semibold text-slate-900">Gliclazide MR, Glimepiride</td>
+                            <td class="p-3">Trung tính</td>
+                            <td class="p-3">Tăng</td>
+                            <td class="p-3">Cao</td>
+                            <td class="p-3 text-slate-600">Rẻ, sẵn có nhưng kém bền; cần giảm cường độ ở người yếu</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition">
+                            <td class="p-3 font-black text-red-700">Insulin</td>
+                            <td class="p-3 font-semibold text-slate-900">Insulin nền (Glargine, Degludec); Icodec hằng tuần</td>
+                            <td class="p-3">Trung tính</td>
+                            <td class="p-3">Tăng</td>
+                            <td class="p-3">Cao</td>
+                            <td class="p-3 text-slate-600">Khởi đầu bằng insulin nền; icodec có hạ glucose máu đáng kể cao hơn glargine U100</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="text-xs text-slate-500 mt-2.5 font-medium">† <span x-text="lang === 'vi' ? 'Phân hạng định tính, đối chiếu Table 1 của báo cáo gốc.' : 'Qualitative grading; cross-check with Table 1 of the source report.'"></span></p>
+            </div>
+        </section>
+
+        <!-- Glossary & Footnotes (Light Background) -->
+        <footer class="mt-8 bg-slate-100 rounded-2xl p-6 text-xs sm:text-sm text-slate-700 space-y-4 border border-slate-200 shadow-sm">
+            <div>
+                <h4 class="font-extrabold text-slate-900 uppercase tracking-wider mb-3 flex items-center gap-2 text-xs sm:text-sm border-b border-slate-200 pb-2">
+                    <i class="fa-solid fa-book text-teal-700"></i>
+                    <span x-text="lang === 'vi' ? 'Danh Mục Viết Tắt & Thuật Ngữ Y Khoa (ADA/EASD 2026):' : 'Medical Glossary & Abbreviations (ADA/EASD 2026 Consensus):'"></span>
+                </h4>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs leading-normal">
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-teal-800 font-extrabold">ASCVD:</strong>
+                        <span class="font-semibold text-slate-800"> Bệnh tim mạch do xơ vữa</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Atherosclerotic Cardiovascular Disease)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-indigo-800 font-extrabold">CKD:</strong>
+                        <span class="font-semibold text-slate-800"> Bệnh thận mạn</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Chronic Kidney Disease)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-sky-800 font-extrabold">HF / HFrEF / HFpEF:</strong>
+                        <span class="font-semibold text-slate-800"> Suy tim / EF giảm / EF bảo tồn</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Heart Failure / Reduced EF / Preserved EF)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-emerald-800 font-extrabold">MASLD / MASH:</strong>
+                        <span class="font-semibold text-slate-800"> Gan nhiễm mỡ / Viêm gan nhiễm mỡ chuyển hóa</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Metabolic Dysfunction-Associated Steatotic Liver Disease)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-teal-800 font-extrabold">SGLT2i:</strong>
+                        <span class="font-semibold text-slate-800"> Thuốc ức chế đồng vận chuyển Sodium-Glucose 2</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Sodium-Glucose Cotransporter 2 Inhibitors)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-rose-800 font-extrabold">GLP-1 RA:</strong>
+                        <span class="font-semibold text-slate-800"> Thuốc đồng vận thụ thể GLP-1</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Glucagon-Like Peptide-1 Receptor Agonists)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-amber-800 font-extrabold">GIP:</strong>
+                        <span class="font-semibold text-slate-800"> Polypeptide kích thích tiết insulin phụ thuộc glucose</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Glucose-dependent Insulinotropic Polypeptide)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-sky-800 font-extrabold">DSMES:</strong>
+                        <span class="font-semibold text-slate-800"> Giáo dục & hỗ trợ tự quản lý đái tháo đường</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Diabetes Self-Management Education and Support)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-purple-800 font-extrabold">SDOH:</strong>
+                        <span class="font-semibold text-slate-800"> Các yếu tố xã hội quyết định sức khỏe</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Social Determinants of Health)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-teal-800 font-extrabold">CGM / TIR:</strong>
+                        <span class="font-semibold text-slate-800"> Theo dõi đường huyết liên tục / Tỷ lệ trong vùng mục tiêu</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Continuous Glucose Monitoring / Time in Range)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-rose-800 font-extrabold">MACE:</strong>
+                        <span class="font-semibold text-slate-800"> Biến cố tim mạch chính bất lợi</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Major Adverse Cardiovascular Events)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-indigo-800 font-extrabold">UACR:</strong>
+                        <span class="font-semibold text-slate-800"> Tỷ lệ Albumin/Creatinine niệu</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Urine Albumin-to-Creatinine Ratio)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-slate-800 font-extrabold">MLTCs:</strong>
+                        <span class="font-semibold text-slate-800"> Các bệnh lý mạn tính đồng mắc</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Multiple Long-Term Conditions)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-slate-800 font-extrabold">MNT / MRA:</strong>
+                        <span class="font-semibold text-slate-800"> Liệu pháp dinh dưỡng y khoa / Thuốc đối kháng thụ thể MRA</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Medical Nutrition Therapy / Mineralocorticoid Antagonist)</span>
+                    </div>
+                    <div class="p-2.5 bg-white rounded-lg border border-slate-200 shadow-sm">
+                        <strong class="text-purple-800 font-extrabold">DPP-4i / TZD:</strong>
+                        <span class="font-semibold text-slate-800"> Thuốc ức chế DPP-4 / Nhóm Thiazolidinedione</span>
+                        <span class="text-slate-500 block text-[11px] mt-0.5">(Dipeptidyl Peptidase-4i / Thiazolidinediones)</span>
+                    </div>
+                </div>
+
+                <p class="leading-relaxed mt-3 text-slate-500 font-medium">Báo cáo gốc hướng tới bối cảnh Hoa Kỳ và châu Âu; cần đối chiếu chỉ định và tình trạng lưu hành thuốc tại Việt Nam. Tài liệu tham khảo cho nhân viên y tế, không thay thế đánh giá lâm sàng.</p>
+            </div>
+
+            <!-- Official Reference & Citation Box -->
+            <div class="pt-4 border-t border-slate-300 bg-slate-200/70 -mx-6 -mb-6 p-5 rounded-b-2xl">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                    <div>
+                        <p class="text-xs sm:text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                            <i class="fa-solid fa-quote-left text-teal-700"></i>
+                            <span x-text="lang === 'vi' ? 'Nguồn Trích Dẫn Gốc Chính Thức (Official Citation):' : 'Official Citation:'"></span>
+                        </p>
+                        <p class="text-xs text-slate-600 mt-1 font-medium leading-relaxed">
+                            Davies MJ, Aroda VR, Bajaj M, et al. <em>Management of Type 2 Diabetes, 2026. A Consensus Report by the American Diabetes Association (ADA) and the European Association for the Study of Diabetes (EASD)</em>. <strong>Diabetologia</strong>, 2026. Published 02 October 2026.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 shrink-0">
+                        <a href="https://link.springer.com/article/10.1007/s00125-026-06855-7" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-emerald-800 hover:bg-emerald-700 text-white text-xs font-extrabold transition shadow-sm border border-emerald-600">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            <span>Diabetologia (Springer Link)</span>
+                        </a>
+                        <a href="https://doi.org/10.2337/dci26-0141" target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-teal-800 hover:bg-teal-700 text-white text-xs font-extrabold transition shadow-sm border border-teal-600">
+                            <i class="fa-solid fa-newspaper"></i>
+                            <span>Diabetes Care (ADA Link)</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- Interactive Clinical Guidance Modal (Dành Cho Bác Sĩ Thực Hành Lâm Sàng) -->
+    <div x-show="activeModal !== null" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click.self="closePillar()" @keydown.escape.window="closePillar()" class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/65 backdrop-blur-md p-4 sm:p-6 lg:p-8 flex items-center justify-center"
+         x-cloak>
+        
+        <div 
+             class="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden relative">
+            
+            <!-- Modal Header -->
+            <template x-if="activeModalData">
+                <div :class="activeModalData.headerBg" class="p-5 border-b border-slate-200 flex items-center justify-between text-white shrink-0">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-black/20 backdrop-blur-md flex items-center justify-center text-2xl text-white border border-white/30">
+                            <i :class="activeModalData.icon"></i>
+                        </div>
+                        <div>
+                            <span class="inline-block px-2.5 py-0.5 rounded-full text-xs font-extrabold uppercase tracking-wider bg-black/30 text-white mb-1 border border-white/30"
+                                  x-text="lang === 'vi' ? 'HƯỚNG DẪN THỰC HÀNH LÂM SÀNG DÀNH CHO BÁC SĨ (ADA/EASD 2026)' : 'CLINICAL PRACTICE GUIDANCE FOR PHYSICIANS (ADA/EASD 2026)'"></span>
+                            <h3 class="text-xl font-black text-white" x-text="lang === 'vi' ? activeModalData.titleVi : activeModalData.titleEn"></h3>
+                        </div>
+                    </div>
+                    <button @click="closePillar()" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-lg transition border border-white/20">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </template>
+
+            <!-- Modal Content Body -->
+            <div class="p-6 overflow-y-auto space-y-6 text-slate-800 text-sm leading-relaxed">
+                <template x-if="activeModalData">
+                    <div class="space-y-6">
+                        
+                        <!-- Core Objective for Physician -->
+                        <div class="bg-teal-50 border-l-4 border-teal-600 p-4 rounded-r-xl border border-teal-200">
+                            <h4 class="font-black text-teal-900 uppercase tracking-wider text-xs sm:text-sm mb-1 flex items-center gap-1.5">
+                                <i class="fa-solid fa-bullseye text-teal-700"></i>
+                                <span x-text="lang === 'vi' ? 'MỤC TIÊU ĐIỀU TRỊ CỐT LÕI TRÊN LÂM SÀNG' : 'CORE CLINICAL OBJECTIVE'"></span>
+                            </h4>
+                            <p class="text-slate-800 font-semibold text-sm sm:text-base leading-relaxed" x-text="lang === 'vi' ? activeModalData.objectiveVi : activeModalData.objectiveEn"></p>
+                        </div>
+
+                        <!-- Action Steps Table / List -->
+                        <div>
+                            <h4 class="font-black text-slate-900 text-base mb-3 flex items-center gap-2 border-b border-slate-200 pb-2">
+                                <i class="fa-solid fa-user-doctor text-teal-700"></i>
+                                <span x-text="lang === 'vi' ? 'CÁC BƯỚC HÀNH ĐỘNG CỤ THỂ CHO BÁC SĨ LÂM SÀNG' : 'ACTIONABLE STEPS FOR CLINICIANS'"></span>
+                            </h4>
+                            
+                            <div class="space-y-3">
+                                <template x-for="(step, idx) in (lang === 'vi' ? activeModalData.stepsVi : activeModalData.stepsEn)" :key="idx">
+                                    <div class="flex items-start gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-sm hover:border-teal-500 transition">
+                                        <span class="w-7 h-7 rounded-full bg-teal-800 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5" x-text="idx + 1"></span>
+                                        <div>
+                                            <h5 class="font-extrabold text-slate-900 text-sm sm:text-base" x-text="step.title"></h5>
+                                            <p class="text-xs sm:text-sm text-slate-700 font-medium mt-1 leading-relaxed" x-text="step.detail"></p>
+                                        </div>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+
+                        <!-- Monitoring & Follow-up Checklist -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                                <h4 class="font-black text-emerald-900 text-xs sm:text-sm uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-list-check text-emerald-700"></i>
+                                    <span x-text="lang === 'vi' ? 'CHỈ SỐ THEO DÕI CẦN ĐÁNH GIÁ' : 'KEY MONITORING PARAMETERS'"></span>
+                                </h4>
+                                <ul class="space-y-2 text-xs sm:text-sm text-slate-800 font-medium">
+                                    <template x-for="(item, idx) in (lang === 'vi' ? activeModalData.monitoringVi : activeModalData.monitoringEn)" :key="idx">
+                                        <li class="flex items-start gap-2">
+                                            <i class="fa-solid fa-check text-emerald-700 mt-0.5 shrink-0 font-bold"></i>
+                                            <span x-text="item"></span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+
+                            <div class="bg-amber-50 p-4 rounded-xl border border-amber-200">
+                                <h4 class="font-black text-amber-900 text-xs sm:text-sm uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                                    <i class="fa-solid fa-triangle-exclamation text-amber-700"></i>
+                                    <span x-text="lang === 'vi' ? 'LƯU Ý LÂM SÀNG CẦN TRÁNH' : 'CLINICAL CAVEATS TO AVOID'"></span>
+                                </h4>
+                                <ul class="space-y-2 text-xs sm:text-sm text-slate-800 font-medium">
+                                    <template x-for="(item, idx) in (lang === 'vi' ? activeModalData.caveatsVi : activeModalData.caveatsEn)" :key="idx">
+                                        <li class="flex items-start gap-2">
+                                            <i class="fa-solid fa-xmark text-rose-700 mt-0.5 shrink-0 font-black"></i>
+                                            <span x-text="item"></span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </template>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-slate-100 p-4 border-t border-slate-200 flex justify-between items-center shrink-0">
+                <span class="text-xs text-slate-600 font-semibold">
+                    <i class="fa-solid fa-book-bookmark text-teal-700 mr-1"></i> ADA/EASD 2026 Clinical Consensus Report
+                </span>
+                <button @click="closePillar()" class="px-5 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold border border-slate-600 shadow transition">
+                    <span x-text="lang === 'vi' ? 'Đóng Hướng Dẫn' : 'Close Guidance'"></span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Alpine.js Application Logic -->
+    <script>
+        function diabetesApp() {
+            return {
+                lang: 'vi',
+                showFilter: true,
+                activeFilter: null,
+                activeModal: null,
+                activeModalData: null,
+                filters: [
+                    { id: 'ascvd', labelVi: 'Bệnh Tim Mạch Do Xơ Vữa (+ASCVD)', labelEn: '+ASCVD / CVD Risk', icon: 'fa-solid fa-heart-crack text-rose-600' },
+                    { id: 'ckd', labelVi: 'Bệnh Thận Mạn (+CKD)', labelEn: '+CKD (Kidney Disease)', icon: 'fa-solid fa-kidney text-indigo-600' },
+                    { id: 'hf', labelVi: 'Suy Tim (+HF)', labelEn: '+Heart Failure (HF)', icon: 'fa-solid fa-heart-pulse text-sky-600' },
+                    { id: 'weight', labelVi: 'Ưu Tiên Quản Lý Cân Nặng', labelEn: 'Weight Management Focus', icon: 'fa-solid fa-weight-scale text-orange-600' },
+                    { id: 'glycaemic', labelVi: 'Ưu Tiên Hạ HbA1c Mạnh', labelEn: 'High Glucose-Lowering Efficacy', icon: 'fa-solid fa-chart-line text-purple-600' },
+                    { id: 'masld', labelVi: 'Bệnh Gan Nhiễm Mỡ (+MASLD/MASH)', labelEn: '+MASLD / MASH', icon: 'fa-solid fa-liver text-emerald-600' }
+                ],
+                pillarsDetail: {
+                    nutrition: {
+                        icon: 'fa-solid fa-apple-whole',
+                        headerBg: 'bg-gradient-to-r from-emerald-800 to-teal-900 border-b border-emerald-600',
+                        titleVi: 'Trụ Cột 1: Dinh Dưỡng Y Khoa & Vận Động 24 Giờ',
+                        titleEn: 'Pillar 1: Medical Nutrition Therapy & 24-Hour Physical Activity',
+                        objectiveVi: 'Cá thể hóa chế độ ăn uống và lối sống vận động nhằm hỗ trợ kiểm soát đường huyết, giảm cân nặng bền vững và tối ưu hóa các yếu tố nguy cơ tim mạch - chuyển hóa.',
+                        objectiveEn: 'Personalize nutrition and active lifestyle to optimize glycaemic control, support weight reduction, and lower cardio-metabolic risk.',
+                        stepsVi: [
+                            {
+                                title: 'Liệu Pháp Dinh Dưỡng Y Khoa (MNT)',
+                                detail: 'Không có một tỷ lệ đa lượng chất tối ưu cho mọi người. Chế độ Địa Trung Hải có bằng chứng nhất quán, ưu tiên ở người có ASCVD; chế độ ít carbohydrate, nhịn ăn gián đoạn có thể hiệu quả nhưng cần điều chỉnh thuốc để tránh hạ glucose máu và nhiễm toan ceton (nhất là với SGLT2i).'
+                            },
+                            {
+                                title: 'Thiết Lập Mục Tiêu Cân Nặng',
+                                detail: 'Giảm ≥5% cân nặng mang lại lợi ích chuyển hóa; giảm 10–15% có thể thay đổi diễn tiến bệnh và đưa đến lui bệnh; giảm ≥7–10% liên quan hồi phục MASH.'
+                            },
+                            {
+                                title: 'Vận Động Thể Lực 24 Giờ (24h Movement Pattern)',
+                                detail: 'Mô hình 5S: Standing, Stepping, Sweating (aerobic ≥150 phút/tuần cường độ trung bình–mạnh, hoặc 75 phút cường độ mạnh, ≥3 ngày/tuần), Strengthening (kháng lực 2–3 lần/tuần), Sleep.'
+                            },
+                            {
+                                title: 'Giảm Thời Gian Ngồi Tĩnh Tại & Tối Ưu Giấc Ngủ',
+                                detail: 'Ngắt các giai đoạn ngồi lâu bằng đi bộ ngắn để giảm glucose và insulin sau ăn. Tối ưu chất lượng, thời lượng và thời điểm ngủ.'
+                            },
+                            {
+                                title: 'Bảo Tồn Khối Cơ & Hành Vi Sức Khỏe Khác',
+                                detail: 'Khi giảm cân bằng liệu pháp GLP-1 hoặc phẫu thuật chuyển hóa, hướng dẫn đủ protein và tập kháng lực. Cai thuốc lá. Không khuyến cáo thực phẩm bổ sung để kiểm soát glucose máu.'
+                            }
+                        ],
+                        monitoringVi: [
+                            'Cân nặng, Chỉ số BMI và Vòng eo mỗi lần tái khám',
+                            'Nhật ký dinh dưỡng & mức độ tuân thủ vận động thể lực',
+                            'Huyết áp (<130/80 mmHg) và lipid máu (LDL-C) định kỳ'
+                        ],
+                        caveatsVi: [
+                            'Tránh đưa ra chế độ ăn kiêng quá khắt khe khó duy trì dài hạn',
+                            'Thận trọng nguy cơ hạ đường huyết khi vận động ở bệnh nhân đang dùng Sulfonylurea hoặc Insulin',
+                            'Không bỏ qua đánh giá tình trạng rối loạn hành vi ăn uống'
+                        ],
+                        stepsEn: [
+                            {
+                                title: 'Medical Nutrition Therapy (MNT)',
+                                detail: 'No single macronutrient ratio is optimal. Mediterranean pattern has consistent evidence (preferred in ASCVD); low-carbohydrate or intermittent fasting can work but require medication adjustment to avoid hypoglycaemia and ketoacidosis (especially with SGLT2i).'
+                            },
+                            {
+                                title: 'Set Individualized Weight Goals',
+                                detail: '≥5% weight loss gives metabolic benefit; 10-15% can modify disease course and lead to remission; ≥7-10% is linked to MASH resolution.'
+                            },
+                            {
+                                title: '24-Hour Physical Activity Prescription',
+                                detail: '5S model: Standing, Stepping, Sweating (aerobic ≥150 min/week moderate-to-vigorous or 75 min vigorous, over ≥3 days), Strengthening (resistance 2-3 times/week), Sleep.'
+                            },
+                            {
+                                title: 'Interrupt Sedentary Behaviour & Prioritize Sleep',
+                                detail: 'Break prolonged sitting with brief walking to lower postprandial glucose and insulin. Optimise sleep quality, duration and timing.'
+                            },
+                            {
+                                title: 'Preserve Lean Mass & Other Behaviours',
+                                detail: 'With GLP-1-based therapy or metabolic surgery, advise adequate protein intake and resistance exercise. Support tobacco cessation. Supplements are not recommended for glycaemic management.'
+                            }
+                        ],
+                        monitoringEn: [
+                            'Body weight, BMI, and waist circumference at every visit',
+                            'Dietary adherence and physical activity logs',
+                            'Blood pressure (<130/80 mmHg) and lipid profile (LDL-C) periodically'
+                        ],
+                        caveatsEn: [
+                            'Avoid overly restrictive diets that lead to poor long-term adherence',
+                            'Watch for exercise-induced hypoglycaemia if on Sulfonylureas or Insulin',
+                            'Screen for eating disorders or unhealthy weight-loss habits'
+                        ]
+                    },
+                    dsmes: {
+                        icon: 'fa-solid fa-user-graduate',
+                        headerBg: 'bg-gradient-to-r from-teal-800 to-blue-900 border-b border-teal-600',
+                        titleVi: 'Trụ Cột 2: Giáo Dục & Hỗ Trợ Tự Quản Lý Đái Tháo Đường (DSMES)',
+                        titleEn: 'Pillar 2: Diabetes Self-Management Education and Support (DSMES)',
+                        objectiveVi: 'Cung cấp kiến thức, kỹ năng và năng lực tự quản lý liên tục giúp bệnh nhân chủ động đưa ra quyết định chăm sóc sức khỏe hàng ngày hiệu quả và an toàn.',
+                        objectiveEn: 'Provide continuous knowledge, skills, and self-care capacity to empower patients in daily decision-making.',
+                        stepsVi: [
+                            {
+                                title: '4 Thời Điểm Then Chốt Cần Chỉ Định DSMES',
+                                detail: '(1) Khi chẩn đoán; (2) Hằng năm (rà soát thay đổi thuốc và hành vi sức khỏe); (3) Khi xuất hiện biến chứng mới; (4) Khi chuyển tiếp chăm sóc.'
+                            },
+                            {
+                                title: 'Huấn Luyện Kỹ Năng Tự Theo Dõi Đường Huyết (SMBG / CGM)',
+                                detail: 'Hướng dẫn cách dùng máy đo đường huyết cá nhân hoặc thiết bị CGM liên tục. Giúp bệnh nhân đọc và hiểu biểu đồ đường huyết (AGP) để tự điều chỉnh lối sống.'
+                            },
+                            {
+                                title: 'Giáo Dục An Toàn Thuốc (SGLT2i, GLP-1 RA)',
+                                detail: 'SGLT2i: nhận biết dấu hiệu nhiễm toan ceton (kể cả euglycaemic DKA); tạm ngưng khi nhịn ăn kéo dài, phẫu thuật, bệnh cấp tính hoặc giảm/bỏ liều insulin. GLP-1 RA: giải thích tác dụng phụ tiêu hóa; cân nhắc tăng liều chậm.'
+                            },
+                            {
+                                title: 'Tự Chăm Sóc Bàn Chân & Tuân Thủ Dùng Thuốc',
+                                detail: 'Hướng dẫn tự kiểm tra bàn chân hàng ngày, chọn giày phù hợp và kỹ thuật tiêm/dùng thuốc đúng liều, đúng thời điểm.'
+                            }
+                        ],
+                        monitoringVi: [
+                            'Mức độ hiểu biết & tự tin tự quản lý bệnh của bệnh nhân',
+                            'Tần suất hạ đường huyết & cách xử trí đúng quy trình',
+                            'Sự tuân thủ sử dụng thiết bị đo đường huyết và kỹ thuật tiêm'
+                        ],
+                        caveatsVi: [
+                            'Không coi DSMES là sự kiện chỉ thực hiện 1 lần duy nhất lúc chẩn đoán',
+                            'Tránh truyền đạt thông tin y khoa quá phức tạp gây hoang mang cho người bệnh',
+                            'Không đổ lỗi cho bệnh nhân khi chưa đạt mục tiêu chỉ số'
+                        ],
+                        stepsEn: [
+                            {
+                                title: '4 Critical Times to Refer for DSMES',
+                                detail: '(1) At diagnosis; (2) Annually, to review medication changes and health behaviours; (3) At onset of new complications; (4) At transitions in care.'
+                            },
+                            {
+                                title: 'Glucose Monitoring Education (SMBG / CGM)',
+                                detail: 'Train on fingerstick SMBG or Continuous Glucose Monitoring (CGM) interpretation (Ambulatory Glucose Profile - AGP) to guide daily decisions.'
+                            },
+                            {
+                                title: 'Medication Safety Education (SGLT2i, GLP-1 RA)',
+                                detail: 'SGLT2i: recognise ketoacidosis symptoms (including euglycaemic DKA); pause during prolonged fasting, surgery, acute illness or insulin omission. GLP-1 RA: explain GI effects; consider slower dose escalation.'
+                            },
+                            {
+                                title: 'Foot Care & Medication Adherence',
+                                detail: 'Instruct daily foot inspection, proper footwear, and correct injection/ingestion techniques.'
+                            }
+                        ],
+                        monitoringEn: [
+                            'Patient self-efficacy and diabetes knowledge assessment',
+                            'Hypoglycaemia frequency and correctness of treatment',
+                            'Adherence to SMBG/CGM devices and medication schedule'
+                        ],
+                        caveatsEn: [
+                            'Do not treat DSMES as a one-time event at diagnosis',
+                            'Avoid overly complex medical jargon that confuses the patient',
+                            'Avoid patient-blaming when glucose targets are not achieved'
+                        ]
+                    },
+                    sdoh: {
+                        icon: 'fa-solid fa-users',
+                        headerBg: 'bg-gradient-to-r from-purple-800 to-indigo-900 border-b border-purple-600',
+                        titleVi: 'Trụ Cột 3: Đánh Giá & Giải Quyết Các Yếu Tố Xã Hội (SDOH)',
+                        titleEn: 'Pillar 3: Address Social Determinants of Health (SDOH)',
+                        objectiveVi: 'Nhận diện các rào cản tài chính, xã hội và môi trường sống để lựa chọn phác đồ điều trị khả thi, thực tế và đảm bảo bệnh nhân có thể tiếp cận dài hạn.',
+                        objectiveEn: 'Identify financial, social, and environmental barriers to tailor realistic and accessible treatment pathways.',
+                        stepsVi: [
+                            {
+                                title: 'Tầm Soát Rào Cản Chi Phí & Bảo Hiểm Y Tế',
+                                detail: 'Chủ động hỏi bệnh nhân về khả năng chi trả cho thuốc mới (SGLT2i, GLP-1 RA, CGM). Lựa chọn giải pháp hợp chi phí (Metformin, sulfonylurea) nếu rào cản tài chính lớn; lưu ý hạ glucose máu và tăng cân với sulfonylurea.'
+                            },
+                            {
+                                title: 'Hỏi Về Khả Năng Đảm Bảo Bữa Ăn & Thực Phẩm Lành Mạnh (Food Insecurity)',
+                                detail: 'Tìm hiểu xem người bệnh có gặp khó khăn khi mua thực phẩm tươi tốt, phải ăn uống thất thường hoặc hay bỏ bữa hay không (do hoàn cảnh kinh tế, chỗ ở hoặc rào cản xã hội). Cần đặc biệt thận trọng: Bệnh nhân ăn uống thiếu hụt hoặc bỏ bữa khi đang dùng thuốc Sulfonylurea (SU) hoặc Insulin sẽ có nguy cơ rất cao bị hạ đường huyết cấp tính.'
+                            },
+                            {
+                                title: 'Đánh Giá Hiểu Biết Về Sức Khỏe (Health Literacy)',
+                                detail: 'Đánh giá khả năng đọc hiểu đơn thuốc, nhãn thực phẩm và bảng liều tiêm. Sử dụng phương pháp "Teach-back" (yêu cầu bệnh nhân nhắc lại hướng dẫn) để đảm bảo họ đã hiểu đúng.'
+                            },
+                            {
+                                title: 'Hỗ Trợ Tâm Lý & Trầm Cảm (Diabetes Distress)',
+                                detail: 'Sàng lọc thường quy căng thẳng tâm lý liên quan đái tháo đường (diabetes distress), trầm cảm và rối loạn ăn uống bằng công cụ đã được thẩm định.'
+                            },
+                            {
+                                title: 'Duy Trì Điều Trị Liên Tục (Persistence)',
+                                detail: 'Khoảng một nửa người bệnh không duy trì điều trị. Nguyên nhân: cho rằng thuốc kém hiệu quả, sợ hạ glucose máu, hạn chế tiếp cận thuốc/thực phẩm và tác dụng phụ. Đặt mục tiêu SMART cùng người bệnh.'
+                            }
+                        ],
+                        monitoringVi: [
+                            'Tỷ lệ bỏ thuốc hoặc uống/tiêm không đều do rào cản chi phí',
+                            'Mức độ căng thẳng tâm lý do đái tháo đường (diabetes distress) và triệu chứng trầm cảm',
+                            'Môi trường sống, sự hỗ trợ từ gia đình và cộng đồng'
+                        ],
+                        caveatsVi: [
+                            'Không kê đơn các thuốc quá đắt đỏ vượt khả năng chi trả khiến bệnh nhân tự ý bỏ điều trị',
+                            'Tránh giả định rằng mọi bệnh nhân đều có thể đọc hiểu tốt hướng dẫn viết bằng văn bản',
+                            'Không bỏ qua các dấu hiệu rối loạn lo âu và trầm cảm đi kèm'
+                        ],
+                        stepsEn: [
+                            {
+                                title: 'Screen Financial Barriers & Insurance Coverage',
+                                detail: 'Inquire directly about drug affordability (SGLT2i, GLP-1 RA, CGM). Offer cost-effective regimens (Metformin, sulfonylureas) if costs are prohibitive; note hypoglycaemia and weight gain with sulfonylureas.'
+                            },
+                            {
+                                title: 'Screen for Food Insecurity & Access to Healthy Meals',
+                                detail: 'Identify if the patient struggles to afford or access healthy food, or skips meals regularly due to financial, housing, or social difficulties. Precaution: Skipping meals while taking Sulfonylureas (SUs) or Insulin carries a high risk of severe hypoglycemia.'
+                            },
+                            {
+                                title: 'Evaluate Health Literacy & Language Barriers',
+                                detail: 'Assess patient capability to read prescriptions and dosing charts. Use the "Teach-back" method to verify comprehension.'
+                            },
+                            {
+                                title: 'Screen Diabetes Distress & Mental Health',
+                                detail: 'Routinely screen for diabetes distress, depression and disordered eating using validated tools.'
+                            },
+                            {
+                                title: 'Sustain Persistence',
+                                detail: 'About half of people do not persist with therapy: perceived lack of efficacy, fear of hypoglycaemia, limited access to medicines/food and adverse effects. Set SMART goals together.'
+                            }
+                        ],
+                        monitoringEn: [
+                            'Medication primary/secondary non-adherence due to cost',
+                            'Diabetes distress and depressive symptom scores',
+                            'Social support system and home environment stability'
+                        ],
+                        caveatsEn: [
+                            'Avoid prescribing unaffordable regimens that result in abrupt therapy abandonment',
+                            'Do not assume every patient understands written complex medical instructions',
+                            'Never ignore underlying anxiety, distress, or depressive symptoms'
+                        ]
+                    },
+                    reassessment: {
+                        icon: 'fa-solid fa-arrows-rotate',
+                        headerBg: 'bg-gradient-to-r from-amber-800 to-orange-900 border-b border-amber-600',
+                        titleVi: 'Trụ Cột 4: Tái Đánh Giá Định Kỳ & Tránh Therapeutic Inertia',
+                        titleEn: 'Pillar 4: Regular Reassessment & Avoiding Therapeutic Inertia',
+                        objectiveVi: 'Theo dõi chủ động, đánh giá định kỳ và điều chỉnh phác đồ kịp thời (tăng hoặc giảm cường độ) nhằm đạt mục tiêu mà không bị trì hoãn.',
+                        objectiveEn: 'Proactively reassess and adjust therapy (intensify or de-intensify) in a timely way without therapeutic inertia.',
+                        stepsVi: [
+                            {
+                                title: 'Tần Suất Tái Khám & Xét Nghiệm Định Kỳ',
+                                detail: 'Đánh giá định kỳ HbA1c (hoặc TIR trên CGM), cân nặng và huyết áp; điều chỉnh mục tiêu cùng người bệnh. Báo cáo đồng thuận không nêu khoảng cách cụ thể.'
+                            },
+                            {
+                                title: 'Tầm Soát Biến Chứng Cơ Quan Đích Hàng Năm (Annual Screening)',
+                                detail: 'Hằng năm: (1) Phân giai đoạn bệnh thận mạn (eGFR, UACR); (2) Khám mắt toàn diện; (3) Khám bàn chân toàn diện; (4) Đánh giá triệu chứng tim mạch. Sàng lọc suy tim, MASLD và sức khỏe tâm lý theo nhu cầu.'
+                            },
+                            {
+                                title: 'Hành Động Ngay Khi Không Đạt Mục Tiêu (Avoid Inertia)',
+                                detail: 'Khi chưa đạt mục tiêu, tăng cường điều trị kịp thời (ưu tiên nhóm có lợi ích tim–thận–cân nặng); khi điều trị quá mức hoặc ở người yếu, giảm cường độ thuốc gây hạ glucose máu, nhất là sulfonylurea.'
+                            },
+                            {
+                                title: 'Đánh Giá Sự Tuân Thủ & Tác Dụng Phụ Của Thuốc',
+                                detail: 'Rà soát kỹ tác dụng phụ (tiêu hóa với GLP-1 RA, nhiễm nấm sinh dục với SGLT2i) để kịp thời xử trí giúp bệnh nhân tiếp tục điều trị.'
+                            },
+                            {
+                                title: 'Sàng Lọc Sớm & Xem Lại Chẩn Đoán',
+                                detail: 'Sàng lọc đái tháo đường ở người ≥35 tuổi và người thừa cân/béo phì có thêm yếu tố nguy cơ. Khi đáp ứng điều trị kém, xem xét lại chẩn đoán (típ 1, đơn gen, hypercortisolism).'
+                            }
+                        ],
+                        monitoringVi: [
+                            'Chỉ số HbA1c, Đường huyết lúc đói & sau ăn (hoặc TIR % trên CGM)',
+                            'Chức năng thận (eGFR, UACR) và đánh giá gan theo nhu cầu (MASLD)',
+                            'Sự xuất hiện các tác dụng phụ của thuốc và độ tuân thủ điều trị'
+                        ],
+                        caveatsVi: [
+                            'Tránh therapeutic inertia – không duy trì phác đồ kém hiệu quả hoặc gây hại',
+                            'Không quên điều chỉnh giảm liều SU/Insulin khi khởi trị thêm SGLT2i hoặc GLP-1 RA để tránh hạ đường huyết',
+                            'Tránh bỏ sót đánh giá albumin niệu (UACR) hằng năm'
+                        ],
+                        stepsEn: [
+                            {
+                                title: 'Frequency of Reassessment & Testing',
+                                detail: 'Reassess HbA1c (or CGM TIR), weight and BP regularly and revisit goals with the patient. The consensus report does not state specific intervals.'
+                            },
+                            {
+                                title: 'Annual Target Organ Complication Screening',
+                                detail: 'Annually: (1) CKD staging (eGFR, UACR); (2) Comprehensive eye exam; (3) Comprehensive foot exam; (4) Cardiovascular symptom assessment. Needs-based screening for HF, MASLD and psychological wellbeing.'
+                            },
+                            {
+                                title: 'Prompt Escalation (Overcoming Inertia)',
+                                detail: 'When off target, intensify promptly (preferring classes with cardio-kidney-weight benefit); when overtreated or frail, de-intensify hypoglycaemia-prone drugs, especially sulfonylureas.'
+                            },
+                            {
+                                title: 'Review Side Effects & Tolerability',
+                                detail: 'Check for GI side effects with GLP-1 RAs or mycotic genital infections with SGLT2is to optimize adherence.'
+                            },
+                            {
+                                title: 'Early Screening & Diagnostic Review',
+                                detail: 'Screen adults ≥35 years and those with overweight/obesity plus another risk factor. If response to treatment is poor, reconsider the diagnosis (type 1, monogenic, hypercortisolism).'
+                            }
+                        ],
+                        monitoringEn: [
+                            'HbA1c, FPG, PPG, or Time-in-Range (TIR %) on CGM',
+                            'Renal function (eGFR, UACR) and needs-based liver assessment (MASLD)',
+                            'Medication side effects and adherence rate'
+                        ],
+                        caveatsEn: [
+                            'Avoid therapeutic inertia — do not maintain ineffective or harmful regimens',
+                            'Remember to reduce SU/Insulin dose when initiating SGLT2i or GLP-1 RA to prevent hypoglycemia',
+                            'Do not omit annual urine albumin-to-creatinine ratio (UACR)'
+                        ]
+                    }
+                },
+                toggleLang() {
+                    this.lang = this.lang === 'vi' ? 'en' : 'vi';
+                },
+                resetFilter() {
+                    this.activeFilter = null;
+                },
+                openPillar(pillarKey) {
+                    if (this.pillarsDetail[pillarKey]) {
+                        this.activeModalData = this.pillarsDetail[pillarKey];
+                        this.activeModal = pillarKey;
+                    }
+                },
+                closePillar() {
+                    this.activeModal = null;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

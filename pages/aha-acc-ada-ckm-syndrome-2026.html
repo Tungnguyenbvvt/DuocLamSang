@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 AHA/ACC/ADA/ASN CKM Syndrome Guideline - Visual Clinical Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        ckm: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            navy: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        /* Standardized Typography & Uniform Hierarchy */
+        h1, h2, h3, h4, h5, h6, p, span, li, button, input, select {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Vivid Light Theme Card Styling with Rich Shadows */
+        .clinical-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+            border-radius: 0.875rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .clinical-card:hover {
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        /* Recommendation Badges with High Contrast */
+        .cor-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.725rem;
+            font-weight: 800;
+            letter-spacing: 0.025em;
+            text-transform: uppercase;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .cor-1 { background-color: #059669; color: #ffffff; border: 1px solid #047857; }
+        .cor-2a { background-color: #0284c7; color: #ffffff; border: 1px solid #0369a1; }
+        .cor-2b { background-color: #d97706; color: #ffffff; border: 1px solid #b45309; }
+        .cor-3 { background-color: #dc2626; color: #ffffff; border: 1px solid #b91c1c; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0d9488;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0f766e;
+        }
+
+        /* Highlight Boxes */
+        .clinical-warning-box {
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+            border-left: 5px solid #f43f5e;
+            border-radius: 0.875rem;
+            box-shadow: 0 4px 10px rgba(244, 63, 94, 0.08);
+        }
+
+        .clinical-pearl-box {
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%);
+            border-left: 5px solid #0d9488;
+            border-radius: 0.875rem;
+            box-shadow: 0 4px 10px rgba(13, 148, 136, 0.08);
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .clinical-card { background: white; color: black; border: 1px solid #cbd5e1; box-shadow: none; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-teal-600 selection:text-white">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-300 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-tr from-teal-700 to-teal-500 text-white p-2.5 rounded-xl font-black text-xl flex items-center justify-center shadow-md shadow-teal-600/30">
+                        <i class="fa-solid fa-heart-pulse"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="font-black text-lg tracking-tight text-slate-900">CKM GUIDELINE 2026</span>
+                            <span class="bg-teal-100 text-teal-900 font-black text-[11px] px-2.5 py-0.5 rounded-full border border-teal-300">AHA / ACC / ADA / ASN</span>
+                        </div>
+                        <span class="text-[11px] text-slate-600 block font-semibold">Hội Chứng Tim Mạch - Thận - Chuyển Hóa (Visual Clinical Hub)</span>
+                    </div>
+                </div>
+
+                <nav class="hidden xl:flex space-x-1 text-xs font-bold text-slate-700">
+                    <a href="#overview" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">1. Tổng Quan</a>
+                    <a href="#novelties" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">2. Điểm Mới</a>
+                    <a href="#algorithm" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">3. Lưu Đồ</a>
+                    <a href="#treatment" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">4. Phác Đồ 4 Trụ Cột</a>
+                    <a href="#special" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">5. Bệnh Đồng Mắc</a>
+                    <a href="#acute" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">6. Cấp Tính</a>
+                    <a href="#swot" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">7. SWOT & VN Context</a>
+                </nav>
+
+                <div class="flex items-center space-x-3">
+                    <a href="#calculator" class="bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-extrabold px-3.5 py-2 rounded-xl text-xs transition-all shadow-md shadow-teal-600/30 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-calculator"></i>
+                        <span>Tính Stage CKM</span>
+                    </a>
+                    <button onclick="window.print()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 p-2 rounded-xl text-xs border border-slate-300 transition-all" title="In Infographic">
+                        <i class="fa-solid fa-print"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner (Vibrant Contrast Theme) -->
+    <section class="relative bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 text-white py-12 px-4 border-b border-teal-800/40 shadow-inner">
+        <div class="max-w-7xl mx-auto relative z-10">
+            
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="bg-teal-500/20 text-teal-300 border border-teal-400/40 text-xs px-3 py-1 rounded-full font-extrabold flex items-center shadow-sm">
+                    <i class="fa-solid fa-circle-check mr-1.5 text-teal-400"></i> HƯỚNG DẪN LIÊN CHUYÊN KHOA ĐẦU TIÊN CỦA HOA KỲ
+                </span>
+                <span class="bg-sky-500/20 text-sky-300 border border-sky-400/40 text-xs px-3 py-1 rounded-full font-extrabold">
+                    <i class="fa-solid fa-book-medical mr-1.5"></i> JACC & CIRCULATION 2026
+                </span>
+                <span class="bg-amber-500/20 text-amber-300 border border-amber-400/40 text-xs px-3 py-1 rounded-full font-extrabold">
+                    <i class="fa-solid fa-award mr-1.5"></i> CLASS I GOLD STANDARD EBM
+                </span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-snug mb-3">
+                Hướng Dẫn Dự Phòng, Tầm Soát, Phân Tầng & Điều Trị <br class="hidden md:inline">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-emerald-300 to-cyan-300">
+                    Hội Chứng Tim Mạch - Thận - Chuyển Hóa (CKM Syndrome) 2026
+                </span>
+            </h1>
+
+            <p class="text-slate-300 text-xs sm:text-sm max-w-5xl leading-relaxed mb-6 font-medium">
+                Bản tóm tắt lâm sàng dành cho Bác sĩ Tim mạch, Thận học, Nội tiết & Cán bộ Y tế. Guideline liên hội tại Hoa Kỳ do ACC/AHA Joint Committee on Clinical Practice Guidelines chủ trì, hợp tác cùng <strong class="text-white">ADA</strong> và <strong class="text-white">ASN</strong> — <strong class="text-white">thay thế (retire &amp; replace)</strong> guideline 2013 AHA/ACC/TOS về Quản lý Thừa cân - Béo phì ở người lớn. 
+                Chủ tịch Hội đồng: <span class="text-teal-300 font-bold italic">Chiadi E. Ndumele, MD, PhD, MHS</span>.
+            </p>
+            <div class="bg-amber-500/10 border border-amber-400/30 rounded-xl px-4 py-2.5 mb-6 text-[11px] sm:text-xs text-amber-200 font-semibold flex items-start gap-2">
+                <i class="fa-solid fa-circle-info mt-0.5 text-amber-300"></i>
+                <span><strong class="text-amber-100">Giới hạn phạm vi áp dụng:</strong> Toàn bộ khuyến cáo trong guideline gốc chỉ áp dụng cho người lớn <strong>≥ 18 tuổi</strong>. Khuyến cáo cho trẻ em/vị thành niên (&lt;18 tuổi) chưa được ban hành, dự kiến là tài liệu riêng trong tương lai.</span>
+            </div>
+
+            <!-- COR / LOE Legend Banner -->
+            <div class="bg-slate-800/90 backdrop-blur-md p-3.5 rounded-xl border border-slate-700/80 flex flex-wrap items-center justify-between gap-3 text-xs shadow-lg">
+                <div class="flex items-center space-x-2">
+                    <span class="text-slate-200 font-black uppercase text-[11px] tracking-wider">Mức Khuyến Cáo (COR):</span>
+                    <span class="cor-badge cor-1">Class I (Nên dùng)</span>
+                    <span class="cor-badge cor-2a">Class IIa (Hợp lý)</span>
+                    <span class="cor-badge cor-2b">Class IIb (Cân nhắc)</span>
+                    <span class="cor-badge cor-3">Class III (Hại/Không ích)</span>
+                </div>
+                <div class="flex items-center space-x-2 text-slate-200 text-[11px]">
+                    <span class="text-slate-300 font-bold uppercase tracking-wider">Mức Bằng Chứng (LOE):</span>
+                    <span class="bg-slate-900 px-2 py-1 rounded font-mono text-teal-300 border border-slate-700 font-bold">LOE A (RCTs mạnh)</span>
+                    <span class="bg-slate-900 px-2 py-1 rounded font-mono text-teal-300 border border-slate-700 font-bold">LOE B (Quan sát/RCTs vừa)</span>
+                    <span class="bg-slate-900 px-2 py-1 rounded font-mono text-teal-300 border border-slate-700 font-bold">LOE C (Đồng thuận)</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECTION 0: INTERACTIVE CKM CALCULATOR -->
+        <section id="calculator" class="clinical-card overflow-hidden border-2 border-teal-600/50 shadow-lg no-print">
+            <div class="bg-gradient-to-r from-teal-800 via-teal-900 to-slate-900 p-4 text-white flex flex-wrap justify-between items-center gap-4 border-b border-teal-700">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-teal-400 text-slate-950 p-2.5 rounded-xl text-xl font-black shadow-md"><i class="fa-solid fa-calculator"></i></div>
+                    <div>
+                        <h2 class="text-base font-black flex items-center text-white tracking-wide">
+                            CÔNG CỤ PHÂN TẦNG GIAI ĐOẠN CKM LÂM SÀNG (INTERACTIVE CKM CALCULATOR)
+                        </h2>
+                        <p class="text-xs text-teal-200 font-medium">Nhập thông số lâm sàng & cận lâm sàng để xác định Giai đoạn CKM (Stage 0 - 4) và chỉ định điều trị ưu tiên</p>
+                    </div>
+                </div>
+                <span class="bg-teal-500/30 text-teal-200 text-xs px-3 py-1.5 rounded-lg border border-teal-400/40 font-extrabold flex items-center shadow-inner">
+                    <i class="fa-solid fa-bolt text-amber-300 mr-1.5"></i> Tính Toán Thời Gian Thực
+                </span>
+            </div>
+
+            <div class="p-5 grid grid-cols-1 md:grid-cols-3 gap-5 text-xs bg-slate-100/70">
+                <!-- Group 1 -->
+                <div class="space-y-3 bg-white p-4 rounded-xl border border-slate-300 shadow-sm">
+                    <h3 class="font-black text-teal-800 text-xs uppercase tracking-wide border-b border-slate-200 pb-2 flex items-center">
+                        <span class="bg-teal-100 text-teal-800 p-1.5 rounded-lg mr-2"><i class="fa-solid fa-user text-teal-700"></i></span> 1. Chuyển Hóa & Thể Trạng
+                    </h3>
+                    <div>
+                        <label class="block text-slate-800 font-bold mb-1">Chỉ số khối cơ thể - BMI (kg/m²):</label>
+                        <input type="number" id="calc-bmi" placeholder="Ví dụ: 24.5" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none font-bold">
+                        <span class="text-[10px] text-amber-800 font-bold mt-1 block bg-amber-50 p-1 rounded border border-amber-200">*Ngưỡng Châu Á: ≥ 23 kg/m² là Thừa cân / Béo phì</span>
+                    </div>
+                    <div>
+                        <label class="block text-slate-800 font-bold mb-1">HbA1c (%) hoặc Đường huyết lúc đói:</label>
+                        <input type="number" step="0.1" id="calc-hba1c" placeholder="Ví dụ: 6.8" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none font-bold">
+                        <span class="text-[10px] text-slate-600 font-semibold mt-1 block">5.7-6.4% (Tiền ĐTĐ) | ≥6.5% (Đái tháo đường)</span>
+                    </div>
+                    <div>
+                        <label class="block text-slate-800 font-bold mb-1">Huyết Áp Phòng Khám (mmHg):</label>
+                        <div class="grid grid-cols-2 gap-2 font-sans">
+                            <input type="number" id="calc-sbp" placeholder="Tâm thu (135)" class="bg-slate-50 border border-slate-300 rounded-lg p-2 text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none font-bold">
+                            <input type="number" id="calc-dbp" placeholder="Tâm trương (85)" class="bg-slate-50 border border-slate-300 rounded-lg p-2 text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none font-bold">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group 2 -->
+                <div class="space-y-3 bg-white p-4 rounded-xl border border-slate-300 shadow-sm">
+                    <h3 class="font-black text-teal-800 text-xs uppercase tracking-wide border-b border-slate-200 pb-2 flex items-center">
+                        <span class="bg-teal-100 text-teal-800 p-1.5 rounded-lg mr-2"><i class="fa-solid fa-vial text-teal-700"></i></span> 2. Chức Năng Thận & Lipid Máu
+                    </h3>
+                    <div>
+                        <label class="block text-slate-800 font-bold mb-1">Mức lọc cầu thận ước tính - eGFR (mL/min/1.73m²):</label>
+                        <input type="number" id="calc-egfr" placeholder="Ví dụ: 52" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none font-bold">
+                        <span class="text-[10px] text-slate-600 font-semibold mt-1 block">&lt; 60 mL/min/1.73m² = Bệnh thận mạn (CKD)</span>
+                    </div>
+                    <div>
+                        <label class="block text-slate-800 font-bold mb-1">Tỷ lệ Albumin/Creatinine niệu - UACR (mg/g):</label>
+                        <input type="number" id="calc-uacr" placeholder="Ví dụ: 120" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none font-bold">
+                        <span class="text-[10px] text-amber-800 font-bold mt-1 block bg-amber-50 p-1 rounded border border-amber-200">≥ 30 mg/g = Có Albumin niệu (Tổn thương thận)</span>
+                    </div>
+                    <div>
+                        <label class="block text-slate-800 font-bold mb-1">Triglyceride huyết thanh (mg/dL):</label>
+                        <input type="number" id="calc-tg" placeholder="Ví dụ: 220" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2 text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none font-bold">
+                    </div>
+                </div>
+
+                <!-- Group 3 -->
+                <div class="space-y-3 bg-white p-4 rounded-xl border border-slate-300 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-black text-teal-800 text-xs uppercase tracking-wide border-b border-slate-200 pb-2 flex items-center mb-3">
+                            <span class="bg-teal-100 text-teal-800 p-1.5 rounded-lg mr-2"><i class="fa-solid fa-heart-pulse text-teal-700"></i></span> 3. Tổn Thương Tim Mạch
+                        </h3>
+                        <div class="space-y-2">
+                            <p class="font-black text-slate-900 text-[11px] uppercase tracking-wider bg-slate-100 p-1 rounded">Cận Lâm Sàng (Subclinical CVD):</p>
+                            <label class="flex items-center space-x-2 text-slate-800 font-medium cursor-pointer">
+                                <input type="checkbox" id="calc-cac" class="rounded text-teal-600 focus:ring-teal-500 border-slate-300 h-4 w-4">
+                                <span>CAC Score &gt; 0 (Vôi hóa ĐM vành)</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-slate-800 font-medium cursor-pointer">
+                                <input type="checkbox" id="calc-lvh" class="rounded text-teal-600 focus:ring-teal-500 border-slate-300 h-4 w-4">
+                                <span>Dày thất trái (LVH trên Echo / ECG)</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-slate-800 font-medium cursor-pointer">
+                                <input type="checkbox" id="calc-prevent20" class="rounded text-teal-600 focus:ring-teal-500 border-slate-300 h-4 w-4">
+                                <span>Thang điểm PREVENT 10 năm ≥ 20%</span>
+                            </label>
+
+                            <p class="font-black text-slate-900 text-[11px] uppercase tracking-wider bg-slate-100 p-1 rounded pt-2">Lâm Sàng (Clinical CVD):</p>
+                            <label class="flex items-center space-x-2 text-slate-800 font-medium cursor-pointer">
+                                <input type="checkbox" id="calc-hf" class="rounded text-teal-600 focus:ring-teal-500 border-slate-300 h-4 w-4">
+                                <span>Suy tim (HFpEF, HFrEF, HFmrEF)</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-slate-800 font-medium cursor-pointer">
+                                <input type="checkbox" id="calc-ascvd" class="rounded text-teal-600 focus:ring-teal-500 border-slate-300 h-4 w-4">
+                                <span>ASCVD (Nhồi máu cơ tim, Đột quỵ, PAD)</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-rose-800 font-bold cursor-pointer bg-rose-50 p-1 rounded border border-rose-200">
+                                <input type="checkbox" id="calc-esrd" class="rounded text-rose-600 focus:ring-rose-500 border-slate-300 h-4 w-4">
+                                <span>Bệnh thận giai đoạn cuối (ESRD / Lọc máu)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button onclick="calculateCKMStage()" class="w-full bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-black py-3 rounded-xl shadow-md transition-all flex items-center justify-center text-xs mt-3 uppercase tracking-wider">
+                        <i class="fa-solid fa-stethoscope mr-2 text-amber-300 text-sm"></i> XÁC ĐỊNH GIAI ĐOẠN CKM
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Result Card -->
+            <div id="calc-result" class="hidden bg-white border-t-2 border-teal-500 p-5">
+                <div class="flex items-start space-x-4 flex-col sm:flex-row gap-4">
+                    <div id="calc-stage-badge" class="px-5 py-3.5 rounded-2xl font-black text-xl text-center shadow-md min-w-[140px] text-white">
+                        STAGE --
+                    </div>
+                    <div class="flex-1 space-y-2">
+                        <h4 id="calc-stage-title" class="font-extrabold text-slate-900 text-base">---</h4>
+                        <p id="calc-stage-desc" class="text-xs text-slate-700 leading-relaxed font-medium">---</p>
+                        
+                        <div class="bg-gradient-to-r from-teal-50 to-emerald-50 p-4 rounded-xl border border-teal-300 text-xs space-y-2 shadow-sm">
+                            <span class="font-black text-teal-950 flex items-center text-xs uppercase tracking-wide">
+                                <i class="fa-solid fa-hand-holding-medical text-teal-700 mr-2 text-sm"></i> Khuyến cáo điều trị ưu tiên theo Guideline:
+                            </span>
+                            <ul id="calc-recommendations" class="list-disc pl-5 text-slate-900 space-y-1.5 leading-relaxed font-semibold"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: TỔNG QUAN & PHÂN LOẠI MỚI -->
+        <section id="overview" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-layer-group"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 1: TỔNG QUAN & PHÂN LOẠI MỚI (OVERVIEW & STAGING)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Định nghĩa chuẩn hóa & Chi tiết 5 Giai đoạn CKM từ Stage 0 đến Stage 4</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- Definition Box -->
+                <div class="clinical-pearl-box p-4 shadow-sm">
+                    <h3 class="font-black text-teal-950 text-sm flex items-center">
+                        <i class="fa-solid fa-lightbulb text-teal-600 mr-2 text-base"></i>
+                        Định Nghĩa Chuẩn Y Khoa Của CKM Syndrome (AHA/ACC/ADA/ASN 2026):
+                    </h3>
+                    <p class="text-xs text-slate-800 mt-2 leading-relaxed font-medium">
+                        <strong>Hội chứng Tim mạch - Thận - Chuyển hóa (Cardiovascular-Kidney-Metabolic Syndrome - CKM)</strong> là một rối loạn toàn thân đa hệ thống, tạo ra tương tác bệnh lý vòng xoắn giữa các yếu tố nguy cơ chuyển hóa (Béo phì, ĐTĐ2), Bệnh thận mạn (CKD) và Hệ thống tim mạch (Xơ vữa động mạch, Suy tim). Tương tác bất lợi này làm gia tăng tốc độ suy giảm chức năng cơ quan đích và nguy cơ tử vong do tim mạch vượt trội.
+                    </p>
+                </div>
+
+                <!-- 5 Stages Grid with Vivid Colors & High Contrast -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3.5">
+                    
+                    <!-- Stage 0 -->
+                    <div class="clinical-card p-4 flex flex-col justify-between border-t-4 border-t-emerald-500 bg-gradient-to-b from-emerald-50/40 to-white">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-black bg-emerald-600 text-white px-2.5 py-0.5 rounded-md shadow-sm">STAGE 0</span>
+                                <i class="fa-solid fa-shield-heart text-emerald-600 text-lg"></i>
+                            </div>
+                            <h4 class="font-extrabold text-emerald-950 text-xs mb-2">Không Có Yếu Tố CKM</h4>
+                            <ul class="text-[11px] text-slate-700 space-y-1.5 list-disc pl-3 font-medium">
+                                <li>BMI bình thường (&lt;23 Châu Á)</li>
+                                <li>Đường huyết & HA tối ưu</li>
+                                <li>Lipid máu bình thường</li>
+                                <li>Chưa tổn thương Tim/Thận</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-emerald-100 text-[10px] text-emerald-800 font-extrabold flex items-center">
+                            <i class="fa-solid fa-bullseye mr-1 text-emerald-600"></i> Dự phòng cấp 0 (Primordial)
+                        </div>
+                    </div>
+
+                    <!-- Stage 1 -->
+                    <div class="clinical-card p-4 flex flex-col justify-between border-t-4 border-t-blue-500 bg-gradient-to-b from-blue-50/40 to-white">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-black bg-blue-600 text-white px-2.5 py-0.5 rounded-md shadow-sm">STAGE 1</span>
+                                <i class="fa-solid fa-weight-scale text-blue-600 text-lg"></i>
+                            </div>
+                            <h4 class="font-extrabold text-blue-950 text-xs mb-2">Thừa Cân / Rối Loạn Mỡ</h4>
+                            <ul class="text-[11px] text-slate-700 space-y-1.5 list-disc pl-3 font-medium">
+                                <li>BMI ≥ 23 kg/m² / béo bụng</li>
+                                <li>Tiền đái tháo đường (5.7-6.4%)</li>
+                                <li>Dung nạp glucose thất thường</li>
+                                <li>Chưa có HTN hoặc CKD</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-blue-100 text-[10px] text-blue-800 font-extrabold flex items-center">
+                            <i class="fa-solid fa-bullseye mr-1 text-blue-600"></i> Giảm cân & Đảo ngược RLCH
+                        </div>
+                    </div>
+
+                    <!-- Stage 2 -->
+                    <div class="clinical-card p-4 flex flex-col justify-between border-t-4 border-t-amber-500 bg-gradient-to-b from-amber-50/40 to-white">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-black bg-amber-600 text-white px-2.5 py-0.5 rounded-md shadow-sm">STAGE 2</span>
+                                <i class="fa-solid fa-disease text-amber-600 text-lg"></i>
+                            </div>
+                            <h4 class="font-extrabold text-amber-950 text-xs mb-2">Yếu Tố Chuyển Hóa / CKD</h4>
+                            <ul class="text-[11px] text-slate-700 space-y-1.5 list-disc pl-3 font-medium">
+                                <li>Đái tháo đường tuýp 2</li>
+                                <li>Tăng huyết áp lâm sàng</li>
+                                <li>Triglyceride cao / RLM</li>
+                                <li>CKD (eGFR &lt;60 / UACR ≥30)</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-amber-100 text-[10px] text-amber-800 font-extrabold flex items-center">
+                            <i class="fa-solid fa-bullseye mr-1 text-amber-600"></i> KS đa yếu tố & Bảo vệ thận
+                        </div>
+                    </div>
+
+                    <!-- Stage 3 -->
+                    <div class="clinical-card p-4 flex flex-col justify-between border-t-4 border-t-orange-500 bg-gradient-to-b from-orange-50/40 to-white">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-black bg-orange-600 text-white px-2.5 py-0.5 rounded-md shadow-sm">STAGE 3</span>
+                                <i class="fa-solid fa-heart-circle-bolt text-orange-600 text-lg"></i>
+                            </div>
+                            <h4 class="font-extrabold text-orange-950 text-xs mb-2">CVD Cận Lâm Sàng</h4>
+                            <ul class="text-[11px] text-slate-700 space-y-1.5 list-disc pl-3 font-medium">
+                                <li>CAC score &gt;0 hoặc &gt;100</li>
+                                <li>Dày thất trái (LVH Echo)</li>
+                                <li>hs-cTn hoặc NT-proBNP tăng</li>
+                                <li>PREVENT 10y risk ≥ 20%</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-orange-100 text-[10px] text-orange-800 font-extrabold flex items-center">
+                            <i class="fa-solid fa-bullseye mr-1 text-orange-600"></i> Tăng cường bảo vệ Tim-Thận
+                        </div>
+                    </div>
+
+                    <!-- Stage 4 -->
+                    <div class="clinical-card p-4 flex flex-col justify-between border-t-4 border-t-rose-600 bg-gradient-to-b from-rose-50/40 to-white">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-[11px] font-black bg-rose-600 text-white px-2.5 py-0.5 rounded-md shadow-sm">STAGE 4</span>
+                                <i class="fa-solid fa-heart-crack text-rose-600 text-lg"></i>
+                            </div>
+                            <h4 class="font-extrabold text-rose-950 text-xs mb-2">CVD Lâm Sàng</h4>
+                            <ul class="text-[11px] text-slate-700 space-y-1.5 list-disc pl-3 font-medium">
+                                <li><strong>4A:</strong> CVD lâm sàng (Suy tim, ACS, PAD) - Chưa ESRD</li>
+                                <li><strong>4B:</strong> CVD lâm sàng + Thận giai đoạn cuối (ESRD)</li>
+                            </ul>
+                        </div>
+                        <div class="mt-3 pt-2 border-t border-rose-100 text-[10px] text-rose-800 font-extrabold flex items-center">
+                            <i class="fa-solid fa-bullseye mr-1 text-rose-600"></i> GDMT 4 trụ cột & Phục hồi
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: ĐIỂM MỚI ĐỘT PHÁ & BẢNG SO SÁNH -->
+        <section id="novelties" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-bolt"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 2: ĐIỂM MỚI ĐỘT PHÁ & BẢNG SO SÁNH (WHAT'S NEW)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">6 Thay đổi mang tính cách mạng so với các hướng dẫn chuyên khoa đơn lẻ trước đây</p>
+                </div>
+            </div>
+
+            <!-- 6 Key Highlights Grid with Colorful Banners -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                
+                <div class="clinical-card p-4 flex items-start space-x-3 border-l-4 border-l-teal-600 bg-gradient-to-r from-teal-50/30 to-white">
+                    <div class="bg-teal-600 text-white font-black p-2.5 rounded-xl text-xs min-w-[34px] text-center shadow-md">1</div>
+                    <div class="text-xs space-y-1">
+                        <h4 class="font-extrabold text-slate-900 text-xs">Đồng Thuận Liên Chuyên Khoa</h4>
+                        <p class="text-slate-700 leading-relaxed font-medium">Hợp nhất giữa AHA, ACC, ADA và ASN dỡ bỏ "rào cản điều trị riêng rẽ" theo cơ quan.</p>
+                    </div>
+                </div>
+
+                <div class="clinical-card p-4 flex items-start space-x-3 border-l-4 border-l-sky-600 bg-gradient-to-r from-sky-50/30 to-white">
+                    <div class="bg-sky-600 text-white font-black p-2.5 rounded-xl text-xs min-w-[34px] text-center shadow-md">2</div>
+                    <div class="text-xs space-y-1">
+                        <h4 class="font-extrabold text-slate-900 text-xs">Thang Điểm PREVENT Thay PCE</h4>
+                        <p class="text-slate-700 leading-relaxed font-medium">Tính nguy cơ 10 & 30 năm ASCVD + Suy tim, tích hợp eGFR, UACR & Yếu tố Xã hội quyết định sức khỏe (SDOH: thu nhập, tiếp cận y tế, an ninh lương thực — khuyến cáo sàng lọc thường quy để cá thể hóa cường độ can thiệp).</p>
+                    </div>
+                </div>
+
+                <div class="clinical-card p-4 flex items-start space-x-3 border-l-4 border-l-emerald-600 bg-gradient-to-r from-emerald-50/30 to-white">
+                    <div class="bg-emerald-600 text-white font-black p-2.5 rounded-xl text-xs min-w-[34px] text-center shadow-md">3</div>
+                    <div class="text-xs space-y-1">
+                        <h4 class="font-extrabold text-slate-900 text-xs">GLP-1 RA & Tirzepatide [Class I]</h4>
+                        <p class="text-slate-700 leading-relaxed font-medium">Khuyến cáo mức Class I cho Béo phì / ĐTĐ2 có nguy cơ Tim-Thận giúp giảm MACE & bảo vệ thận.</p>
+                    </div>
+                </div>
+
+                <div class="clinical-card p-4 flex items-start space-x-3 border-l-4 border-l-amber-600 bg-gradient-to-r from-amber-50/30 to-white">
+                    <div class="bg-amber-600 text-white font-black p-2.5 rounded-xl text-xs min-w-[34px] text-center shadow-md">4</div>
+                    <div class="text-xs space-y-1">
+                        <h4 class="font-extrabold text-slate-900 text-xs">Tầm Soát Bắt Buộc Đạm Niệu (UACR)</h4>
+                        <p class="text-slate-700 leading-relaxed font-medium">Yêu cầu xét nghiệm eGFR + UACR đồng thời hàng năm từ Stage 2 để phát hiện tổn thương thận sớm.</p>
+                    </div>
+                </div>
+
+                <div class="clinical-card p-4 flex items-start space-x-3 border-l-4 border-l-indigo-600 bg-gradient-to-r from-indigo-50/30 to-white">
+                    <div class="bg-indigo-600 text-white font-black p-2.5 rounded-xl text-xs min-w-[34px] text-center shadow-md">5</div>
+                    <div class="text-xs space-y-1">
+                        <h4 class="font-extrabold text-slate-900 text-xs">Thuốc ns-MRA Finerenone Nền Tảng</h4>
+                        <p class="text-slate-700 leading-relaxed font-medium">Đưa Finerenone lên mức <span class="cor-badge cor-1 scale-90">Class I - LOE A</span> cho bệnh nhân CKD + ĐTĐ2 có đạm niệu.</p>
+                    </div>
+                </div>
+
+                <div class="clinical-card p-4 flex items-start space-x-3 border-l-4 border-l-purple-600 bg-gradient-to-r from-purple-50/30 to-white">
+                    <div class="bg-purple-600 text-white font-black p-2.5 rounded-xl text-xs min-w-[34px] text-center shadow-md">6</div>
+                    <div class="text-xs space-y-1">
+                        <h4 class="font-extrabold text-slate-900 text-xs">Phẫu Thuật Giảm Béo / Chuyển Hóa</h4>
+                        <p class="text-slate-700 leading-relaxed font-medium">Khuyến cáo <span class="cor-badge cor-1 scale-90">Class I - LOE B</span> cho CKM Stage 1-3 có BMI ≥35 kg/m² kháng trị với thuốc.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Comparison Table in Vibrant Light Theme -->
+            <div class="clinical-card overflow-hidden shadow-sm">
+                <div class="bg-gradient-to-r from-slate-800 to-teal-900 p-3.5 font-black text-xs text-white flex items-center border-b border-slate-700">
+                    <i class="fa-solid fa-code-compare mr-2 text-teal-300"></i>
+                    BẢNG SO SÁNH CHI TIẾT: GUIDELINE CŨ VS GUIDELINE CKM 2026
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left text-slate-800">
+                        <thead class="bg-slate-200 text-slate-950 font-black uppercase border-b border-slate-300">
+                            <tr>
+                                <th class="p-3 w-1/4">Nội Dung So Sánh</th>
+                                <th class="p-3 w-3/8 text-slate-600">Guideline Cũ (ACC/AHA 2018, ADA 2023, KDIGO 2023)</th>
+                                <th class="p-3 w-3/8 text-teal-950 bg-teal-100/70 font-black">Guideline Mới (AHA/ACC/ADA/ASN CKM 2026)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 font-medium">
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-extrabold text-slate-900">Mô Hình Quản Lý Bệnh</td>
+                                <td class="p-3 text-slate-600">Độc lập từng chuyên khoa (Tim mạch, Thận, Nội tiết quản lý riêng).</td>
+                                <td class="p-3 bg-teal-50/50 font-bold text-teal-950">Mô hình liên chuyên khoa CKM Syndrome toàn diện tích hợp.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-extrabold text-slate-900">Thang Điểm Tiên Lượng</td>
+                                <td class="p-3 text-slate-600">PCE (Pooled Cohort Equations) chỉ tính biến cố ASCVD 10 năm.</td>
+                                <td class="p-3 bg-teal-50/50 font-bold text-teal-950">PREVENT Equations: Tính 10 & 30 năm ASCVD + Suy tim, tích hợp eGFR, UACR & SDOH.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-extrabold text-slate-900">GLP-1 RA / Tirzepatide</td>
+                                <td class="p-3 text-slate-600">Chỉ định thứ phát khi ĐTĐ2 chưa đạt mục tiêu hoặc hạ cân.</td>
+                                <td class="p-3 bg-teal-50/50 font-bold text-teal-950"><span class="cor-badge cor-1 mr-1">Class I</span> Khuyến cáo ưu tiên giảm MACE & bảo vệ thận từ Stage 1-4.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-extrabold text-slate-900">Tầm Soát Bệnh Thận Mạn</td>
+                                <td class="p-3 text-slate-600">Thường chỉ xét nghiệm eGFR; UACR hay bị bỏ sót.</td>
+                                <td class="p-3 bg-teal-50/50 font-bold text-teal-950"><span class="cor-badge cor-1 mr-1">Class I</span> Bắt buộc làm eGFR + UACR định kỳ hàng năm ở Stage 2+.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-extrabold text-slate-900">Kháng Aldosterone (Finerenone)</td>
+                                <td class="p-3 text-slate-600">Khuyến cáo bổ trợ Class IIa/IIb khi đường huyết/HA không đạt.</td>
+                                <td class="p-3 bg-teal-50/50 font-bold text-teal-950"><span class="cor-badge cor-1 mr-1">Class I</span> Thuốc nền tảng giảm biến cố tim mạch & suy thận tiến triển.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: LƯU ĐỒ CHẨN ĐOÁN -->
+        <section id="algorithm" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-diagram-project"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 3: LƯU ĐỒ CHẨN ĐOÁN (DIAGNOSTIC ALGORITHM)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Quy trình 4 bước tiếp cận lâm sàng & Ngưỡng cắt (Cut-off values) quan trọng</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Step by step flow chart -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-3.5">
+                    
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-slate-700 bg-gradient-to-b from-slate-100/60 to-white">
+                        <div class="bg-slate-800 text-white text-[10px] font-black px-2.5 py-0.5 rounded uppercase w-max shadow-sm">BƯỚC 1</div>
+                        <h4 class="font-extrabold text-slate-900 text-xs">Đánh Giá Thể Trạng & Đường Huyết</h4>
+                        <ul class="text-[11px] text-slate-700 space-y-1 font-medium">
+                            <li>• Đo BMI & Vòng eo</li>
+                            <li>• Glucose máu lúc đói / HbA1c</li>
+                            <li>• Huyết áp phòng khám</li>
+                        </ul>
+                        <div class="bg-amber-100 text-amber-900 p-2 rounded-lg text-[10px] border border-amber-300 font-extrabold">
+                            Cut-off: BMI ≥23, HbA1c 5.7-6.4%, HA ≥130/80 ➔ <strong>Stage 1 - 2</strong>
+                        </div>
+                    </div>
+
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-teal-600 bg-gradient-to-b from-teal-50/60 to-white">
+                        <div class="bg-teal-600 text-white text-[10px] font-black px-2.5 py-0.5 rounded uppercase w-max shadow-sm">BƯỚC 2</div>
+                        <h4 class="font-extrabold text-slate-900 text-xs">Đánh Giá Chức Năng Thận Chi Tiết</h4>
+                        <ul class="text-[11px] text-slate-700 space-y-1 font-medium">
+                            <li>• eGFR (CKD-EPI 2021)</li>
+                            <li>• UACR (Albumin/Creatinine niệu)</li>
+                            <li>• Lipid máu (TG, HDL, ApoB)</li>
+                        </ul>
+                        <div class="bg-teal-100 text-teal-950 p-2 rounded-lg text-[10px] border border-teal-300 font-extrabold">
+                            Cut-off: eGFR &lt;60 hoặc UACR ≥30 mg/g ➔ <strong>Stage 2 CKD</strong>
+                        </div>
+                    </div>
+
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-orange-500 bg-gradient-to-b from-orange-50/60 to-white">
+                        <div class="bg-orange-500 text-white text-[10px] font-black px-2.5 py-0.5 rounded uppercase w-max shadow-sm">BƯỚC 3</div>
+                        <h4 class="font-extrabold text-slate-900 text-xs">Tầm Soát CVD Cận Lâm Sàng</h4>
+                        <ul class="text-[11px] text-slate-700 space-y-1 font-medium">
+                            <li>• Thang điểm PREVENT</li>
+                            <li>• CAC Score (Điểm vôi hóa)</li>
+                            <li>• Biomarkers: hs-cTn, NT-proBNP</li>
+                            <li>• Siêu âm tim (Tìm LVH)</li>
+                        </ul>
+                        <div class="bg-orange-100 text-orange-950 p-2 rounded-lg text-[10px] border border-orange-300 font-extrabold">
+                            Cut-off: PREVENT ≥20%, CAC &gt;0, LVH ➔ <strong>Stage 3</strong>
+                        </div>
+                    </div>
+
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-rose-600 bg-gradient-to-b from-rose-50/60 to-white">
+                        <div class="bg-rose-600 text-white text-[10px] font-black px-2.5 py-0.5 rounded uppercase w-max shadow-sm">BƯỚC 4</div>
+                        <h4 class="font-extrabold text-slate-900 text-xs">Xác Định CVD Lâm Sàng</h4>
+                        <ul class="text-[11px] text-slate-700 space-y-1 font-medium">
+                            <li>• Chẩn đoán Suy tim (HF)</li>
+                            <li>• Bệnh mạch vành (CAD/ACS)</li>
+                            <li>• Đột quỵ / Bệnh ĐM Ngoại biên</li>
+                            <li>• Thận giai đoạn cuối (ESRD)</li>
+                        </ul>
+                        <div class="bg-rose-100 text-rose-950 p-2 rounded-lg text-[10px] border border-rose-300 font-extrabold">
+                            Phân loại: <strong>Stage 4A</strong> (Chưa ESRD) vs <strong>Stage 4B</strong> (Có ESRD)
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Cut-off Summary Grid -->
+                <div class="clinical-card p-4 text-xs">
+                    <h4 class="font-black text-teal-950 mb-2 uppercase text-[11px] tracking-wider flex items-center">
+                        <i class="fa-solid fa-list-check text-teal-600 mr-2"></i> Tóm Tắt Các Ngưỡng Cắt (Cut-Off Values) Lâm Sàng Cần Nhớ:
+                    </h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-[11px] font-semibold">
+                        <div class="bg-emerald-50 p-2.5 rounded-lg border border-emerald-200">
+                            <span class="text-slate-600 block">UACR Bình Thường:</span>
+                            <strong class="text-emerald-800 text-xs">&lt; 30 mg/g</strong>
+                        </div>
+                        <div class="bg-amber-50 p-2.5 rounded-lg border border-amber-200">
+                            <span class="text-slate-600 block">UACR Tăng (Micro/Macro):</span>
+                            <strong class="text-amber-800 text-xs">30 - 300 / &gt;300 mg/g</strong>
+                        </div>
+                        <div class="bg-rose-50 p-2.5 rounded-lg border border-rose-200">
+                            <span class="text-slate-600 block">eGFR Suy Thận:</span>
+                            <strong class="text-rose-800 text-xs">&lt; 60 mL/min/1.73m²</strong>
+                        </div>
+                        <div class="bg-orange-50 p-2.5 rounded-lg border border-orange-200">
+                            <span class="text-slate-600 block">Nguy Cơ PREVENT 10 năm:</span>
+                            <strong class="text-orange-800 text-xs">≥10% (Cao) / ≥20% (Rất cao)</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PHÁC ĐỒ & BỐN TRỤ CỘT ĐIỀU TRỊ -->
+        <section id="treatment" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 4: PHÁC ĐỒ & BỐN TRỤ CỘT ĐIỀU TRỊ (TREATMENT PILLARS)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Bốn nhóm thuốc nền tảng Class I, liều khởi đầu, liều đích & Cảnh báo đỏ lâm sàng</p>
+                </div>
+            </div>
+
+            <!-- CRITICAL CLINICAL RED FLAG ALERT BOX -->
+            <div class="clinical-warning-box p-4 space-y-2.5 shadow-md">
+                <div class="flex items-center space-x-2.5 text-rose-900 font-black text-sm">
+                    <div class="bg-rose-600 text-white p-2 rounded-xl shadow"><i class="fa-solid fa-triangle-exclamation text-base"></i></div>
+                    <h3 class="uppercase tracking-wide">CẢNH BẢO ĐỎ LÂM SÀNG SỐNG CÒN DÀNH CHO BÁC SĨ (CRITICAL RED FLAGS)</h3>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-900 font-medium">
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm">
+                        <strong class="text-rose-900 block mb-1 font-black">1. Hiện Tượng eGFR Giảm Thoáng Qua &lt; 30%:</strong>
+                        Mức eGFR giảm dưới 30% trong 2-4 tuần đầu khi khởi dùng SGLT2i hoặc RAASi là <i>đáp ứng sinh lý có lợi</i> (giảm áp lực lọc cầu thận). <strong>KHÔNG ĐƯỢC NGỪNG THUỐC!</strong> Chỉ ngưng khi eGFR giảm &gt; 30%.
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm">
+                        <strong class="text-amber-900 block mb-1 font-black">2. Nguy Cơ Tăng Kali Máu Khi Dùng Finerenone:</strong>
+                        Theo dõi Kali máu tại thời điểm 4 tuần sau khởi đầu/tăng liều. Nếu K+ &gt; 5.5 mmol/L: Tạm ngưng Finerenone và khởi động lại khi K+ ≤ 5.0 mmol/L.
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm">
+                        <strong class="text-amber-900 block mb-1 font-black">3. Nguy Cơ Nhiễm Toan Ceton Đường Huyết Bình Thường (euDKA):</strong>
+                        Tạm ngưng SGLT2i ít nhất <strong>3 - 4 ngày</strong> trước các phẫu thuật lớn hoặc trong giai đoạn bệnh cấp tính nặng.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 Pillars Grid in Uniform Light Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <!-- Pillar 1: SGLT2i -->
+                <div class="clinical-card p-5 space-y-3 hover:border-teal-500 transition-all border-t-4 border-t-teal-600">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="cor-badge cor-1">Class I - LOE A</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1.5">1. Thuốc Ức Chế SGLT2 (SGLT2 Inhibitors)</h3>
+                        </div>
+                        <div class="bg-teal-100 text-teal-800 p-2.5 rounded-xl text-xl shadow-sm"><i class="fa-solid fa-capsules"></i></div>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                        <strong>Chỉ định Core:</strong> CKM Stage 2-4 có ĐTĐ2, CKD (eGFR ≥20 mL/min) hoặc Suy tim (HFpEF/HFrEF).
+                    </p>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-300 text-xs space-y-2">
+                        <div class="flex justify-between border-b border-slate-200 pb-1.5">
+                            <span class="font-extrabold text-slate-900">Dapagliflozin:</span>
+                            <span class="text-teal-900 font-extrabold">10 mg x 1 lần/ngày (Liều duy nhất)</span>
+                        </div>
+                        <div class="flex justify-between pt-0.5">
+                            <span class="font-extrabold text-slate-900">Empagliflozin:</span>
+                            <span class="text-teal-900 font-extrabold">10 mg x 1 lần/ngày (Liều duy nhất)</span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-600 italic font-semibold">*Lưu ý: Không cần dò liều. Tiếp tục duy trì ngay cả khi eGFR giảm dưới 20 trong quá trình điều trị cho đến khi lọc máu.</p>
+                </div>
+
+                <!-- Pillar 2: GLP-1 RA / Dual Agonist -->
+                <div class="clinical-card p-5 space-y-3 hover:border-teal-500 transition-all border-t-4 border-t-sky-600">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="cor-badge cor-1">Class I - LOE A (Stage 3-4)</span>
+                            <span class="cor-badge cor-2a">Class IIa (Stage 1, giảm cân đơn thuần)</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1.5">2. Đồng Vận GLP-1 RA / Kép GLP-1/GIP</h3>
+                        </div>
+                        <div class="bg-sky-100 text-sky-800 p-2.5 rounded-xl text-xl shadow-sm"><i class="fa-solid fa-syringe"></i></div>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                        <strong>Chỉ định Core:</strong> CKM Stage 1-4 kèm Thừa cân/Béo phì (BMI ≥27) hoặc ĐTĐ2. Mức Class I - LOE A (giảm MACE, biến cố thận) dựa trên RCT kết cục cứng ở nhóm <strong>đã có ASCVD xác lập</strong> (SELECT) hoặc <strong>ĐTĐ2 + CKD</strong> (FLOW); ở Stage 1 (chưa tổn thương cơ quan đích, mục tiêu giảm cân đơn thuần) mức khuyến cáo thấp hơn (IIa) — <strong>không nên xem đây là một mức COR đồng nhất cho toàn bộ Stage 1-4</strong>.
+                    </p>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-300 text-xs space-y-2">
+                        <div>
+                            <div class="flex justify-between font-extrabold text-slate-900 mb-1">
+                                <span>Semaglutide (Tăng liều mỗi 4 tuần):</span>
+                                <span class="text-sky-900">0.25 ➔ 0.5 ➔ 1.0 ➔ Đích 2.4mg/tuần</span>
+                            </div>
+                        </div>
+                        <div class="border-t border-slate-200 pt-1.5">
+                            <div class="flex justify-between font-extrabold text-slate-900 mb-1">
+                                <span>Tirzepatide (Tăng liều mỗi 4 tuần):</span>
+                                <span class="text-sky-900">2.5 ➔ 5.0 ➔ 7.5 ➔ Đích 15mg/tuần</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-600 italic font-semibold">*Lưu ý: Dò liều chậm để giảm tác dụng phụ đường tiêu hóa (nôn, buồn nôn).</p>
+                </div>
+
+                <!-- Pillar 3: ns-MRA (Finerenone) -->
+                <div class="clinical-card p-5 space-y-3 hover:border-teal-500 transition-all border-t-4 border-t-indigo-600">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="cor-badge cor-1">Class I - LOE A</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1.5">3. Kháng Aldosterone Phi Steroid (Finerenone)</h3>
+                        </div>
+                        <div class="bg-indigo-100 text-indigo-800 p-2.5 rounded-xl text-xl shadow-sm"><i class="fa-solid fa-pills"></i></div>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                        <strong>Chỉ định Core:</strong> CKM Stage 2-4 có ĐTĐ2 + CKD (UACR ≥30 mg/g, eGFR ≥25 mL/min, K+ ≤4.8 mmol/L).
+                    </p>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-300 text-xs space-y-2">
+                        <div class="flex justify-between border-b border-slate-200 pb-1.5">
+                            <span class="font-extrabold text-slate-900">eGFR 25–60 mL/min:</span>
+                            <span class="text-indigo-900 font-extrabold">Khởi đầu 10 mg/ngày ➔ Tăng 20 mg/ngày sau 4 tuần</span>
+                        </div>
+                        <div class="flex justify-between pt-0.5">
+                            <span class="font-extrabold text-slate-900">eGFR ≥60 mL/min:</span>
+                            <span class="text-indigo-900 font-extrabold">Khởi đầu 20 mg x 1 lần/ngày</span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-600 italic font-semibold">*Lưu ý: Ưu việt hơn Spironolactone vì ít gây tụt HA và nguy cơ tăng Kali máu thấp hơn. Mức Class I chỉ áp dụng đúng phân nhóm ĐTĐ2 + CKD có albumin niệu như tiêu chuẩn nêu trên (FIDELIO-DKD/FIGARO-DKD) — <strong>không phải khuyến cáo nền tảng cho mọi bệnh nhân CKD nói chung</strong>.</p>
+                </div>
+
+                <!-- Pillar 4: RAASi & Statins -->
+                <div class="clinical-card p-5 space-y-3 hover:border-teal-500 transition-all border-t-4 border-t-rose-600">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="cor-badge cor-1">ACEi/ARB: Class I - LOE A (có đạm niệu)</span>
+                            <span class="cor-badge cor-1">Statin cường độ cao: Class I (Stage 3-4 / nguy cơ PREVENT rất cao)</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1.5">4. RAASi (ACEi/ARB) & Statin Cường Độ Cao</h3>
+                        </div>
+                        <div class="bg-rose-100 text-rose-800 p-2.5 rounded-xl text-xl shadow-sm"><i class="fa-solid fa-heart-pulse"></i></div>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed font-medium">
+                        <strong>ACEi/ARB:</strong> Thuốc hạ HA ưu tiên số 1 khi có Đạm niệu. <strong>Statin:</strong> Kiểm soát LDL-C tích cực — mức Class I mạnh nhất áp dụng cho nhóm nguy cơ rất cao theo phân tầng PREVENT hoặc đã có ASCVD/CKM Stage 3-4; ở Stage 1-2 quyết định statin dựa trên tính toán nguy cơ 10 năm cá thể hóa, không mặc định Class I đồng loạt.
+                    </p>
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-300 text-xs space-y-2">
+                        <div class="flex justify-between border-b border-slate-200 pb-1.5">
+                            <span class="font-extrabold text-slate-900">ACEi/ARB:</span>
+                            <span class="text-rose-900 font-extrabold">Dò đến liều tối đa bệnh nhân dung nạp được</span>
+                        </div>
+                        <div class="flex justify-between pt-0.5">
+                            <span class="font-extrabold text-slate-900">Statin Cường độ cao:</span>
+                            <span class="text-rose-900 font-extrabold">Atorvastatin 40-80mg / Rosuvastatin 20-40mg</span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-600 italic font-semibold">*Mục tiêu LDL-C &lt; 70 mg/dL (hoặc &lt; 55 mg/dL ở nhóm nguy cơ rất cao CKM Stage 3-4).</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 5: QUẢN LÝ BỆNH ĐỒNG MẮC -->
+        <section id="special" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-arrows-split-up-and-left"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 5: QUẢN LÝ BỆNH ĐỒNG MẮC & ĐỐI TƯỢNG ĐẶC BIỆT</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Hướng dẫn cá thể hóa trên từng kiểu hình bệnh kèm theo</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
+                
+                <div class="clinical-card p-4 space-y-2 border-l-4 border-l-teal-600">
+                    <div class="flex items-center space-x-2 text-teal-900 font-extrabold text-sm">
+                        <i class="fa-solid fa-cubes-stacked text-teal-600"></i>
+                        <h3>Đái Tháo Đường Tuýp 2 (T2D)</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed font-medium">
+                        • Phối hợp <strong>SGLT2i + GLP-1 RA</strong> ngay từ đầu độc lập với HbA1c nếu có nguy cơ Tim-Thận.<br>
+                        • Mục tiêu HbA1c cá thể hóa (6.5% - 7.5%).
+                    </p>
+                </div>
+
+                <div class="clinical-card p-4 space-y-2 border-l-4 border-l-sky-600">
+                    <div class="flex items-center space-x-2 text-sky-900 font-extrabold text-sm">
+                        <i class="fa-solid fa-kidney text-sky-600"></i>
+                        <h3>Bệnh Thận Mạn (CKD)</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed font-medium">
+                        • Áp dụng bộ 4 trụ cột bảo vệ thận: <strong>(1) ACEi/ARB, (2) SGLT2i, (3) Finerenone, (4) GLP-1 RA</strong>.<br>
+                        • Theo dõi sát eGFR và Kali máu định kỳ.
+                    </p>
+                </div>
+
+                <div class="clinical-card p-4 space-y-2 border-l-4 border-l-amber-600">
+                    <div class="flex items-center space-x-2 text-amber-900 font-extrabold text-sm">
+                        <i class="fa-solid fa-weight-scale text-amber-600"></i>
+                        <h3>Béo Phì & RL Mô Mỡ</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed font-medium">
+                        • Đặt mục tiêu giảm cân <strong>&gt;10 - 15%</strong> thể trọng bằng GLP-1 RA / Tirzepatide giúp cải thiện triệu chứng HFpEF và giảm đạm niệu.
+                    </p>
+                </div>
+
+                <div class="clinical-card p-4 space-y-2 border-l-4 border-l-rose-600">
+                    <div class="flex items-center space-x-2 text-rose-900 font-extrabold text-sm">
+                        <i class="fa-solid fa-gauge-high text-rose-600"></i>
+                        <h3>Tăng Huyết Áp</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed font-medium">
+                        • Mục tiêu Huyết áp <strong>&lt; 130/80 mmHg</strong> cho đa số bệnh nhân CKM <span class="cor-badge cor-1 scale-75">Class I</span>.<br>
+                        • Chọn ACEi/ARB nếu có đạm niệu; kết hợp DHP-CCB hoặc Thiazide-like.
+                    </p>
+                </div>
+
+                <div class="clinical-card p-4 space-y-2 border-l-4 border-l-emerald-600">
+                    <div class="flex items-center space-x-2 text-emerald-900 font-extrabold text-sm">
+                        <i class="fa-solid fa-liver text-emerald-600"></i>
+                        <h3>Gan Nhiễm Mỡ MASLD / MASH</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed font-medium">
+                        • Ưu tiên GLP-1 RA hoặc Tirzepatide giúp giảm tích tụ mỡ trong gan và đảo ngược tiến triển xơ hóa gan ở bệnh nhân CKM.
+                    </p>
+                </div>
+
+                <div class="clinical-card p-4 space-y-2 border-l-4 border-l-purple-600">
+                    <div class="flex items-center space-x-2 text-purple-900 font-extrabold text-sm">
+                        <i class="fa-solid fa-person-cane text-purple-600"></i>
+                        <h3>Người Cao Tuổi & Suy Kiệt</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed font-medium">
+                        • Tránh hạ HA quá mức (&lt;120/70 mmHg). Dùng liều thấp khởi đầu và theo dõi sát nguy cơ hạ đường huyết, tụt HA tư thế.
+                    </p>
+                </div>
+
+                <div class="clinical-card p-4 space-y-2 border-l-4 border-l-teal-800">
+                    <div class="flex items-center space-x-2 text-teal-900 font-extrabold text-sm">
+                        <i class="fa-solid fa-mortar-pestle text-teal-700"></i>
+                        <h3>Vai Trò Dược Sĩ Lâm Sàng Trong Mô Hình CKM</h3>
+                    </div>
+                    <p class="text-slate-700 leading-relaxed font-medium">
+                        • Rà soát tương tác thuốc (đặc biệt Finerenone + ACEi/ARB + lợi tiểu giữ Kali).<br>
+                        • Chuẩn hóa quy trình theo dõi ADR (Kali máu, eGFR, ceton niệu) và tư vấn kỹ thuật tiêm GLP-1 RA/Tirzepatide.<br>
+                        • Tham gia phòng khám liên chuyên khoa: tối ưu hóa liều, đánh giá tuân thủ điều trị dài hạn.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 6: XỬ TRÍ CẤP TÍNH NỘI VIỆN -->
+        <section id="acute" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-truck-medical"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 6: XỬ TRÍ CẤP TÍNH / MẤT BÙ NỘI VIỆN (ACUTE MANAGEMENT)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Phác đồ đợt cấp, tối ưu hóa trước xuất viện & Lịch tái khám ngoại trú</p>
+                </div>
+            </div>
+
+            <div class="clinical-card p-5 space-y-3">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
+                    
+                    <div class="bg-rose-50 border border-rose-300 p-4 rounded-xl space-y-1.5 shadow-sm">
+                        <h4 class="font-black text-rose-950 text-xs flex items-center">
+                            <i class="fa-solid fa-truck-medical mr-2 text-rose-600"></i> 1. Cấp Cứu Ban Đầu Nội Viện
+                        </h4>
+                        <p class="text-slate-800 leading-relaxed font-medium">
+                            • <strong>Suy tim mất bù cấp (ADHF) / CRS Type 1:</strong> Dùng Lợi tiểu quai IV (Furosemide) gấp 2-2.5 lần liều tại nhà.<br>
+                            • Theo dõi sát bilan dịch, Kali máu và Creatinine hàng ngày.
+                        </p>
+                    </div>
+
+                    <div class="bg-teal-50 border border-teal-300 p-4 rounded-xl space-y-1.5 shadow-sm">
+                        <h4 class="font-black text-teal-950 text-xs flex items-center">
+                            <i class="fa-solid fa-pills mr-2 text-teal-600"></i> 2. Khởi Động Thuốc Nền Tảng Trong Viện
+                        </h4>
+                        <p class="text-slate-800 leading-relaxed font-medium">
+                            • <strong>SGLT2i:</strong> Khởi động sớm ngay trong thời gian nằm viện khi huyết động ổn định [Class I - LOE B].<br>
+                            • <strong>ARNI / RAASi:</strong> Tối ưu liều trước khi xuất viện.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-100 border border-slate-300 p-4 rounded-xl space-y-1.5 shadow-sm">
+                        <h4 class="font-black text-slate-950 text-xs flex items-center">
+                            <i class="fa-solid fa-clipboard-check mr-2 text-slate-700"></i> 3. Tiêu Chuẩn Xuất Viện & Re-check
+                        </h4>
+                        <p class="text-slate-800 leading-relaxed font-medium">
+                            • Huyết động ổn định ≥24-48 giờ; hết sung huyết.<br>
+                            • Hẹn tái khám ngoại trú sau <strong>7 – 14 ngày</strong>.<br>
+                            • Kiểm tra lại eGFR, K+ & UACR sau 2 – 4 tuần.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: SWOT & THỰC HÀNH TẠI VIỆT NAM -->
+        <section id="swot" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-chart-line"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 7: ĐÁNH GIÁ PHẢN BIỆN & THỰC HÀNH TẠI VIỆT NAM (SWOT ANALYSIS)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Phân tích SWOT & Khuyến nghị thích ứng thực tế cho hệ thống y tế Việt Nam</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 text-xs">
+                
+                <div class="bg-emerald-50/90 border border-emerald-300 p-4 rounded-xl space-y-2 shadow-sm">
+                    <h3 class="font-black text-emerald-950 text-sm flex items-center">
+                        <i class="fa-solid fa-thumbs-up mr-2 text-emerald-600"></i> STRENGTHS (Điểm Mạnh)
+                    </h3>
+                    <ul class="text-slate-800 space-y-1.5 list-disc pl-4 leading-relaxed font-medium">
+                        <li>Xóa bỏ mô hình điều trị "khe hẹp" riêng rẽ từng cơ quan.</li>
+                        <li>Thang điểm PREVENT có độ chính xác cao hơn hẳn PCE cũ trong tiên lượng suy tim và biến cố thận.</li>
+                        <li>Bằng chứng EBM cực mạnh từ chuỗi RCTs lớn (DAPA-CKD, EMPA-KIDNEY, FLOW, SELECT, FINEARTS-HF).</li>
+                    </ul>
+                </div>
+
+                <div class="bg-rose-50/90 border border-rose-300 p-4 rounded-xl space-y-2 shadow-sm">
+                    <h3 class="font-black text-rose-950 text-sm flex items-center">
+                        <i class="fa-solid fa-triangle-exclamation mr-2 text-rose-600"></i> LIMITATIONS (Hạn Chế)
+                    </h3>
+                    <ul class="text-slate-800 space-y-1.5 list-disc pl-4 leading-relaxed font-medium">
+                        <li>Dữ liệu nghiên cứu còn hạn chế ở nhóm Bệnh thận giai đoạn cuối (ESRD / eGFR &lt;15) hoặc Suy tim NYHA IV.</li>
+                        <li>Tác dụng phụ cộng dồn: Tụt HA, tăng Kali máu (Finerenone + RAASi) hoặc nhiễm trùng sinh dục (SGLT2i).</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Vietnam Context Box -->
+            <div class="clinical-card p-5 space-y-3 border-l-4 border-l-purple-500">
+                <div class="bg-purple-50 border border-purple-200 rounded-lg px-3 py-2 text-[10.5px] text-purple-900 font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-user-pen"></i>
+                    <span>Ý KIẾN CHUYÊN GIA / BÌNH LUẬN THÍCH ỨNG — không phải khuyến cáo chính thức của guideline AHA/ACC/ADA/ASN 2026, chưa có nguồn dữ liệu BHYT chính thức đối chiếu.</span>
+                </div>
+                <h3 class="font-black text-teal-950 text-sm flex items-center">
+                    <i class="fa-solid fa-hospital-user mr-2 text-teal-600 text-base"></i>
+                    Tính Khả Thi & Lộ Trình Thích Ứng Cho Hệ Thống Y Tế Việt Nam:
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs font-medium">
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-300">
+                        <h4 class="font-black text-amber-900 mb-1 border-b border-slate-200 pb-1">1. Rào Cản Chi Phí & BHYT</h4>
+                        <p class="text-slate-700 leading-relaxed">
+                            Thuốc GLP-1 RA (Semaglutide/Tirzepatide) và Finerenone có giá thành cao, BHYT Việt Nam chưa chi trả rộng rãi cho chỉ định béo phì đơn thuần.
+                        </p>
+                    </div>
+
+                    <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-300">
+                        <h4 class="font-black text-amber-900 mb-1 border-b border-slate-200 pb-1">2. Rào Cản Xét Nghiệm Tuyến Dưới</h4>
+                        <p class="text-slate-700 leading-relaxed">
+                            Xét nghiệm UACR và NT-proBNP chưa phổ cập thường quy ở các Trung tâm Y tế Tuyến Huyện/Xã, dễ bỏ sót CKM Stage 2 - 3.
+                        </p>
+                    </div>
+
+                    <div class="bg-teal-50 p-3.5 rounded-xl border border-teal-300">
+                        <h4 class="font-black text-teal-950 mb-1 border-b border-teal-200 pb-1">3. Khuyến Nghị Lộ Trình Thích Ứng</h4>
+                        <p class="text-slate-800 leading-relaxed">
+                            • <strong>Ưu tiên phủ rộng bộ ba SGLT2i + ACEi/ARB + Statin</strong> (đã được BHYT chi trả tốt).<br>
+                            • Tập huấn tuyến cơ sở làm xét nghiệm <strong>UACR</strong> định kỳ.<br>
+                            • Thành lập <strong>Phòng khám liên chuyên khoa Tim - Thận - Chuyển hóa</strong> tại các BV Tỉnh/Thành phố.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TÀI LIỆU THAM KHẢO -->
+        <section id="references" class="space-y-3">
+            <div class="flex items-center space-x-2 border-l-4 border-slate-600 pl-3">
+                <i class="fa-solid fa-book-bookmark text-teal-700 text-sm"></i>
+                <h2 class="text-base font-black text-slate-900 uppercase tracking-tight">TÀI LIỆU THAM KHẢO</h2>
+            </div>
+
+            <div class="clinical-card p-4 text-xs font-mono text-slate-800 leading-relaxed bg-slate-50 border border-slate-300 shadow-sm space-y-2">
+                <p>Ndumele CE (Chair), Rodriguez F (Vice Chair), Dixon DL, Khan SS, Mukherjee D, Bajaj M, Bangalore S, Bozkurt B, Breathett K, Clarke SL, de Boer IH, Ellison DH, Evangelista LS, Heffron SP, Kazi DS, Kulshreshtha A, Lingvay I, Low Wang CC, Mercado CA, Morton JM, Neeland IJ, Pagidipati N, Powell-Wiley TM, Rangaswami J, Rao G, Reza N, Saeed A, St. Peter W, Starks JB, Sterling M, Talbot AW, Tran AH, Tuttle KR, VanWagner LB, Vest AR, Virani SS; American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines. 2026 AHA/ACC/ADA/ASN Guideline for the Prevention, Detection, Evaluation, and Management of Cardiovascular-Kidney-Metabolic Syndrome: A Report of the American College of Cardiology/American Heart Association Joint Committee on Clinical Practice Guidelines. <em>Journal of the American College of Cardiology</em>. 2026;87(22 Suppl):e1889-e2007. doi:10.1016/j.jacc.2026.03.056.</p>
+                <p class="text-slate-500 not-italic">Tài liệu này chỉ trích dẫn 1 nguồn gốc duy nhất và không gắn mã số khuyến cáo (recommendation number) theo bản gốc — mọi nội dung Class/LOE trong infographic là <strong>diễn giải tóm tắt</strong>, cần đối chiếu bảng khuyến cáo đầy đủ trong toàn văn JACC trước khi áp dụng ra quyết định lâm sàng cụ thể.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-center text-xs no-print">
+        <div class="max-w-7xl mx-auto px-4 space-y-1 font-medium">
+            <p class="font-bold text-slate-200">Visual Infographic & Interactive Clinical Hub • AHA/ACC/ADA/ASN CKM Syndrome Guideline 2026</p>
+            <p class="text-[11px] text-slate-400">Tài liệu tra cứu lâm sàng Dựa trên Bằng chứng (EBM). Trích dẫn chính thức 1 nguồn duy nhất từ JACC 2026.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic Script -->
+    <script>
+        function calculateCKMStage() {
+            const bmi = parseFloat(document.getElementById('calc-bmi').value) || 0;
+            const hba1c = parseFloat(document.getElementById('calc-hba1c').value) || 0;
+            const sbp = parseFloat(document.getElementById('calc-sbp').value) || 0;
+            const tg = parseFloat(document.getElementById('calc-tg').value) || 0;
+            const egfrInput = document.getElementById('calc-egfr').value;
+            const egfr = parseFloat(egfrInput) || 100;
+            const egfrMissing = egfrInput === '';
+            const uacr = parseFloat(document.getElementById('calc-uacr').value) || 0;
+            
+            const cac = document.getElementById('calc-cac').checked;
+            const lvh = document.getElementById('calc-lvh').checked;
+            const prevent20 = document.getElementById('calc-prevent20').checked;
+
+            const hf = document.getElementById('calc-hf').checked;
+            const ascvd = document.getElementById('calc-ascvd').checked;
+            const esrd = document.getElementById('calc-esrd').checked;
+
+            const resultDiv = document.getElementById('calc-result');
+            const badge = document.getElementById('calc-stage-badge');
+            const title = document.getElementById('calc-stage-title');
+            const desc = document.getElementById('calc-stage-desc');
+            const recs = document.getElementById('calc-recommendations');
+
+            resultDiv.classList.remove('hidden');
+            recs.innerHTML = '';
+            if (egfrMissing) {
+                recs.innerHTML += '<li class="text-amber-800">⚠ Chưa nhập eGFR — hệ thống tạm dùng giá trị mặc định 100 mL/min/1.73m² (giả định chức năng thận bình thường). Vui lòng nhập eGFR thực tế để tránh đánh giá thấp giai đoạn CKM.</li>';
+            }
+
+            // Staging Decision Logic
+            if (hf || ascvd || esrd) {
+                if (esrd) {
+                    badge.className = "px-5 py-3.5 rounded-2xl font-black text-xl text-center shadow-md min-w-[140px] bg-rose-700 text-white border border-rose-800";
+                    badge.innerText = "STAGE 4B";
+                    title.innerText = "Giai Đoạn 4B: CKM Lâm Sàng Kèm Bệnh Thận Giai Đoạn Cuối (ESRD)";
+                    desc.innerText = "Bệnh nhân có biến cố tim mạch lâm sàng (Suy tim/ASCVD) kết hợp với bệnh thận mạn tiến triển nặng cần lọc máu hoặc ghép thận.";
+                } else {
+                    badge.className = "px-5 py-3.5 rounded-2xl font-black text-xl text-center shadow-md min-w-[140px] bg-rose-600 text-white border border-rose-700";
+                    badge.innerText = "STAGE 4A";
+                    title.innerText = "Giai Đoạn 4A: CKM Lâm Sàng (Clinical CVD)";
+                    desc.innerText = "Xác định bệnh tim mạch lâm sàng (Suy tim, Bệnh vành, Đột quỵ, PAD) chưa có Bệnh thận giai đoạn cuối.";
+                }
+                recs.innerHTML += '<li>Tối ưu hóa phác đồ điều trị nội khoa chuẩn GDMT với 4 trụ cột.</li>';
+                recs.innerHTML += '<li>Dùng SGLT2i + GLP-1 RA [Class I] để giảm tỷ lệ tái nhập viện do suy tim & tử vong tim mạch.</li>';
+                recs.innerHTML += '<li>Kiểm soát Huyết áp &lt; 130/80 mmHg và LDL-C tích cực (&lt; 55 mg/dL).</li>';
+            } else if (cac || lvh || prevent20 || uacr >= 300) {
+                badge.className = "px-5 py-3.5 rounded-2xl font-black text-xl text-center shadow-md min-w-[140px] bg-orange-600 text-white border border-orange-700";
+                badge.innerText = "STAGE 3";
+                title.innerText = "Giai Đoạn 3: Bệnh Tim Mạch Cận Lâm Sàng (Subclinical CVD) Trong CKM";
+                desc.innerText = uacr >= 300
+                    ? "Đạm niệu nặng (UACR ≥300 mg/g) — xếp vào nhóm nguy cơ rất cao tương đương tổn thương cơ quan đích cận lâm sàng, dù chưa có CAC/LVH/PREVENT ≥20% ghi nhận."
+                    : "Có tổn thương cơ quan đích cận lâm sàng (CAC score >0, Dày thất trái) hoặc nguy cơ tim mạch 10 năm theo PREVENT ≥ 20%.";
+                recs.innerHTML += '<li>Khởi động tích cực GLP-1 RA / Tirzepatide nếu có Béo phì hoặc ĐTĐ2 [Class I - nhóm ASCVD/ĐTĐ2+CKD].</li>';
+                recs.innerHTML += '<li>Khởi dùng Statin cường độ cao [Class I].</li>';
+                recs.innerHTML += '<li>Dùng SGLT2i + Finerenone nếu có đạm niệu hoặc CKD kèm theo (xét tiêu chuẩn UACR/eGFR/Kali cụ thể).</li>';
+            } else if (hba1c >= 6.5 || sbp >= 130 || egfr < 60 || (uacr >= 30 && uacr < 300)) {
+                badge.className = "px-5 py-3.5 rounded-2xl font-black text-xl text-center shadow-md min-w-[140px] bg-amber-600 text-white border border-amber-700";
+                badge.innerText = "STAGE 2";
+                title.innerText = "Giai Đoạn 2: Có Yếu Tố Nguy Cơ Chuyển Hóa Hoặc Bệnh Thận Mạn";
+                desc.innerText = "Bệnh nhân đã có Đái tháo đường tuýp 2, Tăng huyết áp, hoặc Bệnh thận mạn (eGFR <60 hoặc UACR ≥30 mg/g).";
+                recs.innerHTML += '<li>Khuyên dùng SGLT2i nếu có ĐTĐ2, CKD hoặc UACR ≥30 mg/g [Class I].</li>';
+                recs.innerHTML += '<li>Khuyên dùng Finerenone nếu có ĐTĐ2 + CKD có đạm niệu [Class I].</li>';
+                recs.innerHTML += '<li>Dùng ACEi/ARB liều tối đa nếu có Tăng huyết áp + Albumin niệu.</li>';
+            } else if (bmi >= 23 || (hba1c >= 5.7 && hba1c < 6.5) || tg >= 135) {
+                badge.className = "px-5 py-3.5 rounded-2xl font-black text-xl text-center shadow-md min-w-[140px] bg-blue-600 text-white border border-blue-700";
+                badge.innerText = "STAGE 1";
+                title.innerText = "Giai Đoạn 1: Thừa Cân / Rối Loạn Chức Năng Mô Mỡ";
+                desc.innerText = "Bệnh nhân có BMI ≥ 23 kg/m², tiền đái tháo đường (HbA1c 5.7 - 6.4%), hoặc Triglyceride ≥135 mg/dL (dấu hiệu rối loạn chức năng mô mỡ/chuyển hóa).";
+                recs.innerHTML += '<li>Can thiệp lối sống tích cực: Dinh dưỡng chuẩn, thể dục ≥150 phút/tuần.</li>';
+                recs.innerHTML += '<li>Cân nhắc GLP-1 RA [Class IIa] nếu BMI cao không kiểm soát được bằng chế độ ăn/tập luyện — lưu ý mức khuyến cáo ở Stage 1 thấp hơn Stage 3-4.</li>';
+            } else {
+                badge.className = "px-5 py-3.5 rounded-2xl font-black text-xl text-center shadow-md min-w-[140px] bg-emerald-600 text-white border border-emerald-700";
+                badge.innerText = "STAGE 0";
+                title.innerText = "Giai Đoạn 0: Thể Trạng Tối Ưu (No CKM Risk Factors)";
+                desc.innerText = "Chưa phát hiện bất kỳ yếu tố nguy cơ chuyển hóa, thận hoặc tim mạch nào.";
+                recs.innerHTML += '<li>Duy trì lối sống lành mắt, kiểm tra sức khỏe & xét nghiệm CKM định kỳ mỗi 3-5 năm.</li>';
+            }
+
+            // Scroll down to result
+            resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

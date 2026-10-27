@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn IDSA 2026: Phác đồ Kháng sinh Ưu tiên & Thay thế</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- html2pdf.js, html2canvas, and jsPDF for Single-Page PDF Export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        /* Flat 2D Scene Viewport (không phối cảnh 3D) */
+        #scene-viewport {
+            overflow-x: hidden;
+            overflow-y: scroll;
+            width: 100vw;
+            height: calc(100vh - 64px);
+            position: relative;
+        }
+
+        #flowchart-3d-world {
+            position: relative;
+            min-width: 1680px;
+            padding-bottom: 60px;
+            transition: transform 0.15s ease-out;
+        }
+        #flowchart-scale-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+        }
+
+        /* High-Contrast Light Glass Cards (thiết kế phẳng 2D) */
+        .card-3d {
+            transition: all 0.2s ease-out;
+            background-color: #ffffff;
+            box-shadow: 0 4px 14px -2px rgba(15, 23, 42, 0.08),
+                        0 2px 6px -1px rgba(15, 23, 42, 0.04);
+            overflow-wrap: break-word;
+            word-break: break-word;
+            box-sizing: border-box;
+        }
+
+        /* CRE sub-columns (KPC / NDM-MBL / OXA-48): Flexbox thay vì CSS Grid vì
+           html2canvas render Grid không ổn định khi xuất PDF. Chiều rộng 3 cột
+           được chia đều bằng flex-1 (inline); chiều cao từng "hàng" (header/
+           rx/alt) khớp nhau nhờ JS equalizeCREHeights() gọi trước khi chụp. */
+        .subgrid-cre > div {
+            min-width: 0;
+        }
+
+        .card-3d:hover {
+            transform: scale(1.015);
+            box-shadow: 0 10px 24px -4px rgba(15, 23, 42, 0.15),
+                        0 0 12px rgba(99, 102, 241, 0.15);
+            z-index: 50;
+        }
+
+        /* Clean Accent Color Shadows */
+        .glow-esbl { box-shadow: 0 4px 15px rgba(2, 132, 199, 0.15); }
+        .glow-ampc { box-shadow: 0 4px 15px rgba(16, 185, 129, 0.15); }
+        .glow-cre  { box-shadow: 0 4px 15px rgba(234, 88, 12, 0.15); }
+        .glow-dtr  { box-shadow: 0 4px 15px rgba(217, 119, 6, 0.15); }
+        .glow-crab { box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15); }
+        .glow-smalt{ box-shadow: 0 4px 15px rgba(124, 58, 237, 0.15); }
+
+        /* Highlight Search Match (phẳng 2D, không nhấp nháy/không chiều sâu) */
+        .search-matched {
+            border-color: #d97706 !important;
+            box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.35) !important;
+        }
+
+        /* SVG Line Connections overlay */
+        #connector-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+
+        /* PDF Exporting Overrides for Pristine 1-Page Light Printout */
+        .pdf-exporting #flowchart-3d-world {
+            background-color: #ffffff !important;
+            padding: 20px 24px !important;
+            width: 1780px !important;
+            min-width: 1780px !important;
+        }
+
+        .pdf-exporting .card-3d {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important;
+            transform: none !important;
+        }
+
+        @page {
+            size: landscape;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col font-sans overflow-x-hidden">
+
+    <!-- Top Navigation Header -->
+    <header class="h-16 bg-white border-b border-slate-200 px-4 md:px-8 flex items-center justify-between z-40 relative shadow-sm">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-200">
+                <i class="fa-solid fa-diagram-project text-white text-sm"></i>
+            </div>
+            <div>
+                <h1 class="font-extrabold text-sm md:text-base tracking-tight text-slate-900 leading-snug">
+                    Hướng dẫn IDSA 2026: Phác đồ Kháng sinh Ưu tiên & Thay thế
+                </h1>
+                <p class="text-[11px] text-slate-600 font-medium">
+                    Nhiễm trùng Vi khuẩn Gram âm Kháng thuốc (AMR) &bull; <span class="text-indigo-700 font-bold">IDSA</span> = Hiệp hội Bệnh truyền nhiễm Hoa Kỳ
+                </p>
+            </div>
+        </div>
+
+        <!-- Controls Toolbar -->
+        <div class="flex items-center space-x-3">
+            <!-- Search Input -->
+            <div class="relative">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                <input type="text" id="searchInput" placeholder="Tìm vi khuẩn hoặc kháng sinh..." 
+                       class="pl-8 pr-3 py-1.5 text-xs bg-slate-100 border border-slate-300 rounded-lg text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:bg-white w-48 md:w-64 transition-all">
+                <button id="clearSearch" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <button id="btnExportPDF" title="Xuất sơ đồ ra file PDF (1 trang)" class="px-3 py-1.5 text-xs text-white bg-rose-600 hover:bg-rose-700 rounded-lg transition-colors font-bold flex items-center space-x-1.5 shadow-sm">
+                <i class="fa-solid fa-file-pdf text-white"></i>
+                <span>Xuất PDF</span>
+            </button>
+        </div>
+    </header>
+
+    <main id="scene-viewport" class="relative flex-1 bg-slate-50">
+        <!-- Dynamic SVG Connection Layer (đường liền, không đứt nét/nhấp nháy) -->
+        <svg id="connector-canvas" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="grad-blue" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#0284c7"/>
+                    <stop offset="100%" stop-color="#0369a1"/>
+                </linearGradient>
+                <linearGradient id="grad-green" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#059669"/>
+                    <stop offset="100%" stop-color="#047857"/>
+                </linearGradient>
+                <linearGradient id="grad-orange" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ea580c"/>
+                    <stop offset="100%" stop-color="#c2410c"/>
+                </linearGradient>
+                <linearGradient id="grad-amber" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#d97706"/>
+                    <stop offset="100%" stop-color="#b45309"/>
+                </linearGradient>
+                <linearGradient id="grad-royal" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#2563eb"/>
+                    <stop offset="100%" stop-color="#1d4ed8"/>
+                </linearGradient>
+                <linearGradient id="grad-purple" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#7c3aed"/>
+                    <stop offset="100%" stop-color="#6d28d9"/>
+                </linearGradient>
+                <linearGradient id="grad-slate" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#64748b"/>
+                    <stop offset="100%" stop-color="#475569"/>
+                </linearGradient>
+            </defs>
+            <g id="svg-paths-container"></g>
+        </svg>
+
+        <div id="flowchart-scale-wrapper">
+        <div id="flowchart-3d-world" class="p-6 md:p-8 max-w-[1780px] mx-auto flex flex-col items-center">
+
+            <!-- LEVEL 1: Title Header Banner Node -->
+            <div id="node-title" data-node="title" class="card-3d bg-slate-900 text-white border-2 border-indigo-600 rounded-2xl px-10 py-4 text-center shadow-xl relative mb-5 z-20 w-[960px]">
+                <h2 class="text-lg md:text-xl font-black text-white tracking-wide uppercase leading-snug">
+                    Hướng dẫn IDSA 2026: Phác đồ Kháng sinh Ưu tiên & Thay thế cho các Nhiễm trùng<br>Vi khuẩn Gram Âm Kháng thuốc (AMR) Nguy hiểm
+                </h2>
+                <p class="text-xs text-indigo-200 font-bold mt-1">
+                    (IDSA = Infectious Diseases Society of America - Hiệp hội Bệnh truyền nhiễm Hoa Kỳ)
+                </p>
+            </div>
+
+            <!-- LEVEL 2: Target Condition Root Box -->
+            <div id="node-root" data-node="root" class="card-3d bg-sky-900 border-2 border-sky-600 rounded-2xl px-8 py-3 text-center shadow-lg relative mb-10 z-20 w-[540px]">
+                <h3 class="text-lg md:text-xl font-black text-white tracking-tight">
+                    Nhiễm trùng Vi khuẩn<br><span class="text-sky-200 font-extrabold">Gram Âm Kháng thuốc (AMR)</span>
+                </h3>
+            </div>
+
+            <!-- LEVEL 3: 6 Main Resistance Class Columns -->
+            <div class="flex items-stretch gap-4 w-full z-20 mb-12">
+
+                <!-- 1. ESBL-E Column -->
+                <div class="flex flex-col items-center space-y-3 flex-1 min-w-0">
+                    <!-- Class Header Node -->
+                    <div id="node-esbl" data-node="esbl" class="card-3d glow-esbl w-full bg-white border-t-4 border-t-sky-600 border-x border-b border-slate-300 rounded-xl p-3 text-center cursor-pointer">
+                        <h3 class="text-base font-black text-sky-900">ESBL-E</h3>
+                        <p class="text-[10px] text-slate-700 leading-snug mt-0.5 font-semibold">
+                            Enterobacterales sinh &beta;-lactamase phổ rộng
+                        </p>
+                    </div>
+                    <!-- Preferred Therapy Box -->
+                    <div id="node-esbl-rx" data-node="esbl-rx" class="card-3d w-full bg-white border-2 border-sky-400 rounded-xl p-3 text-center text-slate-900 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-sky-700 text-white text-[10px] font-black py-0.5 px-2 rounded-md uppercase tracking-wider mb-2 shadow-sm w-full box-border">
+                                Phác đồ ưu tiên
+                            </div>
+                            <h4 class="text-base font-black text-slate-900 leading-tight">Carbapenem</h4>
+                            <p class="text-xs text-sky-800 font-bold mt-1">(Meropenem hoặc Imipenem)</p>
+                        </div>
+                        <div class="mt-2 pt-2 border-t border-slate-200 text-[10px] text-slate-700 font-medium leading-tight bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+                            Ertapenem có thể dùng cho BN ổn định / xuất viện
+                        </div>
+                    </div>
+                    <!-- Alternative Therapy Box -->
+                    <div id="node-esbl-alt" data-node="esbl-alt" class="card-3d w-full bg-slate-50 border-2 border-dashed border-sky-400 rounded-xl p-3 text-center text-slate-900">
+                        <div class="bg-slate-200 text-sky-900 text-[10px] font-black py-0.5 px-2 rounded-md uppercase tracking-wider mb-2 border border-sky-300 w-full box-border">
+                            Phác đồ thay thế
+                        </div>
+                        <ul class="text-[10px] text-slate-800 font-semibold space-y-1 text-left list-disc list-inside leading-tight">
+                            <li>Cefepime-enmetazobactam</li>
+                            <li>Piperacillin-tazobactam (chỉ cUTI nhẹ/ổn định)</li>
+                            <li>Chuyển đường uống: TMP-SMX, Ciprofloxacin, Levofloxacin (nếu nhạy cảm)</li>
+                            <li>Nitrofurantoin / Fosfomycin (chỉ viêm bàng quang cấp)</li>
+                        </ul>
+                        <p class="text-[9px] text-slate-500 font-semibold italic text-left mt-1.5 pt-1.5 border-t border-slate-300">
+                            * Cefiderocol, CAZ-AVI, MEV, IMI-REL, C/T: chỉ dành riêng khi có bằng chứng kháng carbapenem
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 2. AmpC-E Column -->
+                <div class="flex flex-col items-center space-y-3 flex-1 min-w-0">
+                    <!-- Class Header Node -->
+                    <div id="node-ampc" data-node="ampc" class="card-3d glow-ampc w-full bg-white border-t-4 border-t-emerald-600 border-x border-b border-slate-300 rounded-xl p-3 text-center cursor-pointer">
+                        <h3 class="text-base font-black text-emerald-900">AmpC-E</h3>
+                        <p class="text-[10px] text-slate-700 leading-snug mt-0.5 font-semibold">
+                            Enterobacterales sinh AmpC &beta;-lactamase
+                        </p>
+                    </div>
+                    <!-- Preferred Therapy Box -->
+                    <div id="node-ampc-rx" data-node="ampc-rx" class="card-3d w-full bg-white border-2 border-emerald-400 rounded-xl p-3 text-center text-slate-900 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-emerald-700 text-white text-[10px] font-black py-0.5 px-2 rounded-md uppercase tracking-wider mb-2 shadow-sm w-full box-border">
+                                Phác đồ ưu tiên
+                            </div>
+                            <h4 class="text-base font-black text-slate-900 leading-tight">Cefepime</h4>
+                            <p class="text-xs text-emerald-800 font-bold mt-1">(khi MIC &le; 8 &mu;g/mL: nhạy/SDD*)</p>
+                        </div>
+                        <div class="mt-2 pt-2 border-t border-slate-200 text-[10px] text-slate-700 font-medium leading-tight bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+                            Hạn chế Pip-Tazo nếu nguy cơ cảm ứng AmpC cao
+                        </div>
+                    </div>
+                    <!-- Alternative Therapy Box -->
+                    <div id="node-ampc-alt" data-node="ampc-alt" class="card-3d w-full bg-slate-50 border-2 border-dashed border-emerald-400 rounded-xl p-3 text-center text-slate-900">
+                        <div class="bg-slate-200 text-emerald-900 text-[10px] font-black py-0.5 px-2 rounded-md uppercase tracking-wider mb-2 border border-emerald-300 w-full box-border">
+                            Phác đồ thay thế
+                        </div>
+                        <ul class="text-[10px] text-slate-800 font-semibold space-y-1 text-left list-disc list-inside leading-tight">
+                            <li>Carbapenem (Meropenem, Imipenem, Ertapenem)</li>
+                            <li>Cefepime-enmetazobactam</li>
+                            <li>TMP-SMX, Ciprofloxacin, Levofloxacin (theo KSĐ)</li>
+                            <li>Nitrofurantoin (chỉ viêm bàng quang cấp)</li>
+                        </ul>
+                        <p class="text-[9px] text-slate-500 font-semibold italic text-left mt-1.5 pt-1.5 border-t border-slate-300">
+                            * Cefiderocol, CAZ-AVI, MEV, IMI-REL: chỉ dành riêng khi có bằng chứng kháng carbapenem
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3. CRE Column (Sub-branch) -->
+                <div class="flex flex-col items-center space-y-3 flex-1 min-w-0">
+                    <!-- Class Header Node -->
+                    <div id="node-cre" data-node="cre" class="card-3d glow-cre w-full bg-white border-t-4 border-t-orange-600 border-x border-b border-slate-300 rounded-xl p-3 text-center cursor-pointer">
+                        <h3 class="text-base font-black text-orange-900">CRE</h3>
+                        <p class="text-[10px] text-slate-700 leading-snug mt-0.5 font-semibold">
+                            Enterobacterales kháng carbapenem
+                        </p>
+                    </div>
+
+                    <!-- Step Node: Identify Carbapenemase -->
+                    <div id="node-cre-id" data-node="cre-id" class="card-3d bg-orange-700 border-2 border-orange-600 text-white rounded-lg py-1.5 px-2 text-center w-full">
+                        <div class="text-[10px] font-black text-white uppercase tracking-wide flex items-center justify-center space-x-1">
+                            <i class="fa-solid fa-vial-circle-check text-orange-200 text-xs"></i>
+                            <span>Xác định kiểu gen carbapenemase</span>
+                        </div>
+                    </div>
+
+                    <!-- 3 Carbapenemase Sub-Columns : Flexbox (không dùng CSS Grid vì html2canvas
+                         render Grid không ổn định khi xuất PDF). Chiều cao từng hàng
+                         (header / rx / alt) được ép bằng nhau bằng JS equalizeCREHeights(). -->
+                    <div class="flex gap-1.5 w-full items-stretch subgrid-cre">
+                        <!-- KPC -->
+                        <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+                            <div id="node-kpc" data-node="kpc" class="card-3d bg-white border border-orange-300 rounded-lg p-1.5 text-center flex items-center justify-center">
+                                <span class="font-black text-orange-900 text-[11px] leading-tight">KPC</span>
+                            </div>
+                            <div id="node-kpc-rx" data-node="kpc-rx" class="card-3d bg-white border border-orange-400 rounded-lg p-1.5 text-center flex flex-col">
+                                <span class="text-[8px] font-black bg-orange-600 text-white uppercase px-1 py-0.5 rounded block mb-1 shrink-0">Ưu tiên</span>
+                                <div class="text-[9px] font-bold text-slate-900 leading-tight flex-1 flex items-center justify-center">
+                                    <span>Meropenem-vaborbactam<br><span class="text-slate-400 text-[8px]">hoặc</span><br>Ceftazidime-avibactam<br><span class="text-slate-400 text-[8px]">hoặc</span><br>Imipenem-relebactam</span>
+                                </div>
+                            </div>
+                            <div id="node-kpc-alt" data-node="kpc-alt" class="card-3d bg-slate-50 border border-dashed border-orange-400 rounded-lg p-1.5 text-center flex flex-col">
+                                <span class="text-[8px] font-black bg-slate-200 text-orange-900 uppercase px-1 py-0.5 rounded block mb-1 shrink-0">Thay thế</span>
+                                <div class="text-[9px] font-semibold text-slate-800 leading-tight text-left flex-1">
+                                    • Aztreonam-avibactam<br>• Cefiderocol<br>• Eravacycline / Tigecycline (ngoại trừ nhiễm trùng máu/đường niệu)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NDM / MBL -->
+                        <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+                            <div id="node-ndm" data-node="ndm" class="card-3d bg-white border border-orange-300 rounded-lg p-1.5 text-center flex items-center justify-center">
+                                <span class="font-black text-orange-900 text-[11px] leading-tight">NDM / MBL</span>
+                            </div>
+                            <div id="node-ndm-rx" data-node="ndm-rx" class="card-3d bg-white border border-orange-400 rounded-lg p-1.5 text-center flex flex-col">
+                                <span class="text-[8px] font-black bg-orange-600 text-white uppercase px-1 py-0.5 rounded block mb-1 shrink-0">Ưu tiên</span>
+                                <div class="text-[9px] font-bold text-slate-900 leading-tight flex-1 flex items-center justify-center">
+                                    <span>Aztreonam-avibactam<br><span class="text-slate-400 text-[8px]">hoặc</span><br>Cefiderocol<br><span class="text-slate-400 text-[8px]">(nếu thiếu ATM-AVI:<br>Ceftazidime-avibactam<br>+ Aztreonam)</span></span>
+                                </div>
+                            </div>
+                            <div id="node-ndm-alt" data-node="ndm-alt" class="card-3d bg-slate-50 border border-dashed border-orange-400 rounded-lg p-1.5 text-center flex flex-col">
+                                <span class="text-[8px] font-black bg-slate-200 text-orange-900 uppercase px-1 py-0.5 rounded block mb-1 shrink-0">Thay thế</span>
+                                <div class="text-[9px] font-semibold text-slate-800 leading-tight text-left flex-1">
+                                    • Tigecycline / Eravacycline
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OXA-48-like -->
+                        <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+                            <div id="node-oxa" data-node="oxa" class="card-3d bg-white border border-orange-300 rounded-lg p-1.5 text-center flex items-center justify-center">
+                                <span class="font-black text-orange-900 text-[11px] leading-tight">OXA-48</span>
+                            </div>
+                            <div id="node-oxa-rx" data-node="oxa-rx" class="card-3d bg-white border border-orange-400 rounded-lg p-1.5 text-center flex flex-col">
+                                <span class="text-[8px] font-black bg-orange-600 text-white uppercase px-1 py-0.5 rounded block mb-1 shrink-0">Ưu tiên</span>
+                                <div class="text-[9px] font-bold text-slate-900 leading-tight flex-1 flex items-center justify-center">
+                                    <span>Ceftazidime-avibactam</span>
+                                </div>
+                            </div>
+                            <div id="node-oxa-alt" data-node="oxa-alt" class="card-3d bg-slate-50 border border-dashed border-orange-400 rounded-lg p-1.5 text-center flex flex-col">
+                                <span class="text-[8px] font-black bg-slate-200 text-orange-900 uppercase px-1 py-0.5 rounded block mb-1 shrink-0">Thay thế</span>
+                                <div class="text-[9px] font-semibold text-slate-800 leading-tight text-left flex-1">
+                                    • Cefiderocol<br>• Aztreonam-avibactam<br>• Eravacycline / Tigecycline
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[8px] text-slate-500 font-semibold italic text-left w-full mt-0.5">
+                        * Phối hợp kháng sinh KHÔNG khuyến cáo thường quy cho CRE
+                    </p>
+                </div>
+
+                <!-- 4. DTR P. aeruginosa Column -->
+                <div class="flex flex-col items-center space-y-3 flex-1 min-w-0">
+                    <!-- Class Header Node -->
+                    <div id="node-dtr" data-node="dtr" class="card-3d glow-dtr w-full bg-white border-t-4 border-t-amber-600 border-x border-b border-slate-300 rounded-xl p-3 text-center cursor-pointer">
+                        <h3 class="text-sm font-black text-amber-900">DTR <i>P. aeruginosa</i></h3>
+                        <p class="text-[10px] text-slate-700 leading-snug mt-0.5 font-semibold">
+                            <i>P. aeruginosa</i> kháng thuốc khó điều trị
+                        </p>
+                    </div>
+                    <!-- Preferred Therapy Box -->
+                    <div id="node-dtr-rx" data-node="dtr-rx" class="card-3d w-full bg-white border-2 border-amber-400 rounded-xl p-3 text-center text-slate-900 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-amber-600 text-white text-[10px] font-black py-0.5 px-1.5 rounded-md uppercase tracking-wider mb-2 shadow-sm w-full box-border">
+                                Phác đồ ưu tiên
+                            </div>
+                            <h4 class="text-xs font-black text-slate-900 leading-tight">
+                                Ceftolozane-tazobactam<br>
+                                <span class="text-[9px] text-amber-900 font-bold">HOẶC</span> Ceftazidime-avibactam<br>
+                                <span class="text-[9px] text-amber-900 font-bold">HOẶC</span> Imipenem-relebactam
+                            </h4>
+                        </div>
+                        <div class="mt-2 pt-2 border-t border-slate-200 text-[10px] text-slate-700 font-medium leading-tight bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+                            (Ceftolozane-tazobactam ưu tiên cho nhiễm trùng phổi)
+                        </div>
+                    </div>
+                    <!-- Alternative Therapy Box -->
+                    <div id="node-dtr-alt" data-node="dtr-alt" class="card-3d w-full bg-slate-50 border-2 border-dashed border-amber-400 rounded-xl p-3 text-center text-slate-900">
+                        <div class="bg-slate-200 text-amber-900 text-[10px] font-black py-0.5 px-2 rounded-md uppercase tracking-wider mb-2 border border-amber-300 w-full box-border">
+                            Phác đồ thay thế
+                        </div>
+                        <ul class="text-[10px] text-slate-800 font-semibold space-y-1 text-left list-disc list-inside leading-tight">
+                            <li>Cefiderocol</li>
+                            <li>Colistin / Polymyxin B (phối hợp, khi thiếu các lựa chọn trên)</li>
+                            <li>Amikacin hoặc Tobramycin (1 lần/ngày, chỉ cho cUTI)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 5. CRAB Column -->
+                <div class="flex flex-col items-center space-y-3 flex-1 min-w-0">
+                    <!-- Class Header Node -->
+                    <div id="node-crab" data-node="crab" class="card-3d glow-crab w-full bg-white border-t-4 border-t-blue-600 border-x border-b border-slate-300 rounded-xl p-3 text-center cursor-pointer">
+                        <h3 class="text-base font-black text-blue-900">CRAB</h3>
+                        <p class="text-[10px] text-slate-700 leading-snug mt-0.5 font-semibold">
+                            <i>Acinetobacter baumannii</i> kháng carbapenem
+                        </p>
+                    </div>
+                    <!-- Preferred Therapy Box -->
+                    <div id="node-crab-rx" data-node="crab-rx" class="card-3d w-full bg-white border-2 border-blue-400 rounded-xl p-3 text-center text-slate-900 flex-1 flex flex-col justify-center">
+                        <div class="bg-blue-600 text-white text-[10px] font-black py-0.5 px-2 rounded-md uppercase tracking-wider mb-2 shadow-sm w-full box-border">
+                            Phác đồ ưu tiên
+                        </div>
+                        <h4 class="text-xs font-black text-slate-900 leading-tight">
+                            Sulbactam-durlobactam
+                        </h4>
+                        <div class="my-1.5 text-[9px] font-black text-blue-900 uppercase tracking-wider bg-blue-100 inline-block px-2 py-0.5 rounded-full border border-blue-300">
+                            CỘNG VỚI
+                        </div>
+                        <h4 class="text-xs font-black text-slate-900">
+                            Imipenem <span class="text-[10px] font-normal text-slate-600">hoặc</span> Meropenem
+                        </h4>
+                    </div>
+                    <!-- Alternative Therapy Box -->
+                    <div id="node-crab-alt" data-node="crab-alt" class="card-3d w-full bg-slate-50 border-2 border-dashed border-blue-400 rounded-xl p-3 text-center text-slate-900">
+                        <div class="bg-slate-200 text-blue-900 text-[10px] font-black py-0.5 px-2 rounded-md uppercase tracking-wider mb-2 border border-blue-300 w-full box-border">
+                            Phác đồ thay thế
+                        </div>
+                        <p class="text-[9px] font-bold text-slate-700 mb-1 text-left">(Khi thiếu Sulbactam-durlobactam - phối hợp ít nhất 2 thuốc):</p>
+                        <ul class="text-[10px] text-slate-800 font-semibold space-y-1 text-left list-disc list-inside leading-tight">
+                            <li>Ampicillin-sulbactam (liều cao: 9g sulbactam/ngày)</li>
+                            <li>Minocycline / Tigecycline</li>
+                            <li>Cefiderocol</li>
+                            <li>Polymyxin B / Colistin</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 6. S. maltophilia Column -->
+                <div class="flex flex-col items-center space-y-3 flex-1 min-w-0">
+                    <!-- Class Header Node -->
+                    <div id="node-smalt" data-node="smalt" class="card-3d glow-smalt w-full bg-white border-t-4 border-t-purple-600 border-x border-b border-slate-300 rounded-xl p-3 text-center cursor-pointer">
+                        <h3 class="text-sm font-black text-purple-900"><i>S. maltophilia</i></h3>
+                        <p class="text-[10px] text-slate-700 leading-snug mt-0.5 font-semibold">
+                            <i>Stenotrophomonas maltophilia</i>
+                        </p>
+                    </div>
+                    <!-- Preferred Therapy Box -->
+                    <div id="node-smalt-rx" data-node="smalt-rx" class="card-3d w-full bg-white border-2 border-purple-400 rounded-xl p-3 text-center text-slate-900 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="bg-purple-600 text-white text-[10px] font-black py-0.5 px-2 rounded-md uppercase tracking-wider mb-2 shadow-sm w-full box-border">
+                                Phác đồ ưu tiên
+                            </div>
+                            <h4 class="text-base font-black text-slate-900">Cefiderocol</h4>
+                            <p class="text-xs text-purple-900 font-bold mt-1">(Đơn trị liệu)</p>
+                        </div>
+                        <div class="mt-2 pt-2 border-t border-slate-200 text-[10px] text-slate-700 font-medium leading-tight bg-slate-50 p-1.5 rounded-lg border border-slate-200">
+                            (Được ưu tiên cho nhiễm trùng xâm lấn theo hướng dẫn 2026)
+                        </div>
+                    </div>
+                    <!-- Alternative Therapy Box -->
+                    <div id="node-smalt-alt" data-node="smalt-alt" class="card-3d w-full bg-slate-50 border-2 border-dashed border-purple-400 rounded-xl p-3 text-center text-slate-900">
+                        <div class="bg-slate-200 text-purple-900 text-[10px] font-black py-0.5 px-2 rounded-md uppercase tracking-wider mb-2 border border-purple-300 w-full box-border">
+                            Phác đồ thay thế
+                        </div>
+                        <p class="text-[9px] font-bold text-slate-700 mb-1 text-left">(Là thành phần của phác đồ phối hợp, không đơn trị):</p>
+                        <ul class="text-[10px] text-slate-800 font-semibold space-y-1 text-left list-disc list-inside leading-tight">
+                            <li>Aztreonam-avibactam (ưu tiên phối hợp thêm 1 thuốc khác)</li>
+                            <li>TMP-SMX (Co-trimoxazole)</li>
+                            <li>Minocycline</li>
+                            <li>Levofloxacin</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- LEVEL 4: FULL VIETNAMESE NOTES SECTION -->
+            <div id="node-notes-section" class="w-full z-20 flex flex-col md:flex-row gap-5 pt-4 border-t-2 border-slate-300">
+                
+                <!-- 1. Key Points Box -->
+                <div class="card-3d bg-white border-2 border-emerald-500 rounded-2xl p-5 flex flex-col justify-between shadow-md flex-1 min-w-0">
+                    <div>
+                        <div class="flex items-center space-x-2 text-emerald-800 font-black text-sm mb-3.5 border-b border-emerald-200 pb-2">
+                            <i class="fa-solid fa-list-check text-base"></i>
+                            <span class="uppercase tracking-wider">Các điểm quan trọng (Key Points)</span>
+                        </div>
+                        <ol class="text-xs text-slate-800 space-y-2.5 leading-relaxed list-decimal list-inside font-semibold">
+                            <li class="pl-1">
+                                Ưu tiên chọn kháng sinh dựa trên kháng sinh đồ, vị trí nhiễm trùng và chức năng thận của bệnh nhân.
+                            </li>
+                            <li class="pl-1">
+                                Thuật ngữ <strong class="text-emerald-900 font-black">"Phác đồ thay thế"</strong> được chỉ định khi kháng sinh ưu tiên bị dị ứng, không có sẵn, hoặc vi khuẩn đề kháng.
+                            </li>
+                            <li class="pl-1">
+                                <span class="text-emerald-900 font-black">Cập nhật 2026:</span> Sulbactam-durlobactam là nền tảng điều trị CRAB; Cefiderocol là lựa chọn ưu tiên hàng đầu cho <i>S. maltophilia</i>.
+                            </li>
+                            <li class="pl-1">
+                                Khuyến cáo dựa trên bối cảnh dịch tễ và các thuốc hiện có tại Hoa Kỳ (IDSA).
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- 2. Abbreviations Box -->
+                <div class="card-3d bg-white border-2 border-amber-500 rounded-2xl p-5 flex flex-col justify-between shadow-md flex-1 min-w-0">
+                    <div>
+                        <div class="flex items-center space-x-2 text-amber-800 font-black text-sm mb-3.5 border-b border-amber-200 pb-2">
+                            <i class="fa-solid fa-spell-check text-base"></i>
+                            <span class="uppercase tracking-wider">Từ viết tắt (Tên đầy đủ)</span>
+                        </div>
+                        <div class="text-[11px] text-slate-900 flex flex-col gap-1.5 font-mono leading-tight">
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">IDSA</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Hiệp hội Bệnh truyền nhiễm Hoa Kỳ</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">AMR</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Vi khuẩn kháng kháng sinh</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">ESBL-E</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Enterobacterales sinh &beta;-lactamase phổ rộng</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">AmpC-E</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Enterobacterales sinh AmpC &beta;-lactamase</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">CRE</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Enterobacterales kháng Carbapenem</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">KPC</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Carbapenemase từ <i>Klebsiella pneumoniae</i></span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">NDM / MBL</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Metallo-&beta;-lactamase</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">OXA-48</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Oxacillinase-48</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">DTR</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Kháng thuốc khó điều trị</span></div>
+                            <div class="flex justify-between border-b border-slate-200 pb-1.5"><strong class="text-amber-900 font-bold pr-2">CRAB</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= <i>Acinetobacter baumannii</i> kháng Carbapenem</span></div>
+                            <div class="flex justify-between"><strong class="text-amber-900 font-bold pr-2">SDD</strong><span class="text-right text-slate-800 font-sans text-[11px] font-semibold">= Susceptible Dose-Dependent (Nhạy phụ thuộc liều dùng)</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Note Box -->
+                <div class="card-3d bg-white border-2 border-sky-500 rounded-2xl p-5 flex flex-col justify-between shadow-md flex-1 min-w-0">
+                    <div>
+                        <div class="flex items-center space-x-2 text-sky-800 font-black text-sm mb-3.5 border-b border-sky-200 pb-2">
+                            <i class="fa-solid fa-user-doctor text-base"></i>
+                            <span class="uppercase tracking-wider">Ghi chú (Note)</span>
+                        </div>
+                        <p class="text-xs text-slate-900 font-black mb-2.5 leading-relaxed">
+                            Điều trị cần được cá thể hóa dựa trên:
+                        </p>
+                        <ul class="text-xs text-slate-800 space-y-2 leading-relaxed font-semibold">
+                            <li class="flex items-start space-x-2">
+                                <span class="text-sky-700 font-black">•</span>
+                                <span>Vị trí nhiễm trùng (huyết, phổi, tiết niệu, ổ bụng, v.v.)</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-sky-700 font-black">•</span>
+                                <span>Kết quả thử nghiệm độ nhạy cảm kháng sinh (KSĐ)</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-sky-700 font-black">•</span>
+                                <span>Mức độ nghiêm trọng &amp; chức năng gan/thận của bệnh nhân</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-sky-700 font-black">•</span>
+                                <span>Tính sẵn có của thuốc và dịch tễ học kháng thuốc tại cơ sở y tế</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        </div>
+            <!-- LEVEL 3.5: DOSING REFERENCE TABLE -->
+            <div id="node-dosing-section" class="w-full z-20 pt-2 pb-4">
+                <div class="card-3d bg-white border-2 border-indigo-600 rounded-2xl p-5 md:p-6 shadow-md">
+                    <h3 class="text-base md:text-lg font-black text-indigo-900 uppercase tracking-wide mb-1 flex items-center gap-2">
+                        <span>💊</span> Bảng 1: Liều Kháng sinh Điều trị Nhiễm khuẩn Đa kháng (Người lớn, chức năng thận/gan bình thường)
+                    </h3>
+                    <p class="text-[11px] text-slate-500 mb-4 italic">Trích chính xác từ Table 1 — IDSA 2026 AMR Guidance. uUTI = viêm bàng quang đơn thuần; cUTI = UTI phức tạp. Liều có thể khác khuyến cáo trên nhãn thuốc (label) của FDA. Luôn hiệu chỉnh theo CrCl/eGFR thực tế bằng module "Hiệu chỉnh liều Kháng sinh" trong ClinPharmAI.</p>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="overflow-x-auto max-h-[480px] overflow-y-auto border border-indigo-100 rounded-lg">
+                            <table class="w-full text-[12px] border-collapse">
+                            <thead class="sticky top-0 bg-indigo-700 text-white z-10">
+                                <tr>
+                                    <th class="text-left py-2 px-3 font-bold whitespace-nowrap">Kháng sinh</th>
+                                    <th class="text-left py-2 px-3 font-bold">Liều dùng</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Amikacin</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 15 mg/kg IV liều đơn.<br>cUTI: 15 mg/kg IV liều đầu; các liều sau và khoảng cách liều dựa theo đánh giá dược động học (PK).</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Ampicillin-sulbactam</td>
+                                    <td class="py-2.5 text-slate-700">Tổng liều sulbactam 9g/ngày, chọn 1 trong 2 cách:<br>• 9g ampicillin-sulbactam (6g ampicillin, 3g sulbactam) IV mỗi 8 giờ, truyền trong 4 giờ<br><b>HOẶC</b><br>• 27g ampicillin-sulbactam (18g ampicillin, 9g sulbactam) truyền liên tục IV trong 24 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Aztreonam-avibactam</td>
+                                    <td class="py-2.5 text-slate-700"><b>Liều nạp:</b> 2,67g (2g aztreonam + 0,67g avibactam) IV một lần, truyền trong 3 giờ<br><b>SAU ĐÓ (duy trì):</b> 2g (1,5g aztreonam + 0,5g avibactam) IV mỗi 6 giờ, truyền trong 3 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Cefepime</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 1g IV mỗi 8 giờ, truyền trong 30 phút.<br>Nhiễm khuẩn khác: <b>Liều nạp</b> 2g IV truyền 30 phút, <b>sau đó</b> 2g IV mỗi 8 giờ truyền trong 3 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Cefepime-enmetazobactam</td>
+                                    <td class="py-2.5 text-slate-700">2,5g (2g cefepime + 0,5g enmetazobactam) IV mỗi 8 giờ, truyền trong 2 giờ.<br>CrCl ≥130 mL/phút: 2,5g IV mỗi 8 giờ, truyền trong 4 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Cefiderocol</td>
+                                    <td class="py-2.5 text-slate-700">2g IV mỗi 8 giờ, truyền trong 3 giờ.<br>CrCl ≥120 mL/phút: 2g IV mỗi 6 giờ, truyền trong 3 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Ceftazidime-avibactam</td>
+                                    <td class="py-2.5 text-slate-700">2,5g (2g ceftazidime + 0,5g avibactam) IV mỗi 8 giờ, truyền trong 3 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Ceftazidime-avibactam + Aztreonam</td>
+                                    <td class="py-2.5 text-slate-700">Ceftazidime-avibactam 2,5g IV mỗi 8 giờ (truyền 3 giờ) <b>PHỐI HỢP</b> (dùng đồng thời qua đường Y-site) Aztreonam 2g IV mỗi 8 giờ (truyền 3 giờ)</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Ceftolozane-tazobactam</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 1,5g (1g ceftolozane + 0,5g tazobactam) IV mỗi 8 giờ, truyền 1 giờ.<br>Nhiễm khuẩn khác: 3g (2g ceftolozane + 1g tazobactam) IV mỗi 8 giờ, truyền 3 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Ciprofloxacin</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 400mg IV mỗi 12 giờ HOẶC 500mg uống mỗi 12 giờ.<br>Nhiễm khuẩn khác: 400mg IV mỗi 8 giờ HOẶC 750mg uống mỗi 12 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Colistin</td>
+                                    <td class="py-2.5 text-slate-700">Tham khảo hướng dẫn đồng thuận quốc tế về polymyxin (không nêu liều cụ thể trong Bảng 1) — dùng module <b>Colistin (CMS)</b> trong ClinPharmAI để tính liều.</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Eravacycline</td>
+                                    <td class="py-2.5 text-slate-700">1 mg/kg IV mỗi 12 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Ertapenem</td>
+                                    <td class="py-2.5 text-slate-700">1g IV mỗi 24 giờ, truyền trong 30 phút</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Fosfomycin</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 3g uống liều đơn.<br>cUTI: 6g IV mỗi 8 giờ, truyền trong 1 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Gentamicin</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 5 mg/kg/liều IV liều đơn.<br>cUTI: 7 mg/kg IV liều đầu; liều sau và khoảng cách dựa theo PK</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Gepotidacin</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 1,5g uống mỗi 12 giờ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                        <div class="overflow-x-auto max-h-[480px] overflow-y-auto border border-indigo-100 rounded-lg">
+                            <table class="w-full text-[12px] border-collapse">
+                            <thead class="sticky top-0 bg-indigo-700 text-white z-10">
+                                <tr>
+                                    <th class="text-left py-2 px-3 font-bold whitespace-nowrap">Kháng sinh</th>
+                                    <th class="text-left py-2 px-3 font-bold">Liều dùng</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Imipenem-cilastatin</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 500mg (tính theo imipenem) IV mỗi 6 giờ, truyền 30 phút.<br>Nhiễm khuẩn khác: 500mg IV mỗi 6 giờ truyền 3 giờ (nếu khả thi) HOẶC 1.000mg IV mỗi 8 giờ truyền 1 giờ.<br>CrCl ≥90 mL/phút: 1g IV mỗi 6 giờ, truyền 1 giờ.<br><i>Liều tính theo thành phần imipenem; cilastatin đi kèm liều tương đương.</i></td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Imipenem-cilastatin-relebactam</td>
+                                    <td class="py-2.5 text-slate-700">1,25g (500mg imipenem + 500mg cilastatin + 250mg relebactam) IV mỗi 6 giờ, truyền trong 30 phút</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Levofloxacin</td>
+                                    <td class="py-2.5 text-slate-700">750mg IV/uống mỗi 24 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Meropenem</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 1g IV mỗi 8 giờ, truyền 30 phút.<br>Nhiễm khuẩn khác: 1–2g IV mỗi 8 giờ, truyền 3 giờ (nếu khả thi); <b>ưu tiên liều 2g</b> cho: béo phì, nhiễm khuẩn TKTW, ECMO, hoặc CrCl ≥130 mL/phút</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Meropenem-vaborbactam</td>
+                                    <td class="py-2.5 text-slate-700">4g (2g meropenem + 2g vaborbactam) IV mỗi 8 giờ, truyền trong 3 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Minocycline</td>
+                                    <td class="py-2.5 text-slate-700">200mg IV/uống mỗi 12 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Nitrofurantoin</td>
+                                    <td class="py-2.5 text-slate-700">Dạng macrocrystal/monohydrate (Macrobid®): 100mg uống mỗi 12 giờ.<br>Dạng hỗn dịch uống: 50mg uống mỗi 6 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Pivmecillinam</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 370mg uống mỗi 8 giờ.<br><i>(185mg pivmecillinam tương đương 200mg pivmecillinam hydrochloride)</i></td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Plazomicin</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 15 mg/kg IV liều đơn.<br>cUTI: 15 mg/kg IV liều đầu; liều sau và khoảng cách dựa theo PK</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Polymyxin B</td>
+                                    <td class="py-2.5 text-slate-700">Tham khảo hướng dẫn đồng thuận quốc tế về polymyxin (không nêu liều cụ thể trong Bảng 1)</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Sulbactam-durlobactam</td>
+                                    <td class="py-2.5 text-slate-700">2g (1g sulbactam + 1g durlobactam) IV mỗi 6 giờ, truyền trong 3 giờ.<br>CrCl ≥130 mL/phút: 2g IV mỗi 4 giờ, truyền trong 3 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Sulopenem etzadroxil-probenecid</td>
+                                    <td class="py-2.5 text-slate-700">500mg sulopenem etzadroxil + 500mg probenecid, uống mỗi 12 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Tigecycline</td>
+                                    <td class="py-2.5 text-slate-700"><b>Liều nạp:</b> 200mg IV một lần <b>SAU ĐÓ</b> 100mg IV mỗi 12 giờ</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Tobramycin</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 5 mg/kg/liều IV liều đơn.<br>cUTI: 7 mg/kg IV liều đầu; liều sau và khoảng cách dựa theo PK</td>
+                                </tr>
+                                <tr class="border-b border-slate-100 align-top">
+                                    <td class="py-2.5 pr-3 font-bold text-indigo-800 whitespace-nowrap">Trimethoprim-sulfamethoxazole</td>
+                                    <td class="py-2.5 text-slate-700">uUTI: 160mg (tính theo trimethoprim) IV/uống mỗi 12 giờ.<br>Nhiễm khuẩn khác: 8–15 mg/kg/ngày (tính theo trimethoprim) IV/uống, chia mỗi 8–12 giờ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <div class="text-[10.5px] text-slate-500 mt-4 pt-3 border-t border-slate-200 space-y-1">
+                        <p class="font-bold text-slate-600 uppercase tracking-wide text-[9.5px]">Tài liệu tham khảo</p>
+                        <p>1. Tamma PD, Bonomo RA, Heil EL, Justo JA, Satlin MJ, Mathers AJ. IDSA 2026 guidance on the treatment of antimicrobial resistant gram-negative infections [Internet]. Arlington (VA): Infectious Diseases Society of America; 2026 Jul 30 [cited 2026 Sep 18]. Table 1, Suggested dosing of antibiotics for the treatment of antimicrobial-resistant infections in adults. Available from: https://www.idsociety.org/practice-guideline/amr-guidance/</p>
+                        <p>2. Lockowitz CR, et al. Consensus suggested dosing of antibiotics for antimicrobial-resistant infections in children. J Pediatr Infect Dis Soc. 2025;14(2):piaf004.</p>
+                        <p class="italic pt-1">Liều trên dành cho người lớn có chức năng thận/gan bình thường; một số liều có thể khác khuyến cáo trên nhãn thuốc (FDA label). Luôn hiệu chỉnh theo tình trạng lâm sàng thực tế của bệnh nhân.</p>
+                    </div>
+                </div>
+            </div>
+
+    </main>
+
+    <script>
+        const world = document.getElementById('flowchart-3d-world');
+        const viewport = document.getElementById('scene-viewport');
+
+        // --- CRE sub-columns (KPC / NDM-MBL / OXA-48) height equalizer ---
+        // Not relying on CSS Grid row-stretch here: html2canvas (used for PDF
+        // export) renders CSS Grid unreliably, so instead we measure the
+        // natural height of each "row" (the 3 headers, the 3 preferred-therapy
+        // boxes, the 3 alternative-therapy boxes) and force all 3 siblings to
+        // match the tallest one via plain inline pixel heights, which
+        // html2canvas always captures correctly.
+        function equalizeGroupHeight(ids) {
+            const els = ids.map(id => document.getElementById(id)).filter(Boolean);
+            if (els.length < 2) return;
+            els.forEach(el => { el.style.height = 'auto'; });
+            let maxH = 0;
+            els.forEach(el => { maxH = Math.max(maxH, el.offsetHeight); });
+            els.forEach(el => { el.style.height = maxH + 'px'; });
+        }
+
+        function resetCREHeights() {
+            ['node-kpc', 'node-ndm', 'node-oxa',
+             'node-kpc-rx', 'node-ndm-rx', 'node-oxa-rx',
+             'node-kpc-alt', 'node-ndm-alt', 'node-oxa-alt'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.style.height = '';
+            });
+        }
+
+        function equalizeCREHeights() {
+            equalizeGroupHeight(['node-kpc', 'node-ndm', 'node-oxa']);
+            equalizeGroupHeight(['node-kpc-rx', 'node-ndm-rx', 'node-oxa-rx']);
+            equalizeGroupHeight(['node-kpc-alt', 'node-ndm-alt', 'node-oxa-alt']);
+        }
+
+        function drawConnections() {
+            const container = document.getElementById('svg-paths-container');
+            const svg = document.getElementById('connector-canvas');
+            const svgRect = svg.getBoundingClientRect();
+
+            container.innerHTML = '';
+
+            const connections = [
+                ['node-title', 'node-root', 'url(#grad-blue)'],
+                ['node-root', 'node-esbl', 'url(#grad-blue)'],
+                ['node-root', 'node-ampc', 'url(#grad-green)'],
+                ['node-root', 'node-cre', 'url(#grad-orange)'],
+                ['node-root', 'node-dtr', 'url(#grad-amber)'],
+                ['node-root', 'node-crab', 'url(#grad-royal)'],
+                ['node-root', 'node-smalt', 'url(#grad-purple)'],
+                
+                ['node-esbl', 'node-esbl-rx', 'url(#grad-blue)'],
+                ['node-esbl-rx', 'node-esbl-alt', 'url(#grad-slate)'],
+
+                ['node-ampc', 'node-ampc-rx', 'url(#grad-green)'],
+                ['node-ampc-rx', 'node-ampc-alt', 'url(#grad-slate)'],
+
+                ['node-cre', 'node-cre-id', 'url(#grad-orange)'],
+                ['node-cre-id', 'node-kpc', 'url(#grad-orange)'],
+                ['node-cre-id', 'node-ndm', 'url(#grad-orange)'],
+                ['node-cre-id', 'node-oxa', 'url(#grad-orange)'],
+                
+                ['node-kpc', 'node-kpc-rx', 'url(#grad-orange)'],
+                ['node-kpc-rx', 'node-kpc-alt', 'url(#grad-slate)'],
+                
+                ['node-ndm', 'node-ndm-rx', 'url(#grad-orange)'],
+                ['node-ndm-rx', 'node-ndm-alt', 'url(#grad-slate)'],
+                
+                ['node-oxa', 'node-oxa-rx', 'url(#grad-orange)'],
+                ['node-oxa-rx', 'node-oxa-alt', 'url(#grad-slate)'],
+
+                ['node-dtr', 'node-dtr-rx', 'url(#grad-amber)'],
+                ['node-dtr-rx', 'node-dtr-alt', 'url(#grad-slate)'],
+
+                ['node-crab', 'node-crab-rx', 'url(#grad-royal)'],
+                ['node-crab-rx', 'node-crab-alt', 'url(#grad-slate)'],
+
+                ['node-smalt', 'node-smalt-rx', 'url(#grad-purple)'],
+                ['node-smalt-rx', 'node-smalt-alt', 'url(#grad-slate)'],
+            ];
+
+            connections.forEach(([fromId, toId, strokeColor]) => {
+                const elFrom = document.getElementById(fromId);
+                const elTo = document.getElementById(toId);
+                if (!elFrom || !elTo) return;
+
+                const r1 = elFrom.getBoundingClientRect();
+                const r2 = elTo.getBoundingClientRect();
+
+                const x1 = r1.left + r1.width / 2 - svgRect.left;
+                const y1 = r1.bottom - svgRect.top;
+                const x2 = r2.left + r2.width / 2 - svgRect.left;
+                const y2 = r2.top - svgRect.top;
+
+                const deltaY = Math.abs(y2 - y1) * 0.5;
+                const pathStr = `M ${x1} ${y1} C ${x1} ${y1 + deltaY}, ${x2} ${y2 - deltaY}, ${x2} ${y2}`;
+
+                const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                path.setAttribute('d', pathStr);
+                path.setAttribute('stroke', strokeColor);
+                path.setAttribute('stroke-width', '2.5');
+                path.setAttribute('fill', 'none');
+                path.setAttribute('stroke-linecap', 'round');
+
+                container.appendChild(path);
+            });
+        }
+
+        // Search & Filter Logic
+        const searchInput = document.getElementById('searchInput');
+        const clearSearch = document.getElementById('clearSearch');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            if (query.length > 0) {
+                clearSearch.classList.remove('hidden');
+            } else {
+                clearSearch.classList.add('hidden');
+            }
+
+            document.querySelectorAll('.card-3d').forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (query.length > 0 && text.includes(query)) {
+                    card.classList.add('search-matched');
+                } else {
+                    card.classList.remove('search-matched');
+                }
+            });
+        });
+
+        clearSearch.addEventListener('click', () => {
+            searchInput.value = '';
+            clearSearch.classList.add('hidden');
+            document.querySelectorAll('.card-3d').forEach(card => card.classList.remove('search-matched'));
+        });
+
+        // PDF Export Handler - Captures ON EXACTLY 1 PAGE
+        document.getElementById('btnExportPDF').addEventListener('click', async function() {
+            const btn = this;
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Đang tạo PDF 1 trang...</span>';
+            btn.disabled = true;
+
+            document.body.classList.add('pdf-exporting');
+
+            drawConnections();
+            await new Promise(resolve => setTimeout(resolve, 150));
+
+            // Chiều rộng cột KPC/NDM/OXA-48 khác với lúc xem thường (vì
+            // .pdf-exporting ép #flowchart-3d-world về 1780px), nên chữ xuống
+            // dòng khác -> phải tính lại chiều cao NGAY TRƯỚC KHI chụp, không
+            // dùng lại giá trị đã tính lúc xem thường.
+            resetCREHeights();
+            equalizeCREHeights();
+            await new Promise(resolve => setTimeout(resolve, 50));
+
+            const element = document.getElementById('flowchart-3d-world');
+
+            try {
+                const canvas = await html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    backgroundColor: '#ffffff'
+                });
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                const JSClass = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF || (window.html2pdf && window.html2pdf.jsPDF);
+
+                if (JSClass) {
+                    const canvasAspect = canvas.width / canvas.height;
+                    const pdfWidth = 420;
+                    const pdfHeight = 297;
+                    const margin = 6;
+
+                    const maxW = pdfWidth - (margin * 2);
+                    const maxH = pdfHeight - (margin * 2);
+
+                    let renderW = maxW;
+                    let renderH = renderW / canvasAspect;
+
+                    if (renderH > maxH) {
+                        renderH = maxH;
+                        renderW = renderH * canvasAspect;
+                    }
+
+                    const x = (pdfWidth - renderW) / 2;
+                    const y = (pdfHeight - renderH) / 2;
+
+                    const pdf = new JSClass({
+                        orientation: 'landscape',
+                        unit: 'mm',
+                        format: 'a3'
+                    });
+
+                    pdf.addImage(imgData, 'JPEG', x, y, renderW, renderH);
+
+                    const pdfFilename = 'IDSA_2026_Guidance_Phac_Do_Khang_Sinh.pdf';
+
+                    // Khi trang chạy trong Claude Artifact (claude.ai), trình duyệt-nhúng
+                    // KHÔNG cho phép tải file trực tiếp qua script (pdf.save() sẽ báo
+                    // "Hiện không thể tải xuống tệp cho hiện vật này"). Phải xin lưu file
+                    // qua capability "downloads" của nền tảng. Nếu mở file HTML này độc lập
+                    // (ngoài claude.ai, ví dụ double-click từ máy tính) thì window.claude
+                    // không tồn tại -> tự động dùng pdf.save() như bình thường.
+                    let savedViaCapability = false;
+                    try {
+                        if (window.claude && typeof window.claude.use === 'function') {
+                            const downloads = await window.claude.use('downloads');
+                            if (downloads) {
+                                const pdfBlob = pdf.output('blob');
+                                await downloads.save({ filename: pdfFilename, data: pdfBlob });
+                                savedViaCapability = true;
+                            }
+                        }
+                    } catch (capErr) {
+                        console.warn('Downloads capability không dùng được, chuyển sang pdf.save():', capErr);
+                    }
+
+                    if (!savedViaCapability) {
+                        pdf.save(pdfFilename);
+                    }
+                } else {
+                    window.print();
+                }
+            } catch (err) {
+                console.error("PDF Export Error:", err);
+                btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> <span>Lỗi xuất PDF</span>';
+                await new Promise(resolve => setTimeout(resolve, 1800));
+            } finally {
+                document.body.classList.remove('pdf-exporting');
+
+                // Về lại độ rộng cột bình thường -> tính lại chiều cao cho khớp
+                resetCREHeights();
+                equalizeCREHeights();
+                drawConnections();
+
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+            }
+        });
+
+        // Window Load & Resize handlers
+        function fitDiagramToScreen() {
+            var wrapper = document.getElementById('flowchart-scale-wrapper');
+            var el = document.getElementById('flowchart-3d-world');
+            if (!wrapper || !el) return;
+            el.style.transform = 'none';
+            el.style.marginLeft = '';
+            el.style.marginRight = '';
+            var naturalWidth = el.offsetWidth;
+            var naturalHeight = el.offsetHeight;
+            var available = wrapper.clientWidth - 24;
+            var scale = Math.min(1, available / naturalWidth);
+            scale = Math.max(scale, 0.55);
+
+            el.style.transformOrigin = 'top left';
+            el.style.transform = 'scale(' + scale + ')';
+
+            var scaledWidth = naturalWidth * scale;
+            var offsetX = Math.max(12, (wrapper.clientWidth - scaledWidth) / 2);
+            el.style.marginLeft = offsetX + 'px';
+            el.style.marginRight = offsetX + 'px';
+
+            wrapper.style.height = (naturalHeight * scale) + 'px';
+        }
+
+        var resizeTimer;
+        function handleResize() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                fitDiagramToScreen();
+                drawConnections();
+                resetCREHeights();
+                equalizeCREHeights();
+                fitDiagramToScreen();
+            }, 80);
+        }
+
+        window.addEventListener('load', () => {
+            equalizeCREHeights();
+            fitDiagramToScreen();
+            drawConnections();
+            setTimeout(function () { equalizeCREHeights(); fitDiagramToScreen(); drawConnections(); }, 150);
+        });
+
+        window.addEventListener('resize', handleResize);
+
+        setInterval(drawConnections, 120);
+    </script>
+</body>
+</html>

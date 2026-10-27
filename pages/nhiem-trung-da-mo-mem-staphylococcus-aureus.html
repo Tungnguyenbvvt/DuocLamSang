@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: Chẩn Đoán & Điều Trị Nhiễm Trùng Da do S. aureus (SSTIs)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Alpine.js for interactivity -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#EAF3F1',
+                            100: '#D2E8E2',
+                            500: '#0F6E5C',
+                            600: '#0B4F42',
+                            700: '#0A3B34',
+                            800: '#0A2622',
+                            900: '#0C0A09',
+                        },
+                        accent: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            500: '#f43f5e',
+                            600: '#e11d48',
+                            700: '#be123c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0369a1 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen selection:bg-teal-500 selection:text-white" x-data="infographicApp()">
+
+    <!-- TOP NAV / HEADER -->
+    <header class="hero-gradient text-white py-10 px-4 sm:px-8 shadow-xl relative overflow-hidden">
+        <div class="absolute -right-10 -top-10 w-80 h-80 bg-teal-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-10 -bottom-10 w-80 h-80 bg-rose-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-700/60 pb-6 mb-6">
+                <div class="flex items-center gap-3">
+                    <span class="p-2.5 bg-teal-500/20 border border-teal-400/30 rounded-xl text-teal-300">
+                        <i class="fa-solid fa-bacteria text-2xl"></i>
+                    </span>
+                    <div>
+                        <span class="text-xs font-semibold tracking-wider uppercase text-teal-400">Y Khoa Lâm Sàng • Chuyên Đề SSTIs</span>
+                        <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mt-0.5">
+                            Nhiễm Trùng Da & Mô Mềm Do <em class="not-italic text-teal-300">Staphylococcus aureus</em>
+                        </h1>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 text-xs font-medium bg-slate-800/80 border border-slate-700 px-3 py-2 rounded-lg text-slate-300">
+                    <i class="fa-solid fa-book-medical text-teal-400"></i>
+                    <span>Nguồn: Abeydeera-Keshmiri NA, Miller LG. Infect Dis Clin N Am. 2026 Sep. doi:10.1016/j.idc.2026.07.003</span>
+                </div>
+            </div>
+
+            <!-- Key Highlights Quick Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-slate-800/50 backdrop-blur border border-slate-700/50 p-3.5 rounded-xl">
+                    <div class="text-xs text-slate-400 font-medium">Tác Nhân Hàng Đầu</div>
+                    <div class="text-lg font-bold text-teal-300 mt-1 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-virus text-sm"></i>
+                        <span>S. aureus (Có mủ)</span>
+                    </div>
+                </div>
+                <div class="bg-slate-800/50 backdrop-blur border border-slate-700/50 p-3.5 rounded-xl">
+                    <div class="text-xs text-slate-400 font-medium">Xử Trí Áp-xe Cốt Lõi</div>
+                    <div class="text-lg font-bold text-emerald-400 mt-1 flex items-center gap-2">
+                        <i class="fa-solid fa-scalpel text-sm"></i>
+                        <span>Rạch & Dẫn Lưu (I&D)</span>
+                    </div>
+                </div>
+                <div class="bg-slate-800/50 backdrop-blur border border-slate-700/50 p-3.5 rounded-xl">
+                    <div class="text-xs text-slate-400 font-medium">Thời Gian Khuyến Cáo</div>
+                    <div class="text-lg font-bold text-amber-300 mt-1 flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-sm"></i>
+                        <span>5 – 7 Ngày Điều Trị</span>
+                    </div>
+                </div>
+                <div class="bg-slate-800/50 backdrop-blur border border-slate-700/50 p-3.5 rounded-xl">
+                    <div class="text-xs text-slate-400 font-medium">Kháng Sinh Ngoại Trú MRSA</div>
+                    <div class="text-lg font-bold text-rose-300 mt-1 flex items-center gap-2">
+                        <i class="fa-solid fa-pills text-sm"></i>
+                        <span>TMP-SMX / Doxycycline</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-10">
+
+        <!-- SECTION 1: MÔ HÌNH LÂY TRUYỀN 5 C'S (CDC) -->
+        <section class="space-y-4">
+            <div class="flex items-center gap-3 border-l-4 border-teal-600 pl-3">
+                <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">1. Mô Hình Lây Truyền Tụ Cầu "5 C's" (CDC Model)</h2>
+            </div>
+            <p class="text-slate-600 text-sm">Mô hình do CDC xây dựng để giải thích các yếu tố môi trường/hành vi thúc đẩy lây truyền <em>tụ cầu vàng kháng Methicillin cộng đồng (CA-MRSA)</em>; khả năng suy diễn sang lây truyền chủng nhạy Methicillin (CA-MSSA) hiện chưa có bằng chứng trực tiếp.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="glass-card p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-teal-300 transition-all group">
+                    <div class="w-12 h-12 bg-teal-100 text-teal-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">C1 • Contact</span>
+                    <h3 class="text-base font-bold text-slate-900 mt-1">Tiếp Xúc Trực Tiếp</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Tiếp xúc da-với-da trực tiếp với người nhiễm hoặc người mang vi khuẩn tụ cầu.
+                    </p>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-emerald-300 transition-all group">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-pump-soap"></i>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider">C2 • Cleanliness</span>
+                    <h3 class="text-base font-bold text-slate-900 mt-1">Vệ Sinh Kém</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Thiếu vệ sinh cá nhân, không rửa tay thường xuyên hoặc che chắn vết thương.
+                    </p>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-rose-300 transition-all group">
+                    <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bandage"></i>
+                    </div>
+                    <span class="text-xs font-bold text-rose-600 uppercase tracking-wider">C3 • Compromised</span>
+                    <h3 class="text-base font-bold text-slate-900 mt-1">Tổn Thương Da</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Mất tính toàn vẹn hàng rào da do trầy xước, vết thương, côn trùng cắn hoặc bệnh da.
+                    </p>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-amber-300 transition-all group">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-box-tissue"></i>
+                    </div>
+                    <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">C4 • Contaminated</span>
+                    <h3 class="text-base font-bold text-slate-900 mt-1">Vật Dụng Nhiễm Khai</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Dùng chung đồ cá nhân (khăn, quần áo, dụng cụ thể thao, đồ dùng dính dịch mủ).
+                    </p>
+                </div>
+
+                <div class="glass-card p-5 rounded-2xl shadow-sm border border-slate-200/80 hover:border-purple-300 transition-all group">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center font-bold text-xl mb-3 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-people-roof"></i>
+                    </div>
+                    <span class="text-xs font-bold text-purple-600 uppercase tracking-wider">C5 • Crowded</span>
+                    <h3 class="text-base font-bold text-slate-900 mt-1">Đông Đúc</h3>
+                    <p class="text-xs text-slate-600 mt-1.5 leading-relaxed">
+                        Môi trường tập trung đông người: Nhà trẻ, doanh trại quân đội, đội thể thao, tù nhân.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: PHÂN LOẠI LÂM SÀNG & XỬ TRÍ CỐT LÕI -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <!-- Classification Table Card -->
+            <div class="lg:col-span-7 glass-card p-6 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
+                        <div class="flex items-center gap-2.5">
+                            <i class="fa-solid fa-list-check text-teal-600 text-xl"></i>
+                            <h2 class="text-lg font-bold text-slate-900">2. Phân Loại Nhiễm Trùng Da & Mô Mềm (SSTIs)</h2>
+                        </div>
+                        <span class="text-xs bg-slate-100 font-semibold px-2.5 py-1 rounded-full text-slate-600">IDSA Classification</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-slate-100/80 text-slate-700 uppercase font-bold text-[11px] tracking-wider">
+                                    <th class="p-3 rounded-l-lg">Phân Loại</th>
+                                    <th class="p-3">Biểu Hiện Lâm Sàng</th>
+                                    <th class="p-3 rounded-r-lg">Chiến Lược Xử Trí Chốt</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-slate-700">
+                                <!-- Purulent -->
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="p-3 font-bold text-rose-700 align-top">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                                            <span>Có Mủ</span>
+                                        </div>
+                                        <span class="text-[10px] font-normal text-slate-500 block pl-3">Purulent</span>
+                                    </td>
+                                    <td class="p-3 align-top space-y-1">
+                                        <div><strong>• Nhọt (Furuncle):</strong> Nhiễm trùng nang lông lan ra hạ bì.</div>
+                                        <div><strong>• Cụm nhọt (Carbuncle):</strong> Nhiều nhọt liên kết sâu.</div>
+                                        <div><strong>• Áp-xe da (Cutaneous abscess):</strong> Tích tụ mủ trong da.</div>
+                                    </td>
+                                    <td class="p-3 align-top font-semibold text-slate-900">
+                                        <span class="inline-block bg-rose-100 text-rose-800 text-[11px] px-2 py-1 rounded font-bold mb-1">Rạch & Dẫn Lưu (I&D)</span>
+                                        <p class="text-[11px] font-normal text-slate-600">Là biện pháp cốt lõi. Kháng sinh bổ trợ khi cần.</p>
+                                    </td>
+                                </tr>
+                                <!-- Non-purulent -->
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="p-3 font-bold text-teal-700 align-top">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="w-2 h-2 rounded-full bg-teal-500"></span>
+                                            <span>Không Mủ</span>
+                                        </div>
+                                        <span class="text-[10px] font-normal text-slate-500 block pl-3">Non-purulent</span>
+                                    </td>
+                                    <td class="p-3 align-top space-y-1">
+                                        <div><strong>• Viêm mô tế bào (Cellulitis):</strong> Nhiễm trùng sâu đến hạ bì.</div>
+                                        <div><strong>• Viêm quầng (Erysipelas):</strong> Nhiễm trùng nông hơn, ranh giới rõ.</div>
+                                    </td>
+                                    <td class="p-3 align-top font-semibold text-slate-900">
+                                        <span class="inline-block bg-teal-100 text-teal-800 text-[11px] px-2 py-1 rounded font-bold mb-1">Kháng Sinh Toàn Thân</span>
+                                        <p class="text-[11px] font-normal text-slate-600">Ưu tiên nhắm vào Liên cầu (Streptococcus), đồng thời phủ MSSA.</p>
+                                    </td>
+                                </tr>
+                                <!-- Other -->
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="p-3 font-bold text-amber-700 align-top">
+                                        <div class="flex items-center gap-1.5">
+                                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                            <span>Thể Khác</span>
+                                        </div>
+                                        <span class="text-[10px] font-normal text-slate-500 block pl-3">Other SSTIs</span>
+                                    </td>
+                                    <td class="p-3 align-top space-y-1.5">
+                                        <div><strong>• Chốc (Impetigo):</strong> Nhiễm trùng nông, có thể dạng bọng nước hoặc <span class="italic">đóng vảy màu mật ong</span> (honey-crusted).
+                                            <span class="block text-[10px] text-slate-500">→ Kháng sinh tại chỗ (Mupirocin/Retapamulin); kháng sinh toàn thân nếu không đáp ứng.</span></div>
+                                        <div><strong>• Chốc loét (Ecthyma):</strong> Thể sâu hơn Chốc, lan tới trung bì.
+                                            <span class="block text-[10px] text-slate-500">→ Kháng sinh toàn thân.</span></div>
+                                        <div><strong>• Viêm nang lông (Folliculitis):</strong> Giới hạn ở nang lông, không lan tới trung bì.
+                                            <span class="block text-[10px] text-slate-500">→ Chườm ấm và vệ sinh da, không cần kháng sinh.</span></div>
+                                        <div><strong>• Nang biểu bì viêm (Inflamed epidermoid cyst):</strong> Nang sưng đỏ, dịch mùi hôi, có thể có mủ/vỡ nang.
+                                            <span class="block text-[10px] text-slate-500">→ Rạch & Dẫn Lưu (I&D).</span></div>
+                                    </td>
+                                    <td class="p-3 align-top">
+                                        <p class="text-[11px] text-slate-600 italic">Mỗi thể có xử trí riêng biệt — xem ghi chú bên trái, không dùng chung một phác đồ.</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Clinical Takeaways Card -->
+            <div class="lg:col-span-5 glass-card p-6 rounded-2xl shadow-sm border border-slate-200/80 flex flex-col justify-between bg-gradient-to-br from-white to-teal-50/40">
+                <div>
+                    <div class="flex items-center gap-2.5 pb-4 border-b border-slate-200 mb-4">
+                        <i class="fa-solid fa-lightbulb text-amber-500 text-xl"></i>
+                        <h2 class="text-lg font-bold text-slate-900">3. Nguyên Tắc Điều Trị Cốt Lõi</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Rule 1 -->
+                        <div class="flex items-start gap-3 bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs">
+                            <div class="p-2 bg-rose-100 text-rose-600 rounded-lg text-sm shrink-0 mt-0.5">
+                                <i class="fa-solid fa-syringe"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-900 uppercase">Chọc Hút Kim VS. Rạch Dẫn Lưu (I&D)</h3>
+                                <p class="text-xs text-slate-600 mt-1">
+                                    Thử nghiệm lâm sàng ngẫu nhiên chứng minh chọc hút bằng kim cho hiệu quả <strong class="text-rose-600">kém xa I&D (26% vs 80% tỷ lệ khỏi)</strong>. Không thay thế I&D bằng chọc hút kim.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Rule 2 -->
+                        <div class="flex items-start gap-3 bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs">
+                            <div class="p-2 bg-emerald-100 text-emerald-600 rounded-lg text-sm shrink-0 mt-0.5">
+                                <i class="fa-solid fa-calendar-check"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-900 uppercase">Thời Gian Điều Trị: 5 - 7 Ngày</h3>
+                                <p class="text-xs text-slate-600 mt-1">
+                                    Đối với SSTIs có mủ, liệu trình <strong class="text-emerald-700">5 đến 7 ngày</strong> đạt hiệu quả tương đương các liệu trình kéo dài hơn. Không khuyến cáo dùng kéo dài vô ích.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Rule 3 -->
+                        <div class="flex items-start gap-3 bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs">
+                            <div class="p-2 bg-teal-100 text-teal-600 rounded-lg text-sm shrink-0 mt-0.5">
+                                <i class="fa-solid fa-right-left"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-900 uppercase">Xuống Thang Đường Uống Sớm</h3>
+                                <p class="text-xs text-slate-600 mt-1">
+                                    Chuyển từ IV sang thuốc uống ngay khi có đáp ứng lâm sàng. Không có bằng chứng thuyết phục cho thấy IV kéo dài sau xuất viện ưu việt hơn uống; ngược lại IV kéo dài làm tăng rủi ro biến chứng liên quan Catheter.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Rule 4 -->
+                        <div class="flex items-start gap-3 bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs">
+                            <div class="p-2 bg-purple-100 text-purple-600 rounded-lg text-sm shrink-0 mt-0.5">
+                                <i class="fa-solid fa-plus-minus"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-900 uppercase">Kháng Sinh Bổ Trợ Sau I&D</h3>
+                                <p class="text-xs text-slate-600 mt-1">
+                                    I&D là nền tảng điều trị áp-xe, nhưng kháng sinh bổ trợ sau I&D giúp <strong class="text-purple-700">cải thiện tỷ lệ khỏi bệnh</strong>, không chỉ là lựa chọn "khi cần".
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Rule 5 -->
+                        <div class="flex items-start gap-3 bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-xs">
+                            <div class="p-2 bg-amber-100 text-amber-600 rounded-lg text-sm shrink-0 mt-0.5">
+                                <i class="fa-solid fa-water"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-bold text-slate-900 uppercase">Ngoại Lệ: Vết Cắn & Tiếp Xúc Nước</h3>
+                                <p class="text-xs text-slate-600 mt-1">
+                                    Thuật toán trong bài chỉ áp dụng cho SSTI cộng đồng "thông thường". Với vết thương do <strong>súc vật/người cắn</strong> hoặc có <strong>tiền sử tiếp xúc nước</strong>, cần đổi sang phác đồ phủ thêm vi khuẩn kỵ khí và Gram âm (kể cả <em>Pseudomonas, Vibrio</em>) — không áp dụng bảng thuốc nhắm S. aureus bên dưới.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SECTION 3: INTERACTIVE TREATMENT DECISION TREE -->
+        <section class="glass-card p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200/80">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+                <div>
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">Thuật Toán Lâm Sàng</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-0.5">4. Phác Đồ Hướng Dẫn Lựa Chọn Kháng Sinh Kinh Nghiệm</h2>
+                </div>
+                <div class="flex items-center gap-2 bg-slate-100 p-1 rounded-xl text-xs font-semibold">
+                    <button 
+                        @click="selectedType = 'purulent'" 
+                        :class="selectedType === 'purulent' ? 'bg-rose-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'"
+                        class="px-3.5 py-1.5 rounded-lg transition-all">
+                        <i class="fa-solid fa-vial-circle-check mr-1"></i> Có Mủ (Nghi ngờ MRSA)
+                    </button>
+                    <button 
+                        @click="selectedType = 'nonpurulent'" 
+                        :class="selectedType === 'nonpurulent' ? 'bg-teal-600 text-white shadow-xs' : 'text-slate-600 hover:text-slate-900'"
+                        class="px-3.5 py-1.5 rounded-lg transition-all">
+                        <i class="fa-solid fa-shield-virus mr-1"></i> Không Mủ (Nghi ngờ MSSA)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Algorithm Display Panel -->
+            <div class="mt-6">
+                
+                <!-- PURULENT BRANCH -->
+                <div x-show="selectedType === 'purulent'" class="space-y-6" x-transition>
+                    <div class="p-4 bg-rose-50 border border-rose-200 rounded-xl flex items-center justify-between flex-wrap gap-2">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 rounded-full bg-rose-600 animate-pulse"></span>
+                            <span class="font-bold text-rose-900 text-sm">Hướng Xử Trí Nhiễm Trùng Có Mủ (Purulent SSTI) — Đích: S. aureus</span>
+                        </div>
+                        <span class="text-xs font-semibold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-full">I&D + kháng sinh bổ trợ (cải thiện tỷ lệ khỏi)</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500 -mt-3">CA-MRSA chiếm ~25–40% các trường hợp SSTI có mủ tùy khu vực → cần phủ MRSA theo kinh nghiệm cho đến khi có kháng sinh đồ.</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Outpatient Purulent -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-3">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                                <span class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                                    <i class="fa-solid fa-house-user text-teal-600"></i> Ngoại Trú (Đường Uống - PO)
+                                </span>
+                                <span class="text-[11px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">Ưu tiên phủ MRSA</span>
+                            </div>
+
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide pt-1">Ưu tiên (Preferred)</div>
+                            <div class="space-y-2 text-xs">
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Doxycycline</span>
+                                        <span class="text-emerald-600 font-bold">$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">100mg PO q12h • Không kém hiệu quả TMP-SMX trong RCT (kèm I&D); được ưu tiên hơn Minocycline do ít chóng mặt/rối loạn tiền đình hơn.</p>
+                                </div>
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>TMP-SMX (Trimethoprim-Sulfamethoxazole)</span>
+                                        <span class="text-emerald-600 font-bold">$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">1-2 viên (160/800mg) PO q12h • Tỷ lệ khỏi 80-90%, tương đương Clindamycin trong RCT đa trung tâm.</p>
+                                </div>
+                                <div class="p-2.5 bg-amber-50/60 rounded-lg border border-amber-200/60">
+                                    <div class="font-bold text-amber-900 flex justify-between">
+                                        <span>Clindamycin</span>
+                                        <span class="text-amber-700 font-medium">Thận trọng</span>
+                                    </div>
+                                    <p class="text-amber-800/80 mt-0.5">PO 450mg q8h • Chuyên gia không còn khuyên dùng kinh nghiệm do kháng thuốc gia tăng trong cộng đồng; cần thử nghiệm đĩa đôi (D-test) nếu dùng. <em>Tiêu chảy do C. difficile hiếm gặp</em> ở liệu trình ngoại trú ngắn ngày.</p>
+                                </div>
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Linezolid PO</span>
+                                        <span class="text-amber-600">$$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">400-600mg q12h • Có tác dụng ức chế ngoại độc tố; cân nhắc khi nghi ngờ nhiễm trùng mô mềm hoại tử (NSTI).</p>
+                                </div>
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Cephalexin<sup>a</sup> / Cefadroxil<sup>a</sup></span>
+                                        <span class="text-emerald-600 font-bold">$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">Cephalexin 500mg q6h hoặc 1000mg q12h; Cefadroxil 500mg q12h/1g/ngày • <sup>a</sup>Chỉ dùng khi đã <strong>xác định là MSSA</strong> — không phủ MRSA.</p>
+                                </div>
+                            </div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide pt-2">Thay thế (Alternatives)</div>
+                            <p class="text-[11px] text-slate-500">Minocycline • Dalbavancin • Oritavancin • Omadacycline • Tedizolid</p>
+                        </div>
+
+                        <!-- Inpatient Purulent -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-3">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                                <span class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                                    <i class="fa-solid fa-hospital text-purple-600"></i> Nội Trú / Cần IV (Tiêm IV)
+                                </span>
+                                <span class="text-[11px] font-bold text-purple-600 bg-purple-50 px-2 py-0.5 rounded">MRSA Nặng</span>
+                            </div>
+
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide pt-1">Ưu tiên (Preferred)</div>
+                            <div class="space-y-2 text-xs">
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Vancomycin IV</span>
+                                        <span class="text-emerald-600 font-bold">$ (Đầu tay)</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">15 mg/kg IV q12h • Lựa chọn kinh điển khi chưa có KSĐ và cần đường tiêm; cần theo dõi nồng độ đáy (TDM) cho nhiễm khuẩn MRSA nặng.</p>
+                                </div>
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Daptomycin IV</span>
+                                        <span class="text-slate-600">$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">4 mg/kg/ngày IV • Hợp lý khi có nguy cơ độc thận với Vancomycin; theo dõi CPK.</p>
+                                </div>
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Linezolid IV</span>
+                                        <span class="text-amber-600">$$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">600mg q12h • Tác dụng ức chế độc tố, phù hợp khi nghi ngờ nhiễm trùng mô mềm hoại tử (NSTI). Thận trọng phối hợp thuốc serotonergic (SSRI/SNRI/MAOI) do nguy cơ hội chứng Serotonin — được đánh giá là <em>thấp</em> nếu theo dõi phù hợp; ức chế tủy xương (giảm tiểu cầu, thiếu máu) và bệnh lý thần kinh ngoại biên chỉ đáng lo khi dùng &gt;2 tuần.</p>
+                                </div>
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Cefazolin<sup>a</sup> / Oxacillin-Nafcillin<sup>a</sup></span>
+                                        <span class="text-slate-600">$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">Cefazolin 1-2g q8h (ưu tiên, an toàn hơn) • <sup>a</sup>Chỉ dùng khi đã xác định là MSSA.</p>
+                                </div>
+                            </div>
+                            <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wide pt-2">Thay thế (Alternatives)</div>
+                            <p class="text-[11px] text-slate-500">Ceftaroline<sup>+</sup> • Tigecycline • Ceftobiprole • Telavancin • Eravacycline</p>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-slate-400 italic"><sup>a</sup> Điều trị MSSA (tụ cầu vàng nhạy Methicillin), không có hoạt tính trên MRSA — chỉ dùng khi đã xác định căn nguyên là MSSA.</p>
+                </div>
+
+                <!-- NON-PURULENT BRANCH -->
+                <div x-show="selectedType === 'nonpurulent'" class="space-y-6" x-transition>
+                    <div class="p-4 bg-teal-50 border border-teal-200 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="w-3 h-3 rounded-full bg-teal-600 animate-pulse"></span>
+                            <span class="font-bold text-teal-900 text-sm">Hướng Xử Trí Nhiễm Trùng Không Mủ (Non-purulent SSTI) — Đích: Streptococcus</span>
+                        </div>
+                        <span class="text-xs font-semibold text-teal-700 bg-teal-100 px-2.5 py-1 rounded-full">Ưu tiên Liên cầu nhóm A; các thuốc dưới đây đồng thời phủ MSSA</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Outpatient Non-purulent -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-3">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                                <span class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                                    <i class="fa-solid fa-house-user text-teal-600"></i> Ngoại Trú (Đường Uống - PO)
+                                </span>
+                                <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">MSSA Targeted</span>
+                            </div>
+
+                            <div class="space-y-2 text-xs">
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Cephalexin (Thế hệ 1)</span>
+                                        <span class="text-emerald-600 font-bold">$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">500mg PO q6h HOẶC 1000mg PO q12h (Tiện lợi hơn cho bệnh nhân).</p>
+                                </div>
+
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Cefadroxil</span>
+                                        <span class="text-emerald-600 font-bold">$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">500mg PO q12h hoặc 1g PO daily • Thời gian bán thải dài hơn Cephalexin.</p>
+                                </div>
+
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Dicloxacillin</span>
+                                        <span class="text-emerald-600 font-bold">$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">500mg PO q6h • Penicillin kháng tụ cầu đường uống chuẩn.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inpatient Non-purulent -->
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-xs space-y-3">
+                            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                                <span class="font-bold text-slate-900 text-sm flex items-center gap-2">
+                                    <i class="fa-solid fa-hospital text-purple-600"></i> Nội Trú (Tiêm IV)
+                                </span>
+                                <span class="text-[11px] font-bold text-teal-600 bg-teal-50 px-2 py-0.5 rounded">Ưu tiên Cefazolin</span>
+                            </div>
+
+                            <div class="space-y-2 text-xs">
+                                <div class="p-2.5 bg-emerald-50/80 rounded-lg border border-emerald-200">
+                                    <div class="font-bold text-emerald-900 flex justify-between">
+                                        <span>Cefazolin IV</span>
+                                        <span class="text-emerald-700 font-bold">Khuyên dùng đầu tay</span>
+                                    </div>
+                                    <p class="text-emerald-800/80 mt-0.5">1-2g IV q8h • An toàn hơn hẳn Nafcillin/Oxacillin (ít độc thận & ít bỏ thuốc hơn).</p>
+                                </div>
+
+                                <div class="p-2.5 bg-slate-50 rounded-lg border border-slate-100">
+                                    <div class="font-bold text-slate-800 flex justify-between">
+                                        <span>Nafcillin / Oxacillin IV</span>
+                                        <span class="text-slate-600">$</span>
+                                    </div>
+                                    <p class="text-slate-500 mt-0.5">1-2g IV q4h • Tỷ lệ viêm tĩnh mạch, độc thận và phản ứng phụ cao hơn Cefazolin.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: DETAILED ANTIBIOTIC MATRIX TABLE -->
+        <section class="glass-card p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-200/80 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">Tra Cứu Dược Lý</span>
+                    <h2 class="text-xl font-bold text-slate-900 mt-0.5">5. Bảng Kháng Sinh Chi Tiết Dùng Trong SSTIs</h2>
+                </div>
+                
+                <!-- Filter Controls -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <input 
+                        type="text" 
+                        x-model="searchQuery" 
+                        placeholder="Tìm tên thuốc..." 
+                        class="px-3 py-1.5 text-xs border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 w-40 sm:w-52">
+                    
+                    <button 
+                        @click="filterTag = 'all'" 
+                        :class="filterTag === 'all' ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-600'" 
+                        class="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors">Tất cả</button>
+                    <button 
+                        @click="filterTag = 'MRSA'" 
+                        :class="filterTag === 'MRSA' ? 'bg-rose-600 text-white' : 'bg-rose-50 text-rose-700 border border-rose-200'" 
+                        class="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors">Kháng MRSA</button>
+                    <button 
+                        @click="filterTag = 'Oral'" 
+                        :class="filterTag === 'Oral' ? 'bg-teal-600 text-white' : 'bg-teal-50 text-teal-700 border border-teal-200'" 
+                        class="px-3 py-1.5 rounded-lg text-xs font-medium transition-colors">Có Thuốc Uống</button>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-slate-100 text-slate-700 font-bold uppercase text-[11px] tracking-wider border-b border-slate-200">
+                            <th class="p-3">Kháng Sinh</th>
+                            <th class="p-3">Đường Dùng & Liều Chuẩn</th>
+                            <th class="p-3">Phổ Tác Dụng</th>
+                            <th class="p-3">Chi Phí</th>
+                            <th class="p-3">Ưu Điểm Chính</th>
+                            <th class="p-3">Nhược Điểm & Tác Dụng Phụ</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <template x-for="drug in filteredDrugs" :key="drug.name">
+                            <tr class="hover:bg-slate-50/80 transition-colors">
+                                <td class="p-3 font-bold text-slate-900 whitespace-nowrap align-top">
+                                    <span x-text="drug.name"></span>
+                                    <span x-show="drug.highlight" class="block text-[10px] text-emerald-600 font-normal" x-text="drug.highlight"></span>
+                                </td>
+                                <td class="p-3 text-slate-700 align-top" x-text="drug.dose"></td>
+                                <td class="p-3 align-top whitespace-nowrap">
+                                    <span x-show="drug.mrsa" class="px-2 py-0.5 bg-rose-100 text-rose-700 font-bold text-[10px] rounded mr-1">MRSA</span>
+                                    <span x-show="drug.mssa" class="px-2 py-0.5 bg-emerald-100 text-emerald-700 font-bold text-[10px] rounded">MSSA</span>
+                                </td>
+                                <td class="p-3 font-semibold text-slate-600 align-top" x-text="drug.cost"></td>
+                                <td class="p-3 text-slate-700 align-top" x-text="drug.advantages"></td>
+                                <td class="p-3 text-slate-600 align-top" x-text="drug.disadvantages"></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION 5: CLINICAL PEARLS & CONTRAINDICATIONS -->
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-rose-50 border border-rose-200 p-5 rounded-2xl space-y-2">
+                <div class="flex items-center gap-2 text-rose-800 font-bold text-sm">
+                    <i class="fa-solid fa-triangle-exclamation text-rose-600"></i>
+                    <span>CẢNH BÁO: Fluoroquinolones, Rifampin & Fusidic Acid</span>
+                </div>
+                <p class="text-xs text-rose-900/80 leading-relaxed">
+                    • <strong>Fluoroquinolones (Levofloxacin/Moxifloxacin):</strong> Tỷ lệ kháng thuốc của <em>S. aureus</em> hiện rất cao, thêm nguy cơ kéo dài QTc và nhiều cảnh báo khung đen. Không dùng làm điều trị kinh nghiệm cho SSTIs có mủ.<br>
+                    • <strong>Rifampin:</strong> Tuyệt đối không dùng đơn trị liệu vì kháng thuốc xuất hiện rất nhanh. Phối hợp thêm Rifampin với kháng sinh kháng tụ cầu khác cũng KHÔNG chứng minh cải thiện kết cục lâm sàng → không khuyến cáo.<br>
+                    • <strong>Fusidic Acid:</strong> Hiệu quả tương đương các thuốc uống khác nhưng tỷ lệ kháng đang tăng ở nhiều khu vực; hiện <em>không sẵn có tại Hoa Kỳ</em>.
+                </p>
+            </div>
+
+            <div class="bg-amber-50 border border-amber-200 p-5 rounded-2xl space-y-2">
+                <div class="flex items-center gap-2 text-amber-800 font-bold text-sm">
+                    <i class="fa-solid fa-prescription-bottle-medical text-amber-600"></i>
+                    <span>LƯU Ý THUỐC MỚI (Novel Agents)</span>
+                </div>
+                <p class="text-xs text-amber-900/80 leading-relaxed">
+                    • <strong>Dalbavancin / Oritavancin:</strong> Lipoglycopeptide thời gian bán thải rất dài (&gt;7 ngày), cho phép truyền liều duy nhất — thuận lợi xuống thang/tránh nhập viện kéo dài.<br>
+                    • <strong>Omadacycline:</strong> Không kém hơn Linezolid trong điều trị SSTI do MRSA (thử nghiệm không kém hơn); hạn chế bởi chi phí cao.<br>
+                    • <strong>Ceftaroline / Ceftobiprole (Cephalosporin thế hệ 5):</strong> Hiệu quả và an toàn tương đương Vancomycin cho SSTI, nhưng hạn chế bởi phổ rộng không cần thiết và chi phí cao.<br>
+                    • <strong>Tedizolid:</strong> Thay thế Linezolid với tỷ lệ khỏi cao hơn và ít tác dụng phụ hơn trong một phân tích gộp.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-8 px-4 text-center text-xs border-t border-slate-800 mt-12">
+        <p class="font-medium text-slate-300">Infographic Y Khoa • Chẩn Đoán & Điều Trị Nhiễm Trùng Da do Tụ Cầu Vàng (SSTIs)</p>
+        <p class="mt-1 text-slate-500">Nguồn: Abeydeera-Keshmiri NA, Miller LG. <em>Staphylococcus aureus</em> Skin and Soft Tissue Infections. Infect Dis Clin N Am. 2026 Sep;S0891-5520(26)00064-4. doi:10.1016/j.idc.2026.07.003</p>
+        <p class="mt-1 text-slate-600 text-[10px]">Tài liệu tham khảo chuyên môn — không thay thế phán đoán lâm sàng và kháng sinh đồ tại chỗ.</p>
+    </footer>
+
+    <!-- ALPINE JS DATA SCRIPT -->
+    <script>
+        function infographicApp() {
+            return {
+                selectedType: 'purulent',
+                searchQuery: '',
+                filterTag: 'all',
+                drugs: [
+                    {
+                        name: 'Trimethoprim-Sulfamethoxazole (TMP-SMX)',
+                        dose: 'Uống: 1-2 viên (160/800mg) q12h',
+                        mrsa: true, mssa: true, oral: true, cost: '$',
+                        advantages: 'Sinh khả dụng uống tốt; tỷ lệ khỏi 80-90%, tương đương Clindamycin trong RCT đa trung tâm.',
+                        disadvantages: 'Dị ứng nhóm Sulfonamid, tăng Kali máu, tăng Creatinin huyết thanh, Phân loại thai kỳ D (FDA).'
+                    },
+                    {
+                        name: 'Doxycycline / Minocycline',
+                        dose: 'Uống / IV: 100mg q12h',
+                        mrsa: true, mssa: true, oral: true, cost: '$',
+                        advantages: 'Doxycycline không kém hơn TMP-SMX (RCT, kèm I&D); dung nạp tốt hơn Minocycline (ít chóng mặt/rối loạn tiền đình).',
+                        disadvantages: 'Nhạy cảm ánh sáng, Phân loại thai kỳ D (FDA); Minocycline có thêm tác dụng phụ tiền đình (chóng mặt, mất thăng bằng).'
+                    },
+                    {
+                        name: 'Clindamycin',
+                        dose: 'Uống: 450mg q8h / IV: 600mg q8h',
+                        mrsa: true, mssa: true, oral: true, cost: '$',
+                        advantages: 'Có tác dụng ức chế ngoại độc tố tụ cầu (anti-toxin) — hữu ích khi nghi ngờ NSTI.',
+                        disadvantages: 'Dùng nhiều lần/ngày, rối loạn tiêu hóa. Tỷ lệ đề kháng cảm ứng trong cộng đồng đang tăng → không còn khuyến cáo dùng kinh nghiệm, cần thử nghiệm đĩa đôi (D-test). Tiêu chảy do C. difficile RẤT HIẾM ở liệu trình ngoại trú.'
+                    },
+                    {
+                        name: 'Cephalexin',
+                        dose: 'Uống: 500mg q6h hoặc 1000mg q12h',
+                        mrsa: false, mssa: true, oral: true, cost: '$',
+                        advantages: 'Dung nạp tốt, hiệu quả tương đương TMP-SMX/Clindamycin cho SSTI không mủ nhẹ-vừa.',
+                        disadvantages: 'Không có hoạt tính trên MRSA — chỉ dùng khi đã xác định MSSA.'
+                    },
+                    {
+                        name: 'Cefadroxil',
+                        dose: 'Uống: 0.5g q12h hoặc 1g/ngày',
+                        mrsa: false, mssa: true, oral: true, cost: '$',
+                        advantages: 'Hoạt tính tương tự Cephalexin, thời gian bán thải dài hơn → liều thuận tiện hơn (1 lần/ngày).',
+                        disadvantages: 'Không có hoạt tính trên MRSA.'
+                    },
+                    {
+                        name: 'Dicloxacillin',
+                        dose: 'Uống: 500mg q6h',
+                        mrsa: false, mssa: true, oral: true, cost: '$',
+                        advantages: 'Penicillin kháng tụ cầu đường uống chuẩn cho MSSA.',
+                        disadvantages: 'Dùng nhiều lần/ngày; không có hoạt tính trên MRSA.'
+                    },
+                    {
+                        name: 'Cefazolin',
+                        dose: 'IV: 1g q8h',
+                        mrsa: false, mssa: true, oral: false, cost: '$',
+                        highlight: 'Ưu tiên hàng đầu cho MSSA đường IV',
+                        advantages: 'An toàn/dung nạp hơn Nafcillin-Oxacillin (tỷ lệ độc thận, viêm gan, ngừng thuốc thấp hơn trong tổng quan hệ thống).',
+                        disadvantages: 'Không có hoạt tính trên MRSA — chỉ dùng khi đã xác định MSSA.'
+                    },
+                    {
+                        name: 'Nafcillin / Oxacillin',
+                        dose: 'IV: 1-2g q4h',
+                        mrsa: false, mssa: true, oral: false, cost: '$',
+                        advantages: 'Penicillin kháng tụ cầu IV kinh điển.',
+                        disadvantages: 'Độc thận, dùng nhiều lần/ngày (q4h) — nay ít ưu tiên hơn Cefazolin; không phủ MRSA.'
+                    },
+                    {
+                        name: 'Vancomycin',
+                        dose: 'IV: 15 mg/kg q12h',
+                        mrsa: true, mssa: true, oral: false, cost: '$',
+                        advantages: 'Sẵn có rộng rãi, chi phí thấp, kinh nghiệm sử dụng lâu đời.',
+                        disadvantages: 'Độc thận, cần theo dõi nồng độ đáy (TDM) cho nhiễm khuẩn MRSA nặng; đang giảm vai trò làm lựa chọn kinh nghiệm phổ quát do đã có nhiều thuốc thay thế an toàn/tiện lợi hơn.'
+                    },
+                    {
+                        name: 'Daptomycin',
+                        dose: 'IV: 4 mg/kg/ngày',
+                        mrsa: true, mssa: true, oral: false, cost: '$',
+                        advantages: 'Hiệu quả tương đương Vancomycin; lựa chọn hợp lý khi có nguy cơ độc thận với Vancomycin.',
+                        disadvantages: 'Chỉ đường IV; tăng CPK/nguy cơ tiêu cơ vân (đặc biệt dùng kéo dài).'
+                    },
+                    {
+                        name: 'Telavancin',
+                        dose: 'IV: 10 mg/kg/ngày',
+                        mrsa: true, mssa: true, oral: false, cost: '$$$',
+                        advantages: 'Lipoglycopeptide bán tổng hợp, hiệu quả tương đương Vancomycin, không cần TDM thường quy.',
+                        disadvantages: 'Độc thận, hạn chế sẵn có, Phân loại thai kỳ D (FDA), chi phí cao.'
+                    },
+                    {
+                        name: 'Dalbavancin / Oritavancin',
+                        dose: 'Oritavancin: IV 1200mg liều duy nhất • Dalbavancin: IV 1000mg, sau đó 500mg sau 1 tuần (nếu cần)',
+                        mrsa: true, mssa: true, oral: false, cost: '$$$$',
+                        advantages: 'Thời gian bán thải rất dài (>7 ngày) → truyền liều duy nhất, thuận lợi xuống thang/xuất viện sớm.',
+                        disadvantages: 'Một số chế phẩm Oritavancin cần truyền kéo dài (3 giờ); chi phí rất cao.'
+                    },
+                    {
+                        name: 'Linezolid',
+                        dose: 'Uống / IV: 600mg q12h (PO có thể 400-600mg q12h)',
+                        mrsa: true, mssa: true, oral: true, cost: '$$',
+                        advantages: 'Sinh khả dụng đường uống cao; có tác dụng ức chế ngoại độc tố — thay thế hấp dẫn khi nghi ngờ nhiễm trùng mô mềm hoại tử (NSTI).',
+                        disadvantages: 'Ức chế tủy xương (giảm tiểu cầu, thiếu máu) và bệnh lý thần kinh ngoại biên nếu dùng KÉO DÀI (>2 tuần); thận trọng khi phối hợp thuốc serotonergic (nguy cơ hội chứng Serotonin, song được đánh giá THẤP nếu theo dõi phù hợp); Phân loại thai kỳ C (FDA).'
+                    },
+                    {
+                        name: 'Tedizolid',
+                        dose: 'Uống / IV: 200mg q24h',
+                        mrsa: true, mssa: true, oral: true, cost: '$$$',
+                        advantages: 'Một phân tích gộp cho thấy tỷ lệ khỏi CAO HƠN Linezolid cho SSTI; ít tác dụng phụ hơn, liều 1 lần/ngày.',
+                        disadvantages: 'Chi phí cao hơn Linezolid; Phân loại thai kỳ C (FDA).'
+                    },
+                    {
+                        name: 'Tigecycline',
+                        dose: 'IV: nạp 100mg, sau đó 50mg q12h',
+                        mrsa: true, mssa: true, oral: false, cost: '$$',
+                        advantages: 'Phổ rất rộng trong 1 thuốc: Gram dương (gồm MRSA), Gram âm và kỵ khí.',
+                        disadvantages: 'Chỉ đường IV; buồn nôn khá thường gặp (~25%).'
+                    },
+                    {
+                        name: 'Omadacycline',
+                        dose: 'Nạp IV 200mg (hoặc 100mg q12h x1 ngày) → 100mg IV/ngày; hoặc nạp PO 450mg x2 ngày → duy trì 300mg/ngày',
+                        mrsa: true, mssa: true, oral: true, cost: '$$$',
+                        advantages: 'Không kém hơn Linezolid cho SSTI do MRSA trong thử nghiệm; còn hoạt tính trên một số chủng kháng Doxycycline.',
+                        disadvantages: 'Giảm hấp thu khi dùng cùng cation (sữa, canxi, sắt); chi phí cao.'
+                    },
+                    {
+                        name: 'Eravacycline',
+                        dose: 'IV: 1 mg/kg q12h, truyền >60 phút',
+                        mrsa: true, mssa: true, oral: false, cost: '$$$',
+                        advantages: 'Phổ rất rộng (Gram dương gồm MRSA, Gram âm, kỵ khí); còn hoạt tính trên một số chủng kháng Doxycycline.',
+                        disadvantages: 'Chỉ đường IV; tương tác thuốc với chất cảm ứng CYP3A4.'
+                    },
+                    {
+                        name: 'Ceftaroline',
+                        dose: 'IV: 600mg q12h',
+                        mrsa: true, mssa: true, oral: false, cost: '$$$',
+                        advantages: 'Cephalosporin thế hệ 5, hiệu quả SSTI tương đương các thuốc khác, gắn không hồi phục với PBP2a — protein gắn Penicillin biến đổi, trung gian đề kháng Methicillin.',
+                        disadvantages: 'Chưa rõ có thực sự ít độc thận hơn Vancomycin; chi phí cao, phổ rộng hơn cần thiết cho SSTI đơn thuần.'
+                    },
+                    {
+                        name: 'Ceftobiprole',
+                        dose: 'IV: 667mg q8h',
+                        mrsa: true, mssa: true, oral: false, cost: '$$$',
+                        advantages: 'Hiệu quả tương đương Vancomycin; tỷ lệ ngừng thuốc do tác dụng phụ nặng thấp hơn Vancomycin/Aztreonam.',
+                        disadvantages: 'Thiếu máu, rối loạn tiêu hóa, tăng men gan; chi phí cao, phổ rộng hơn cần thiết.'
+                    },
+                    {
+                        name: 'Levofloxacin / Moxifloxacin',
+                        dose: 'Uống/IV: 750mg / 400mg q24h',
+                        mrsa: false, mssa: false, oral: true, cost: '$',
+                        advantages: 'Phổ rộng, sinh khả dụng đường uống tốt.',
+                        disadvantages: 'Tỷ lệ kháng S. aureus RẤT CAO — KHÔNG dùng kinh nghiệm cho SSTI có mủ; kéo dài QTc; nhiều cảnh báo khung đen; Phân loại thai kỳ C (FDA).'
+                    },
+                    {
+                        name: 'Delafloxacin',
+                        dose: 'Uống: 450mg q12h • IV: 300mg q12h',
+                        mrsa: true, mssa: true, oral: true, cost: '$$$',
+                        advantages: 'Fluoroquinolone mới có hoạt tính trên MRSA và một số chủng kháng Fluoroquinolone khác.',
+                        disadvantages: 'Hạn chế sẵn có; vẫn thuộc nhóm Fluoroquinolone (thận trọng nhóm — gân, QTc, thần kinh).'
+                    }
+                ],
+                get filteredDrugs() {
+                    return this.drugs.filter(drug => {
+                        const matchesSearch = drug.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                                              drug.dose.toLowerCase().includes(this.searchQuery.toLowerCase());
+                        
+                        if (this.filterTag === 'MRSA') return matchesSearch && drug.mrsa;
+                        if (this.filterTag === 'Oral') return matchesSearch && drug.oral;
+                        return matchesSearch;
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,2225 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 ACR Osteoarthritis Guideline - Visual Clinical Hub</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        acr: {
+                            50: '#EAF3F1',
+                            100: '#D2E8E2',
+                            200: '#A6D4C6',
+                            500: '#0F6E5C',
+                            600: '#0B4F42',
+                            700: '#0A3B34',
+                            800: '#0A2622',
+                            900: '#0C0A09',
+                            navy: '#0f172a'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        /* Standardized Typography & Uniform Hierarchy */
+        h1, h2, h3, h4, h5, h6, p, span, li, button, input, select {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Vivid Light Theme Card Styling with Rich Shadows */
+        .clinical-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+            border-radius: 0.875rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .clinical-card:hover {
+            box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        /* Recommendation Badges with High Contrast */
+        .cor-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.725rem;
+            font-weight: 800;
+            letter-spacing: 0.025em;
+            text-transform: uppercase;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .cor-gps { background-color: #0f766e; color: #ffffff; border: 1px solid #115e59; }
+        .cor-strong-for { background-color: #059669; color: #ffffff; border: 1px solid #047857; }
+        .cor-cond-for { background-color: #0284c7; color: #ffffff; border: 1px solid #0369a1; }
+        .cor-cond-against { background-color: #d97706; color: #ffffff; border: 1px solid #b45309; }
+        .cor-strong-against { background-color: #dc2626; color: #ffffff; border: 1px solid #b91c1c; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0284c7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0369a1;
+        }
+
+        /* Highlight Boxes */
+        .clinical-warning-box {
+            background: linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%);
+            border-left: 5px solid #f43f5e;
+            border-radius: 0.875rem;
+            box-shadow: 0 4px 10px rgba(244, 63, 94, 0.08);
+        }
+
+        .clinical-pearl-box {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-left: 5px solid #0284c7;
+            border-radius: 0.875rem;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.08);
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .clinical-card { background: white; color: black; border: 1px solid #cbd5e1; box-shadow: none; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-teal-600 selection:text-white">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-300 shadow-md no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-tr from-teal-700 to-teal-500 text-white p-2.5 rounded-xl font-black text-xl flex items-center justify-center shadow-md shadow-teal-600/30">
+                        <i class="fa-solid fa-bone"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <span class="font-black text-lg tracking-tight text-slate-900">ACR OA GUIDELINE 2026</span>
+                            <span class="bg-teal-100 text-teal-900 font-black text-[11px] px-2.5 py-0.5 rounded-full border border-teal-300">ACR APPROVED SEP 2026</span>
+                        </div>
+                        <span class="text-[11px] text-slate-600 block font-semibold">Khuyến Cáo Khớp Gối, Khớp Háng & Khớp Bàn Tay (Visual Clinical Hub)</span>
+                    </div>
+                </div>
+
+                <nav class="hidden xl:flex space-x-1 text-xs font-bold text-slate-700">
+                    <a href="#overview" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">1. Tổng Quan</a>
+                    <a href="#novelties" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">2. Điểm Mới 2026</a>
+                    <a href="#physical" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">3. Hành Vi & Vật Lý Trị Liệu</a>
+                    <a href="#pharmacologic" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">4. Can Thiệp Dùng Thuốc</a>
+                    <a href="#against" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">5. Không Nên Dùng / Tránh Dùng</a>
+                    <a href="#summary-table" class="px-3 py-2 rounded-lg hover:bg-teal-50 hover:text-teal-800 transition-all">6. Bảng Tổng Hợp</a>
+                </nav>
+
+                <div class="flex items-center space-x-3">
+                    <a href="#finder" class="bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-teal-800 text-white font-extrabold px-3.5 py-2 rounded-xl text-xs transition-all shadow-md shadow-teal-600/30 flex items-center space-x-1.5">
+                        <i class="fa-solid fa-filter"></i>
+                        <span>Tra Cứu Theo Khớp</span>
+                    </a>
+                    <button onclick="window.print()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 p-2 rounded-xl text-xs border border-slate-300 transition-all" title="In Infographic">
+                        <i class="fa-solid fa-print"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner (Vibrant Contrast Theme) -->
+    <section class="relative bg-gradient-to-br from-slate-900 via-teal-950 to-slate-900 text-white py-12 px-4 border-b border-teal-800/40 shadow-inner">
+        <div class="max-w-7xl mx-auto relative z-10">
+            
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+                <span class="bg-teal-500/20 text-teal-300 border border-teal-400/40 text-xs px-3 py-1 rounded-full font-extrabold flex items-center shadow-sm">
+                    <i class="fa-solid fa-circle-check mr-1.5 text-teal-400"></i> HƯỚNG DẪN CẬP NHẬT MỚI NHẤT
+                </span>
+                <span class="bg-teal-500/20 text-teal-300 border border-teal-400/40 text-xs px-3 py-1 rounded-full font-extrabold">
+                    <i class="fa-solid fa-calendar-check mr-1.5"></i> ACR APPROVED: 08/09/2026
+                </span>
+                <span class="bg-amber-500/20 text-amber-300 border border-amber-400/40 text-xs px-3 py-1 rounded-full font-extrabold">
+                    <i class="fa-solid fa-award mr-1.5"></i> AMERICAN COLLEGE OF RHEUMATOLOGY
+                </span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight leading-snug mb-3">
+                Hướng Dẫn Lâm Sàng Quản Lý Bệnh Thoái Hóa Khớp <br class="hidden md:inline">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-teal-300 to-cyan-300">
+                    Khớp Gối, Khớp Háng & Khớp Bàn Tay (ACR 2026)
+                </span>
+            </h1>
+
+            <p class="text-slate-300 text-xs sm:text-sm max-w-5xl leading-relaxed mb-6 font-medium">
+                Bản tóm tắt khuyến cáo lâm sàng thực hành dựa trên hướng dẫn chính thức của <strong class="text-white">American College of Rheumatology (ACR)</strong> — bản cập nhật (update) từ hướng dẫn ACR/AF 2019.
+            </p>
+
+            <!-- COR / CERTAINTY Legend Banner -->
+            <div class="bg-slate-800/90 backdrop-blur-md p-3.5 rounded-xl border border-slate-700/80 flex flex-wrap items-center justify-between gap-3 text-xs shadow-lg">
+                <div class="flex items-center space-x-2 flex-wrap gap-y-1">
+                    <span class="text-slate-200 font-black uppercase text-[11px] tracking-wider">Mức Khuyến Cáo:</span>
+                    <span class="cor-badge cor-gps">GPS (Thực hành tốt)</span>
+                    <span class="cor-badge cor-strong-for">Mạnh (Nên dùng)</span>
+                    <span class="cor-badge cor-cond-for">Có Điều Kiện (Cân nhắc)</span>
+                    <span class="cor-badge cor-cond-against">Có Điều Kiện Chống (Không ưu tiên)</span>
+                    <span class="cor-badge cor-strong-against">Mạnh - Chống dùng (Không khuyến cáo)</span>
+                </div>
+                <div class="flex items-center space-x-2 text-slate-200 text-[11px] flex-wrap gap-y-1">
+                    <span class="text-slate-300 font-bold uppercase tracking-wider">Mức Bằng Chứng:</span>
+                    <span class="bg-slate-900 px-2 py-1 rounded text-teal-300 border border-slate-700 font-bold">Moderate (Trung bình)</span>
+                    <span class="bg-slate-900 px-2 py-1 rounded text-teal-300 border border-slate-700 font-bold">Low (Thấp)</span>
+                    <span class="bg-slate-900 px-2 py-1 rounded text-teal-300 border border-slate-700 font-bold">Very Low (Rất thấp)</span>
+                    <span class="bg-slate-900 px-2 py-1 rounded text-teal-300 border border-slate-700 font-bold">Ungraded (GPS - Không phân loại)</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- SECTION 0: INTERACTIVE JOINT TREATMENT FINDER -->
+        <section id="finder" class="clinical-card overflow-hidden border-2 border-teal-600/50 shadow-lg no-print">
+            <div class="bg-gradient-to-r from-teal-800 via-teal-900 to-slate-900 p-4 text-white flex flex-wrap justify-between items-center gap-4 border-b border-teal-700">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-teal-400 text-slate-950 p-2.5 rounded-xl text-xl font-black shadow-md"><i class="fa-solid fa-stethoscope"></i></div>
+                    <div>
+                        <h2 class="text-base font-black flex items-center text-white tracking-wide">
+                            CÔNG CỤ LỌC PHÁC ĐỒ THEO VỊ TRÍ KHỚP & ĐẶC ĐIỂM BỆNH NHÂN (INTERACTIVE OA FINDER)
+                        </h2>
+                        <p class="text-xs text-teal-200 font-medium">Chọn vị trí khớp tổn thương và đặc điểm kèm theo để tra cứu các phương pháp Khuyến cáo NÊN vs KHÔNG NÊN dùng</p>
+                    </div>
+                </div>
+                <span class="bg-teal-500/30 text-teal-200 text-xs px-3 py-1.5 rounded-lg border border-teal-400/40 font-extrabold flex items-center shadow-inner">
+                    <i class="fa-solid fa-bolt text-amber-300 mr-1.5"></i> Lọc Nhanh Tức Thì
+                </span>
+            </div>
+
+            <div class="p-5 bg-slate-100/70 space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <!-- Select Joint -->
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-300 shadow-sm space-y-2">
+                        <label class="block font-black text-teal-900 uppercase tracking-wider text-[11px]">1. Chọn Vị Trí Khớp Tổn Thương:</label>
+                        <select id="filter-joint" onchange="runFilter()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none">
+                            <option value="knee">Thoái Hóa Khớp Gối (Knee OA)</option>
+                            <option value="hip">Thoái Hóa Khớp Háng (Hip OA)</option>
+                            <option value="hand">Thoái Hóa Khớp Bàn Tay (Hand OA)</option>
+                            <option value="erosive-hand">Thoái Hóa Khớp Bàn Tay Tán Phá (Erosive Hand OA)</option>
+                        </select>
+                    </div>
+
+                    <!-- Select Patient Condition -->
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-300 shadow-sm space-y-2">
+                        <label class="block font-black text-teal-900 uppercase tracking-wider text-[11px]">2. Tình Trạng Thể Trạng Đi Kèm:</label>
+                        <select id="filter-obesity" onchange="runFilter()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none">
+                            <option value="all">Tất cả bệnh nhân</option>
+                            <option value="obese">Có Thừa Cân / Béo Phì (Overweight/Obesity)</option>
+                            <option value="normal">Thể trạng bình thường</option>
+                        </select>
+                    </div>
+
+                    <!-- Select Approach Type -->
+                    <div class="bg-white p-3.5 rounded-xl border border-slate-300 shadow-sm space-y-2">
+                        <label class="block font-black text-teal-900 uppercase tracking-wider text-[11px]">3. Phương Pháp Điều Trị:</label>
+                        <select id="filter-type" onchange="runFilter()" class="w-full bg-slate-50 border border-slate-300 rounded-lg p-2.5 font-bold text-slate-900 focus:ring-2 focus:ring-teal-500 focus:border-teal-500 outline-none">
+                            <option value="all">Tất cả (Hành Vi/Vật Lý & Thuốc)</option>
+                            <option value="physical">Hành Vi & Vật Lý Trị Liệu (Behavioral/Physical)</option>
+                            <option value="pharmacologic">Dùng Thuốc (Pharmacologic)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Interactive Dynamic Results Output -->
+                <div id="finder-result" class="bg-white p-4 rounded-xl border border-teal-300 shadow-sm space-y-3">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+                        <h4 id="finder-title" class="font-extrabold text-teal-950 text-sm flex items-center">
+                            <i class="fa-solid fa-list-check text-teal-600 mr-2"></i> Kết Quả Tra Cứu Cho Khớp Gối
+                        </h4>
+                        <span id="finder-count" class="bg-teal-100 text-teal-900 text-[11px] font-black px-2.5 py-0.5 rounded-full border border-teal-300"></span>
+                    </div>
+                    <div id="finder-inherit-note" style="display:none" class="bg-amber-50 border border-amber-300 text-amber-900 text-[11px] font-semibold p-2.5 rounded-lg">
+                        <i class="fa-solid fa-circle-info mr-1"></i> PDF gốc ACR 2026 chỉ nêu riêng <strong>Methotrexate</strong> là khuyến cáo đặc hiệu-bằng-chứng cho thể tán phá (Erosive Hand OA). Các mục còn lại bên dưới là khuyến cáo chung cho <strong>Hand OA</strong> (áp dụng hợp lý cho thể tán phá vì đây là một phân nhóm của Hand OA), không phải khuyến cáo được PDF phân tách riêng theo thể tán phá.
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <!-- Strongly & Conditionally Recommended FOR -->
+                        <div class="bg-emerald-50/70 p-3.5 rounded-xl border border-emerald-300 space-y-2">
+                            <h5 class="font-black text-emerald-950 uppercase text-[11px] flex items-center">
+                                <i class="fa-solid fa-circle-check text-emerald-600 mr-1.5 text-sm"></i> NÊN DÙNG (RECOMMENDED)
+                            </h5>
+                            <ul id="finder-list-for" class="space-y-1.5 list-disc pl-4 text-slate-900 font-semibold leading-relaxed"></ul>
+                        </div>
+
+                        <!-- Strongly & Conditionally Recommended AGAINST -->
+                        <div class="bg-rose-50/70 p-3.5 rounded-xl border border-rose-300 space-y-2">
+                            <h5 class="font-black text-rose-950 uppercase text-[11px] flex items-center">
+                                <i class="fa-solid fa-circle-xmark text-rose-600 mr-1.5 text-sm"></i> KHÔNG NÊN DÙNG (RECOMMENDED AGAINST)
+                            </h5>
+                            <ul id="finder-list-against" class="space-y-1.5 list-disc pl-4 text-slate-900 font-semibold leading-relaxed"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: TỔNG QUAN & NGUYÊN TẮC CỐT LÕI -->
+        <section id="overview" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-shapes"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 1: TỔNG QUAN & NGUYÊN TẮC NỀN TẢNG (CORE ASSUMPTIONS)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Giả định quản lý, mô hình phối hợp đa chuyên khoa & triết lý điều trị cá thể hóa ACR 2026</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- Definition Box -->
+                <div class="clinical-pearl-box p-4 shadow-sm">
+                    <h3 class="font-black text-teal-950 text-sm flex items-center">
+                        <i class="fa-solid fa-lightbulb text-teal-600 mr-2 text-base"></i>
+                        3 Giả Định Cốt Lõi Trong Mọi Quyết Định Điều Trị Thoái Hóa Khớp (ACR 2026):
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-3 text-xs text-slate-800 font-medium">
+                        <div class="bg-white p-3 rounded-xl border border-teal-200 shadow-sm">
+                            <strong class="text-teal-950 font-black block mb-1">1. Độc Tính Thấp Nhất Trước:</strong>
+                            Quản lý bệnh nhân OA luôn phải bắt đầu bằng các can thiệp có tiềm năng độc tính ít nhất.
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-teal-200 shadow-sm">
+                            <strong class="text-teal-950 font-black block mb-1">2. Chuyên Gia Đảm Nhận:</strong>
+                            Các liệu pháp chuyên sâu hoặc thủ thuật chuyên khoa phải được thực hiện bởi cán bộ y tế có đủ năng lực, đào tạo bài bản và kinh nghiệm lâm sàng đối với phương pháp đó.
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-teal-200 shadow-sm">
+                            <strong class="text-teal-950 font-black block mb-1">3. Ra Quyết Định Chia Sẻ (SDM):</strong>
+                            Mọi chỉ định phải được cá thể hóa dựa trên sự đồng thuận giữa bác sĩ và bệnh nhân, cân nhắc nguyện vọng, mức độ nặng, các chống chỉ định về mặt bệnh lý và yếu tố nguy cơ của bệnh nhân, và khả năng tiếp cận điều trị.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Multimodal & Multidisciplinary approach cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-teal-600">
+                        <h4 class="font-black text-slate-900 text-xs uppercase tracking-wide flex items-center">
+                            <i class="fa-solid fa-layer-group text-teal-600 mr-2"></i> Tiếp Cận Đa Phương Thức (Multimodal Approach)
+                        </h4>
+                        <p class="text-xs text-slate-700 font-medium leading-relaxed">
+                            Quản lý thoái hóa khớp hiệu quả đòi hỏi sự kết hợp nhuần nhuyễn giữa: <br>
+                            • Can thiệp hành vi & tâm lý (Giảm cân, Giáo dục, CBT)<br>
+                            • Trị liệu vật lý & Vận động (Tập luyện, Dụng cụ hỗ trợ)<br>
+                            • Thuốc điều trị triệu chứng (Tại chỗ, Uống, Tiêm nội khớp).
+                        </p>
+                    </div>
+
+                    <div class="clinical-card p-4 space-y-2 border-t-4 border-t-teal-600">
+                        <h4 class="font-black text-slate-900 text-xs uppercase tracking-wide flex items-center">
+                            <i class="fa-solid fa-users-gear text-teal-600 mr-2"></i> Đội Ngũ Bác Sĩ Đa Chuyên Khoa (Care Team)
+                        </h4>
+                        <p class="text-xs text-slate-700 font-medium leading-relaxed">
+                            Hợp tác chặt chẽ giữa các bên để mang lại kết quả tối ưu (theo PDF gốc): <br>
+                            • Bác sĩ Chăm sóc ban đầu (Primary care) & Bác sĩ Thấp khớp học (Rheumatologist)<br>
+                            • Kỹ thuật viên Vật lý trị liệu (PT) & Hoạt động trị liệu (OT)<br>
+                            • Phẫu thuật viên Chấn thương Chỉnh hình (Orthopedic surgeon).
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 2: ĐIỂM MỚI ĐỘT PHÁ 2026 -->
+        <section id="novelties" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-bolt"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 2: CÁC THAY ĐỔI & ĐIỂM MỚI ĐỘT PHÁ SO VỚI HƯỚNG DẪN 2019</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Tóm tắt các điểm bổ sung mới và đảo ngược chiều khuyến cáo quan trọng trong bản Cập nhật 2026</p>
+                </div>
+            </div>
+
+            <!-- Highlights Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                
+                <!-- Novelty 1: GLP-1 RA -->
+                <div class="clinical-card p-4 border-t-4 border-t-emerald-500 bg-gradient-to-b from-emerald-50/30 to-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-emerald-600 text-white text-[10px] font-black px-2 py-0.5 rounded shadow-sm">KHUYẾN CÁO MỚI 2026</span>
+                            <i class="fa-solid fa-syringe text-emerald-600 text-lg"></i>
+                        </div>
+                        <h4 class="font-extrabold text-emerald-950 text-xs mb-1.5">Thuốc GLP-1 RA Cho OA Khớp Gối + Béo Phì</h4>
+                        <p class="text-[11px] text-slate-700 leading-relaxed font-medium">
+                            Lần đầu tiên bổ sung khuyến cáo <span class="cor-badge cor-cond-for text-[10px] py-0">Conditionally Recommend</span> sử dụng thuốc đồng vận receptor GLP-1 (GLP-1 RA) hỗ trợ giảm cân kết hợp chế độ ăn & vận động cho người thoái hóa khớp gối có kèm <strong>Béo phì (Obesity)</strong>. <span class="text-rose-700 font-bold">Lưu ý: PDF gốc CHỈ nêu "obesity", KHÔNG bao gồm "overweight" (thừa cân đơn thuần) — khác với khuyến cáo Giảm cân áp dụng cho cả hai nhóm.</span>
+                        </p>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-emerald-200 text-[10px] text-emerald-800 font-extrabold flex items-center">
+                        <i class="fa-solid fa-award mr-1"></i> Bằng chứng: Moderate
+                    </div>
+                </div>
+
+                <!-- Novelty 2: Massage Therapy -->
+                <div class="clinical-card p-4 border-t-4 border-t-teal-500 bg-gradient-to-b from-teal-50/30 to-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-teal-600 text-white text-[10px] font-black px-2 py-0.5 rounded shadow-sm">ĐẢO CHIỀU SO VỚI 2019</span>
+                            <i class="fa-solid fa-spa text-teal-600 text-lg"></i>
+                        </div>
+                        <h4 class="font-extrabold text-teal-950 text-xs mb-1.5">Liệu Pháp Massage Khớp Gối & Háng</h4>
+                        <p class="text-[11px] text-slate-700 leading-relaxed font-medium">
+                            Đảo chiều khuyến cáo (thay đổi so với bản 2019) sang <span class="cor-badge cor-cond-for text-[10px] py-0">Conditionally Recommend</span> cho bệnh nhân thoái hóa khớp gối và khớp háng [Low certainty]. <em>(Văn bản tóm tắt ACR 2026 chỉ đánh dấu đây là thay đổi chiều khuyến cáo so với 2019, không nêu chi tiết nội dung khuyến cáo 2019 trước đó — cần đối chiếu bản gốc 2019 nếu cần trích dẫn cụ thể.)</em>
+                        </p>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-teal-200 text-[10px] text-teal-800 font-extrabold flex items-center">
+                        <i class="fa-solid fa-arrows-rotate mr-1"></i> Thay đổi so với 2019
+                    </div>
+                </div>
+
+                <!-- Novelty 3: Methotrexate for Erosive Hand OA -->
+                <div class="clinical-card p-4 border-t-4 border-t-indigo-500 bg-gradient-to-b from-indigo-50/30 to-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-indigo-600 text-white text-[10px] font-black px-2 py-0.5 rounded shadow-sm">ĐẢO CHIỀU SO VỚI 2019</span>
+                            <i class="fa-solid fa-pills text-indigo-600 text-lg"></i>
+                        </div>
+                        <h4 class="font-extrabold text-indigo-950 text-xs mb-1.5">Methotrexate Cho OA Bàn Tay Tán Phá</h4>
+                        <p class="text-[11px] text-slate-700 leading-relaxed font-medium">
+                            Chuyển sang <span class="cor-badge cor-cond-for text-[10px] py-0">Conditionally Recommend</span> đối với thể Thoái hóa khớp bàn tay tán phá (Erosive Hand OA). Tuy nhiên, vẫn khuyến cáo CHỐNG lại dùng MTX cho khớp gối/háng thông thường.
+                        </p>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-indigo-200 text-[10px] text-indigo-800 font-extrabold flex items-center">
+                        <i class="fa-solid fa-hand-holding-medical mr-1"></i> Chỉ định riêng thể Tán Phá
+                    </div>
+                </div>
+
+                <!-- Novelty 4: Glucosamine & Chondroitin -->
+                <div class="clinical-card p-4 border-t-4 border-t-rose-600 bg-gradient-to-b from-rose-50/30 to-white flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="bg-rose-600 text-white text-[10px] font-black px-2 py-0.5 rounded shadow-sm">SIẾT CHẶT HƠN 2019</span>
+                            <i class="fa-solid fa-ban text-rose-600 text-lg"></i>
+                        </div>
+                        <h4 class="font-extrabold text-rose-950 text-xs mb-1.5">Glucosamine & Chondroitin</h4>
+                        <p class="text-[11px] text-slate-700 leading-relaxed font-medium">
+                            Mức khuyến cáo hiện tại là <span class="cor-badge cor-strong-against text-[10px] py-0">Strongly Recommend Against</span> cho tất cả các vị trí khớp (Gối, Háng, Bàn tay), kể cả dạng đơn chất hay phối hợp. <em class="text-slate-500 text-[10px]">(PDF gốc chỉ đánh dấu đây là "change in recommendation direction since 2019" mà không nêu cụ thể mức khuyến cáo 2019 trước đó là gì — cần đối chiếu bản ACR/AF 2019 gốc để xác định chính xác đây là đảo chiều hoàn toàn hay siết chặt mức độ.)</em>
+                        </p>
+                    </div>
+                    <div class="mt-3 pt-2 border-t border-rose-200 text-[10px] text-rose-800 font-extrabold flex items-center">
+                        <i class="fa-solid fa-triangle-exclamation mr-1"></i> Không khuyến cáo sử dụng
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: CAN THIỆP HÀNH VI & VẬT LÝ TRỊ LIỆU -->
+        <section id="physical" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-person-walking"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 3: CAN THIỆP HÀNH VI & VẬT LÝ TRỊ LIỆU (BEHAVIORAL & PHYSICAL APPROACHES)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Tập luyện, giảm cân, giáo dục sức khỏe, dụng cụ hỗ trợ và các liệu pháp vật lý</p>
+                </div>
+            </div>
+
+            <!-- Physical & Behavioral Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- GPS & Strong Recommendations -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-emerald-600">
+                    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+                        <div>
+                            <span class="cor-badge cor-strong-for">Khuyến Cáo Mạnh & GPS</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1">Nền Tảng Điều Trị Cốt Lõi</h3>
+                        </div>
+                        <div class="bg-emerald-100 text-emerald-800 p-2.5 rounded-xl text-xl font-black shadow-sm"><i class="fa-solid fa-heart-pulse"></i></div>
+                    </div>
+
+                    <div class="space-y-2 text-xs">
+                        <div class="bg-teal-50 p-3 rounded-xl border border-teal-200 space-y-1">
+                            <span class="cor-badge cor-gps text-[10px]">GPS - Thực hành tốt</span>
+                            <h4 class="font-extrabold text-teal-950">Giáo Dục Bệnh Nhân & Tự Quản Lý</h4>
+                            <p class="text-slate-700 font-medium">Cung cấp thông tin giáo dục bệnh và khuyến khích tham gia các chương trình tự quản lý để tăng cường năng lực tự chăm sóc.</p>
+                        </div>
+
+                        <div class="bg-teal-50 p-3 rounded-xl border border-teal-200 space-y-1">
+                            <span class="cor-badge cor-gps text-[10px]">GPS - Thực hành tốt</span>
+                            <h4 class="font-extrabold text-teal-950">Chuyển Vật Lý Trị Liệu (PT) & Hoạt Động Trị Liệu (OT)</h4>
+                            <p class="text-slate-700 font-medium">Chuyển đến PT khi giảm chức năng/đau/mệt mỏi cản trở tập luyện. Chuyển đến OT khi giới hạn sinh hoạt hàng ngày liên quan chi trên hoặc vai trò xã hội.</p>
+                        </div>
+
+                        <div class="bg-teal-50 p-3 rounded-xl border border-teal-200 space-y-1">
+                            <span class="cor-badge cor-gps text-[10px]">GPS - Thực hành tốt</span>
+                            <h4 class="font-extrabold text-teal-950">Gậy Chống & Dụng Cụ Hỗ Trợ Di Chuyển</h4>
+                            <p class="text-slate-700 font-medium">Khuyên dùng gậy chống và dụng cụ hỗ trợ thích hợp cho người thoái hóa khớp gối/háng có hạn chế khả năng đi lại (limitations in walking).</p>
+                        </div>
+
+                        <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-300 space-y-1">
+                            <span class="cor-badge cor-strong-for text-[10px]">Strong - Moderate Certainty</span>
+                            <h4 class="font-extrabold text-emerald-950">Tập Luyện Thể Dục (Exercise)</h4>
+                            <p class="text-slate-700 font-bold">Khuyến cáo MẠNH MẼ cho bệnh nhân thoái hóa khớp Gối và khớp Háng.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-300 space-y-1">
+                            <span class="cor-badge cor-strong-for text-[10px]">Strong - Moderate Certainty</span>
+                            <h4 class="font-extrabold text-emerald-950">Giảm Cân (Weight Loss)</h4>
+                            <p class="text-slate-700 font-bold">Khuyến cáo MẠNH MẼ cho bệnh nhân thoái hóa khớp Gối và Háng có thừa cân hoặc béo phì.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conditional Recommendations -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-teal-600">
+                    <div class="flex justify-between items-start border-b border-slate-200 pb-2">
+                        <div>
+                            <span class="cor-badge cor-cond-for">Khuyến Cáo Có Điều Kiện (Conditional)</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1">Các Biện Pháp Bổ Trợ Nên Cân Nhắc</h3>
+                        </div>
+                        <div class="bg-teal-100 text-teal-800 p-2.5 rounded-xl text-xl font-black shadow-sm"><i class="fa-solid fa-hand-holding-medical"></i></div>
+                    </div>
+
+                    <div class="space-y-2 text-xs">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div class="bg-teal-50 p-2.5 rounded-lg border border-teal-200">
+                                <strong class="text-teal-950 block font-black">Khớp Bàn Tay:</strong>
+                                <span class="text-slate-700 font-medium">• Bài tập vận động bàn tay (Low)<br>• Nẹp chỉnh hình bàn tay (CMC1 & ngón) (Low)<br>• Dán băng trị liệu Taping cho CMC1 (Low)<br>• Găng tay thoái hóa khớp (Very low)<br>• Sáp Paraffin (Low)</span>
+                            </div>
+
+                            <div class="bg-teal-50 p-2.5 rounded-lg border border-teal-200">
+                                <strong class="text-teal-950 block font-black">Khớp Gối:</strong>
+                                <span class="text-slate-700 font-medium">• Nẹp khớp gối (Xương đùi-chày / Bánh chè-đùi) (Very low - Moderate, tùy loại nẹp)<br>• Dán băng trị liệu Therapeutic Taping (Low)<br>• Yoga (Very low)<br>• Đốt sóng cao tần Radiofrequency ablation (Low)</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-teal-50 p-2.5 rounded-lg border border-teal-200 space-y-1">
+                            <strong class="text-teal-950 block font-black">Áp Dụng Cho Cả Gối, Háng & Bàn Tay:</strong>
+                            <p class="text-slate-700 font-medium">
+                                • Liệu pháp Nhận thức Hành vi (CBT) (Low)<br>
+                                • Chườm nóng / Chườm lạnh tại chỗ (Low)<br>
+                                • Châm cứu (Acupuncture) (Moderate gối/háng; Very low bàn tay)
+                            </p>
+                            <p class="text-slate-500 text-[10px] italic">* Dán băng trị liệu (Taping) CHỈ áp dụng cho Khớp Gối hoặc khớp CMC1 (bàn tay) — KHÔNG áp dụng cho khớp Háng, xem cột "Khớp Gối" và "Khớp Bàn Tay" tương ứng.</p>
+                        </div>
+
+                        <div class="bg-teal-50 p-2.5 rounded-lg border border-teal-200 space-y-1">
+                            <strong class="text-teal-950 block font-black">Áp Dụng Cho Cả Gối & Háng:</strong>
+                            <p class="text-slate-700 font-medium">
+                                • Thái Cực Quyền (Tai Chi) (Very low)<br>
+                                • Liệu pháp Massage (*) (Low) — <i>Mới đảo chiều 2026</i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 4: CAN THIỆP DÙNG THUỐC -->
+        <section id="pharmacologic" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-prescription-bottle-medical"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 4: CAN THIỆP DÙNG THUỐC (PHARMACOLOGIC APPROACHES)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Các thuốc uống, tại chỗ, tiêm nội khớp được khuyến cáo theo từng vị trí khớp</p>
+                </div>
+            </div>
+
+            <!-- Pharmacologic Pillars Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                <!-- Pillar 1: NSAIDs (Topical & Oral) -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-emerald-600 hover:border-emerald-500 transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="cor-badge cor-strong-for">Class Strong</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1">1. Thuốc NSAIDs (Tại chỗ & Uống)</h3>
+                        </div>
+                        <div class="bg-emerald-100 text-emerald-800 p-2.5 rounded-xl text-xl font-black shadow-sm"><i class="fa-solid fa-capsules"></i></div>
+                    </div>
+                    <ul class="text-xs text-slate-800 space-y-2 font-medium">
+                        <li class="bg-emerald-50 p-2 rounded-lg border border-emerald-200">
+                            <strong class="text-emerald-950 block font-extrabold">• NSAIDs Tại Chỗ (Topical):</strong>
+                            Khuyến cáo MẠNH MẼ cho khớp Gối & Bàn tay [Moderate]. Nên ưu tiên NSAIDs tại chỗ hơn NSAIDs uống cho Gối & Bàn tay [Conditional - Low].
+                        </li>
+                        <li class="bg-emerald-50 p-2 rounded-lg border border-emerald-200">
+                            <strong class="text-emerald-950 block font-extrabold">• NSAIDs Đường Uống (Oral):</strong>
+                            Khuyến cáo MẠNH MẼ cho khớp Gối, Háng & Bàn tay [Moderate].
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 2: Intraarticular Glucocorticoids -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-teal-600 hover:border-teal-500 transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="cor-badge cor-strong-for">Class Strong / Cond</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1">2. Tiêm Glucocorticoid Nội Khớp</h3>
+                        </div>
+                        <div class="bg-teal-100 text-teal-800 p-2.5 rounded-xl text-xl font-black shadow-sm"><i class="fa-solid fa-syringe"></i></div>
+                    </div>
+                    <ul class="text-xs text-slate-800 space-y-2 font-medium">
+                        <li class="bg-teal-50 p-2 rounded-lg border border-teal-200">
+                            <strong class="text-teal-950 block font-extrabold">• Khớp Gối & Khớp Háng:</strong>
+                            Khuyến cáo MẠNH MẼ [Low]. ĐẶC BIỆT: Khuyến cáo mạnh mẽ NÊN dùng Siêu âm hướng dẫn tiêm cho Khớp Háng [Strong - Low].
+                        </li>
+                        <li class="bg-teal-50 p-2 rounded-lg border border-teal-200">
+                            <strong class="text-teal-950 block font-extrabold">• Khớp Bàn Tay:</strong>
+                            Khuyến cáo CÓ ĐIỀU KIỆN (Conditionally Recommend) [Low].
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 3: GLP-1 RA for Obesity & Knee OA -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-teal-600 hover:border-teal-500 transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="cor-badge cor-cond-for">Conditional (NEW 2026)</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1">3. Đồng Vận GLP-1 RA</h3>
+                        </div>
+                        <div class="bg-teal-100 text-teal-800 p-2.5 rounded-xl text-xl font-black shadow-sm"><i class="fa-solid fa-weight-scale"></i></div>
+                    </div>
+                    <div class="bg-teal-50 p-2.5 rounded-lg border border-teal-200 text-xs text-slate-800 space-y-1 font-medium">
+                        <strong class="text-teal-950 block font-extrabold">• Chỉ định đặc hiệu:</strong>
+                        Khuyến cáo CÓ ĐIỀU KIỆN cho bệnh nhân Thoái hóa khớp Gối kèm <strong>Béo phì (Obesity)</strong> để đạt mức giảm cân tối ưu, kết hợp chế độ ăn & vận động [Moderate certainty]. <span class="text-rose-700 font-bold">Lưu ý: khuyến cáo này CHỈ áp dụng cho nhóm Béo phì, KHÔNG bao gồm Thừa cân đơn thuần</span> (khác với khuyến cáo Giảm cân áp dụng cho cả Thừa cân/Béo phì).
+                    </div>
+                </div>
+
+                <!-- Pillar 4: Acetaminophen, Duloxetine, Capsaicin -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-indigo-600 hover:border-indigo-500 transition-all">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="cor-badge cor-cond-for">Class Conditional</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1">4. Acetaminophen & Duloxetine</h3>
+                        </div>
+                        <div class="bg-indigo-100 text-indigo-800 p-2.5 rounded-xl text-xl font-black shadow-sm"><i class="fa-solid fa-pills"></i></div>
+                    </div>
+                    <ul class="text-xs text-slate-800 space-y-2 font-medium">
+                        <li class="bg-indigo-50 p-2 rounded-lg border border-indigo-200">
+                            <strong class="text-indigo-950 block font-extrabold">• Acetaminophen (Paracetamol):</strong>
+                            Khuyến cáo Có điều kiện cho Khớp Gối, Háng & Bàn tay [Low].
+                        </li>
+                        <li class="bg-indigo-50 p-2 rounded-lg border border-indigo-200">
+                            <strong class="text-indigo-950 block font-extrabold">• Duloxetine (SNRI):</strong>
+                            Khuyến cáo Có điều kiện cho Khớp Gối, Háng & Bàn tay [Moderate].
+                        </li>
+                        <li class="bg-indigo-50 p-2 rounded-lg border border-indigo-200">
+                            <strong class="text-indigo-950 block font-extrabold">• Topical Capsaicin:</strong>
+                            Khuyến cáo Có điều kiện CHO Khớp Gối [Moderate].
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 5: Methotrexate for Erosive Hand OA -->
+                <div class="clinical-card p-5 space-y-3 border-t-4 border-t-amber-600 hover:border-amber-500 transition-all md:col-span-2 lg:col-span-2">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="cor-badge cor-cond-for">Conditional (*)</span>
+                            <h3 class="font-black text-slate-900 text-base mt-1">5. Methotrexate (Đặc hiệu thể Bàn tay Tán phá - Erosive Hand OA)</h3>
+                        </div>
+                        <div class="bg-amber-100 text-amber-800 p-2.5 rounded-xl text-xl font-black shadow-sm"><i class="fa-solid fa-disease"></i></div>
+                    </div>
+                    <p class="text-xs text-slate-700 leading-relaxed font-semibold">
+                        • Khuyến cáo CÓ ĐIỀU KIỆN <span class="cor-badge cor-cond-for text-[10px] py-0">Conditionally Recommend</span> cho bệnh nhân <strong>Erosive Hand OA (Thoái hóa khớp bàn tay tán phá)</strong> [Low certainty]. <br>
+                        • <span class="text-rose-700 font-extrabold">CHÚ Ý:</span> Vẫn khuyến cáo CÓ ĐIỀU KIỆN CHỐNG DÙNG (Conditionally Recommend Against) Methotrexate cho thoái hóa khớp Gối và khớp Háng thông thường.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 5: CÁC CAN THIỆP KHÔNG NÊN DÙNG (RECOMMENDED AGAINST) -->
+        <section id="against" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-rose-600 pl-3">
+                <div class="bg-rose-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-ban"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 5: CÁC CAN THIỆP KHÔNG NÊN DÙNG (RECOMMENDED AGAINST)</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Danh sách thuốc, chất tiêm và liệu pháp vật lý bị khuyến cáo CHỐNG DÙNG do thiếu hiệu quả hoặc rủi ro</p>
+                </div>
+            </div>
+
+            <!-- WARNING RED BOX FOR STRONGLY RECOMMENDED AGAINST -->
+            <div class="clinical-warning-box p-5 space-y-3 shadow-md">
+                <div class="flex items-center space-x-2 text-rose-950 font-black text-sm">
+                    <div class="bg-rose-600 text-white p-2 rounded-xl shadow"><i class="fa-solid fa-octagon-exclamation"></i></div>
+                    <h3 class="uppercase tracking-wide">KHUYẾN CÁO MẠNH MẼ KHÔNG NÊN DÙNG (STRONGLY RECOMMEND AGAINST)</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 text-xs font-medium">
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm space-y-1">
+                        <strong class="text-rose-900 font-black block">• Tiêm Huyết Tương Giàu Tiểu Cầu (PRP):</strong>
+                        Chống sử dụng mạnh mẽ cho Khớp Gối & Khớp Háng [Low].
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm space-y-1">
+                        <strong class="text-rose-900 font-black block">• Tiêm Tế Bào Gốc (Stem Cell Injections):</strong>
+                        Chống sử dụng mạnh mẽ cho Khớp Gối & Khớp Háng [Moderate].
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm space-y-1">
+                        <strong class="text-rose-900 font-black block">• Hydroxychloroquine (HCQ):</strong>
+                        Chống sử dụng mạnh mẽ cho Khớp Gối, Háng & Bàn tay [Moderate].
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm space-y-1">
+                        <strong class="text-rose-900 font-black block">• Bisphosphonates:</strong>
+                        Chống sử dụng mạnh mẽ cho Khớp Gối, Háng & Bàn tay [Moderate].
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm space-y-1">
+                        <strong class="text-rose-900 font-black block">• Glucosamine & Chondroitin (*):</strong>
+                        Chống sử dụng mạnh mẽ cho tất cả vị trí khớp [Low - Moderate].
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm space-y-1">
+                        <strong class="text-rose-900 font-black block">• Thuốc Ức Chế TNF-alpha:</strong>
+                        Chống sử dụng mạnh mẽ cho Khớp Gối, Háng & Bàn tay [Very low - Moderate].
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-rose-300 shadow-sm space-y-1">
+                        <strong class="text-rose-900 font-black block">• Thuốc Ức Chế IL-1 (Cho Bàn Tay):</strong>
+                        Chống sử dụng mạnh mẽ cho Khớp Bàn Tay [Low].
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONDITIONALLY RECOMMENDED AGAINST GRID -->
+            <div class="clinical-card p-5 space-y-3 border-t-4 border-t-amber-600">
+                <h3 class="font-black text-amber-950 text-xs uppercase tracking-wide flex items-center">
+                    <i class="fa-solid fa-triangle-exclamation text-amber-600 mr-2"></i> KHUYẾN CÁO CÓ ĐIỀU KIỆN KHÔNG NÊN DÙNG (CONDITIONALLY RECOMMEND AGAINST)
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-medium">
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                        <strong class="text-amber-950 block font-bold mb-1">Cơ Học & Vật Lý:</strong>
+                        • Đệm lót nêm trong/ngoài (Wedge insoles) (Gối & Háng)<br>
+                        • Kích thích điện qua da TENS (Gối & Háng)
+                    </div>
+
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                        <strong class="text-amber-950 block font-bold mb-1">Thuốc Giảm Đau Toàn Thân:</strong>
+                        • <strong>Opioids</strong> (Gối, Háng & Bàn tay)<br>
+                        • SNRIs khác, TCAs, Pregabalin, Gabapentin<br>
+                        • Topical Capsaicin cho Bàn Tay
+                    </div>
+
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                        <strong class="text-amber-950 block font-bold mb-1">Thuốc Tiêm Nội Khớp:</strong>
+                        • <strong>Hyaluronic Acid (HA)</strong> (Gối, Háng, Bàn tay)<br>
+                        • Botulinum Toxin (Gối & Háng)<br>
+                        • Dextrose Prolotherapy (Gối & Háng)
+                    </div>
+
+                    <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                        <strong class="text-amber-950 block font-bold mb-1">Thực Phẩm Bổ Sung & Thuốc Khác:</strong>
+                        • Colchicine, Vitamin D, Dầu cá (Fish oil)<br>
+                        • Ức chế IL-1 (Gối & Háng)<br>
+                        • Methotrexate (Gối & Háng)
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SECTION 6: BẢNG TỔNG HỢP TOÀN BỘ KHUYẾN CÁO ACR 2026 -->
+        <section id="summary-table" class="space-y-5">
+            <div class="flex items-center space-x-3 border-l-4 border-teal-600 pl-3">
+                <div class="bg-teal-600 text-white p-2 rounded-lg font-black text-sm"><i class="fa-solid fa-table-list"></i></div>
+                <div>
+                    <h2 class="text-xl font-black text-slate-900 uppercase tracking-tight">PHẦN 6: BẢNG TỔNG HỢP TOÀN BỘ KHUYẾN CÁO ACR 2026</h2>
+                    <p class="text-xs text-slate-600 font-semibold">Tra cứu theo nhóm phương pháp, mức độ khuyến cáo và chất lượng bằng chứng</p>
+                </div>
+            </div>
+
+            <div class="clinical-card overflow-hidden shadow-sm">
+                <div class="bg-gradient-to-r from-slate-800 to-teal-900 p-3.5 font-black text-xs text-white flex items-center justify-between border-b border-slate-700">
+                    <span class="flex items-center"><i class="fa-solid fa-list-check mr-2 text-teal-300"></i> BẢNG KHUYẾN CÁO CHI TIẾT THEO VĂN BẢN GỐC ACR 2026</span>
+                    <span class="text-[11px] text-teal-200 font-normal">* Thay đổi từ 2019 | ** Khuyến cáo mới 2026</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left text-slate-800">
+                        <thead class="bg-slate-200 text-slate-950 font-black uppercase border-b border-slate-300">
+                            <tr>
+                                <th class="p-3 w-7/12">Nội Dung Phát Biểu Khuyến Cáo (Recommendation Statement)</th>
+                                <th class="p-3 w-2/12">Mức Khuyến Cáo (Strength)</th>
+                                <th class="p-3 w-3/12">Chất Lượng Bằng Chứng (Certainty)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200 font-medium">
+                            
+                            <!-- PHYSICAL HEADER -->
+                            <tr class="bg-teal-100/80 font-black text-teal-950">
+                                <td colspan="3" class="p-2.5 uppercase tracking-wider text-[11px]"><i class="fa-solid fa-person-walking mr-1.5"></i> 1. CÁC TIẾP CẬN HÀNH VI & VẬT LÝ TRỊ LIỆU (BEHAVIORAL AND PHYSICAL APPROACHES)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Giáo dục về bệnh và tự quản lý bệnh thoái hóa khớp</td>
+                                <td class="p-3"><span class="cor-badge cor-gps">GPS</span></td>
+                                <td class="p-3 text-slate-600">Ungraded</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Chuyển Vật lý trị liệu (PT) và Hoạt động trị liệu (OT) theo chỉ định</td>
+                                <td class="p-3"><span class="cor-badge cor-gps">GPS</span></td>
+                                <td class="p-3 text-slate-600">Ungraded</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-semibold">Khuyên dùng gậy chống và dụng cụ hỗ trợ di chuyển cho OA Gối/Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-gps">GPS</span></td>
+                                <td class="p-3 text-slate-600">Ungraded</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-emerald-950">Tập luyện thể dục cho người OA Gối và OA Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-for">Strong</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-emerald-950">Giảm cân cho người OA Gối và OA Háng có thừa cân / béo phì</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-for">Strong</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Tập vận động bàn tay cho OA Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Nẹp khớp gối (Tibiofemoral & Patellofemoral braces) cho OA Gối</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Very low to Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Nẹp bàn tay / khớp CMC1 & ngón tay cho OA Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Dán băng trị liệu Therapeutic Taping cho OA Gối hoặc CMC1</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Găng tay thoái hóa khớp (Arthritis gloves) cho OA Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Very low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Liệu pháp Nhận thức Hành vi (CBT) cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Thái Cực Quyền (Tai Chi) cho OA Gối & Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Very low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Yoga cho OA Khớp Gối</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Very low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Chườm nóng / Chườm lạnh tại chỗ cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Tắm sáp Paraffin cho OA Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 bg-teal-50/40">
+                                <td class="p-3 font-bold text-teal-950">Liệu pháp Massage cho OA Gối & Háng (*)</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Châm cứu (Acupuncture) cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Moderate (Gối/Háng); Very low (Bàn tay)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Đốt sóng cao tần (Radiofrequency ablation) cho OA Gối</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Đệm lót nêm trong/ngoài cho OA Gối & Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Very low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Kích thích điện TENS cho OA Gối & Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+
+                            <!-- PHARMACOLOGIC HEADER -->
+                            <tr class="bg-teal-100/80 font-black text-teal-950">
+                                <td colspan="3" class="p-2.5 uppercase tracking-wider text-[11px]"><i class="fa-solid fa-capsules mr-1.5"></i> 2. CÁC TIẾP CẬN DÙNG THUỐC (PHARMACOLOGIC APPROACHES)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-emerald-950">NSAIDs tại chỗ (Topical) cho OA Gối và OA Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-for">Strong</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-emerald-950">NSAIDs đường uống (Oral) cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-for">Strong</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-emerald-950">Tiêm Glucocorticoid nội khớp cho OA Gối & Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-for">Strong</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-emerald-950">Siêu âm hướng dẫn tiêm Glucocorticoid nội khớp cho OA Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-for">Strong</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 bg-teal-50/60">
+                                <td class="p-3 font-bold text-teal-950">Thuốc GLP-1 RA hỗ trợ giảm cân + ăn uống/vận động cho OA Gối + Béo phì (**)</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Tiêm Glucocorticoid nội khớp cho OA Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Ưu tiên NSAIDs tại chỗ hơn NSAIDs uống cho OA Gối & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Topical Capsaicin cho OA Gối</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Acetaminophen (Paracetamol) cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3">Duloxetine (SNRI) cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 bg-amber-50/50">
+                                <td class="p-3 font-bold text-amber-950">Methotrexate cho Thoái hóa khớp bàn tay tán phá (Erosive Hand OA) (*)</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-for">Conditional</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+
+                            <!-- STRONGLY RECOMMENDED AGAINST -->
+                            <tr class="bg-rose-100/80 font-black text-rose-950">
+                                <td colspan="3" class="p-2.5 uppercase tracking-wider text-[11px]"><i class="fa-solid fa-ban mr-1.5"></i> 3. CÁC KHUYẾN CÁO MẠNH MẼ CHỐNG DÙNG (STRONGLY RECOMMEND AGAINST)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-rose-900">CHỐNG DÙNG Tiêm Huyết tương giàu tiểu cầu (PRP) cho OA Gối & Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-against">Strong Against</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-rose-900">CHỐNG DÙNG Tiêm Tế bào gốc cho OA Gối & Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-against">Strong Against</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-rose-900">CHỐNG DÙNG Hydroxychloroquine cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-against">Strong Against</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-rose-900">CHỐNG DÙNG Bisphosphonates cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-against">Strong Against</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 bg-rose-50/50">
+                                <td class="p-3 font-bold text-rose-900">CHỐNG DÙNG Glucosamine, Chondroitin & dạng phối hợp (*) cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-against">Strong Against</span></td>
+                                <td class="p-3 text-slate-600">Low (Glucosamine đơn); Moderate (Phối hợp)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-rose-900">CHỐNG DÙNG Thuốc ức chế TNF-alpha cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-against">Strong Against</span></td>
+                                <td class="p-3 text-slate-600">Very low (Gối/Háng); Moderate (Bàn tay)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 font-bold text-rose-900">CHỐNG DÙNG Thuốc ức chế IL-1 cho OA Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-strong-against">Strong Against</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+
+                            <!-- CONDITIONALLY RECOMMENDED AGAINST -->
+                            <tr class="bg-amber-100/80 font-black text-amber-950">
+                                <td colspan="3" class="p-2.5 uppercase tracking-wider text-[11px]"><i class="fa-solid fa-triangle-exclamation mr-1.5"></i> 4. CÁC KHUYẾN CÁO CÓ ĐIỀU KIỆN CHỐNG DÙNG (CONDITIONALLY RECOMMEND AGAINST)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Thuốc ức chế IL-1 cho OA Gối & Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Topical Capsaicin cho OA Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG các SNRIs khác, TCAs, Pregabalin, Gabapentin cho OA Gối, Háng, Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Very low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Thuốc giảm đau Opioids cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Tiêm Acid Hyaluronic (HA) nội khớp cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Moderate (Gối/Háng); Very low (Bàn tay)</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Tiêm Botulinum Toxin nội khớp cho OA Gối & Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Tiêm Dextrose Prolotherapy cho OA Gối & Háng</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Methotrexate cho OA Gối & Háng thông thường</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Colchicine cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Very low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Vitamin D cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-600">Low</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-3 text-slate-700">CHỐNG DÙNG Dầu cá (Fish oil) cho OA Gối, Háng & Bàn tay</td>
+                                <td class="p-3"><span class="cor-badge cor-cond-against">Cond Against</span></td>
+                                <td class="p-3 text-slate-900 font-bold">Moderate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: TÀI LIỆU THAM KHẢO & THÔNG TIN BẢN QUYỀN -->
+        <section id="references" class="space-y-3">
+            <div class="flex items-center space-x-2 border-l-4 border-slate-600 pl-3">
+                <i class="fa-solid fa-book-bookmark text-teal-700 text-sm"></i>
+                <h2 class="text-base font-black text-slate-900 uppercase tracking-tight">TÀI LIỆU THAM KHẢO CHÍNH THỨC</h2>
+            </div>
+
+            <div class="clinical-card p-4 text-xs text-slate-800 leading-relaxed bg-slate-50 border border-slate-300 shadow-sm space-y-2">
+                <p><strong>Approved by ACR Board of Directors:</strong> September 8, 2026.</p>
+                <p>American College of Rheumatology (ACR). 2026 Update of the American College of Rheumatology Recommendations for the Management of Osteoarthritis of the Knee, Hip, and Hand. Official Guideline Summary; 2026. <em>[Manuscript đầy đủ sẽ được nộp đăng trên Arthritis & Rheumatology và Arthritis Care & Research — CHƯA xuất bản chính thức tại thời điểm bản tóm tắt này được phê duyệt (08/09/2026), theo đúng nguyên văn PDF gốc: "will be submitted for publication"]</em>.</p>
+                <p class="text-[11px] text-slate-600 font-sans italic">* Note on changes since 2019: Massage therapy (Knee/Hip), Methotrexate (Erosive Hand OA), and Glucosamine/Chondroitin (Strongly Against all joints).</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 text-center text-xs no-print">
+        <div class="max-w-7xl mx-auto px-4 space-y-1 font-medium">
+            <p class="font-bold text-slate-200">Visual Infographic & Interactive Clinical Hub • ACR Osteoarthritis Guideline 2026</p>
+            <p class="text-[11px] text-slate-400">Tài liệu tra cứu lâm sàng Dựa trên Bằng chứng (EBM). Phê duyệt bởi Hội Thấp Khớp Học Hoa Kỳ (ACR) tháng 09/2026.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Logic Script -->
+    <script>
+        // ============================================================
+        // DỮ LIỆU KHUYẾN CÁO — xây dựng lại hoàn toàn từ 49 recommendation
+        // statements trong PDF gốc ACR 2026 (đối chiếu Phần 6 - đã xác minh khớp 100%)
+        // Mỗi mục = { t: nội dung, b: badge (gps/strong-for/cond-for/cond-against/strong-against),
+        //             c: certainty, cat: physical/pharma, ob: chỉ áp dụng nhóm thừa cân/béo phì, n: ghi chú */** }
+        // ============================================================
+        const oaData = {
+        "knee": {
+                "title": "Thoái Hóa Khớp Gối (Knee OA)",
+                "for": [
+                        {
+                                "t": "Giáo dục về bệnh & khuyến khích tự quản lý (self-management)",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Chuyển Vật lý trị liệu (PT) / Hoạt động trị liệu (OT) khi có chỉ định",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Gậy chống & dụng cụ hỗ trợ di chuyển (khi có giới hạn khả năng đi lại)",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tập luyện thể dục (Exercise)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Giảm cân (Weight loss)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "physical",
+                                "ob": true,
+                                "n": ""
+                        },
+                        {
+                                "t": "Nẹp khớp gối (Tibiofemoral & Patellofemoral braces)",
+                                "b": "cond-for",
+                                "c": "Very low đến Moderate (tùy loại nẹp)",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Dán băng trị liệu (Therapeutic Taping) cho khớp gối",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Liệu pháp Nhận thức Hành vi (CBT)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thái Cực Quyền (Tai Chi)",
+                                "b": "cond-for",
+                                "c": "Very low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Yoga",
+                                "b": "cond-for",
+                                "c": "Very low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Chườm nóng / Chườm lạnh tại chỗ",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Liệu pháp Massage",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": "*"
+                        },
+                        {
+                                "t": "Châm cứu (Acupuncture)",
+                                "b": "cond-for",
+                                "c": "Moderate",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Đốt sóng cao tần (Radiofrequency ablation)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "NSAIDs tại chỗ (Topical)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "NSAIDs đường uống (Oral)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Glucocorticoid nội khớp",
+                                "b": "strong-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Đồng vận thụ thể GLP-1 (GLP-1 RA) hỗ trợ giảm cân, kết hợp ăn uống/vận động",
+                                "b": "cond-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": true,
+                                "n": "**"
+                        },
+                        {
+                                "t": "Ưu tiên NSAIDs tại chỗ hơn NSAIDs đường uống",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Topical Capsaicin",
+                                "b": "cond-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Acetaminophen (Paracetamol)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Duloxetine (SNRI)",
+                                "b": "cond-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        }
+                ],
+                "against": [
+                        {
+                                "t": "Đệm lót nêm trong/ngoài (Wedge insoles)",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Kích thích điện qua da (TENS)",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Huyết tương giàu tiểu cầu (PRP)",
+                                "b": "strong-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Tế bào gốc (Stem cell injections)",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Hydroxychloroquine (HCQ)",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Bisphosphonates",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Glucosamine, Chondroitin & dạng phối hợp",
+                                "b": "strong-against",
+                                "c": "Low (đơn chất); Moderate (phối hợp)",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": "*"
+                        },
+                        {
+                                "t": "Thuốc ức chế TNF-alpha",
+                                "b": "strong-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thuốc ức chế IL-1",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Các SNRIs khác, TCAs, Pregabalin, Gabapentin",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thuốc giảm đau nhóm Opioids",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Acid Hyaluronic (HA) nội khớp",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Botulinum Toxin nội khớp",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Dextrose Prolotherapy",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Methotrexate (cho thoái hóa khớp thông thường)",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Colchicine",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Vitamin D",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Dầu cá (Fish oil)",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        }
+                ],
+                "inherited": false
+        },
+        "hip": {
+                "title": "Thoái Hóa Khớp Háng (Hip OA)",
+                "for": [
+                        {
+                                "t": "Giáo dục về bệnh & khuyến khích tự quản lý (self-management)",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Chuyển Vật lý trị liệu (PT) / Hoạt động trị liệu (OT) khi có chỉ định",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Gậy chống & dụng cụ hỗ trợ di chuyển (khi có giới hạn khả năng đi lại)",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tập luyện thể dục (Exercise)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Giảm cân (Weight loss)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "physical",
+                                "ob": true,
+                                "n": ""
+                        },
+                        {
+                                "t": "Liệu pháp Nhận thức Hành vi (CBT)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thái Cực Quyền (Tai Chi)",
+                                "b": "cond-for",
+                                "c": "Very low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Chườm nóng / Chườm lạnh tại chỗ",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Liệu pháp Massage",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": "*"
+                        },
+                        {
+                                "t": "Châm cứu (Acupuncture)",
+                                "b": "cond-for",
+                                "c": "Moderate",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "NSAIDs đường uống (Oral)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Glucocorticoid nội khớp",
+                                "b": "strong-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Siêu âm hướng dẫn tiêm Glucocorticoid nội khớp",
+                                "b": "strong-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Acetaminophen (Paracetamol)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Duloxetine (SNRI)",
+                                "b": "cond-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        }
+                ],
+                "against": [
+                        {
+                                "t": "Đệm lót nêm trong/ngoài (Wedge insoles)",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Kích thích điện qua da (TENS)",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Huyết tương giàu tiểu cầu (PRP)",
+                                "b": "strong-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Tế bào gốc (Stem cell injections)",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Hydroxychloroquine (HCQ)",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Bisphosphonates",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Glucosamine, Chondroitin & dạng phối hợp",
+                                "b": "strong-against",
+                                "c": "Low (đơn chất); Moderate (phối hợp)",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": "*"
+                        },
+                        {
+                                "t": "Thuốc ức chế TNF-alpha",
+                                "b": "strong-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thuốc ức chế IL-1",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Các SNRIs khác, TCAs, Pregabalin, Gabapentin",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thuốc giảm đau nhóm Opioids",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Acid Hyaluronic (HA) nội khớp",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Botulinum Toxin nội khớp",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Dextrose Prolotherapy",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Methotrexate (cho thoái hóa khớp thông thường)",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Colchicine",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Vitamin D",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Dầu cá (Fish oil)",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        }
+                ],
+                "inherited": false
+        },
+        "hand": {
+                "title": "Thoái Hóa Khớp Bàn Tay (Hand OA)",
+                "for": [
+                        {
+                                "t": "Giáo dục về bệnh & khuyến khích tự quản lý (self-management)",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Chuyển Vật lý trị liệu (PT) / Hoạt động trị liệu (OT) khi có chỉ định",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Bài tập vận động bàn tay (Hand exercise)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Nẹp chỉnh hình bàn tay (Hand orthoses – CMC1 & khớp ngón)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Dán băng trị liệu (Therapeutic Taping) cho khớp CMC1",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Găng tay thoái hóa khớp (Arthritis gloves)",
+                                "b": "cond-for",
+                                "c": "Very low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Liệu pháp Nhận thức Hành vi (CBT)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Chườm nóng / Chườm lạnh tại chỗ",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tắm sáp Paraffin (Paraffin wax bath)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Châm cứu (Acupuncture)",
+                                "b": "cond-for",
+                                "c": "Very low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "NSAIDs tại chỗ (Topical)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "NSAIDs đường uống (Oral)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Glucocorticoid nội khớp",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Ưu tiên NSAIDs tại chỗ hơn NSAIDs đường uống",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Acetaminophen (Paracetamol)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Duloxetine (SNRI)",
+                                "b": "cond-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        }
+                ],
+                "against": [
+                        {
+                                "t": "Hydroxychloroquine (HCQ)",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Bisphosphonates",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Glucosamine, Chondroitin & dạng phối hợp",
+                                "b": "strong-against",
+                                "c": "Low (đơn chất); Moderate (phối hợp)",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": "*"
+                        },
+                        {
+                                "t": "Thuốc ức chế TNF-alpha",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thuốc ức chế IL-1",
+                                "b": "strong-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Topical Capsaicin",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Các SNRIs khác, TCAs, Pregabalin, Gabapentin",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thuốc giảm đau nhóm Opioids",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Acid Hyaluronic (HA) nội khớp",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Colchicine",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Vitamin D",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Dầu cá (Fish oil)",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        }
+                ],
+                "inherited": false
+        },
+        "erosive-hand": {
+                "title": "Thoái Hóa Khớp Bàn Tay Tán Phá (Erosive Hand OA)",
+                "for": [
+                        {
+                                "t": "Giáo dục về bệnh & khuyến khích tự quản lý (self-management)",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Chuyển Vật lý trị liệu (PT) / Hoạt động trị liệu (OT) khi có chỉ định",
+                                "b": "gps",
+                                "c": "Ungraded",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Bài tập vận động bàn tay (Hand exercise)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Nẹp chỉnh hình bàn tay (Hand orthoses – CMC1 & khớp ngón)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Dán băng trị liệu (Therapeutic Taping) cho khớp CMC1",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Găng tay thoái hóa khớp (Arthritis gloves)",
+                                "b": "cond-for",
+                                "c": "Very low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Liệu pháp Nhận thức Hành vi (CBT)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Chườm nóng / Chườm lạnh tại chỗ",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tắm sáp Paraffin (Paraffin wax bath)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Châm cứu (Acupuncture)",
+                                "b": "cond-for",
+                                "c": "Very low",
+                                "cat": "physical",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "NSAIDs tại chỗ (Topical)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "NSAIDs đường uống (Oral)",
+                                "b": "strong-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Glucocorticoid nội khớp",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Ưu tiên NSAIDs tại chỗ hơn NSAIDs đường uống",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Acetaminophen (Paracetamol)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Duloxetine (SNRI)",
+                                "b": "cond-for",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Methotrexate (đặc hiệu cho thể tán phá – Erosive Hand OA)",
+                                "b": "cond-for",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": "*"
+                        }
+                ],
+                "against": [
+                        {
+                                "t": "Hydroxychloroquine (HCQ)",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Bisphosphonates",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Glucosamine, Chondroitin & dạng phối hợp",
+                                "b": "strong-against",
+                                "c": "Low (đơn chất); Moderate (phối hợp)",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": "*"
+                        },
+                        {
+                                "t": "Thuốc ức chế TNF-alpha",
+                                "b": "strong-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thuốc ức chế IL-1",
+                                "b": "strong-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Topical Capsaicin",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Các SNRIs khác, TCAs, Pregabalin, Gabapentin",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Thuốc giảm đau nhóm Opioids",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Tiêm Acid Hyaluronic (HA) nội khớp",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Colchicine",
+                                "b": "cond-against",
+                                "c": "Very low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Vitamin D",
+                                "b": "cond-against",
+                                "c": "Low",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        },
+                        {
+                                "t": "Dầu cá (Fish oil)",
+                                "b": "cond-against",
+                                "c": "Moderate",
+                                "cat": "pharma",
+                                "ob": false,
+                                "n": ""
+                        }
+                ],
+                "inherited": true
+        }
+};
+
+        const BADGE_LABEL = {
+            'gps': 'GPS',
+            'strong-for': 'Mạnh',
+            'cond-for': 'Có điều kiện',
+            'cond-against': 'Có điều kiện - Chống',
+            'strong-against': 'Mạnh - Chống'
+        };
+
+        function renderItem(item) {
+            const badgeClass = 'cor-' + item.b;
+            const noteHtml = item.n ? ` <span class="text-slate-500 font-bold">(${item.n})</span>` : '';
+            const obHtml = item.ob ? ` <span class="text-amber-700 font-bold text-[10px]">[Chỉ nhóm Thừa cân/Béo phì]</span>` : '';
+            return `<li class="flex flex-col gap-1 border-b border-slate-100 pb-1.5 mb-1.5 last:border-0">
+                <span>${item.t}${noteHtml}${obHtml}</span>
+                <span class="flex items-center gap-1.5">
+                    <span class="cor-badge ${badgeClass} text-[9px] py-0">${BADGE_LABEL[item.b]}</span>
+                    <span class="text-slate-500 text-[10px] italic">${item.c}</span>
+                </span>
+            </li>`;
+        }
+
+        function runFilter() {
+            const joint = document.getElementById('filter-joint').value;
+            const obesity = document.getElementById('filter-obesity').value;
+            const type = document.getElementById('filter-type').value;
+
+            const titleEl = document.getElementById('finder-title');
+            const countEl = document.getElementById('finder-count');
+            const forEl = document.getElementById('finder-list-for');
+            const againstEl = document.getElementById('finder-list-against');
+            const noteEl = document.getElementById('finder-inherit-note');
+
+            const data = oaData[joint];
+            titleEl.innerHTML = `<i class="fa-solid fa-list-check text-teal-600 mr-2"></i> Kết Quả Tra Cứu: ${data.title}`;
+
+            if (noteEl) {
+                noteEl.style.display = data.inherited ? 'block' : 'none';
+            }
+
+            let forItems = [...data.for];
+            let againstItems = [...data.against];
+
+            // --- Lọc theo thể trạng (obesity) ---
+            // 'obese'  -> hiển thị TẤT CẢ (kể cả các mục chỉ dành riêng cho thừa cân/béo phì)
+            // 'normal' -> ẨN các mục chỉ áp dụng cho nhóm thừa cân/béo phì (vd: Giảm cân, GLP-1 RA)
+            // 'all'    -> hiển thị tất cả, không lọc theo thể trạng
+            if (obesity === 'normal') {
+                forItems = forItems.filter(i => !i.ob);
+                againstItems = againstItems.filter(i => !i.ob);
+            }
+
+            // --- Lọc theo loại can thiệp (không phân biệt hoa/thường, dựa trên field 'cat' thay vì dò chuỗi) ---
+            if (type === 'physical') {
+                forItems = forItems.filter(i => i.cat === 'physical');
+                againstItems = againstItems.filter(i => i.cat === 'physical');
+            } else if (type === 'pharmacologic') {
+                forItems = forItems.filter(i => i.cat === 'pharma');
+                againstItems = againstItems.filter(i => i.cat === 'pharma');
+            }
+
+            // Render
+            forEl.innerHTML = forItems.map(renderItem).join('');
+            againstEl.innerHTML = againstItems.map(renderItem).join('');
+
+            countEl.innerText = `${forItems.length + againstItems.length} khuyến cáo`;
+        }
+
+        // Khởi tạo khi tải trang
+        window.onload = function() {
+            runFilter();
+        }
+
+    </script>
+</body>
+</html>

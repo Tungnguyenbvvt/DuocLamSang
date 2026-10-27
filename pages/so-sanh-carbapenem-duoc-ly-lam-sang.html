@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>So sánh Carbapenem – Dược lý lâm sàng</title>
+<meta name="description" content="So sánh 6 carbapenem: imipenem/cilastatin, imipenem/cilastatin/relebactam, meropenem, meropenem/vaborbactam, ertapenem, doripenem.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.5/dist/cdn.min.js"></script>
+<style>
+:root{--bg:#c4ccda;--bg2:#b8c2d3;--card:#eef1f6;--card2:#dfe5ee;--line:#aab6c9;--tx:#0a1020;--mut:#2f3d54;--dim:#4a5a73;
+--g:#15803d;--gb:#dcfce7;--w:#a16207;--wb:#fef3c7;--b:#b91c1c;--bb:#fee2e2;--n:#1d4ed8;--nb:#dbeafe;--ind:#3730a3}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Plus Jakarta Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--tx);background:linear-gradient(180deg,#a9b5c9,#c4ccda);background-color:#c4ccda;min-height:100vh;line-height:1.5;-webkit-font-smoothing:antialiased}
+[x-cloak]{display:none!important}
+.wrap{max-width:1360px;margin:0 auto;padding:16px}
+header.top{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 18px;box-shadow:0 6px 20px rgba(10,16,32,.10)}
+header.top h1{margin:0;font-size:1.25rem;font-weight:800;color:var(--ind);letter-spacing:-.01em}
+header.top p{margin:2px 0 0;font-size:.82rem;color:var(--mut)}
+.ico{width:46px;height:46px;flex:none}
+.ico svg{width:100%;height:100%;display:block}
+.sp{flex:1}
+.langbtn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-weight:700;font-size:.8rem;color:var(--ind);cursor:pointer}
+.langbtn:hover{background:#e0e7ff}
+nav.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+nav.tabs button{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--card2);color:var(--tx);border-radius:14px;padding:8px 14px 8px 8px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit}
+nav.tabs button .ico{width:30px;height:30px}
+nav.tabs button.on{background:var(--ind);color:#fff;border-color:var(--ind);box-shadow:0 4px 14px rgba(55,48,163,.35)}
+nav.tabs button:hover:not(.on){background:#fff}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 6px 20px rgba(10,16,32,.08);margin-bottom:14px}
+.panel h2{margin:0 0 4px;font-size:1.05rem;font-weight:800;color:var(--ind)}
+.sub{margin:0 0 12px;color:var(--mut);font-size:.82rem}
+.picker{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.pill{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--c);background:transparent;color:var(--c);border-radius:999px;padding:5px 12px;font-weight:700;font-size:.78rem;cursor:pointer;opacity:.62;font-family:inherit}
+.pill.on{background:var(--c);color:#fff;opacity:1;box-shadow:0 3px 10px rgba(10,16,32,.25)}
+.pill .ck{font-size:.8rem}
+.cnt{font-size:.78rem;color:var(--mut);font-weight:600}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.filters button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:4px 11px;font-size:.74rem;font-weight:700;color:var(--mut);cursor:pointer;font-family:inherit}
+.filters button.on{background:#e0e7ff;color:var(--ind);border-color:#818cf8}
+.tw{border:1px solid var(--line);border-radius:14px;background:#fff}
+.tw .sc{overflow-x:visible}
+table.dt{table-layout:fixed;width:100%;border-collapse:collapse;font-size:.78rem}
+table.dt th,table.dt td{padding:8px 9px;vertical-align:top;overflow-wrap:anywhere;border-bottom:1px solid #d7deea;text-align:left}
+table.dt thead th{position:sticky;top:0;background:var(--ind);color:#fff;font-size:.8rem;z-index:2}
+table.dt thead th .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);border:2px solid #fff;margin-right:6px}
+table.dt td.lab,table.dt th.lab{width:15%;background:#eef1f6;font-weight:800;color:var(--ind);position:sticky;left:0;z-index:1}
+table.dt thead th.lab{background:#312e81;color:#fff;z-index:3}
+table.dt tr.band td{background:#c7d2fe;color:#1e1b4b;font-weight:800;font-size:.76rem;letter-spacing:.02em;text-transform:uppercase}
+table.dt tr.z td:not(.lab){background:#f4f6fb}
+table.dt ul{margin:0;padding-left:14px}
+table.dt li{margin:0 0 3px}
+sup.rf{color:var(--n);font-weight:800;font-size:.66rem;margin-left:1px}
+.qm{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:4px;font-size:.78rem}
+.qm th{background:var(--ind);color:#fff;padding:8px;border-radius:8px;overflow-wrap:anywhere}
+.qm td.lab{background:var(--card2);font-weight:800;color:var(--ind);padding:8px;border-radius:8px;width:16%;overflow-wrap:anywhere}
+.qm td.q{padding:8px;border-radius:8px;overflow-wrap:anywhere;font-weight:600;border:1px solid rgba(10,16,32,.10)}
+.qg{background:var(--gb);color:#14532d}.qw{background:var(--wb);color:#713f12}.qb{background:var(--bb);color:#7f1d1d}.qn{background:var(--nb);color:#1e3a8a}
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0;font-size:.76rem;font-weight:700;align-items:center}
+.legend span.k{padding:3px 10px;border-radius:999px;border:1px solid rgba(10,16,32,.12)}
+.legend a{color:var(--n);text-decoration:underline;font-weight:700}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:12px}
+.form label{display:flex;flex-direction:column;gap:3px;font-size:.74rem;font-weight:700;color:var(--mut)}
+.form input,.form select{border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.88rem;font-family:inherit;background:#fff;color:var(--tx)}
+.chk{display:flex;gap:6px;align-items:center;font-size:.8rem;font-weight:600;padding:6px 10px;border:1px solid var(--line);background:#fff;border-radius:10px}
+.chks{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.est{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 14px}
+.est div{background:#e0e7ff;border-radius:12px;padding:8px 14px;font-weight:800;color:var(--ind);font-size:.86rem}
+.est small{display:block;font-weight:600;color:var(--mut);font-size:.7rem}
+.res{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.rc{border-radius:14px;padding:12px;border:2px solid var(--c);background:#fff}
+.rc h3{margin:0 0 6px;font-size:.88rem;font-weight:800;color:var(--c)}
+.badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.7rem;font-weight:800;margin-bottom:6px}
+.s-ok{background:var(--gb);color:#14532d}.s-warn{background:var(--wb);color:#713f12}.s-avoid{background:var(--bb);color:#7f1d1d}.s-contra{background:#7f1d1d;color:#fff}
+.rc .dose{font-weight:800;font-size:.9rem;margin-bottom:6px}
+.rc ul{margin:0;padding-left:16px;font-size:.76rem;color:var(--mut)}
+.disc{font-size:.76rem;color:var(--mut);margin-top:10px}
+.cases{display:grid;gap:12px}
+.case{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.case h3{margin:0 0 8px;font-size:.92rem;color:var(--ind);font-weight:800}
+.case .row{display:grid;grid-template-columns:110px 1fr;gap:8px;font-size:.8rem;padding:4px 0;border-top:1px dashed #d7deea}
+.case .row b{font-weight:800}
+.case .row.p b{color:var(--g)}.case .row.a b{color:var(--w)}.case .row.x b{color:var(--b)}.case .row.y b{color:var(--ind)}
+.quiz .qh{font-weight:800;font-size:.95rem;margin:6px 0 10px}
+.opt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:9px 12px;margin-bottom:8px;font-weight:600;font-size:.84rem;cursor:pointer;font-family:inherit;color:var(--tx)}
+.opt:hover:not([disabled]){border-color:#818cf8;background:#eef2ff}
+.opt.ok{border-color:var(--g);background:var(--gb)}.opt.no{border-color:var(--b);background:var(--bb)}
+.expl{background:#eef2ff;border-left:4px solid var(--ind);padding:8px 12px;border-radius:8px;font-size:.8rem;margin:8px 0}
+.btn{border:0;background:var(--ind);color:#fff;border-radius:12px;padding:8px 18px;font-weight:800;font-size:.84rem;cursor:pointer;font-family:inherit}
+.btn.alt{background:#fff;color:var(--ind);border:1px solid var(--ind)}
+.sec h2{font-size:1rem}
+.sec ol{margin:0;padding-left:18px;font-size:.8rem}
+.sec ol li{margin-bottom:5px}
+table.gl{width:100%;table-layout:fixed;border-collapse:collapse;font-size:.76rem;margin-bottom:12px}
+table.gl th,table.gl td{border-bottom:1px solid #d7deea;padding:6px 8px;text-align:left;vertical-align:top;overflow-wrap:anywhere}
+table.gl th{background:#c7d2fe;color:#1e1b4b}
+table.gl td:first-child{font-weight:800;color:var(--ind);width:14%}
+.refs{font-size:.74rem;color:var(--mut);list-style:none;padding-left:0!important}
+.refs li{margin-bottom:5px;overflow-wrap:anywhere}
+.warn{background:var(--wb);border:1px solid #fcd34d;color:#713f12;border-radius:10px;padding:8px 12px;font-size:.8rem;font-weight:600}
+footer{font-size:.72rem;color:var(--mut);text-align:center;padding:10px 0 24px}
+@media(max-width:860px){.tw .sc{overflow-x:auto}table.dt{min-width:780px}.qm{min-width:640px}.qmw{overflow-x:auto}.case .row{grid-template-columns:1fr}}
+@media print{nav.tabs,.picker,.filters,.langbtn{display:none}body{background:#fff}}
+</style>
+</head>
+<body x-data="app()" x-init="init()" x-cloak>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="g-ped" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d9deea"/></linearGradient>
+<linearGradient id="g-ind" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#818cf8"/><stop offset="1" stop-color="#3730a3"/></linearGradient>
+<linearGradient id="g-teal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5eead4"/><stop offset="1" stop-color="#0f766e"/></linearGradient>
+<linearGradient id="g-pink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f9a8d4"/><stop offset="1" stop-color="#be185d"/></linearGradient>
+<linearGradient id="g-amb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#d97706"/></linearGradient>
+<linearGradient id="g-blu" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7dd3fc"/><stop offset="1" stop-color="#0369a1"/></linearGradient>
+<linearGradient id="g-red" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fca5a5"/><stop offset="1" stop-color="#b91c1c"/></linearGradient>
+<radialGradient id="r-sh" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#0a1020" stop-opacity=".28"/><stop offset="1" stop-color="#0a1020" stop-opacity="0"/></radialGradient>
+<radialGradient id="r-hi" cx=".3" cy=".25" r=".7"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+</defs></svg>
+
+<div class="wrap">
+<header class="top">
+  <div class="ico" x-html="ic('capsule')"></div>
+  <div>
+    <h1 x-text="UI('title')"></h1>
+    <p x-text="UI('subtitle')"></p>
+  </div>
+  <div class="sp"></div>
+  <button class="langbtn" @click="lang = lang==='vi' ? 'en' : 'vi'" x-text="lang==='vi' ? 'EN' : 'VI'"></button>
+</header>
+
+<nav class="tabs">
+  <template x-for="t in tabs" :key="t.k">
+    <button :class="{on: view===t.k}" @click="view=t.k"><span class="ico" x-html="ic(t.i)"></span><span x-text="UI(t.k)"></span></button>
+  </template>
+</nav>
+
+<div class="panel" x-show="view==='table' || view==='quick'">
+  <div class="picker">
+    <template x-for="d in DR" :key="d.k">
+      <button class="pill" :class="{on: sel.includes(d.k)}" :style="'--c:'+d.c" @click="toggle(d.k)">
+        <span class="ck" x-text="sel.includes(d.k) ? '✓' : '○'"></span><span x-text="T(d.n)"></span>
+      </button>
+    </template>
+    <span class="cnt" x-text="UI('comparing') + ' ' + sel.length + '/' + DR.length + ' · ' + selNames()"></span>
+  </div>
+  <div class="filters" x-show="view==='table'">
+    <button :class="{on: gf==='all'}" @click="gf='all'" x-text="UI('all')"></button>
+    <template x-for="g in GROUPS" :key="g.k">
+      <button :class="{on: gf===g.k}" @click="gf=g.k" x-text="T(g.n)"></button>
+    </template>
+  </div>
+
+  <div class="tw" x-show="view==='table'"><div class="sc">
+    <table class="dt">
+      <thead><tr>
+        <th class="lab" x-text="UI('criterion')"></th>
+        <template x-for="d in selDrugs()" :key="d.k"><th :style="'--c:'+d.c"><span class="dot"></span><span x-text="T(d.n)"></span></th></template>
+      </tr></thead>
+      <tbody>
+        <template x-for="blk in tableBlocks()" :key="blk.key">
+          <tr :class="blk.band ? 'band' : (blk.z ? 'z' : '')">
+            <template x-if="blk.band"><td :colspan="selDrugs().length+1" x-text="T(blk.band)"></td></template>
+            <template x-if="!blk.band"><td class="lab" x-text="T(blk.row.l)"></td></template>
+            <template x-if="!blk.band">
+              <template x-for="d in selDrugs()" :key="d.k">
+                <td><ul><template x-for="(p,i) in parts(T(blk.row.c[d.k]))" :key="i"><li x-text="p"></li></template></ul><span x-html="refHtml(blk.row.c[d.k][2])"></span></td>
+              </template>
+            </template>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+  </div></div>
+
+  <div x-show="view==='quick'" class="qmw">
+    <table class="qm">
+      <thead><tr><th x-text="UI('criterion')"></th><template x-for="d in selDrugs()" :key="d.k"><th :style="'background:'+d.c" x-text="T(d.n)"></th></template></tr></thead>
+      <tbody>
+        <template x-for="r in QM" :key="r.l[0]">
+          <tr><td class="lab" x-text="T(r.l)"></td>
+            <template x-for="d in selDrugs()" :key="d.k"><td class="q" :class="r.c[d.k][0]" x-text="T(r.c[d.k].slice(1))"></td></template>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <div class="legend">
+      <span class="k qg" x-text="UI('lg')"></span><span class="k qw" x-text="UI('lw')"></span><span class="k qb" x-text="UI('lb')"></span><span class="k qn" x-text="UI('ln')"></span>
+      <a href="#gloss" x-text="UI('glossLink')"></a>
+    </div>
+  </div>
+</div>
+
+<div class="panel" x-show="view==='dose'">
+  <h2 x-text="UI('dose')"></h2>
+  <p class="sub" x-text="UI('doseSub')"></p>
+  <div class="form">
+    <label><span x-text="UI('age')"></span><input type="number" min="1" max="120" x-model.number="p.age"></label>
+    <label><span x-text="UI('wt')"></span><input type="number" min="1" max="300" step="0.1" x-model.number="p.wt"></label>
+    <label><span x-text="UI('sex')"></span><select x-model="p.sex"><option value="F" x-text="UI('female')"></option><option value="M" x-text="UI('male')"></option></select></label>
+    <label><span x-text="UI('scr')"></span><input type="number" min="0.1" step="0.01" x-model.number="p.scr"></label>
+    <label><span x-text="UI('scrUnit')"></span><select x-model="p.unit"><option value="mgdl">mg/dL</option><option value="umol">µmol/L</option></select></label>
+    <label><span x-text="UI('ind')"></span>
+      <select x-model="p.ind">
+        <template x-for="o in INDS" :key="o.k"><option :value="o.k" x-text="T(o.n)"></option></template>
+      </select></label>
+  </div>
+  <div class="chks">
+    <label class="chk"><input type="checkbox" x-model="p.hd"> <span x-text="UI('hd')"></span></label>
+    <label class="chk"><input type="checkbox" x-model="p.vpa"> <span x-text="UI('vpa')"></span></label>
+    <label class="chk"><input type="checkbox" x-model="p.gcv"> <span x-text="UI('gcv')"></span></label>
+    <label class="chk"><input type="checkbox" x-model="p.seiz"> <span x-text="UI('seiz')"></span></label>
+    <label class="chk"><input type="checkbox" x-model="p.alb"> <span x-text="UI('alb')"></span></label>
+    <label class="chk"><input type="checkbox" x-model="p.pa"> <span x-text="UI('pa')"></span></label>
+  </div>
+  <template x-if="!valid()"><div class="warn" x-text="UI('invalid')"></div></template>
+  <template x-if="valid()">
+    <div>
+      <div class="est">
+        <div><small>CrCl (Cockcroft–Gault)</small><span x-text="fmt(crcl()) + ' mL/min'"></span></div>
+        <div><small>eGFR (MDRD, <span x-text="UI('noRace')"></span>)</small><span x-text="fmt(egfr()) + ' mL/min/1.73 m²'"></span></div>
+      </div>
+      <div class="res">
+        <template x-for="d in DR" :key="d.k">
+          <div class="rc" :style="'--c:'+d.c">
+            <h3 x-text="T(d.n)"></h3>
+            <span class="badge" :class="'s-'+calc(d.k).status" x-text="UI('st_'+calc(d.k).status)"></span>
+            <div class="dose" x-text="T(calc(d.k).dose)"></div>
+            <ul><template x-for="(n,i) in calc(d.k).notes" :key="i"><li x-text="T(n)"></li></template></ul>
+          </div>
+        </template>
+      </div>
+    </div>
+  </template>
+  <p class="disc" x-text="UI('doseDisc')"></p>
+</div>
+
+<div class="panel" x-show="view==='cases'">
+  <h2 x-text="UI('cases')"></h2>
+  <p class="sub" x-text="UI('casesSub')"></p>
+  <div class="cases">
+    <template x-for="(c,i) in SCEN" :key="i">
+      <div class="case">
+        <h3 x-text="(i+1)+'. '+T(c.t)"></h3>
+        <div class="row p"><b x-text="UI('pref')"></b><span x-text="T(c.pref)"></span></div>
+        <div class="row a"><b x-text="UI('alt')"></b><span x-text="T(c.alt)"></span></div>
+        <div class="row x"><b x-text="UI('avoid')"></b><span x-text="T(c.avoid)"></span></div>
+        <div class="row y"><b x-text="UI('why')"></b><span><span x-text="T(c.why)"></span><span x-html="refHtml(c.why[2])"></span></span></div>
+      </div>
+    </template>
+  </div>
+</div>
+
+<div class="panel quiz" x-show="view==='quiz'">
+  <h2 x-text="UI('quiz')"></h2>
+  <template x-if="!qDone">
+    <div>
+      <p class="sub" x-text="UI('question') + ' ' + (qi+1) + '/' + QUIZ.length"></p>
+      <div class="qh" x-text="T(QUIZ[qi].q)"></div>
+      <template x-for="(o,j) in QUIZ[qi].o" :key="j">
+        <button class="opt" :class="qPick!==null ? (j===QUIZ[qi].a ? 'ok' : (j===qPick ? 'no' : '')) : ''" :disabled="qPick!==null" @click="pick(j)" x-text="T(o)"></button>
+      </template>
+      <div class="expl" x-show="qPick!==null" x-text="T(QUIZ[qi].e)"></div>
+      <button class="btn" x-show="qPick!==null" @click="nextQ()" x-text="qi+1<QUIZ.length ? UI('next') : UI('finish')"></button>
+    </div>
+  </template>
+  <template x-if="qDone">
+    <div>
+      <div class="qh" x-text="UI('score') + ': ' + qScore + '/' + QUIZ.length"></div>
+      <button class="btn alt" @click="resetQ()" x-text="UI('retry')"></button>
+    </div>
+  </template>
+</div>
+
+<div class="panel sec" id="notes">
+  <h2 x-text="UI('notes')"></h2>
+  <ol><template x-for="(n,i) in NOTES" :key="i"><li x-text="T(n)"></li></template></ol>
+</div>
+
+<div class="panel sec" id="gloss">
+  <h2 x-text="UI('gloss')"></h2>
+  <template x-for="g in GLOSS" :key="g.k">
+    <div>
+      <table class="gl">
+        <thead><tr><th colspan="3" x-text="T(g.n)"></th></tr></thead>
+        <tbody><template x-for="r in g.r" :key="r[0]"><tr><td x-text="r[0]"></td><td x-text="T(r[1])"></td><td x-text="T(r[2])"></td></tr></template></tbody>
+      </table>
+    </div>
+  </template>
+</div>
+
+<div class="panel sec">
+  <h2 x-text="UI('refs')"></h2>
+  <ol class="refs"><template x-for="r in refList()" :key="r.k"><li :id="'ref'+r.n" x-text="r.t"></li></template></ol>
+  <p class="disc" x-text="UI('disclaimer')"></p>
+</div>
+<footer x-text="UI('footer')"></footer>
+</div>
+
+<script>
+/* ============ DỮ LIỆU ============ */
+const DR=[
+ {k:'imi',n:['Imipenem/cilastatin','Imipenem/cilastatin'],c:'#be185d'},
+ {k:'imr',n:['Imipenem/cilastatin/relebactam','Imipenem/cilastatin/relebactam'],c:'#6d28d9'},
+ {k:'mero',n:['Meropenem','Meropenem'],c:'#0369a1'},
+ {k:'mvb',n:['Meropenem/vaborbactam','Meropenem/vaborbactam'],c:'#0f766e'},
+ {k:'erta',n:['Ertapenem','Ertapenem'],c:'#b45309'},
+ {k:'dori',n:['Doripenem','Doripenem'],c:'#475569'}
+];
+const GROUPS=[
+ {k:'g1',n:['Thông tin chung','General']},
+ {k:'g2',n:['Liều dùng và dược động học','Dosing and pharmacokinetics']},
+ {k:'g3',n:['Hiệu chỉnh liều','Dose adjustment']},
+ {k:'g4',n:['An toàn và tương tác','Safety and interactions']},
+ {k:'g5',n:['Bằng chứng và vị trí điều trị','Evidence and place in therapy']}
+];
+const c=(vi,en,r)=>[vi,en,r||[]];
+const ROWS=[
+{g:'g1',l:['Tình trạng lưu hành','Marketing status'],c:{
+ imi:c('Lưu hành tại Mỹ; nhãn FDA cập nhật 5/2022.','Marketed in the US; FDA label revised 5/2022.',['pri']),
+ imr:c('Lưu hành tại Mỹ (Recarbrio); nhãn cập nhật 12/2025.','Marketed in the US (Recarbrio); label revised 12/2025.',['rec']),
+ mero:c('Lưu hành; nhãn Merrem IV cập nhật 12/2024.','Marketed; Merrem IV label revised 12/2024.',['mer']),
+ mvb:c('Lưu hành tại Mỹ (Vabomere); nhãn đối chiếu là bản 2017, có thể không phải bản mới nhất.','Marketed in the US (Vabomere); the label reviewed is the 2017 version and may not be the latest.',['vab']),
+ erta:c('Lưu hành; nhãn cập nhật 3/2022.','Marketed; label revised 3/2022.',['inv']),
+ dori:c('Đã ngừng lưu hành tại Mỹ (cơ sở dữ liệu thuốc ghi “off-market”); chỉ dùng để tham khảo.','No longer available in the US (drug database lists it as off-market); for reference only.',['davis'])}},
+{g:'g1',l:['Chỉ định theo nhãn FDA (người lớn)','FDA-labelled indications (adults)'],c:{
+ imi:c('Nhiễm khuẩn hô hấp dưới, tiết niệu, ổ bụng, phụ khoa, nhiễm khuẩn huyết, xương khớp, da–mô mềm, viêm nội tâm mạc (S. aureus). Không chỉ định cho viêm màng não.','Lower respiratory, urinary, intra-abdominal, gynecologic, septicemia, bone/joint, skin/soft tissue, endocarditis (S. aureus). Not indicated for meningitis.',['pri']),
+ imr:c('HABP/VABP; cUTI và cIAI chỉ khi ít hoặc không có lựa chọn thay thế (dựa trên dữ liệu hạn chế). Cho cả trẻ ≥2 kg.','HABP/VABP; cUTI and cIAI only when options are limited or absent (limited data). Also approved for children ≥2 kg.',['rec']),
+ mero:c('cSSSI và cIAI (người lớn); viêm màng não vi khuẩn chỉ cho trẻ ≥3 tháng.','cSSSI and cIAI (adults); bacterial meningitis only in children ≥3 months.',['mer']),
+ mvb:c('cUTI kể cả viêm thận–bể thận, ≥18 tuổi (theo bản nhãn 2017).','cUTI including pyelonephritis, age ≥18 (per the 2017 label).',['vab']),
+ erta:c('cIAI, cSSSI (kể cả bàn chân đái tháo đường không viêm xương), CAP, cUTI, nhiễm khuẩn vùng chậu cấp; dự phòng nhiễm khuẩn vết mổ phẫu thuật đại–trực tràng.','cIAI, cSSSI (including diabetic foot without osteomyelitis), CAP, cUTI, acute pelvic infections; surgical-site prophylaxis in elective colorectal surgery.',['inv']),
+ dori:c('cIAI và cUTI (kể cả viêm thận–bể thận). Không được chỉ định cho bất kỳ loại viêm phổi nào.','cIAI and cUTI (including pyelonephritis). Not approved for any type of pneumonia.',['dorfda'])}},
+{g:'g1',l:['Chất bổ trợ / chất ức chế β-lactamase','Adjunct / β-lactamase inhibitor'],c:{
+ imi:c('Cilastatin: ức chế dehydropeptidase-I ở thận, không có hoạt tính kháng khuẩn. Không có chất ức chế β-lactamase.','Cilastatin: renal dehydropeptidase-I inhibitor with no antibacterial activity. No β-lactamase inhibitor.',['pri']),
+ imr:c('Cilastatin + relebactam (chất ức chế β-lactamase nhóm diazabicyclooctane): bảo vệ imipenem khỏi KPC, AmpC (PDC), ESBL.','Cilastatin + relebactam (diazabicyclooctane β-lactamase inhibitor): protects imipenem from KPC, AmpC (PDC) and ESBL.',['rec']),
+ mero:c('Không có.','None.',['mer']),
+ mvb:c('Vaborbactam (chất ức chế β-lactamase dạng acid boronic vòng): bảo vệ meropenem khỏi KPC; không có hoạt tính kháng khuẩn.','Vaborbactam (cyclic boronic acid β-lactamase inhibitor): protects meropenem from KPC; no intrinsic antibacterial activity.',['vab']),
+ erta:c('Không có.','None.',['inv']),
+ dori:c('Không có.','None.',['dor'])}},
+{g:'g1',l:['Hoạt tính then chốt','Key activity'],c:{
+ imi:c('Bền với nhiều β-lactamase (ESBL, AmpC); có hoạt tính trên P. aeruginosa. Không hoạt tính với E. faecium, S. maltophilia; tụ cầu kháng methicillin xem là kháng.','Stable to many β-lactamases (ESBL, AmpC); active against P. aeruginosa. Inactive against E. faecium and S. maltophilia; methicillin-resistant staphylococci are resistant.',['pri']),
+ imr:c('Thêm hoạt tính trên KPC và một số P. aeruginosa đề kháng imipenem (mất OprD/PDC). Không hoạt tính với đa số MBL, một số OXA có hoạt tính carbapenemase.','Adds activity against KPC and some imipenem-nonsusceptible P. aeruginosa (OprD loss/PDC). Not active against most MBLs or some carbapenemase-type OXA enzymes.',['rec']),
+ mero:c('Bền với penicillinase và cephalosporinase; có hoạt tính trên P. aeruginosa. Không hoạt tính với MRSA; bị carbapenemase thủy phân.','Stable to penicillinases and cephalosporinases; active against P. aeruginosa. No activity against MRSA; hydrolyzed by carbapenemases.',['mer']),
+ mvb:c('Hoạt tính trên KPC (giám sát tại Mỹ: >95% KPC-E nhạy). Không hoạt tính với MBL hoặc OXA có hoạt tính carbapenemase.','Active against KPC (US surveillance: >95% of KPC-E susceptible). Not active against MBLs or carbapenemase-type OXA enzymes.',['vab','idsa']),
+ erta:c('Bền với ESBL; bị MBL thủy phân. Danh sách vi khuẩn trên nhãn không có P. aeruginosa hay Acinetobacter.','Stable to ESBLs; hydrolyzed by MBLs. The organism list on the label does not include P. aeruginosa or Acinetobacter.',['inv']),
+ dori:c('Hoạt tính in vitro tốt hơn trên P. aeruginosa nhưng chưa chuyển thành kết cục lâm sàng tốt hơn meropenem/imipenem. Không phủ MRSA, VRE.','Better in vitro activity against P. aeruginosa, but this has not translated into better outcomes than meropenem/imipenem. No MRSA or VRE coverage.',['idstew'])}},
+{g:'g2',l:['Liều người lớn (chức năng thận bình thường)','Adult dose (normal renal function)'],c:{
+ imi:c('500 mg mỗi 6 giờ hoặc 1000 mg mỗi 8 giờ (chủng nhạy); 1000 mg mỗi 6 giờ (nhạy trung gian). Tối đa 4 g/ngày.','500 mg q6h or 1000 mg q8h (susceptible); 1000 mg q6h (intermediate). Maximum 4 g/day.',['pri']),
+ imr:c('1,25 g (imipenem 500 mg/cilastatin 500 mg/relebactam 250 mg) mỗi 6 giờ, 4–14 ngày.','1.25 g (imipenem 500 mg/cilastatin 500 mg/relebactam 250 mg) q6h for 4–14 days.',['rec']),
+ mero:c('500 mg mỗi 8 giờ (cSSSI); 1 g mỗi 8 giờ (cIAI, hoặc cSSSI do P. aeruginosa).','500 mg q8h (cSSSI); 1 g q8h (cIAI, or cSSSI caused by P. aeruginosa).',['mer']),
+ mvb:c('4 g (meropenem 2 g/vaborbactam 2 g) mỗi 8 giờ, truyền 3 giờ, tối đa 14 ngày.','4 g (meropenem 2 g/vaborbactam 2 g) q8h as a 3-hour infusion, up to 14 days.',['vab']),
+ erta:c('1 g mỗi 24 giờ (tiêm tĩnh mạch hoặc bắp).','1 g q24h (IV or IM).',['inv']),
+ dori:c('500 mg mỗi 8 giờ truyền 1 giờ (≥18 tuổi).','500 mg q8h as a 1-hour infusion (age ≥18).',['dor'])}},
+{g:'g2',l:['Thời gian truyền','Infusion time'],c:{
+ imi:c('500 mg: 20–30 phút; 1000 mg: 40–60 phút.','500 mg: 20–30 min; 1000 mg: 40–60 min.',['pri']),
+ imr:c('30 phút.','30 minutes.',['rec']),
+ mero:c('15–30 phút, hoặc tiêm bolus 1 g trong 3–5 phút. IDSA gợi ý truyền kéo dài cho một số CRE không sinh carbapenemase.','15–30 min, or 1 g IV bolus over 3–5 min. IDSA suggests extended infusion for some non-carbapenemase-producing CRE.',['mer','idsa']),
+ mvb:c('3 giờ.','3 hours.',['vab']),
+ erta:c('30 phút.','30 minutes.',['inv']),
+ dori:c('1 giờ.','1 hour.',['dor'])}},
+{g:'g2',l:['Gắn protein huyết tương','Plasma protein binding'],c:{
+ imi:c('Imipenem ~20%, cilastatin ~40%.','Imipenem ~20%, cilastatin ~40%.',['pri']),
+ imr:c('Imipenem ~20%, cilastatin ~40%, relebactam ~22%.','Imipenem ~20%, cilastatin ~40%, relebactam ~22%.',['rec']),
+ mero:c('~2%.','~2%.',['mer']),
+ mvb:c('Meropenem ~2%, vaborbactam ~33%.','Meropenem ~2%, vaborbactam ~33%.',['vab']),
+ erta:c('85–95%, giảm khi nồng độ tăng (dược động học không tuyến tính). Giảm albumin làm tăng phần tự do.','85–95%, decreasing as concentration rises (non-linear pharmacokinetics). Hypoalbuminemia raises the unbound fraction.',['inv','idsa']),
+ dori:c('Chưa kiểm chứng được từ nguồn đã đọc trong phiên này.','Not verified from the sources read in this session.',[])}},
+{g:'g2',l:['Thời gian bán thải và thải trừ','Half-life and elimination'],c:{
+ imi:c('t½ ~1 giờ; ~70% imipenem qua nước tiểu trong 10 giờ (cilastatin ngăn chuyển hóa ở thận).','t½ ~1 h; ~70% of imipenem recovered in urine within 10 h (cilastatin blocks renal metabolism).',['pri']),
+ imr:c('t½ imipenem ~1 giờ, relebactam ~1,2 giờ; imipenem ~63% và relebactam >90% nguyên dạng qua nước tiểu.','t½ imipenem ~1 h, relebactam ~1.2 h; ~63% of imipenem and >90% of relebactam excreted unchanged in urine.',['rec']),
+ mero:c('t½ ~1 giờ; ~70% nguyên dạng trong 12 giờ, thêm ~28% là chất chuyển hóa không hoạt tính.','t½ ~1 h; ~70% unchanged within 12 h, plus ~28% inactive metabolite.',['mer']),
+ mvb:c('t½ meropenem 1,22 giờ, vaborbactam 1,68 giờ; meropenem 40–60% và vaborbactam 75–95% nguyên dạng qua nước tiểu.','t½ meropenem 1.22 h, vaborbactam 1.68 h; 40–60% of meropenem and 75–95% of vaborbactam excreted unchanged in urine.',['vab']),
+ erta:c('t½ ~4 giờ; ~80% qua nước tiểu (~38% nguyên dạng, ~37% chất chuyển hóa mở vòng), ~10% qua phân.','t½ ~4 h; ~80% in urine (~38% unchanged, ~37% ring-opened metabolite), ~10% in feces.',['inv']),
+ dori:c('t½ ~1 giờ ở người lớn khỏe mạnh không cao tuổi.','t½ ~1 h in healthy non-elderly adults.',['dorph'])}},
+{g:'g3',l:['Suy thận (người lớn)','Renal impairment (adults)'],c:{
+ imi:c('CrCl (Cockcroft–Gault), tương ứng 500 mg mỗi 6 giờ / 1000 mg mỗi 8 giờ: 60–89: 400 mg mỗi 6 giờ / 500 mg mỗi 6 giờ; 30–59: 300 mg mỗi 6 giờ / 500 mg mỗi 8 giờ; 15–29: 200 mg mỗi 6 giờ / 500 mg mỗi 12 giờ; <15: không dùng trừ khi lọc máu trong 48 giờ.','CrCl (Cockcroft–Gault), corresponding to 500 mg q6h / 1000 mg q8h: 60–89: 400 mg q6h / 500 mg q6h; 30–59: 300 mg q6h / 500 mg q8h; 15–29: 200 mg q6h / 500 mg q12h; <15: do not use unless hemodialysis within 48 h.',['pri']),
+ imr:c('CrCl 60–89: 1 g mỗi 6 giờ; 30–59: 0,75 g; 15–29: 0,5 g; <15 không lọc máu: không khuyến cáo (không dùng trừ khi lọc máu trong 48 giờ).','CrCl 60–89: 1 g q6h; 30–59: 0.75 g; 15–29: 0.5 g; <15 not on hemodialysis: not recommended (do not use unless hemodialysis within 48 h).',['rec']),
+ mero:c('CrCl >50: liều chuẩn mỗi 8 giờ; 26–50: liều chuẩn mỗi 12 giờ; 10–25: một nửa liều mỗi 12 giờ; <10: một nửa liều mỗi 24 giờ.','CrCl >50: usual dose q8h; 26–50: usual dose q12h; 10–25: half dose q12h; <10: half dose q24h.',['mer']),
+ mvb:c('eGFR (MDRD) 30–49: 2 g (1 g/1 g) mỗi 8 giờ; 15–29: 2 g mỗi 12 giờ; <15: 1 g (0,5 g/0,5 g) mỗi 12 giờ. Theo dõi creatinin ít nhất hằng ngày.','eGFR (MDRD) 30–49: 2 g (1 g/1 g) q8h; 15–29: 2 g q12h; <15: 1 g (0.5 g/0.5 g) q12h. Monitor creatinine at least daily.',['vab']),
+ erta:c('CrCl >30: không chỉnh liều; ≤30 (kể cả bệnh thận giai đoạn cuối): 500 mg mỗi 24 giờ.','CrCl >30: no adjustment; ≤30 (including end-stage renal disease): 500 mg q24h.',['inv']),
+ dori:c('CrCl >50: không chỉnh; 30–50: 250 mg mỗi 8 giờ; >10 đến <30: 250 mg mỗi 12 giờ; ≤10: chưa đủ dữ liệu khuyến cáo.','CrCl >50: no adjustment; 30–50: 250 mg q8h; >10 to <30: 250 mg q12h; ≤10: insufficient data for a recommendation.',['dor','pdr'])}},
+{g:'g3',l:['Lọc máu','Hemodialysis'],c:{
+ imi:c('Imipenem và cilastatin bị loại bỏ khi lọc máu; dùng sau lọc máu với liều của bậc CrCl 15–<30. Chỉ dùng khi lợi ích lớn hơn nguy cơ co giật.','Imipenem and cilastatin are removed by hemodialysis; give after dialysis using the CrCl 15–<30 dose. Use only when benefit outweighs seizure risk.',['pri']),
+ imr:c('Dùng sau lọc máu, 0,5 g mỗi 6 giờ tính từ cuối buổi lọc. Chưa đủ thông tin cho thẩm phân phúc mạc.','Give after hemodialysis, 0.5 g q6h timed from the end of the session. Inadequate information for peritoneal dialysis.',['rec']),
+ mero:c('Meropenem lọc được qua màng nhưng nhãn nêu chưa đủ thông tin về liều khi lọc máu hoặc thẩm phân phúc mạc.','Meropenem is dialyzable, but the label states there is inadequate information on dosing during hemodialysis or peritoneal dialysis.',['mer']),
+ mvb:c('Loại bỏ ~38% meropenem và ~53% vaborbactam; dùng sau lọc máu (phơi nhiễm vaborbactam cao hơn nhiều nếu dùng sau lọc).','Removes ~38% of meropenem and ~53% of vaborbactam; give after dialysis (vaborbactam exposure is much higher when given after dialysis).',['vab']),
+ erta:c('500 mg/ngày; bổ sung 150 mg sau lọc nếu dùng trong vòng 6 giờ trước lọc; ~30% liều thu được trong dịch lọc. Chưa có dữ liệu về thẩm phân phúc mạc.','500 mg/day; add 150 mg after dialysis if given within 6 h before; ~30% of the dose recovered in dialysate. No data for peritoneal dialysis.',['inv']),
+ dori:c('Lọc được nhưng chưa đủ thông tin để khuyến cáo liều.','Dialyzable, but there is insufficient information to recommend a dose.',['dor'])}},
+{g:'g3',l:['Suy gan','Hepatic impairment'],c:{
+ imi:c('Nhãn (phần đã đọc) không nêu hiệu chỉnh liều theo chức năng gan.','The label sections reviewed do not specify hepatic dose adjustment.',['pri']),
+ imr:c('Ít khả năng ảnh hưởng nồng độ thuốc do thải trừ chủ yếu qua thận.','Unlikely to affect exposure because elimination is mainly renal.',['rec']),
+ mero:c('Bệnh gan không ảnh hưởng dược động học của meropenem.','Liver disease does not affect meropenem pharmacokinetics.',['mer']),
+ mvb:c('Vaborbactam không chuyển hóa ở gan; không dự kiến ảnh hưởng của suy gan.','Vaborbactam is not hepatically metabolized; hepatic impairment is not expected to matter.',['vab']),
+ erta:c('Chưa xác lập dược động học; nhãn không đưa ra khuyến cáo liều ở suy gan.','Pharmacokinetics not established; the label gives no dose recommendation in hepatic impairment.',['inv']),
+ dori:c('Dược động học ở suy gan chưa được xác lập.','Pharmacokinetics in hepatic impairment have not been established.',['dorph'])}},
+{g:'g4',l:['Co giật và tác dụng trên thần kinh trung ương','Seizures and CNS effects'],c:{
+ imi:c('Co giật 0,4% trong thử nghiệm; nguy cơ cao hơn ở CrCl ≤30 (kể cả lọc máu). Tuân thủ liều, tối đa 4 g/ngày.','Seizures 0.4% in trials; higher risk with CrCl ≤30 (including on dialysis). Adhere to dosing; maximum 4 g/day.',['pri']),
+ imr:c('Co giật và phản ứng thần kinh trung ương của imipenem, nhất là khi vượt liều, có bệnh thần kinh trung ương hoặc suy thận.','Seizures and CNS reactions attributable to imipenem, especially with excess dose, CNS disorders or renal impairment.',['rec']),
+ mero:c('Co giật 0,7% (2904 bệnh nhân; tất cả đều có yếu tố thuận lợi). Chỉnh liều khi cao tuổi hoặc CrCl ≤50.','Seizures 0.7% (2904 patients; all had predisposing factors). Adjust dose in advanced age or CrCl ≤50.',['mer']),
+ mvb:c('Co giật và biến cố thần kinh trung ương liên quan meropenem; hay gặp ở bệnh thần kinh trung ương, viêm màng não, suy thận.','Seizures and CNS events attributable to meropenem; most common with CNS disorders, meningitis, renal impairment.',['vab']),
+ erta:c('Co giật 0,5% (1 g/ngày); bệnh não sau lưu hành (hồi phục kéo dài ở suy thận).','Seizures 0.5% (1 g/day); post-marketing encephalopathy (prolonged recovery in renal impairment).',['inv']),
+ dori:c('Cần thận trọng co giật như nhóm carbapenem.','Seizure caution as for the carbapenem class.',['idstew'])}},
+{g:'g4',l:['Tương tác với valproic acid','Interaction with valproic acid'],c:{
+ imi:c('Giảm nồng độ valproic acid; phối hợp thường không khuyến cáo. Nếu bắt buộc, cân nhắc thuốc chống co giật bổ sung.','Lowers valproic acid levels; co-use generally not recommended. If unavoidable, consider supplemental anticonvulsant.',['pri']),
+ imr:c('Tránh phối hợp; nên chọn kháng sinh không thuộc nhóm carbapenem.','Avoid co-use; consider a non-carbapenem antibacterial.',['rec']),
+ mero:c('Giảm nồng độ valproic acid, tăng nguy cơ co giật bùng phát; thường không khuyến cáo phối hợp. Tăng liều valproic acid có thể không đủ bù.','Lowers valproic acid levels with breakthrough seizure risk; generally not recommended. Raising the valproic acid dose may not compensate.',['mer']),
+ mvb:c('Như meropenem: thường không khuyến cáo phối hợp.','As with meropenem: co-use generally not recommended.',['vab']),
+ erta:c('Thường không khuyến cáo phối hợp; chọn kháng sinh khác nhóm nếu động kinh đang kiểm soát tốt bằng valproate.','Generally not recommended; choose another class if seizures are well controlled on valproate.',['inv']),
+ dori:c('Có thể làm giảm nồng độ valproic acid.','Can reduce valproic acid concentrations.',['idstew'])}},
+{g:'g4',l:['Tương tác khác','Other interactions'],c:{
+ imi:c('Ganciclovir: co giật toàn thể, không phối hợp trừ khi lợi ích vượt nguy cơ. Probenecid: không khuyến cáo.','Ganciclovir: generalized seizures; avoid unless benefit outweighs risk. Probenecid: not recommended.',['pri']),
+ imr:c('Ganciclovir: tránh phối hợp. Probenecid: không có khác biệt dược động học có ý nghĩa lâm sàng.','Ganciclovir: avoid co-use. Probenecid: no clinically significant pharmacokinetic difference.',['rec']),
+ mero:c('Probenecid cạnh tranh bài tiết ở ống thận: tăng phơi nhiễm 56% và t½ 38%; không khuyến cáo.','Probenecid competes for tubular secretion: exposure +56%, t½ +38%; not recommended.',['mer']),
+ mvb:c('Probenecid (do meropenem): không khuyến cáo. Vaborbactam ít khả năng tương tác (không ức chế CYP, P-gp, BCRP, OAT in vitro).','Probenecid (via meropenem): not recommended. Vaborbactam has low interaction potential (no in vitro inhibition of CYP, P-gp, BCRP, OAT).',['vab']),
+ erta:c('Probenecid: AUC +25%, t½ 4,0 → 4,8 giờ; không khuyến cáo.','Probenecid: AUC +25%, t½ 4.0 → 4.8 h; not recommended.',['inv']),
+ dori:c('Probenecid: t½ tăng 53%, AUC tăng 75%.','Probenecid: t½ +53%, AUC +75%.',['pdr'])}},
+{g:'g4',l:['Cảnh báo đặc biệt','Special warnings'],c:{
+ imi:c('Không dùng cho viêm màng não; trẻ <30 kg có suy thận không khuyến cáo.','Not for meningitis; not recommended in children <30 kg with renal impairment.',['pri']),
+ imr:c('Chỉ định cUTI và cIAI dựa trên dữ liệu hạn chế.','cUTI and cIAI indications rest on limited data.',['rec']),
+ mero:c('Phản ứng da nặng (SCAR); tiêu cơ vân (bổ sung 12/2024); giảm tiểu cầu ở suy thận.','Severe cutaneous reactions; rhabdomyolysis (added 12/2024); thrombocytopenia in renal impairment.',['mer']),
+ mvb:c('Dị tật thai ở thỏ với vaborbactam; phơi nhiễm vaborbactam tăng rất mạnh ở bệnh thận giai đoạn cuối.','Fetal malformations in rabbits with vaborbactam; vaborbactam exposure is very high in end-stage renal disease.',['vab']),
+ erta:c('Không khuyến cáo điều trị viêm màng não ở trẻ em do thấm dịch não tủy kém.','Not recommended for meningitis in children because of poor CSF penetration.',['inv']),
+ dori:c('Tăng tử vong 28 ngày khi dùng cho viêm phổi thở máy (23,0% so với 16,7% với imipenem/cilastatin); nhãn đã bổ sung cảnh báo.','Increased 28-day mortality when used for ventilator-associated pneumonia (23.0% vs 16.7% with imipenem/cilastatin); a label warning was added.',['dorfda'])}},
+{g:'g5',l:['Thử nghiệm lâm sàng then chốt','Key clinical trials'],c:{
+ imi:c('Là thuốc đối chứng trong thử nghiệm VAP của doripenem và trong RESTORE-IMI 1 (kèm colistin). Trong cSSSI: meropenem 86% so với imipenem 83% (quần thể đánh giá lâm sàng).','Comparator in the doripenem VAP trial and in RESTORE-IMI 1 (with colistin). In cSSSI: meropenem 86% vs imipenem 83% (clinically evaluable).',['dorfda','ri1','mer']),
+ imr:c('RESTORE-IMI 1 (n=47; nhiễm khuẩn kháng imipenem): đáp ứng tổng thể 71% so với 70% (KTC 90% của hiệu: −27,5 đến 21,4); tử vong 28 ngày 10% so với 30%. RESTORE-IMI 2 (HABP/VABP, n=531): tử vong 28 ngày 15,9% so với 21,3% với piperacillin/tazobactam (hiệu −5,3%; KTC 95% −11,9 đến 1,2): không kém hơn.','RESTORE-IMI 1 (n=47; imipenem-nonsusceptible infections): overall response 71% vs 70% (90% CI of difference −27.5 to 21.4); 28-day mortality 10% vs 30%. RESTORE-IMI 2 (HABP/VABP, n=531): 28-day mortality 15.9% vs 21.3% with piperacillin/tazobactam (difference −5.3%; 95% CI −11.9 to 1.2): noninferior.',['ri1','ri2']),
+ mero:c('MERINO (n=378; nhiễm khuẩn huyết E. coli/K. pneumoniae kháng ceftriaxone): tử vong 30 ngày 3,7% (7/191) với meropenem so với 12,3% (23/187) với piperacillin/tazobactam: piperacillin/tazobactam không đạt tiêu chuẩn không kém hơn.','MERINO (n=378; ceftriaxone-resistant E. coli/K. pneumoniae bloodstream infection): 30-day mortality 3.7% (7/191) with meropenem vs 12.3% (23/187) with piperacillin/tazobactam: piperacillin/tazobactam failed noninferiority.',['merino']),
+ mvb:c('TANGO I (cUTI, n=545): thành công tổng thể 98,4% (189/192) so với 94,0% (171/182) với piperacillin/tazobactam (hiệu 4,5%; KTC 95% 0,7–9,1). TANGO II (CRE, nhãn mở, cỡ mẫu nhỏ): chữa khỏi lâm sàng cuối điều trị 65,6% (21/32) so với 33,3% (5/15); tử vong 28 ngày 15,6% so với 33,3% (KTC 95% của hiệu −44,7 đến 9,3).','TANGO I (cUTI, n=545): overall success 98.4% (189/192) vs 94.0% (171/182) with piperacillin/tazobactam (difference 4.5%; 95% CI 0.7–9.1). TANGO II (CRE, open-label, small sample): clinical cure at end of treatment 65.6% (21/32) vs 33.3% (5/15); 28-day mortality 15.6% vs 33.3% (95% CI of difference −44.7 to 9.3).',['tango1','tango2']),
+ erta:c('Theo nhãn: cIAI thành công 83,6% so với 80,4% với piperacillin/tazobactam; cUTI đáp ứng vi sinh 89,5% so với 91,1% với ceftriaxone (thiết kế không kém hơn).','Per label: cIAI success 83.6% vs 80.4% with piperacillin/tazobactam; cUTI microbiological success 89.5% vs 91.1% with ceftriaxone (noninferiority designs).',['inv']),
+ dori:c('Thử nghiệm VAP bị dừng sớm (doripenem 7 ngày so với imipenem/cilastatin 10 ngày): tử vong 28 ngày (ITT) 23,0% (31/135) so với 16,7% (22/132).','VAP trial stopped early (doripenem 7 days vs imipenem/cilastatin 10 days): 28-day mortality (ITT) 23.0% (31/135) vs 16.7% (22/132).',['dorfda'])}},
+{g:'g5',l:['Vị trí theo hướng dẫn IDSA 2026','Place in IDSA 2026 guidance'],c:{
+ imi:c('Ưu tiên cho ESBL-E ngoài đường tiết niệu, đặc biệt bệnh nặng hoặc giảm albumin. Với CRE không sinh carbapenemase còn nhạy imipenem/meropenem: gợi ý truyền kéo dài.','Preferred for ESBL-E infections outside the urinary tract, especially when critically ill or hypoalbuminemic. For non-carbapenemase-producing CRE still susceptible: extended infusion suggested.',['idsa']),
+ imr:c('Là một trong ba lựa chọn ưu tiên cho CRE sinh KPC; đề kháng xuất hiện trong điều trị <3%. Thận trọng vì dữ liệu RESTORE-IMI 1 nhỏ. Với P. aeruginosa kháng khó điều trị: nguy cơ đề kháng xuất hiện cao tương tự ceftazidime-avibactam.','One of three preferred options for KPC-producing CRE; resistance emergence on therapy <3%. Caution because RESTORE-IMI 1 data are small. In DTR P. aeruginosa: resistance emergence risk similarly high to ceftazidime-avibactam.',['idsa']),
+ mero:c('Ưu tiên cho ESBL-E ngoài đường tiết niệu (bệnh nặng hoặc giảm albumin); với cUTI do ESBL-E khi không dùng được TMP-SMX hoặc fluoroquinolone.','Preferred for ESBL-E outside the urinary tract (critically ill or hypoalbuminemic); for ESBL-E cUTI when TMP-SMX or fluoroquinolones cannot be used.',['idsa']),
+ mvb:c('Ưu tiên cho KPC-E; hội đồng hơi ưu tiên meropenem-vaborbactam, rồi ceftazidime-avibactam, rồi imipenem-relebactam dựa trên dữ liệu quan sát. Vaborbactam không ức chế NDM.','Preferred for KPC-E; panel slightly favors meropenem-vaborbactam, then ceftazidime-avibactam, then imipenem-relebactam, based on observational data. Vaborbactam does not inhibit NDM.',['idsa']),
+ erta:c('Ưu tiên cho ESBL-E ngoài đường tiết niệu nhưng KHÔNG chọn ban đầu cho bệnh nặng hoặc giảm albumin do dược động học khó đoán (ví dụ albumin <2,5 g/dL liên quan tử vong cao hơn).','Preferred for ESBL-E outside the urinary tract but NOT the initial choice for critically ill or hypoalbuminemic patients because of unpredictable pharmacokinetics (e.g., albumin <2.5 g/dL linked to higher mortality).',['idsa']),
+ dori:c('Không có khuyến cáo riêng trong các phần IDSA đã đọc (ESBL-E, CRE).','No dedicated recommendation in the IDSA sections reviewed (ESBL-E, CRE).',['idsa'])}}
+];
+
+const q=(cl,vi,en)=>[cl,vi,en];
+const QM=[
+ {l:['Phủ KPC','Covers KPC'],c:{imi:q('qb','Không','No'),imr:q('qg','Có','Yes'),mero:q('qb','Không','No'),mvb:q('qg','Có','Yes'),erta:q('qb','Không','No'),dori:q('qb','Không','No')}},
+ {l:['Phủ MBL (NDM)','Covers MBL (NDM)'],c:{imi:q('qb','Không','No'),imr:q('qb','Không (đa số)','No (most)'),mero:q('qb','Không','No'),mvb:q('qb','Không','No'),erta:q('qb','Không','No'),dori:q('qb','Không','No')}},
+ {l:['ESBL-E ngoài đường tiết niệu','ESBL-E outside urinary tract'],c:{imi:q('qg','Ưu tiên','Preferred'),imr:q('qn','Để dành cho CRE','Reserve for CRE'),mero:q('qg','Ưu tiên','Preferred'),mvb:q('qn','Để dành cho CRE','Reserve for CRE'),erta:q('qw','Ưu tiên nhưng không chọn đầu tiên cho bệnh nặng','Preferred but not first choice if critically ill'),dori:q('qn','Không khuyến cáo riêng','No dedicated advice')}},
+ {l:['Hoạt tính trên P. aeruginosa','Activity against P. aeruginosa'],c:{imi:q('qg','Có','Yes'),imr:q('qg','Có (kể cả một số chủng kháng imipenem)','Yes (incl. some imipenem-nonsusceptible)'),mero:q('qg','Có','Yes'),mvb:q('qw','Dữ liệu in vitro, chưa xác lập lâm sàng','In vitro only; clinical efficacy not established'),erta:q('qb','Không','No'),dori:q('qw','In vitro tốt, lợi ích lâm sàng chưa chứng minh','Good in vitro; clinical benefit unproven')}},
+ {l:['Tương tác valproic acid','Valproic acid interaction'],c:{imi:q('qb','Có, tránh phối hợp','Yes, avoid'),imr:q('qb','Có, tránh phối hợp','Yes, avoid'),mero:q('qb','Có, tránh phối hợp','Yes, avoid'),mvb:q('qb','Có, tránh phối hợp','Yes, avoid'),erta:q('qb','Có, tránh phối hợp','Yes, avoid'),dori:q('qb','Có','Yes')}},
+ {l:['Số lần dùng mỗi ngày','Doses per day'],c:{imi:q('qb','3–4 lần','3–4'),imr:q('qb','4 lần','4'),mero:q('qw','3 lần','3'),mvb:q('qw','3 lần, truyền 3 giờ','3, 3-hour infusion'),erta:q('qg','1 lần','1'),dori:q('qw','3 lần','3')}},
+ {l:['Ảnh hưởng của giảm albumin','Effect of hypoalbuminemia'],c:{imi:q('qg','Ít (gắn protein ~20%)','Minor (~20% binding)'),imr:q('qg','Ít','Minor'),mero:q('qg','Ít (~2%)','Minor (~2%)'),mvb:q('qg','Ít','Minor'),erta:q('qb','Đáng kể (85–95%)','Significant (85–95%)'),dori:q('qn','Chưa kiểm chứng','Unverified')}},
+ {l:['Ngưỡng CrCl bắt đầu chỉnh liều','CrCl where adjustment begins'],c:{imi:q('qw','<90','<90'),imr:q('qw','<90','<90'),mero:q('qn','≤50','≤50'),mvb:q('qn','eGFR <50','eGFR <50'),erta:q('qg','≤30','≤30'),dori:q('qn','≤50','≤50')}},
+ {l:['RCT trên nhiễm khuẩn kháng carbapenem','RCTs in carbapenem-resistant infection'],c:{imi:q('qn','Không áp dụng','n/a'),imr:q('qw','RESTORE-IMI 1 (n=47)','RESTORE-IMI 1 (n=47)'),mero:q('qn','Không áp dụng','n/a'),mvb:q('qw','TANGO II (nhãn mở, nhỏ)','TANGO II (open-label, small)'),erta:q('qn','Không áp dụng','n/a'),dori:q('qn','Không có','None')}},
+ {l:['Tình trạng lưu hành tại Mỹ','US availability'],c:{imi:q('qg','Có','Yes'),imr:q('qg','Có','Yes'),mero:q('qg','Có','Yes'),mvb:q('qg','Có','Yes'),erta:q('qg','Có','Yes'),dori:q('qb','Đã ngừng','Discontinued')}},
+ {l:['Cảnh báo an toàn đặc hiệu','Drug-specific safety warning'],c:{imi:q('qn','Co giật khi CrCl ≤30','Seizures if CrCl ≤30'),imr:q('qn','Co giật','Seizures'),mero:q('qn','SCAR, tiêu cơ vân','SCAR, rhabdomyolysis'),mvb:q('qn','Phơi nhiễm vaborbactam cao ở ESRD','High vaborbactam exposure in ESRD'),erta:q('qn','Bệnh não ở suy thận','Encephalopathy in renal impairment'),dori:q('qb','Tăng tử vong khi dùng cho VAP','Higher mortality in VAP')}}
+];
+
+const INDS=[
+ {k:'cuti',n:['cUTI / viêm thận–bể thận','cUTI / pyelonephritis']},
+ {k:'ciai',n:['cIAI','cIAI']},
+ {k:'cssi',n:['cSSSI','cSSSI']},
+ {k:'hapvap',n:['HABP/VABP','HABP/VABP']},
+ {k:'bsi',n:['Nhiễm khuẩn huyết','Bloodstream infection']},
+ {k:'cap',n:['Viêm phổi cộng đồng','Community-acquired pneumonia']}
+];
+
+const SCEN=[
+ {t:['Nhiễm khuẩn huyết do E. coli/K. pneumoniae kháng ceftriaxone (nghi ESBL), huyết động ổn định','Bloodstream infection with ceftriaxone-resistant E. coli/K. pneumoniae (presumed ESBL), hemodynamically stable'],
+  pref:['Meropenem, imipenem/cilastatin hoặc ertapenem (đều là lựa chọn ưu tiên cho ESBL-E ngoài đường tiết niệu).','Meropenem, imipenem/cilastatin or ertapenem (all preferred for ESBL-E outside the urinary tract).'],
+  alt:['Cefepime-enmetazobactam (lựa chọn thay thế).','Cefepime-enmetazobactam (alternative).'],
+  avoid:['Piperacillin/tazobactam, cefepime đơn thuần, cephamycin; không nên dùng sớm carbapenem phổ rộng mới (meropenem-vaborbactam, imipenem-relebactam) nếu không kháng carbapenem.','Piperacillin/tazobactam, cefepime alone, cephamycins; do not use the newer broad agents (meropenem-vaborbactam, imipenem-relebactam) when carbapenem resistance is absent.'],
+  why:['MERINO: tử vong 30 ngày 3,7% với meropenem so với 12,3% với piperacillin/tazobactam. Hướng dẫn IDSA chọn carbapenem làm lựa chọn ưu tiên và dành thuốc mới cho tác nhân kháng carbapenem. Lưu ý: đây là so sánh với piperacillin/tazobactam, không so sánh trực tiếp giữa các carbapenem.','MERINO: 30-day mortality 3.7% with meropenem vs 12.3% with piperacillin/tazobactam. IDSA guidance makes carbapenems preferred and reserves the newer agents for carbapenem-resistant organisms. Note: the comparator was piperacillin/tazobactam, not another carbapenem.',['merino','idsa']]},
+ {t:['ESBL-E ở bệnh nhân nặng hoặc albumin thấp (<2,5 g/dL)','ESBL-E in a critically ill patient or albumin <2.5 g/dL'],
+  pref:['Meropenem hoặc imipenem/cilastatin.','Meropenem or imipenem/cilastatin.'],
+  alt:['Ertapenem liều cao (1,5 g/ngày) hoặc 12 giờ/lần chỉ là giải pháp tình thế; bằng chứng cải thiện kết cục còn hạn chế.','Higher-dose ertapenem (1.5 g/day) or q12h is only a stop-gap; evidence for better outcomes is limited.'],
+  avoid:['Ertapenem 1 g/ngày làm lựa chọn ban đầu.','Ertapenem 1 g/day as initial therapy.'],
+  why:['Ertapenem gắn protein 85–95%; giảm albumin làm tăng phần tự do, tăng thanh thải và rút ngắn t½. Một nghiên cứu quan sát (n=279) ghi nhận tử vong 30 ngày cao hơn với ertapenem khi albumin <2,5 g/dL.','Ertapenem is 85–95% protein bound; hypoalbuminemia raises the unbound fraction, increasing clearance and shortening t½. An observational study (n=279) linked ertapenem to higher 30-day mortality when albumin <2.5 g/dL.',['inv','idsa']]},
+ {t:['CRE sinh KPC (ví dụ K. pneumoniae kháng meropenem, xác định gen blaKPC)','KPC-producing CRE (e.g., meropenem-resistant K. pneumoniae with blaKPC identified)'],
+  pref:['Meropenem-vaborbactam, ceftazidime-avibactam hoặc imipenem-relebactam (hội đồng IDSA hơi ưu tiên theo thứ tự này).','Meropenem-vaborbactam, ceftazidime-avibactam or imipenem-relebactam (IDSA panel slightly favors them in this order).'],
+  alt:['Aztreonam-avibactam, cefiderocol; eravacycline hoặc tigecycline nếu không phải nhiễm khuẩn huyết hay tiết niệu.','Aztreonam-avibactam, cefiderocol; eravacycline or tigecycline if not bloodstream or urinary.'],
+  avoid:['Meropenem, imipenem hoặc ertapenem đơn thuần (bị KPC thủy phân).','Meropenem, imipenem or ertapenem alone (hydrolyzed by KPC).'],
+  why:['Kháng thuốc xuất hiện trong điều trị: ~10% với ceftazidime-avibactam, <3% với imipenem-relebactam và meropenem-vaborbactam. Chưa có RCT so sánh trực tiếp ba thuốc; TANGO II và RESTORE-IMI 1 là thử nghiệm nhỏ.','Resistance emergence on therapy: ~10% with ceftazidime-avibactam, <3% with imipenem-relebactam and meropenem-vaborbactam. No head-to-head RCTs exist; TANGO II and RESTORE-IMI 1 were small.',['idsa','tango2','ri1']]},
+ {t:['CRE sinh NDM (metallo-β-lactamase)','NDM-producing CRE (metallo-β-lactamase)'],
+  pref:['Aztreonam-avibactam hoặc cefiderocol.','Aztreonam-avibactam or cefiderocol.'],
+  alt:['Ceftazidime-avibactam kết hợp aztreonam nếu không có aztreonam-avibactam.','Ceftazidime-avibactam plus aztreonam if aztreonam-avibactam is unavailable.'],
+  avoid:['Meropenem-vaborbactam và imipenem-relebactam: không hoạt tính với MBL.','Meropenem-vaborbactam and imipenem-relebactam: no activity against MBLs.'],
+  why:['Nhãn Vabomere và Recarbrio nêu không hoạt tính với MBL; hướng dẫn IDSA nhấn mạnh avibactam, relebactam và vaborbactam đều không ức chế NDM.','The Vabomere and Recarbrio labels state no activity against MBLs; IDSA guidance stresses that avibactam, relebactam and vaborbactam do not inhibit NDM.',['vab','rec','idsa']]},
+ {t:['Bệnh nhân động kinh đang kiểm soát tốt bằng valproate','Patient with epilepsy well controlled on valproate'],
+  pref:['Kháng sinh không thuộc nhóm carbapenem nếu phổ phù hợp.','A non-carbapenem antibacterial if the spectrum is adequate.'],
+  alt:['Nếu bắt buộc dùng carbapenem: cân nhắc bổ sung thuốc chống co giật khác và theo dõi sát (tăng liều valproate có thể không đủ).','If a carbapenem is unavoidable: consider supplemental anticonvulsant and close monitoring (raising the valproate dose may not suffice).'],
+  avoid:['Phối hợp thường quy carbapenem + valproic acid.','Routine carbapenem + valproic acid combination.'],
+  why:['Nhãn của imipenem, meropenem, ertapenem và Recarbrio đều nêu carbapenem làm giảm nồng độ valproic acid dưới ngưỡng điều trị, tăng nguy cơ co giật bùng phát.','The imipenem, meropenem, ertapenem and Recarbrio labels all state carbapenems reduce valproic acid concentrations below the therapeutic range, raising breakthrough seizure risk.',['pri','mer','inv','rec']]},
+ {t:['Suy thận nặng (CrCl 15–29 mL/min) cần điều trị nhiễm khuẩn ổ bụng','Severe renal impairment (CrCl 15–29 mL/min) needing treatment of intra-abdominal infection'],
+  pref:['Meropenem một nửa liều mỗi 12 giờ (CrCl 10–25) hoặc ertapenem 500 mg/ngày (CrCl ≤30), theo dõi thần kinh.','Meropenem half dose q12h (CrCl 10–25) or ertapenem 500 mg/day (CrCl ≤30), with neurologic monitoring.'],
+  alt:['Imipenem/cilastatin theo bảng chỉnh liều (200 mg mỗi 6 giờ hoặc 500 mg mỗi 12 giờ) chỉ khi cần phổ imipenem và chấp nhận nguy cơ co giật cao hơn.','Imipenem/cilastatin per the adjustment table (200 mg q6h or 500 mg q12h) only when imipenem spectrum is needed and higher seizure risk is accepted.'],
+  avoid:['Không chỉnh liều theo chức năng thận; imipenem khi CrCl <15 mà không lọc máu.','Dosing without renal adjustment; imipenem when CrCl <15 without dialysis.'],
+  why:['Nhãn imipenem nêu bệnh nhân CrCl ≤30 có nguy cơ co giật cao hơn; nhãn ertapenem và meropenem nêu cơ sở chỉnh liều theo thanh thải creatinin. Lưu ý ngưỡng CrCl khác nhau giữa các thuốc (≤30, ≤50, <90).','The imipenem label states patients with CrCl ≤30 have higher seizure risk; the ertapenem and meropenem labels set renal adjustment by creatinine clearance. Note the thresholds differ between drugs (≤30, ≤50, <90).',['pri','inv','mer']]},
+ {t:['Viêm phổi bệnh viện/viêm phổi thở máy do vi khuẩn Gram âm nghi kháng thuốc','Hospital-/ventilator-associated pneumonia with suspected resistant Gram-negative bacteria'],
+  pref:['Imipenem-relebactam là thuốc có chỉ định HABP/VABP và có RCT pha 3.','Imipenem-relebactam is labelled for HABP/VABP and has a phase 3 RCT.'],
+  alt:['Imipenem/cilastatin hoặc meropenem theo kháng sinh đồ và hướng dẫn tại chỗ (meropenem không có chỉ định viêm phổi trên nhãn Mỹ).','Imipenem/cilastatin or meropenem guided by susceptibility and local guidance (meropenem has no pneumonia indication on the US label).'],
+  avoid:['Doripenem.','Doripenem.'],
+  why:['RESTORE-IMI 2: tử vong 28 ngày 15,9% so với 21,3% (không kém hơn piperacillin/tazobactam). Doripenem: thử nghiệm VAP dừng sớm vì tử vong 23,0% so với 16,7% với imipenem/cilastatin.','RESTORE-IMI 2: 28-day mortality 15.9% vs 21.3% (noninferior to piperacillin/tazobactam). Doripenem: VAP trial stopped early because of mortality 23.0% vs 16.7% with imipenem/cilastatin.',['ri2','dorfda']]}
+];
+
+const QUIZ=[
+ {q:['Theo IDSA, nên ưu tiên carbapenem nào khi điều trị ESBL-E ở bệnh nhân nặng và albumin 2,2 g/dL?','Per IDSA, which carbapenem should be preferred for ESBL-E in a critically ill patient with albumin 2.2 g/dL?'],
+  o:[['Ertapenem 1 g/ngày','Ertapenem 1 g/day'],['Meropenem hoặc imipenem/cilastatin','Meropenem or imipenem/cilastatin'],['Doripenem','Doripenem'],['Meropenem-vaborbactam','Meropenem-vaborbactam']],a:1,
+  e:['Ertapenem gắn protein 85–95% nên dược động học thay đổi khi giảm albumin; IDSA ưu tiên meropenem hoặc imipenem. Meropenem-vaborbactam để dành cho tác nhân kháng carbapenem.','Ertapenem is 85–95% protein bound so exposure changes with hypoalbuminemia; IDSA prefers meropenem or imipenem. Meropenem-vaborbactam is reserved for carbapenem-resistant organisms.']},
+ {q:['Tử vong 28 ngày (ITT) trong thử nghiệm VAP của doripenem so với imipenem/cilastatin là bao nhiêu?','What was 28-day mortality (ITT) in the doripenem VAP trial versus imipenem/cilastatin?'],
+  o:[['23,0% so với 16,7%','23.0% vs 16.7%'],['16,7% so với 23,0%','16.7% vs 23.0%'],['15,9% so với 21,3%','15.9% vs 21.3%'],['3,7% so với 12,3%','3.7% vs 12.3%']],a:0,
+  e:['FDA ghi nhận 23,0% (31/135) với doripenem và 16,7% (22/132) với imipenem/cilastatin; 15,9% so với 21,3% là RESTORE-IMI 2 và 3,7% so với 12,3% là MERINO.','FDA reported 23.0% (31/135) with doripenem and 16.7% (22/132) with imipenem/cilastatin; 15.9% vs 21.3% is RESTORE-IMI 2 and 3.7% vs 12.3% is MERINO.']},
+ {q:['Tác nhân nào KHÔNG được vaborbactam hay relebactam bảo vệ?','Which organism is NOT rescued by vaborbactam or relebactam?'],
+  o:[['K. pneumoniae sinh KPC','KPC-producing K. pneumoniae'],['Enterobacterales sinh ESBL','ESBL-producing Enterobacterales'],['Enterobacterales sinh NDM (MBL)','NDM (MBL)-producing Enterobacterales'],['Enterobacter cloacae sinh AmpC','AmpC-producing Enterobacter cloacae']],a:2,
+  e:['Nhãn Vabomere và Recarbrio nêu không hoạt tính với MBL; NDM thủy phân hầu hết β-lactam trừ aztreonam.','Vabomere and Recarbrio labels state no activity against MBLs; NDM hydrolyzes all β-lactams except aztreonam.']},
+ {q:['Cilastatin trong Primaxin và Recarbrio có vai trò gì?','What is the role of cilastatin in Primaxin and Recarbrio?'],
+  o:[['Chất ức chế β-lactamase','β-lactamase inhibitor'],['Ức chế dehydropeptidase-I ở thận, ngăn chuyển hóa imipenem','Inhibits renal dehydropeptidase-I, preventing imipenem metabolism'],['Tăng gắn protein của imipenem','Increases imipenem protein binding'],['Kháng khuẩn bổ sung','Adds antibacterial activity']],a:1,
+  e:['Cilastatin không có hoạt tính kháng khuẩn; nó giữ imipenem không bị chuyển hóa ở thận để đạt nồng độ có hiệu lực trong nước tiểu.','Cilastatin has no antibacterial activity; it prevents renal metabolism of imipenem so effective urinary concentrations are achieved.']},
+ {q:['Bệnh nhân CrCl 40 mL/min dùng meropenem 1 g mỗi 8 giờ khi chức năng thận bình thường. Liều chỉnh theo nhãn Mỹ?','A patient with CrCl 40 mL/min was on meropenem 1 g q8h at normal renal function. What is the US-label adjusted dose?'],
+  o:[['1 g mỗi 8 giờ','1 g q8h'],['1 g mỗi 12 giờ','1 g q12h'],['500 mg mỗi 12 giờ','500 mg q12h'],['500 mg mỗi 24 giờ','500 mg q24h']],a:1,
+  e:['CrCl 26–50: giữ nguyên liều chuẩn nhưng kéo dài khoảng cách thành mỗi 12 giờ.','CrCl 26–50: keep the usual dose but extend the interval to every 12 hours.']},
+ {q:['Meropenem-vaborbactam (4 g) được truyền trong bao lâu theo nhãn?','Over how long is meropenem-vaborbactam (4 g) infused per the label?'],
+  o:[['30 phút','30 minutes'],['1 giờ','1 hour'],['3 giờ','3 hours'],['Bolus 5 phút','5-minute bolus']],a:2,
+  e:['Nhãn Vabomere quy định truyền tĩnh mạch trong 3 giờ.','The Vabomere label specifies a 3-hour intravenous infusion.']},
+ {q:['Phát biểu nào đúng về tương tác với valproic acid?','Which statement about the valproic acid interaction is correct?'],
+  o:[['Chỉ imipenem có tương tác','Only imipenem interacts'],['Ertapenem không tương tác','Ertapenem does not interact'],['Các carbapenem làm giảm nồng độ valproic acid, tăng nguy cơ co giật bùng phát','Carbapenems reduce valproic acid levels and raise breakthrough seizure risk'],['Chỉ cần tăng liều valproic acid là đủ','Simply raising the valproic acid dose is enough']],a:2,
+  e:['Nhãn của imipenem, meropenem, ertapenem và Recarbrio đều nêu tương tác này và nói tăng liều valproic acid có thể không đủ.','The labels for imipenem, meropenem, ertapenem and Recarbrio all state this interaction and that raising the valproic acid dose may not be sufficient.']}
+];
+
+const NOTES=[
+ ['Nguồn dữ liệu: nhãn Mỹ của nhà sản xuất/FDA (ngày bản nhãn ghi ở bảng) và hướng dẫn IDSA 2026. Nhãn Vabomere đối chiếu là bản 2017 và có thể không phải bản mới nhất; hãy kiểm tra nhãn hiện hành trước khi áp dụng.','Sources: US manufacturer/FDA labels (label dates shown in the table) and IDSA 2026 guidance. The Vabomere label reviewed is the 2017 version and may not be the latest; check the current label before use.'],
+ ['Phương pháp CrCl: Cockcroft–Gault với cân nặng thực tế (imipenem, imipenem-relebactam, meropenem, ertapenem, doripenem). Vabomere dùng eGFR theo MDRD; công cụ bỏ hệ số chủng tộc nên eGFR có thể sai lệch.','CrCl method: Cockcroft–Gault with actual body weight (imipenem, imipenem-relebactam, meropenem, ertapenem, doripenem). Vabomere uses MDRD eGFR; the tool omits the race coefficient so eGFR may deviate.'],
+ ['Các thử nghiệm không so sánh trực tiếp với nhau (khác quần thể, thuốc đối chứng, tiêu chí). TANGO II (nhãn mở) và RESTORE-IMI 1 có cỡ mẫu nhỏ; kết luận về CRE cần thận trọng.','The trials are not head-to-head (different populations, comparators, endpoints). TANGO II (open-label) and RESTORE-IMI 1 were small; conclusions on CRE need caution.'],
+ ['Tiêu chí chỉnh liều chính khác nhau: ertapenem CrCl ≤30; meropenem và doripenem ≤50; imipenem và imipenem-relebactam <90; Vabomere eGFR <50.','Main renal-adjustment thresholds differ: ertapenem CrCl ≤30; meropenem and doripenem ≤50; imipenem and imipenem-relebactam <90; Vabomere eGFR <50.'],
+ ['Cảnh báo then chốt: co giật (nhất là imipenem khi CrCl ≤30), tương tác valproic acid của cả nhóm, và doripenem làm tăng tử vong khi dùng cho viêm phổi thở máy.','Key warnings: seizures (especially imipenem with CrCl ≤30), the class-wide valproic acid interaction, and higher mortality with doripenem in ventilator-associated pneumonia.'],
+ ['Tình trạng lưu hành: doripenem đã ngừng lưu hành tại Mỹ; cột thông tin chỉ nhằm tham khảo. Với Doribax, phần liều và cảnh báo VAP được đối chiếu qua trang thứ cấp và thông báo của FDA.','Availability: doripenem is no longer available in the US; its column is for reference. For Doribax, the dosing section and VAP warning were cross-checked through secondary pages and the FDA communication.'],
+ ['Cách đọc: [n] là số tài liệu tham khảo (đánh số theo thứ tự xuất hiện lần đầu). Mã màu tổng quan: xanh lục thuận lợi, vàng thận trọng, đỏ bất lợi, xanh dương trung tính.','How to read: [n] is the reference number (numbered by first appearance). Quick-matrix colors: green favorable, amber caution, red unfavorable, blue neutral.'],
+ ['Giới hạn công cụ: chỉ hỗ trợ thẩm định liều người lớn, không thay thế đánh giá lâm sàng; không bao gồm trẻ em, sơ sinh, liệu pháp thay thế thận liên tục. Công cụ chạy hoàn toàn trên trình duyệt và không lưu dữ liệu bệnh nhân.','Tool limits: supports adult dose review only and does not replace clinical judgment; excludes children, neonates and continuous renal replacement therapy. It runs entirely in the browser and stores no patient data.'],
+ ['Chưa kiểm chứng được: tỷ lệ gắn protein của doripenem; danh sách tác giả và số trang đầy đủ của một số bài RCT (chỉ ghi mã PMC); các phần IDSA về NDM-E, CRAB và P. aeruginosa chỉ đọc một phần. Ngày đối chiếu dữ liệu: 04/10/2026.','Not verified: doripenem protein binding; full author lists and pagination of several RCT papers (only PMC IDs given); the IDSA sections on NDM-E, CRAB and P. aeruginosa were read only in part. Data cross-checked on 2026-10-04.']
+];
+
+const GLOSS=[
+ {k:'a',n:['Bệnh lý và chỉ định','Conditions and indications'],r:[
+  ['cUTI',['Nhiễm khuẩn tiết niệu phức tạp','Complicated urinary tract infection'],['Gồm viêm thận–bể thận','Includes pyelonephritis']],
+  ['cIAI',['Nhiễm khuẩn ổ bụng phức tạp','Complicated intra-abdominal infection'],['Viêm phúc mạc, viêm ruột thừa phức tạp','Peritonitis, complicated appendicitis']],
+  ['cSSSI',['Nhiễm khuẩn da và mô mềm phức tạp','Complicated skin and skin-structure infection'],['Cần can thiệp hoặc kháng sinh tĩnh mạch','Needs surgery or IV antibiotics']],
+  ['HABP',['Viêm phổi bệnh viện','Hospital-acquired bacterial pneumonia'],['Khởi phát ≥48 giờ sau nhập viện','Onset ≥48 h after admission']],
+  ['VABP',['Viêm phổi liên quan thở máy','Ventilator-associated bacterial pneumonia'],['Khởi phát sau đặt nội khí quản','Onset after intubation']],
+  ['VAP',['Viêm phổi liên quan thở máy','Ventilator-associated pneumonia'],['Tên gọi dùng trong thử nghiệm doripenem','Term used in the doripenem trial']],
+  ['CAP',['Viêm phổi cộng đồng','Community-acquired pneumonia'],['Mắc ngoài bệnh viện','Acquired outside hospital']],
+  ['ESRD',['Bệnh thận giai đoạn cuối','End-stage renal disease'],['Thường cần lọc máu','Usually needs dialysis']]]},
+ {k:'b',n:['Vi sinh và đề kháng','Microbiology and resistance'],r:[
+  ['CRAB',['A. baumannii kháng carbapenem','Carbapenem-resistant Acinetobacter baumannii'],['Nhóm kháng khó điều trị','Difficult-to-treat resistant group']],
+  ['CRE',['Enterobacterales kháng carbapenem','Carbapenem-resistant Enterobacterales'],['Kháng ít nhất một carbapenem hoặc sinh carbapenemase','Resistant to ≥1 carbapenem or carbapenemase-producing']],
+  ['ESBL',['β-lactamase phổ rộng','Extended-spectrum β-lactamase'],['Thủy phân penicillin, cephalosporin, aztreonam','Hydrolyzes penicillins, cephalosporins, aztreonam']],
+  ['ESBL-E',['Enterobacterales sinh ESBL','ESBL-producing Enterobacterales'],['Carbapenem vẫn thường có hiệu quả','Carbapenems usually remain effective']],
+  ['KPC',['Carbapenemase của Klebsiella pneumoniae','Klebsiella pneumoniae carbapenemase'],['Enzyme serine, bị vaborbactam/relebactam ức chế','Serine enzyme inhibited by vaborbactam/relebactam']],
+  ['KPC-E',['Enterobacterales sinh KPC','KPC-producing Enterobacterales'],['Nhóm đích của meropenem-vaborbactam','Target of meropenem-vaborbactam']],
+  ['NDM',['New Delhi metallo-β-lactamase','New Delhi metallo-β-lactamase'],['Thuộc MBL; không bị các chất ức chế trên ức chế','An MBL; not inhibited by these inhibitors']],
+  ['NDM-E',['Enterobacterales sinh NDM','NDM-producing Enterobacterales'],['Ưu tiên aztreonam-avibactam hoặc cefiderocol','Aztreonam-avibactam or cefiderocol preferred']],
+  ['MBL',['Metallo-β-lactamase','Metallo-β-lactamase'],['Enzyme chứa kẽm, thủy phân hầu hết β-lactam','Zinc enzyme hydrolyzing most β-lactams']],
+  ['AmpC',['β-lactamase nhóm C (cephalosporinase)','Class C β-lactamase (cephalosporinase)'],['Có thể cảm ứng hoặc biểu hiện quá mức','May be inducible or overexpressed']],
+  ['PDC',['Cephalosporinase của Pseudomonas','Pseudomonas-derived cephalosporinase'],['Loại AmpC ở P. aeruginosa','AmpC type in P. aeruginosa']],
+  ['OXA',['Oxacillinase','Oxacillinase'],['Một số có hoạt tính carbapenemase','Some have carbapenemase activity']],
+  ['OprD',['Porin màng ngoài của P. aeruginosa','Outer-membrane porin of P. aeruginosa'],['Mất OprD làm giảm nhạy imipenem','Loss reduces imipenem susceptibility']],
+  ['MRSA',['S. aureus kháng methicillin','Methicillin-resistant S. aureus'],['Carbapenem không có hoạt tính','Carbapenems are inactive']],
+  ['VRE',['Enterococcus kháng vancomycin','Vancomycin-resistant enterococci'],['Không được phủ','Not covered']],
+  ['DTR',['Kháng khó điều trị','Difficult-to-treat resistance'],['Dùng cho P. aeruginosa trong IDSA','Used for P. aeruginosa in IDSA']],
+  ['CSF',['Dịch não tủy','Cerebrospinal fluid'],['Thấm kém với ertapenem','Poor ertapenem penetration']]]},
+ {k:'c',n:['Dược động học và liều','Pharmacokinetics and dosing'],r:[
+  ['CYP',['Cytochrome P450','Cytochrome P450'],['Hệ enzym chuyển hóa thuốc ở gan','Hepatic drug-metabolizing enzyme system']],
+  ['OAT',['Chất vận chuyển anion hữu cơ','Organic anion transporter'],['Thải trừ qua ống thận','Renal tubular secretion']],
+  ['BCRP',['Protein kháng ung thư vú','Breast cancer resistance protein'],['Chất vận chuyển ngoại bào','Efflux transporter']],
+  ['CrCl',['Độ thanh thải creatinin','Creatinine clearance'],['Ước tính bằng Cockcroft–Gault','Estimated by Cockcroft–Gault']],
+  ['eGFR',['Mức lọc cầu thận ước tính','Estimated glomerular filtration rate'],['Vabomere dùng công thức MDRD','Vabomere uses the MDRD equation']],
+  ['MDRD',['Modification of Diet in Renal Disease','Modification of Diet in Renal Disease'],['Công thức ước tính eGFR','eGFR estimating equation']],
+  ['AUC',['Diện tích dưới đường cong nồng độ–thời gian','Area under the concentration–time curve'],['Chỉ số phơi nhiễm thuốc','Measure of drug exposure']],
+  ['t½',['Thời gian bán thải','Elimination half-life'],['Thời gian giảm một nửa nồng độ','Time for concentration to halve']],
+  ['IV',['Đường tĩnh mạch','Intravenous'],['Tiêm hoặc truyền vào tĩnh mạch','Given into a vein']],
+  ['IM',['Đường tiêm bắp','Intramuscular'],['Tiêm vào cơ','Injected into muscle']],
+  ['q6h',['Mỗi 6 giờ','Every 6 hours'],['Tương tự q8h, q12h, q24h','Likewise q8h, q12h, q24h']]]},
+ {k:'d',n:['Thống kê và thử nghiệm','Statistics and trials'],r:[
+  ['ITT',['Phân tích theo ý định điều trị','Intention-to-treat'],['Tính mọi bệnh nhân đã phân nhóm','Analyzes all randomized patients']],
+  ['KTC',['Khoảng tin cậy','Confidence interval'],['CI trong tiếng Anh','CI in English']],
+  ['CI',['Khoảng tin cậy','Confidence interval'],['Tương đương KTC','Equivalent of KTC']],
+  ['RCT',['Thử nghiệm ngẫu nhiên có đối chứng','Randomized controlled trial'],['Thiết kế bằng chứng chủ chốt','Core evidence design']],
+  ['TANGO',['Thử nghiệm meropenem-vaborbactam','Meropenem-vaborbactam trials'],['TANGO I: cUTI; TANGO II: CRE','TANGO I: cUTI; TANGO II: CRE']],
+  ['RESTORE-IMI',['Thử nghiệm imipenem-relebactam','Imipenem-relebactam trials'],['1: kháng imipenem; 2: HABP/VABP','1: imipenem-nonsusceptible; 2: HABP/VABP']],
+  ['MERINO',['Thử nghiệm piperacillin/tazobactam so với meropenem','Piperacillin/tazobactam vs meropenem trial'],['Nhiễm khuẩn huyết kháng ceftriaxone','Ceftriaxone-resistant bacteremia']],
+  ['IDSA',['Hiệp hội Bệnh truyền nhiễm Hoa Kỳ','Infectious Diseases Society of America'],['Nguồn hướng dẫn điều trị','Source of treatment guidance']],
+  ['FDA',['Cục Quản lý Thực phẩm và Dược phẩm Hoa Kỳ','US Food and Drug Administration'],['Nguồn nhãn thuốc','Source of labels']],
+  ['SCAR',['Phản ứng da nặng','Severe cutaneous adverse reactions'],['Gồm SJS, TEN, DRESS','Includes SJS, TEN, DRESS']],
+  ['CNS',['Thần kinh trung ương','Central nervous system'],['Liên quan co giật','Relevant to seizures']]]},
+ {k:'e',n:['Thuốc và khác','Drugs and other'],r:[
+  ['TMP-SMX',['Trimethoprim-sulfamethoxazole','Trimethoprim-sulfamethoxazole'],['Lựa chọn ESBL-E tiết niệu khi còn nhạy','Option for urinary ESBL-E if susceptible']]]}
+];
+
+const REFS={
+ inv:'INVANZ (ertapenem for injection) [prescribing information]. Whitehouse Station (NJ): Merck Sharp & Dohme; 2022 Mar [cited 2026 Oct 4]. Available from: https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/021337s051lbl.pdf',
+ mer:'MERREM IV (meropenem for injection) [prescribing information]. New York: Pfizer; 2024 Dec [cited 2026 Oct 4]. Available from: https://www.drugs.com/pro/merrem.html',
+ pri:'PRIMAXIN (imipenem and cilastatin) for injection [prescribing information]. Rahway (NJ): Merck Sharp & Dohme; 2022 May [cited 2026 Oct 4]. Available from: https://www.drugs.com/pro/primaxin-iv.html',
+ rec:'RECARBRIO (imipenem, cilastatin, and relebactam) for injection [prescribing information]. Rahway (NJ): Merck Sharp & Dohme; 2025 Dec [cited 2026 Oct 4]. Available from: https://www.merck.com/product/usa/pi_circulars/r/recarbrio/recarbrio_pi.pdf',
+ vab:'VABOMERE (meropenem and vaborbactam) for injection [prescribing information, 2017 version; may not be the latest]. Parsippany (NJ): The Medicines Company; 2017 Aug [cited 2026 Oct 4]. Available from: https://www.accessdata.fda.gov/Drugsatfda_docs/Label/2017/209776lbl.pdf',
+ dor:'DORIBAX (doripenem for injection): dosage and administration [Internet]. Drugs.com [cited 2026 Oct 4]. Available from: https://drugs.com/dosage/doribax.html',
+ dorph:'Doripenem for injection [prescribing information]. Philippines Food and Drug Administration, registration DRP-13150 [cited 2026 Oct 4]. Available from: https://verification.fda.gov.ph/files/DRP-13150_PI_01.pdf',
+ dorfda:'U.S. Food and Drug Administration. FDA Drug Safety Communication: FDA approves label changes for antibacterial Doribax (doripenem) describing increased risk of death for ventilator patients with pneumonia [Internet]. 2014 [cited 2026 Oct 4]. Available from: https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-fda-approves-label-changes-antibacterial-doribax-doripenem-describing',
+ davis:'Vallerand AH, Sanoski CA. Doripenem. In: Davis Drug Guide. 20th ed. Philadelphia: F.A. Davis; 2026 [cited 2026 Oct 4]. Available from: https://www.unboundmedicine.com/washingtonmanual/view/Davis-Drug-Guide/109349/all/doripenem',
+ pdr:'Doribax (doripenem). PDR Drug Summary [Internet] [cited 2026 Oct 4]. Available from: https://www.pdr.net/drug-summary/Doribax-doripenem-2118',
+ idstew:'IDStewardship. Doripenem (Doribax) [Internet] [cited 2026 Oct 4]. Available from: https://www.idstewardship.com/drugs/doripenem/',
+ idsa:'Tamma PD, Bonomo RA, Heil EL, Justo JA, Satlin MJ, Mathers AJ. IDSA 2026 guidance on the treatment of antimicrobial resistant gram-negative infections [Internet]. Infectious Diseases Society of America; 2026 Jul 30 (current as of 2026 Mar 1) [cited 2026 Oct 4]. Available from: https://www.idsociety.org/practice-guideline/amr-guidance/',
+ ri1:'RESTORE-IMI 1: a multicenter, randomized, double-blind trial comparing efficacy and safety of imipenem/relebactam vs colistin plus imipenem in patients with imipenem-nonsusceptible bacterial infections. Clin Infect Dis. 2020 [cited 2026 Oct 4]. PMC7156774. Available from: https://pmc.ncbi.nlm.nih.gov/articles/PMC7156774',
+ ri2:'A randomized, double-blind, multicenter trial comparing efficacy and safety of imipenem/cilastatin/relebactam versus piperacillin/tazobactam in adults with hospital-acquired or ventilator-associated bacterial pneumonia (RESTORE-IMI 2 study). Clin Infect Dis. 2020 Aug 12;73(11):e4539-48 [cited 2026 Oct 4]. Available from: https://pmc.ncbi.nlm.nih.gov/articles/PMC8662781',
+ merino:'Harris PNA, et al. Effect of piperacillin-tazobactam vs meropenem on 30-day mortality for patients with E coli or Klebsiella pneumoniae bloodstream infection and ceftriaxone resistance: a randomized clinical trial. JAMA. 2018;320(10):984-94. doi:10.1001/jama.2018.12163',
+ tango1:'Kaye KS, et al. Effect of meropenem-vaborbactam vs piperacillin-tazobactam on clinical cure or improvement and microbial eradication in complicated urinary tract infection: the TANGO I randomized clinical trial. JAMA. 2018 [cited 2026 Oct 4]. PMC5838656. Available from: https://pmc.ncbi.nlm.nih.gov/articles/PMC5838656',
+ tango2:'Wunderink RG, et al. Effect and safety of meropenem-vaborbactam versus best-available therapy in patients with carbapenem-resistant Enterobacteriaceae infections: the TANGO II randomized clinical trial. Infect Dis Ther. 2018 [cited 2026 Oct 4]. PMC6249182. Available from: https://pmc.ncbi.nlm.nih.gov/articles/PMC6249182'
+};
+
+const UIX={
+ title:['So sánh 6 carbapenem: dược lý lâm sàng','Comparing 6 carbapenems: clinical pharmacology'],
+ subtitle:['Imipenem/cilastatin · imipenem/cilastatin/relebactam · meropenem · meropenem/vaborbactam · ertapenem · doripenem. Đối chiếu dữ liệu ngày 04/10/2026.','Imipenem/cilastatin · imipenem/cilastatin/relebactam · meropenem · meropenem/vaborbactam · ertapenem · doripenem. Data cross-checked 2026-10-04.'],
+ table:['Bảng chi tiết','Detailed table'],quick:['Tổng quan nhanh','Quick matrix'],dose:['Công cụ tính liều','Dose tool'],cases:['Tình huống lâm sàng','Clinical cases'],quiz:['Trắc nghiệm','Quiz'],
+ comparing:['Đang so sánh','Comparing'],all:['Tất cả','All'],criterion:['Tiêu chí','Criterion'],
+ lg:['Thuận lợi','Favorable'],lw:['Thận trọng','Caution'],lb:['Bất lợi / hạn chế','Unfavorable / limited'],ln:['Trung tính / thông tin','Neutral / informational'],glossLink:['Chú giải từ viết tắt','Abbreviation glossary'],
+ doseSub:['Nhập thông số người lớn để xem liều theo nhãn Mỹ cho cả 6 thuốc. Chạy hoàn toàn trên trình duyệt, không lưu dữ liệu bệnh nhân.','Enter adult parameters to see US-label doses for all 6 drugs. Runs entirely in the browser; no patient data stored.'],
+ age:['Tuổi (năm)','Age (years)'],wt:['Cân nặng thực tế (kg)','Actual weight (kg)'],sex:['Giới','Sex'],female:['Nữ','Female'],male:['Nam','Male'],scr:['Creatinin huyết thanh','Serum creatinine'],scrUnit:['Đơn vị creatinin','Creatinine unit'],ind:['Chỉ định','Indication'],
+ hd:['Đang lọc máu','On hemodialysis'],vpa:['Đang dùng valproic acid','Taking valproic acid'],gcv:['Đang dùng ganciclovir','Taking ganciclovir'],seiz:['Tiền sử co giật / bệnh thần kinh trung ương','Seizure history / CNS disorder'],alb:['Albumin <2,5 g/dL hoặc bệnh nặng','Albumin <2.5 g/dL or critically ill'],pa:['Nghi Pseudomonas aeruginosa','Suspected Pseudomonas aeruginosa'],
+ invalid:['Hãy nhập tuổi ≥18, cân nặng và creatinin hợp lệ. Công cụ chỉ dành cho người lớn.','Enter age ≥18 with valid weight and creatinine. The tool is for adults only.'],
+ noRace:['bỏ hệ số chủng tộc','race coefficient omitted'],
+ st_ok:['Phù hợp','Appropriate'],st_warn:['Thận trọng','Caution'],st_avoid:['Nên tránh','Avoid'],st_contra:['Không dùng','Do not use'],
+ doseDisc:['Công cụ chỉ hỗ trợ thẩm định, không thay thế đánh giá lâm sàng, nhãn hiện hành và phác đồ cơ sở.','This tool only supports review; it does not replace clinical assessment, the current label or local protocols.'],
+ casesSub:['Bảy tình huống điển hình. Các so sánh gián tiếp có hạn chế; luôn đối chiếu kháng sinh đồ.','Seven typical scenarios. Indirect comparisons have limits; always confirm susceptibility.'],
+ pref:['Ưu tiên','Preferred'],alt:['Thay thế','Alternative'],avoid:['Tránh','Avoid'],why:['Cơ sở','Rationale'],
+ question:['Câu','Question'],next:['Câu tiếp','Next'],finish:['Hoàn thành','Finish'],score:['Điểm','Score'],retry:['Làm lại','Retry'],
+ notes:['Ghi chú','Notes'],gloss:['Chú giải từ viết tắt','Abbreviation glossary'],refs:['Tài liệu tham khảo','References'],
+ disclaimer:['Trang này chỉ nhằm mục đích thông tin; không thay thế đánh giá lâm sàng, nhãn thuốc hiện hành hay phác đồ của cơ sở. Dữ liệu đối chiếu ngày 04/10/2026.','This page is for information only; it does not replace clinical judgment, the current label or institutional protocols. Data cross-checked 2026-10-04.'],
+ footer:['Khoa Dược lâm sàng · Trang so sánh dược lý lâm sàng nhóm carbapenem','Clinical pharmacy · Carbapenem clinical pharmacology comparison']
+};
+
+/* ============ LOGIC THUẦN ============ */
+function scrMg(p){return p.unit==='umol'? p.scr/88.4 : p.scr;}
+function cgCrCl(p){let v=((140-p.age)*p.wt)/(72*scrMg(p)); if(p.sex==='F') v*=0.85; return v;}
+function mdrdEgfr(p){let v=175*Math.pow(scrMg(p),-1.154)*Math.pow(p.age,-0.203); if(p.sex==='F') v*=0.742; return v;}
+const RANK={ok:0,warn:1,avoid:2,contra:3};
+function mk(){return {status:'ok',dose:['—','—'],notes:[],set(s){ if(RANK[s]>RANK[this.status]) this.status=s; },add(vi,en){this.notes.push([vi,en]);}};}
+function bandImi(cr){return cr>=90?0:cr>=60?1:cr>=30?2:cr>=15?3:4;}
+function evalDose(k,p){
+ const cr=cgCrCl(p), eg=mdrdEgfr(p), r=mk();
+ const off=(ok)=>{ if(!ok.includes(p.ind)){ r.set('warn'); r.add('Chỉ định đã chọn nằm ngoài nhãn Mỹ của thuốc này; chỉ cân nhắc theo hướng dẫn chuyên khoa và kháng sinh đồ.','The selected indication is outside this drug’s US label; consider only per specialist guidance and susceptibility.'); } };
+ const vpa=()=>{ if(p.vpa){ r.set('avoid'); r.add('Đang dùng valproic acid: carbapenem làm giảm nồng độ valproic acid, tăng nguy cơ co giật bùng phát. Nên chọn kháng sinh khác nhóm; nếu bắt buộc, cân nhắc thuốc chống co giật bổ sung.','On valproic acid: carbapenems lower valproic acid levels and raise breakthrough seizure risk. Prefer another class; if unavoidable, consider a supplemental anticonvulsant.'); } };
+ const seiz=()=>{ if(p.seiz){ r.set('warn'); r.add('Tiền sử co giật/bệnh thần kinh trung ương: nguy cơ co giật tăng; tiếp tục thuốc chống co giật và theo dõi thần kinh.','Seizure history/CNS disorder: higher seizure risk; continue anticonvulsants and monitor neurologically.'); } };
+ if(k==='imi'){
+  off(['cuti','ciai','cssi','hapvap','bsi']);
+  const A=['500 mg q6h','400 mg q6h','300 mg q6h','200 mg q6h'],B=['1000 mg q8h','500 mg q6h','500 mg q8h','500 mg q12h'],I=['1000 mg q6h','750 mg q8h','500 mg q6h','500 mg q12h'];
+  let b=bandImi(cr);
+  if(b===4){ if(p.hd){ b=3; r.set('warn'); r.add('CrCl <15 đang lọc máu: dùng liều bậc 15–29, cho sau lọc máu; chỉ khi lợi ích lớn hơn nguy cơ co giật.','CrCl <15 on hemodialysis: use the 15–29 band dose, give after dialysis; only if benefit outweighs seizure risk.'); } else { r.set('avoid'); r.add('CrCl <15: không dùng trừ khi lọc máu trong vòng 48 giờ.','CrCl <15: do not use unless hemodialysis is started within 48 h.'); } }
+  if(b<4){ r.dose=['Nhạy: '+A[b]+' hoặc '+B[b]+'; nhạy trung gian: '+I[b],'Susceptible: '+A[b]+' or '+B[b]+'; intermediate: '+I[b]]; }
+  if(b===3){ r.set('warn'); r.add('CrCl 15–29: nguy cơ co giật tăng theo nhãn.','CrCl 15–29: label notes increased seizure risk.'); }
+  if(p.hd && b<4){ r.set('warn'); r.add('Lọc máu: cho sau lọc máu và theo khoảng cách tính từ cuối buổi lọc.','On hemodialysis: give after dialysis, timed from the end of the session.'); }
+  r.add('Tối đa 4 g/ngày; không dùng cho viêm màng não.','Maximum 4 g/day; not for meningitis.');
+  vpa(); seiz();
+  if(p.gcv){ r.set('warn'); r.add('Ganciclovir: co giật toàn thể đã được báo cáo; không phối hợp trừ khi lợi ích vượt nguy cơ.','Ganciclovir: generalized seizures reported; avoid unless benefit outweighs risk.'); }
+ }
+ else if(k==='imr'){
+  off(['hapvap','cuti','ciai']);
+  if(p.ind==='cuti'||p.ind==='ciai') r.add('Nhãn: cUTI/cIAI chỉ khi ít hoặc không có lựa chọn thay thế.','Label: cUTI/cIAI only when limited or no alternative options.');
+  const D=['1,25 g (imipenem 500 mg/cilastatin 500 mg/relebactam 250 mg) q6h','1 g (imipenem 400 mg) q6h','0,75 g (imipenem 300 mg) q6h','0,5 g (imipenem 200 mg) q6h'];
+  const E=['1.25 g (imipenem 500 mg/cilastatin 500 mg/relebactam 250 mg) q6h','1 g (imipenem 400 mg) q6h','0.75 g (imipenem 300 mg) q6h','0.5 g (imipenem 200 mg) q6h'];
+  let b=bandImi(cr);
+  if(b===4){ if(p.hd){ b=3; r.set('warn'); r.add('CrCl <15 đang lọc máu: 0,5 g mỗi 6 giờ, cho sau lọc máu.','CrCl <15 on hemodialysis: 0.5 g q6h, given after dialysis.'); } else { r.set('avoid'); r.add('CrCl <15 không lọc máu: không khuyến cáo (không dùng trừ khi lọc máu trong 48 giờ).','CrCl <15 not on dialysis: not recommended (do not use unless dialysis within 48 h).'); } }
+  if(b<4) r.dose=[D[b],E[b]];
+  if(b===3){ r.set('warn'); r.add('CrCl 15–29: thận trọng phản ứng thần kinh trung ương.','CrCl 15–29: watch for CNS reactions.'); }
+  if(p.hd && b<4){ r.set('warn'); r.add('Cho sau lọc máu; chưa đủ thông tin cho thẩm phân phúc mạc.','Give after hemodialysis; inadequate information for peritoneal dialysis.'); }
+  r.add('Truyền 30 phút; 4–14 ngày.','30-minute infusion; 4–14 days.');
+  vpa(); seiz();
+  if(p.gcv){ r.set('warn'); r.add('Ganciclovir: tránh phối hợp.','Ganciclovir: avoid co-use.'); }
+ }
+ else if(k==='mero'){
+  off(['ciai','cssi']);
+  const big=!(p.ind==='cssi' && !p.pa);
+  const dv=big?'1 g':'500 mg', half=big?'500 mg':'250 mg';
+  if(cr>50) r.dose=[dv+' q8h',dv+' q8h'];
+  else if(cr>=26) r.dose=[dv+' q12h',dv+' q12h'];
+  else if(cr>=10) r.dose=[half+' q12h',half+' q12h'];
+  else r.dose=[half+' q24h',half+' q24h'];
+  if(cr<=25){ r.set('warn'); r.add('CrCl ≤25: theo dõi thần kinh và công thức máu (giảm tiểu cầu).','CrCl ≤25: monitor neurologic status and blood counts (thrombocytopenia).'); }
+  if(p.hd){ r.set('warn'); r.add('Lọc máu: nhãn nêu chưa đủ thông tin về liều; thuốc lọc được, nên cho sau lọc.','Hemodialysis: label states inadequate dosing information; drug is dialyzable, so give after dialysis.'); }
+  if(p.ind==='cssi') r.add(p.pa?'cSSSI do P. aeruginosa: 1 g q8h.':'cSSSI: 500 mg q8h; nếu do P. aeruginosa dùng 1 g q8h.',p.pa?'cSSSI with P. aeruginosa: 1 g q8h.':'cSSSI: 500 mg q8h; use 1 g q8h if P. aeruginosa.');
+  r.add('Truyền 15–30 phút (hoặc bolus 1 g trong 3–5 phút).','15–30 minute infusion (or 1 g bolus over 3–5 min).');
+  vpa(); seiz();
+ }
+ else if(k==='mvb'){
+  off(['cuti']);
+  if(p.ind!=='cuti') r.add('Nhãn 2017 chỉ có chỉ định cUTI; dùng cho KPC-E là theo hướng dẫn IDSA.','The 2017 label covers cUTI only; use for KPC-E follows IDSA guidance.');
+  if(eg>=50) r.dose=['4 g (meropenem 2 g/vaborbactam 2 g) q8h, truyền 3 giờ','4 g (meropenem 2 g/vaborbactam 2 g) q8h, 3-hour infusion'];
+  else if(eg>=30) r.dose=['2 g (1 g/1 g) q8h, truyền 3 giờ','2 g (1 g/1 g) q8h, 3-hour infusion'];
+  else if(eg>=15) r.dose=['2 g (1 g/1 g) q12h, truyền 3 giờ','2 g (1 g/1 g) q12h, 3-hour infusion'];
+  else r.dose=['1 g (0,5 g/0,5 g) q12h, truyền 3 giờ','1 g (0.5 g/0.5 g) q12h, 3-hour infusion'];
+  r.add('Dùng eGFR (MDRD) của công cụ: '+eg.toFixed(0)+' mL/min/1.73 m². Theo dõi creatinin ít nhất hằng ngày.','Uses the tool’s MDRD eGFR: '+eg.toFixed(0)+' mL/min/1.73 m². Monitor creatinine at least daily.');
+  if(eg<15){ r.set('warn'); r.add('eGFR <15: phơi nhiễm vaborbactam rất cao.','eGFR <15: vaborbactam exposure is very high.'); }
+  if(p.hd){ r.set('warn'); r.add('Lọc máu: cho sau buổi lọc (phơi nhiễm vaborbactam thấp hơn nhiều so với cho trước lọc).','Hemodialysis: give after the session (vaborbactam exposure is much higher when given before).'); }
+  vpa(); seiz();
+ }
+ else if(k==='erta'){
+  off(['cuti','ciai','cssi','cap']);
+  if(cr>30) r.dose=['1 g q24h (truyền 30 phút)','1 g q24h (30-minute infusion)'];
+  else r.dose=['500 mg q24h (truyền 30 phút)','500 mg q24h (30-minute infusion)'];
+  if(p.hd){ r.set('warn'); r.add('Lọc máu: 500 mg/ngày; bổ sung 150 mg sau lọc nếu dùng trong vòng 6 giờ trước lọc.','Hemodialysis: 500 mg/day; add 150 mg after dialysis if given within 6 h before.'); r.dose=['500 mg q24h (+150 mg sau lọc nếu dùng <6 giờ trước lọc)','500 mg q24h (+150 mg after dialysis if given <6 h before)']; }
+  if(p.alb){ r.set('warn'); r.add('Bệnh nặng hoặc albumin <2,5 g/dL: IDSA ưu tiên meropenem hoặc imipenem thay vì ertapenem làm điều trị ban đầu.','Critically ill or albumin <2.5 g/dL: IDSA prefers meropenem or imipenem over ertapenem as initial therapy.'); }
+  r.add('Không nằm trong phổ trên nhãn đối với Pseudomonas aeruginosa.','Pseudomonas aeruginosa is outside the labelled spectrum.');
+  if(p.pa){ r.set('avoid'); r.add('Nghi Pseudomonas aeruginosa: không chọn ertapenem.','Suspected Pseudomonas aeruginosa: do not choose ertapenem.'); }
+  vpa(); seiz();
+ }
+ else if(k==='dori'){
+  r.add('Doripenem đã ngừng lưu hành tại Mỹ; chỉ để tham khảo.','Doripenem is no longer available in the US; for reference only.');
+  off(['cuti','ciai']);
+  if(p.ind==='hapvap'||p.ind==='cap'){ r.set('contra'); r.add('Không được chỉ định cho viêm phổi; thử nghiệm VAP có tử vong cao hơn (23,0% so với 16,7%).','Not approved for pneumonia; the VAP trial showed higher mortality (23.0% vs 16.7%).'); }
+  if(cr>50) r.dose=['500 mg q8h (truyền 1 giờ)','500 mg q8h (1-hour infusion)'];
+  else if(cr>=30) r.dose=['250 mg q8h (truyền 1 giờ)','250 mg q8h (1-hour infusion)'];
+  else if(cr>10) r.dose=['250 mg q12h (truyền 1 giờ)','250 mg q12h (1-hour infusion)'];
+  else { r.set('avoid'); r.add('CrCl ≤10: chưa đủ dữ liệu để khuyến cáo liều.','CrCl ≤10: insufficient data to recommend a dose.'); }
+  if(p.hd){ r.set('warn'); r.add('Lọc máu: lọc được nhưng chưa đủ thông tin khuyến cáo liều.','Hemodialysis: dialyzable, but there is insufficient information for dose advice.'); }
+  vpa(); seiz();
+ }
+ r.crcl=cr; r.egfr=eg;
+ return r;
+}
+
+/* ============ ALPINE ============ */
+function app(){
+ return {
+  lang:'vi',view:'table',gf:'all',sel:['imi','imr','mero','mvb','erta','dori'],
+  DR,GROUPS,QM,INDS,SCEN,QUIZ,NOTES,GLOSS,
+  tabs:[{k:'table',i:'table'},{k:'quick',i:'matrix'},{k:'dose',i:'calc'},{k:'cases',i:'case'},{k:'quiz',i:'quiz'}],
+  p:{age:60,wt:50,sex:'F',scr:1.0,unit:'mgdl',ind:'cuti',hd:false,vpa:false,gcv:false,seiz:false,alb:false,pa:false},
+  qi:0,qPick:null,qScore:0,qDone:false,
+  refNum:{},refOrder:[],
+  init(){ this.buildRefs(); },
+  T(a){ return Array.isArray(a) ? a[this.lang==='vi'?0:1] : a; },
+  UI(k){ const v=UIX[k]; return v ? v[this.lang==='vi'?0:1] : k; },
+  toggle(k){ if(this.sel.includes(k)){ if(this.sel.length>2) this.sel=this.sel.filter(x=>x!==k); } else { this.sel=DR.map(d=>d.k).filter(x=>this.sel.includes(x)||x===k); } },
+  selDrugs(){ return DR.filter(d=>this.sel.includes(d.k)); },
+  selNames(){ return this.selDrugs().map(d=>this.T(d.n)).join(', '); },
+  tableBlocks(){
+   const out=[]; let z=false;
+   GROUPS.forEach(g=>{
+    if(this.gf!=='all' && this.gf!==g.k) return;
+    out.push({key:'b'+g.k,band:g.n});
+    ROWS.filter(r=>r.g===g.k).forEach((r,i)=>{ z=!z; out.push({key:g.k+i,row:r,z}); });
+   });
+   return out;
+  },
+  parts(s){ s=String(s); if(s.length<=95) return [s]; return s.split(/(?<=[.;])\s+/).filter(Boolean); },
+  buildRefs(){
+   const order=[]; const add=(a)=>{ (a||[]).forEach(k=>{ if(!order.includes(k)) order.push(k); }); };
+   ROWS.forEach(r=>DR.forEach(d=>add(r.c[d.k][2])));
+   SCEN.forEach(s=>add(s.why[2]));
+   Object.keys(REFS).forEach(k=>{ if(!order.includes(k)) order.push(k); });
+   this.refOrder=order; const m={}; order.forEach((k,i)=>m[k]=i+1); this.refNum=m;
+  },
+  refHtml(keys){ if(!keys||!keys.length) return ''; const nums=keys.map(k=>this.refNum[k]).filter(Boolean).sort((a,b)=>a-b); return nums.length? '<sup class="rf">['+nums.join(',')+']</sup>' : ''; },
+  refList(){ return this.refOrder.map(k=>({k,n:this.refNum[k],t:this.refNum[k]+'. '+REFS[k]})); },
+  valid(){ const p=this.p; return p.age>=18 && p.age<=120 && p.wt>0 && p.scr>0; },
+  crcl(){ return cgCrCl(this.p); }, egfr(){ return mdrdEgfr(this.p); },
+  fmt(v){ return isFinite(v) ? v.toFixed(0) : '—'; },
+  calc(k){ return evalDose(k,this.p); },
+  pick(j){ if(this.qPick!==null) return; this.qPick=j; if(j===QUIZ[this.qi].a) this.qScore++; },
+  nextQ(){ if(this.qi+1<QUIZ.length){ this.qi++; this.qPick=null; } else { this.qDone=true; } },
+  resetQ(){ this.qi=0; this.qPick=null; this.qScore=0; this.qDone=false; },
+  ic(n){ return ic(n); }
+ };
+}
+
+/* ============ ICON 3D ============ */
+function wrapSvg(inner){ return '<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="32" cy="55" rx="22" ry="6" fill="url(#r-sh)"/><ellipse cx="32" cy="52" rx="20" ry="5.5" fill="url(#g-ped)" stroke="#c3cbdd" stroke-width=".8"/>'+inner+'</svg>'; }
+function capsule(a,b){ return '<g transform="rotate(-35 32 32)"><rect x="12" y="22" width="40" height="18" rx="9" fill="url(#'+a+')"/><path d="M32 22h11a9 9 0 0 1 0 18H32z" fill="url(#'+b+')"/><rect x="15" y="24" width="34" height="5" rx="2.5" fill="url(#r-hi)"/></g>'; }
+function ic(n){
+ if(n==='capsule') return wrapSvg(capsule('g-pink','g-ind'));
+ if(n==='table') return wrapSvg('<rect x="13" y="12" width="38" height="34" rx="5" fill="url(#g-ind)"/><rect x="17" y="17" width="30" height="5" rx="1.5" fill="#fff" opacity=".85"/><rect x="17" y="25" width="13" height="4" rx="1.5" fill="#fff" opacity=".6"/><rect x="33" y="25" width="14" height="4" rx="1.5" fill="#fff" opacity=".6"/><rect x="17" y="32" width="13" height="4" rx="1.5" fill="#fff" opacity=".6"/><rect x="33" y="32" width="14" height="4" rx="1.5" fill="#fff" opacity=".6"/><rect x="13" y="12" width="38" height="12" rx="5" fill="url(#r-hi)"/>');
+ if(n==='matrix') return wrapSvg('<rect x="13" y="13" width="17" height="14" rx="4" fill="url(#g-teal)"/><rect x="34" y="13" width="17" height="14" rx="4" fill="url(#g-amb)"/><rect x="13" y="30" width="17" height="14" rx="4" fill="url(#g-red)"/><rect x="34" y="30" width="17" height="14" rx="4" fill="url(#g-blu)"/>');
+ if(n==='calc') return wrapSvg('<rect x="16" y="10" width="32" height="38" rx="6" fill="url(#g-ind)"/><rect x="20" y="14" width="24" height="9" rx="2.5" fill="#e0e7ff"/><circle cx="24" cy="30" r="3" fill="#fff"/><circle cx="32" cy="30" r="3" fill="#fff"/><circle cx="40" cy="30" r="3" fill="#fff"/><circle cx="24" cy="39" r="3" fill="#fff"/><circle cx="32" cy="39" r="3" fill="#fff"/><circle cx="40" cy="39" r="3" fill="url(#g-amb)"/>');
+ if(n==='case') return wrapSvg('<rect x="15" y="12" width="34" height="36" rx="5" fill="url(#g-teal)"/><rect x="25" y="9" width="14" height="7" rx="3" fill="#fff" stroke="#0f766e" stroke-width="1.2"/><path d="M32 22v14M25 29h14" stroke="#fff" stroke-width="4" stroke-linecap="round"/>');
+ if(n==='quiz') return wrapSvg('<circle cx="32" cy="29" r="19" fill="url(#g-amb)"/><circle cx="26" cy="21" r="8" fill="url(#r-hi)"/><text x="32" y="38" text-anchor="middle" font-size="26" font-weight="800" fill="#fff" font-family="sans-serif">?</text>');
+ return wrapSvg(capsule('g-blu','g-teal'));
+}
+</script>
+</body>
+</html>
