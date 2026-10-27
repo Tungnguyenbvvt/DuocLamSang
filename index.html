@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="vi" data-unit="phuong-nam">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ClinPharmAI Hub</title>
+<meta name="description" content="Cổng tra cứu tài liệu dược lâm sàng: tóm tắt guideline, thông tin thuốc, so sánh dược lý, thẩm định EBM.">
+<meta name="theme-color" content="#164aa2">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+<a class="skip" href="#main">Bỏ qua đến nội dung</a>
+
+<div class="app" id="app">
+  <aside class="sidebar" id="sidebar" aria-label="Điều hướng chính">
+    <div class="sb-head">
+      <a class="brand" href="#/" aria-label="Trang chủ">
+        <svg class="brand-logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><path d="M14 7h4v7h7v4h-7v7h-4v-7H7v-4h7z" fill="#fff"/></svg>
+        <span class="brand-text"><b>ClinPharmAI</b><small class="unit-name">Khoa Dược</small></span>
+      </a>
+      <button class="icon-btn sb-close" id="sbClose" type="button" aria-label="Đóng menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="sb-search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input id="search" type="search" placeholder="Tìm tài liệu… (phím /)" autocomplete="off" aria-label="Tìm tài liệu, không cần gõ dấu">
+    </div>
+
+    <nav class="sb-nav" id="nav" aria-label="Danh mục tài liệu">
+      <a class="nav-home" href="#/" data-route="home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+        <span>Trang chủ</span>
+      </a>
+      <div id="navGroups"><p class="nav-loading">Đang tải danh mục…</p></div>
+    </nav>
+
+    <div class="sb-foot">
+      <label class="unit-pick">
+        <span>Đơn vị</span>
+        <select id="unitSelect" aria-label="Chọn đơn vị">
+          <option value="phuong-nam">BVĐK Phương Nam</option>
+          <option value="phuong-chau">BV Phương Châu</option>
+        </select>
+      </label>
+      <p class="data-ver" id="dataVer">Dữ liệu: –</p>
+      <p class="net" id="netStatus"></p>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim" hidden></div>
+
+  <div class="main-col">
+    <header class="topbar">
+      <button class="icon-btn" id="sbToggle" type="button" aria-label="Mở/thu gọn menu" aria-controls="sidebar" aria-expanded="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="crumb" id="crumb"><span class="crumb-title">Trang chủ</span></div>
+      <div class="tb-actions" id="tbActions" hidden>
+        <button class="icon-btn" id="btnFav" type="button" aria-label="Đánh dấu yêu thích" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>
+        </button>
+        <button class="icon-btn" id="btnReload" type="button" aria-label="Tải lại tài liệu">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v5h-5"/></svg>
+        </button>
+        <a class="icon-btn" id="btnNewTab" href="#" target="_blank" rel="noopener" aria-label="Mở trong tab mới">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <main id="main" class="main" tabindex="-1">
+      <section id="homeView" class="home" aria-labelledby="homeTitle"></section>
+      <section id="docView" class="doc" hidden>
+        <div class="doc-loading" id="docLoading">Đang tải tài liệu…</div>
+        <iframe id="docFrame" title="Nội dung tài liệu" loading="eager"></iframe>
+      </section>
+    </main>
+  </div>
+</div>
+
+<noscript><p class="noscript">Ứng dụng cần bật JavaScript.</p></noscript>
+<script src="js/core.js"></script>
+</body>
+</html>
