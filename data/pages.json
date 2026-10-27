@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-10-27",
+  "source": "Danh mục tài liệu nội bộ Khoa Dược. Nguồn tham khảo gốc của từng tài liệu được ghi trong chính trang tài liệu đó.",
+  "categories": [
+    { "id": "guideline", "name": "Tóm tắt guideline", "icon": "book" },
+    { "id": "thong-tin-thuoc", "name": "Tài liệu thông tin thuốc", "icon": "pill" },
+    { "id": "so-sanh", "name": "So sánh dược lý lâm sàng", "icon": "compare" },
+    { "id": "ebm", "name": "Thẩm định bài báo (EBM)", "icon": "search" }
+  ],
+  "records": [
+    { "id": "acg-2026-xo-gan", "title": "ACG 2026 – Chăm sóc dự phòng cho người bệnh xơ gan", "file": "pages/ACG-2026-xo-gan-du-phong-tom-tat.html", "category": "guideline", "tags": ["Tiêu hóa", "Gan mật"], "review": "chưa kiểm chứng" },
+    { "id": "acr-2026-thoai-hoa-khop", "title": "ACR 2026 – Thoái hóa khớp (Osteoarthritis)", "file": "pages/acr-2026-osteoarthritis.html", "category": "guideline", "tags": ["Cơ xương khớp"], "review": "chưa kiểm chứng" },
+    { "id": "ada-easd-2026-dtd-tip-2", "title": "Đồng thuận ADA/EASD 2026 – Quản lý đái tháo đường típ 2", "file": "pages/ada-easd-2026-dai-thao-duong-tip-2.html", "category": "guideline", "tags": ["Nội tiết", "Đái tháo đường"], "review": "chưa kiểm chứng" },
+    { "id": "aha-acc-ada-ckm-2026", "title": "AHA/ACC/ADA/ASN 2026 – Hội chứng tim mạch – thận – chuyển hóa (CKM)", "file": "pages/aha-acc-ada-ckm-syndrome-2026.html", "category": "guideline", "tags": ["Tim mạch", "Thận", "Nội tiết"], "review": "chưa kiểm chứng" },
+    { "id": "ash-2026-thieu-sat", "title": "ASH 2026 – Thiếu sắt (Iron deficiency)", "file": "pages/ash-2026-iron-deficiency.html", "category": "guideline", "tags": ["Huyết học"], "review": "chưa kiểm chứng" },
+    { "id": "esc-2026-suy-tim", "title": "Cập nhật ESC – Suy tim", "file": "pages/cap-nhat-esc-2026-suy-tim.html", "category": "guideline", "tags": ["Tim mạch"], "review": "chưa kiểm chứng" },
+    { "id": "gina-2026-hen", "title": "GINA 2026 – Điều trị hen người lớn, thanh thiếu niên và trẻ 6–11 tuổi", "file": "pages/GINA-2026-Ch3-4-tom-tat.html", "category": "guideline", "tags": ["Hô hấp", "Nhi khoa"], "review": "chưa kiểm chứng" },
+    { "id": "guideline-dtd-2023-2026", "title": "Bảo vệ cơ quan thay dần HbA1c trong guideline đái tháo đường 2023–2026", "file": "pages/guideline-dai-thao-duong-2023-2026.html", "category": "guideline", "tags": ["Nội tiết", "Đái tháo đường"], "review": "chưa kiểm chứng" },
+    { "id": "idsa-2026-gram-am", "title": "IDSA 2026 – Phác đồ kháng sinh vi khuẩn Gram âm kháng thuốc", "file": "pages/idsa-2026-gram-am-khang-thuoc.html", "category": "guideline", "tags": ["Kháng sinh", "Nhiễm khuẩn"], "review": "chưa kiểm chứng" },
+    { "id": "ssti-s-aureus", "title": "Nhiễm trùng da và mô mềm do Staphylococcus aureus", "file": "pages/nhiem-trung-da-mo-mem-staphylococcus-aureus.html", "category": "guideline", "tags": ["Kháng sinh", "Nhiễm khuẩn", "Da liễu"], "review": "chưa kiểm chứng" },
+
+    { "id": "ttt-aginaril-5", "title": "Aginaril 5 – Tài liệu thông tin thuốc", "file": "pages/Aginaril5_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-amiodarona", "title": "Amiodarona GP – Tài liệu thông tin thuốc", "file": "pages/Amiodarona_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Chống loạn nhịp"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-amlodac-5", "title": "Amlodac 5 – Tài liệu thông tin thuốc", "file": "pages/Amlodac5_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-bexsero", "title": "Bexsero – Tài liệu thông tin thuốc", "file": "pages/Bexsero_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Vắc xin"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-cefoperazone", "title": "Cefoperazone – Tài liệu thông tin thuốc", "file": "pages/Cefoperazone_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Kháng sinh"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-lipitor", "title": "Lipitor – Tài liệu thông tin thuốc", "file": "pages/Lipitor_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Rối loạn lipid máu"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-meronem-iv", "title": "Meronem IV – Tài liệu thông tin thuốc", "file": "pages/Meronem_IV_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Kháng sinh"], "review": "chưa kiểm chứng" },
+
+    { "id": "ss-carbapenem", "title": "So sánh carbapenem – Dược lý lâm sàng", "file": "pages/so-sanh-carbapenem-duoc-ly-lam-sang.html", "category": "so-sanh", "tags": ["Kháng sinh"], "review": "chưa kiểm chứng" },
+    { "id": "ss-fluoroquinolon", "title": "So sánh ciprofloxacin – levofloxacin – moxifloxacin", "file": "pages/so-sanh-fluoroquinolon-duoc-ly-lam-sang.html", "category": "so-sanh", "tags": ["Kháng sinh"], "review": "chưa kiểm chứng" },
+    { "id": "ss-macrolid", "title": "So sánh macrolid – Dược lý lâm sàng", "file": "pages/so-sanh-macrolid-duoc-ly-lam-sang.html", "category": "so-sanh", "tags": ["Kháng sinh"], "review": "chưa kiểm chứng" },
+    { "id": "ss-ppi", "title": "So sánh 5 thuốc ức chế bơm proton (PPI)", "file": "pages/so-sanh-ppi-duoc-ly-lam-sang.html", "category": "so-sanh", "tags": ["Tiêu hóa"], "review": "chưa kiểm chứng" },
+    { "id": "ss-statin", "title": "So sánh 7 statin: tra cứu, quy đổi liều và lựa chọn theo tình huống", "file": "pages/statin-7-so-sanh-duoc-ly-lam-sang.html", "category": "so-sanh", "tags": ["Tim mạch", "Rối loạn lipid máu"], "review": "chưa kiểm chứng" },
+
+    { "id": "ebm-azithromycin-mlt", "title": "Azithromycin dự phòng trong mổ lấy thai ngoài kế hoạch (JAMA 2026)", "file": "pages/azithromycin-du-phong-mo-lay-thai.html", "category": "ebm", "tags": ["Sản khoa", "Kháng sinh"], "review": "chưa kiểm chứng" },
+    { "id": "ebm-kuitunen-bjog-2024", "title": "Kuitunen BJOG 2024 – Thẩm định EBM (azithromycin)", "file": "pages/bjog-azithromycin-sr-journal.html", "category": "ebm", "tags": ["Sản khoa", "Kháng sinh"], "review": "chưa kiểm chứng" }
+  ]
+}
