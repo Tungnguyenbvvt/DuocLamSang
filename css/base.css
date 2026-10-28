@@ -58,6 +58,8 @@ svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-l
 .nav-group[data-cat="thong-tin-thuoc"]{--cat:#f37fae}
 .nav-group[data-cat="so-sanh"]{--cat:#5fd4e8}
 .nav-group[data-cat="ebm"]{--cat:#b3a6ff}
+.nav-group[data-cat="icd10"]{--cat:#3fae5a}
+.nav-group[data-cat="tt20"]{--cat:#e8743b}
 .nav-group{--cat:var(--accent);margin-top:12px}
 .nav-group-btn{display:flex;align-items:center;gap:8px;width:100%;padding:12px;border:0;border-radius:10px;cursor:pointer;text-align:left;font-weight:700;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35);background:linear-gradient(90deg,color-mix(in srgb,var(--cat) 62%,#000) 0%,color-mix(in srgb,var(--cat) 40%,var(--sb-bg)) 100%)}
 .nav-group-btn:hover{filter:brightness(1.08)}

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Ca kiểm thử – module tra cứu</title>
+<style>
+  body{font-family:system-ui,sans-serif;margin:16px;font-size:14px}
+  .pass{color:#1b6b34}.fail{color:#b3261e;font-weight:700}
+  #sum{font-size:16px;font-weight:700;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div id="sum"></div>
+<ol id="out"></ol>
+<script src="../js/modules/lookup.js"></script>
+<script>
+  // Dữ liệu kiểm thử tổng hợp (mã X.. giả), không phải dữ liệu lâm sàng.
+  var T = Lookup._test, results = [];
+  function eq(name, got, want) {
+    var ok = JSON.stringify(got) === JSON.stringify(want);
+    results.push({ name: name, ok: ok, got: got, want: want });
+  }
+  var cfg = { codeField: 'code', searchFields: ['code', 'name', 'chapter'] };
+  var recs = T.prepare([
+    { code: 'X01.1', name: 'Bệnh thử nghiệm đường hô hấp', chapter: 'Chương 1' },
+    { code: 'X01', name: 'Bệnh thử nghiệm chung', chapter: 'Chương 1' },
+    { code: 'Y20', name: 'Đau đầu thử nghiệm', chapter: 'Chương 2' },
+    { code: 'Z9', name: 'Mục khác X01 trong tên', chapter: 'Chương 2' }
+  ], cfg);
+  function codes(list) { return list.map(function (r) { return r.code; }); }
+
+  eq('norm bỏ dấu và đ/Đ', T.norm('Đái Tháo Đường'), 'dai thao duong');
+  eq('tokens tách khoảng trắng thừa', T.tokens('  tang   huyet '), ['tang', 'huyet']);
+  eq('chuỗi rỗng trả toàn bộ, giữ thứ tự gốc', codes(T.search(recs, '', cfg, {})), ['X01.1', 'X01', 'Y20', 'Z9']);
+  eq('chỉ khoảng trắng = rỗng', codes(T.search(recs, '   ', cfg, {})), ['X01.1', 'X01', 'Y20', 'Z9']);
+  eq('khớp đúng mã xếp đầu', codes(T.search(recs, 'x01', cfg, {})), ['X01', 'X01.1', 'Z9']);
+  eq('mã có chấm khớp đúng', codes(T.search(recs, 'X01.1', cfg, {})), ['X01.1']);
+  eq('tìm không dấu trên tên có dấu', codes(T.search(recs, 'dau dau', cfg, {})), ['Y20']);
+  eq('nhiều từ khóa = AND', codes(T.search(recs, 'benh ho hap', cfg, {})), ['X01.1']);
+  eq('từ khóa không tồn tại', codes(T.search(recs, 'benh zzz', cfg, {})), []);
+  eq('lọc trường đơn', codes(T.search(recs, '', cfg, { chapter: 'Chương 2' })), ['Y20', 'Z9']);
+  eq('lọc + tìm kết hợp', codes(T.search(recs, 'x01', cfg, { chapter: 'Chương 2' })), ['Z9']);
+  eq('bộ lọc rỗng bị bỏ qua', codes(T.search(recs, '', cfg, { chapter: null })), ['X01.1', 'X01', 'Y20', 'Z9']);
+
+  var cfg2 = { codeField: null, searchFields: ['name'] };
+  var drugs = T.prepare([
+    { name: 'Thuốc A', tiers: ['dbI', 'II'] },
+    { name: 'Thuốc B', tiers: ['dbI'] },
+    { name: 'Thuốc C', tiers: [] }
+  ], cfg2);
+  eq('lọc trường mảng (hạng BV)', T.search(drugs, '', cfg2, { tiers: 'II' }).map(function (r) { return r.name; }), ['Thuốc A']);
+  eq('không có codeField vẫn tìm được', T.search(drugs, 'thuoc b', cfg2, {}).map(function (r) { return r.name; }), ['Thuốc B']);
+
+  eq('tô sáng giữ nguyên dấu', T.highlight('Tăng áp', ['tang']), '<mark>Tăng</mark> áp');
+  eq('thoát ký tự HTML', T.highlight('<b>&', []), '&lt;b&gt;&amp;');
+  eq('tô sáng + thoát HTML', T.highlight('a<b', ['a']), '<mark>a</mark>&lt;b');
+
+  function throws(fn) { try { fn(); return false; } catch (e) { return true; } }
+  eq('validate: hợp lệ', throws(function () { T.validate({ version: '1', updated: '2026-10-28', source: 's', records: [] }); }), false);
+  eq('validate: thiếu records', throws(function () { T.validate({ version: '1', updated: '2026-10-28', source: 's' }); }), true);
+  eq('validate: thiếu source', throws(function () { T.validate({ version: '1', updated: '2026-10-28', records: [] }); }), true);
+  eq('validate: sai định dạng ngày', throws(function () { T.validate({ version: '1', updated: '28/10/2026', source: 's', records: [] }); }), true);
+
+  var fail = results.filter(function (r) { return !r.ok; }).length;
+  document.getElementById('sum').innerHTML = '<span class="' + (fail ? 'fail' : 'pass') + '">' + (results.length - fail) + '/' + results.length + ' ca đạt</span>';
+  document.getElementById('out').innerHTML = results.map(function (r) {
+    return '<li class="' + (r.ok ? 'pass' : 'fail') + '">' + (r.ok ? 'ĐẠT' : 'LỖI') + ' – ' + r.name +
+      (r.ok ? '' : ' | nhận: ' + JSON.stringify(r.got) + ' | cần: ' + JSON.stringify(r.want)) + '</li>';
+  }).join('');
+  window.TEST_RESULT = { total: results.length, fail: fail };
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "version": "0.1.0-mau",
+  "updated": "2026-10-28",
+  "sample": true,
+  "source": "Bộ Y tế. Thông tư số 20/2022/TT-BYT ban hành danh mục và tỷ lệ, điều kiện thanh toán đối với thuốc hóa dược, sinh phẩm, thuốc phóng xạ và chất đánh dấu thuộc phạm vi được hưởng của người tham gia bảo hiểm y tế. Hà Nội: Bộ Y tế; 2022. [Nguồn dự kiến – chưa kiểm chứng ngày ban hành, chưa nạp dữ liệu]",
+  "fields": {
+    "stt": "STT",
+    "name": "Tên hoạt chất",
+    "group": "Nhóm thuốc",
+    "route": "Đường dùng",
+    "tiers": "Hạng bệnh viện được sử dụng",
+    "note": "Ghi chú / điều kiện, tỷ lệ thanh toán"
+  },
+  "tierLabels": { "dbI": "Đặc biệt, I", "II": "II", "III": "III", "IV": "IV" },
+  "records": [
+    { "stt": "M1", "name": "[MẪU] Hoạt chất minh họa 1", "group": "[MẪU] Nhóm minh họa A", "route": "[MẪU] Uống", "tiers": ["dbI", "II", "III", "IV"], "note": "[MẪU] Thay bằng nội dung nguyên văn từ Thông tư 20/2022/TT-BYT" },
+    { "stt": "M2", "name": "[MẪU] Hoạt chất minh họa 2", "group": "[MẪU] Nhóm minh họa A", "route": "[MẪU] Tiêm", "tiers": ["dbI", "II"], "note": "[MẪU] Thay bằng nội dung nguyên văn từ Thông tư 20/2022/TT-BYT" },
+    { "stt": "M3", "name": "[MẪU] Hoạt chất minh họa 3", "group": "[MẪU] Nhóm minh họa B", "route": "[MẪU] Uống, tiêm", "tiers": ["dbI", "II", "III"], "note": "" },
+    { "stt": "M4", "name": "[MẪU] Hoạt chất minh họa 4", "group": "[MẪU] Nhóm minh họa B", "route": "[MẪU] Dùng ngoài", "tiers": ["dbI"], "note": "[MẪU] Thay bằng nội dung nguyên văn từ Thông tư 20/2022/TT-BYT" }
+  ]
+}

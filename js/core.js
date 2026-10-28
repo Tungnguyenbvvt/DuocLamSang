@@ -85,7 +85,9 @@
     book: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/>',
     pill: '<rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-45 12 12)"/><path d="M9.5 9.5l5 5"/>',
     compare: '<path d="M8 3v18M16 3v18M3 8h5M16 16h5"/>',
-    search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M8 11h6"/>'
+    search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M8 11h6"/>',
+    code: '<path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h5M8 17h3"/>',
+    law: '<path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/>'
   };
   function catIcon(cat) {
     return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (CAT_ICONS[cat.icon] || CAT_ICONS.book) + '</svg>';
@@ -221,7 +223,7 @@
 
     var html =
       '<div class="hero"><h1 id="homeTitle">Cổng tra cứu dược lâm sàng</h1>' +
-      '<p>' + d.records.length + ' tài liệu: tóm tắt guideline, thông tin thuốc, so sánh dược lý và thẩm định bài báo. Chọn tài liệu ở thanh bên trái hoặc bên dưới.</p></div>' +
+      '<p>' + d.records.length + ' tài liệu và công cụ: tóm tắt guideline, thông tin thuốc, so sánh dược lý, thẩm định bài báo, tra cứu ICD-10 và Thông tư 20. Chọn tài liệu ở thanh bên trái hoặc bên dưới.</p></div>' +
       '<div class="stats">' + d.categories.map(function (c) {
         var n = d.records.filter(function (r) { return r.category === c.id; }).length;
         return '<a class="stat" href="#/c/' + encodeURIComponent(c.id) + '"><b>' + n + '</b><span>' + esc(c.name) + '</span></a>';

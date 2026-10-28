@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0-mau",
+  "updated": "2026-10-28",
+  "sample": true,
+  "source": "Bộ Y tế. Quyết định số 4469/QĐ-BYT về việc ban hành Bảng phân loại thống kê quốc tế về bệnh tật và các vấn đề sức khỏe có liên quan phiên bản lần thứ 10 (ICD-10). Hà Nội: Bộ Y tế; 2020. [Nguồn dự kiến – chưa kiểm chứng số hiệu, chưa nạp dữ liệu]",
+  "fields": {
+    "code": "Mã bệnh",
+    "name": "Tên bệnh (tiếng Việt)",
+    "nameEn": "Tên bệnh (tiếng Anh)",
+    "chapter": "Chương"
+  },
+  "records": [
+    { "code": "MAU.01", "name": "[MẪU] Dòng minh họa 1 – thay bằng dữ liệu nguyên văn từ văn bản gốc", "nameEn": "[SAMPLE] Placeholder row 1", "chapter": "[MẪU] Chương minh họa A" },
+    { "code": "MAU.02", "name": "[MẪU] Dòng minh họa 2 – thay bằng dữ liệu nguyên văn từ văn bản gốc", "nameEn": "[SAMPLE] Placeholder row 2", "chapter": "[MẪU] Chương minh họa A" },
+    { "code": "MAU.03", "name": "[MẪU] Dòng minh họa 3 – thay bằng dữ liệu nguyên văn từ văn bản gốc", "nameEn": "[SAMPLE] Placeholder row 3", "chapter": "[MẪU] Chương minh họa B" },
+    { "code": "MAU.04", "name": "[MẪU] Dòng minh họa 4 – thay bằng dữ liệu nguyên văn từ văn bản gốc", "nameEn": "[SAMPLE] Placeholder row 4", "chapter": "[MẪU] Chương minh họa B" }
+  ]
+}

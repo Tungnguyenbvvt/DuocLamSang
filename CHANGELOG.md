@@ -1,5 +1,17 @@
 # Nhật ký thay đổi
 
+## 1.4.0 – 2026-10-28
+
+- Thêm 2 module: **ICD-10** (dải xanh lá #3fae5a) và **TT20 – Danh mục thuốc BHYT** (dải cam #e8743b), mỗi module một trang công cụ tra cứu.
+- Module tra cứu dùng chung `js/modules/lookup.js`: tìm không dấu nhiều từ khóa (AND), ưu tiên khớp đúng mã rồi mã bắt đầu bằng từ khóa, lọc theo chương / nhóm thuốc / hạng bệnh viện, tô sáng, phân trang 100 dòng, dạng thẻ trên điện thoại (≤ 760 px).
+- Dữ liệu `data/icd10.json`, `data/tt20.json` mới là **dòng MẪU** (`sample: true`, banner cảnh báo đỏ). Nguồn trích là nguồn dự kiến, **chưa kiểm chứng**; chưa nạp dữ liệu thật.
+- Danh mục `pages.json` lên 1.1.0 (26 bản ghi); CACHE_VERSION lên cph-hub-v1.4.0 (thêm data, css, js mới vào bộ nhớ offline).
+
+Kiểm tra đã chạy (trình duyệt tích hợp, localhost:8080):
+- `tests/lookup.test.html`: 21/21 ca đạt (bỏ dấu, chuỗi rỗng/khoảng trắng, khớp đúng mã, mã có dấu chấm, AND, lọc trường đơn/mảng, lọc + tìm, thoát HTML, validate thiếu trường/sai định dạng ngày).
+- Cú pháp `core.js`, `sw.js`, `lookup.js`, script nhúng 2 trang: đạt. JSON 4 tệp hợp lệ. Không trùng id. 26/26 tệp tải HTTP 200.
+- Tương tác: lọc hạng II, lọc chương, tìm mã, kết quả rỗng. Điện thoại 375 px không cuộn ngang. Bộ nhớ offline có đủ 6 tệp mới.
+
 ## 1.3.0 – 2026-10-27
 
 - Tiêu đề 4 module lớn trong sidebar đổi sang dải màu đặc, mỗi module một màu nhận diện: Guideline vàng #f2b84b, Thông tin thuốc hồng #f37fae, So sánh dược lý xanh #5fd4e8, EBM tím #b3a6ff; biểu tượng đặt trên ô trắng. Người dùng chọn phương án B trong 3 phương án (A thẻ nổi, B dải màu, C biểu tượng khối lớn).

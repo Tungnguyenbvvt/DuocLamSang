@@ -1,6 +1,6 @@
 /* Service worker: lưu app shell + danh mục + toàn bộ tài liệu để dùng ngoại tuyến.
    Tăng CACHE_VERSION mỗi khi đổi dữ liệu hoặc mã. */
-var CACHE_VERSION = 'cph-hub-v1.3.0';
+var CACHE_VERSION = 'cph-hub-v1.4.0';
 var RUNTIME = 'cph-runtime-v1';
 var SHELL = [
   './',
@@ -9,6 +9,10 @@ var SHELL = [
   'css/theme.css',
   'js/core.js',
   'data/pages.json',
+  'data/icd10.json',
+  'data/tt20.json',
+  'css/tool.css',
+  'js/modules/lookup.js',
   'manifest.webmanifest',
   'icons/logo.png',
   'icons/favicon-48.png',

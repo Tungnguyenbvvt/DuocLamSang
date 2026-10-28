@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="vi" data-unit="vu-thu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tra cứu Thông tư 20/2022/TT-BYT</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/tool.css">
+<style>:root{--cat:#e8743b}</style>
+</head>
+<body>
+<div class="lk" id="lookup">
+  <header class="lk-head">
+    <h1>Tra cứu danh mục thuốc BHYT – Thông tư 20/2022/TT-BYT</h1>
+    <p>Tìm theo tên hoạt chất, nhóm thuốc hoặc ghi chú, không cần gõ dấu. Lọc theo nhóm thuốc và hạng bệnh viện.</p>
+  </header>
+
+  <div class="lk-sample" role="alert" hidden>
+    <b>DỮ LIỆU MẪU – chưa phải dữ liệu thật.</b> Các dòng hiện có chỉ để thử giao diện. Không dùng để xác định phạm vi, tỷ lệ hay điều kiện thanh toán BHYT cho đến khi nạp dữ liệu nguyên văn từ Thông tư gốc.
+  </div>
+
+  <div class="lk-bar">
+    <div class="lk-searchwrap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input class="lk-search" type="search" placeholder="Nhập tên hoạt chất…" aria-label="Tìm hoạt chất" autocomplete="off" disabled>
+    </div>
+    <div class="lk-filters"></div>
+  </div>
+
+  <p class="lk-count" aria-live="polite"></p>
+  <table class="lk-table">
+    <thead><tr><th>STT</th><th>Hoạt chất</th><th>Nhóm thuốc</th><th>Đường dùng</th><th>Hạng bệnh viện</th><th>Ghi chú / điều kiện thanh toán</th></tr></thead>
+    <tbody class="lk-body"><tr class="lk-empty"><td colspan="6">Đang tải dữ liệu…</td></tr></tbody>
+  </table>
+  <button class="lk-more" type="button" hidden>Hiển thị thêm</button>
+
+  <p class="lk-note">Công cụ tham khảo. Phạm vi, tỷ lệ và điều kiện thanh toán áp dụng theo văn bản gốc và các văn bản sửa đổi, bổ sung còn hiệu lực.</p>
+  <p class="lk-meta"></p>
+</div>
+
+<script src="../js/modules/lookup.js"></script>
+<script>
+  Lookup.init({
+    dataUrl: '../data/tt20.json',
+    codeField: null,
+    searchFields: ['name', 'group', 'route', 'note'],
+    filters: [
+      { field: 'group', label: 'Nhóm thuốc' },
+      {
+        field: 'tiers', label: 'Hạng bệnh viện',
+        options: function (d) {
+          return Object.keys(d.tierLabels).map(function (k) { return { value: k, label: 'Hạng ' + d.tierLabels[k] }; });
+        }
+      }
+    ],
+    columns: [
+      { field: 'stt', label: 'STT', cls: 'code', noHighlight: true },
+      { field: 'name', label: 'Hoạt chất' },
+      { field: 'group', label: 'Nhóm thuốc' },
+      { field: 'route', label: 'Đường dùng' },
+      {
+        field: 'tiers', label: 'Hạng bệnh viện',
+        // Hiện đủ 4 hạng, hạng được dùng in đậm có nhãn chữ (không chỉ dựa vào màu)
+        render: function (r, d) {
+          return Object.keys(d.tierLabels).map(function (k) {
+            var on = (r.tiers || []).indexOf(k) !== -1;
+            return '<span class="tier' + (on ? ' on' : '') + '">' + (on ? '✓ ' : '✗ ') + d.tierLabels[k] + '</span>';
+          }).join('');
+        }
+      },
+      { field: 'note', label: 'Ghi chú / điều kiện thanh toán' }
+    ]
+  });
+</script>
+</body>
+</html>

@@ -1,12 +1,14 @@
 {
-  "version": "1.0.0",
-  "updated": "2026-10-27",
+  "version": "1.1.0",
+  "updated": "2026-10-28",
   "source": "Danh mục tài liệu nội bộ Khoa Dược. Nguồn tham khảo gốc của từng tài liệu được ghi trong chính trang tài liệu đó.",
   "categories": [
     { "id": "guideline", "name": "Tóm tắt guideline", "icon": "book" },
     { "id": "thong-tin-thuoc", "name": "Tài liệu thông tin thuốc", "icon": "pill" },
     { "id": "so-sanh", "name": "So sánh dược lý lâm sàng", "icon": "compare" },
-    { "id": "ebm", "name": "Thẩm định bài báo (EBM)", "icon": "search" }
+    { "id": "ebm", "name": "Thẩm định bài báo (EBM)", "icon": "search" },
+    { "id": "icd10", "name": "ICD-10", "icon": "code" },
+    { "id": "tt20", "name": "TT20 – Danh mục thuốc BHYT", "icon": "law" }
   ],
   "records": [
     { "id": "acg-2026-xo-gan", "title": "ACG 2026 – Chăm sóc dự phòng cho người bệnh xơ gan", "file": "pages/ACG-2026-xo-gan-du-phong-tom-tat.html", "category": "guideline", "tags": ["Tiêu hóa", "Gan mật"], "review": "chưa kiểm chứng" },
@@ -35,6 +37,10 @@
     { "id": "ss-statin", "title": "So sánh 7 statin: tra cứu, quy đổi liều và lựa chọn theo tình huống", "file": "pages/statin-7-so-sanh-duoc-ly-lam-sang.html", "category": "so-sanh", "tags": ["Tim mạch", "Rối loạn lipid máu"], "review": "chưa kiểm chứng" },
 
     { "id": "ebm-azithromycin-mlt", "title": "Azithromycin dự phòng trong mổ lấy thai ngoài kế hoạch (JAMA 2026)", "file": "pages/azithromycin-du-phong-mo-lay-thai.html", "category": "ebm", "tags": ["Sản khoa", "Kháng sinh"], "review": "chưa kiểm chứng" },
-    { "id": "ebm-kuitunen-bjog-2024", "title": "Kuitunen BJOG 2024 – Thẩm định EBM (azithromycin)", "file": "pages/bjog-azithromycin-sr-journal.html", "category": "ebm", "tags": ["Sản khoa", "Kháng sinh"], "review": "chưa kiểm chứng" }
+    { "id": "ebm-kuitunen-bjog-2024", "title": "Kuitunen BJOG 2024 – Thẩm định EBM (azithromycin)", "file": "pages/bjog-azithromycin-sr-journal.html", "category": "ebm", "tags": ["Sản khoa", "Kháng sinh"], "review": "chưa kiểm chứng" },
+
+    { "id": "icd10-tra-cuu", "title": "Tra cứu mã bệnh ICD-10", "file": "pages/tra-cuu-icd10.html", "category": "icd10", "tags": ["Mã hóa bệnh tật", "BHYT"], "review": "dữ liệu mẫu" },
+
+    { "id": "tt20-tra-cuu", "title": "Tra cứu danh mục thuốc BHYT – Thông tư 20/2022/TT-BYT", "file": "pages/tra-cuu-tt20.html", "category": "tt20", "tags": ["BHYT", "Văn bản pháp quy"], "review": "dữ liệu mẫu" }
   ]
 }
