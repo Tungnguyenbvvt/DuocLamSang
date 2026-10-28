@@ -1,5 +1,12 @@
 # Nhật ký thay đổi
 
+## 1.7.0 – 2026-10-28
+
+- **TT20: thêm Phụ lục II** – Danh mục thuốc phóng xạ và chất đánh dấu: 59 thuốc, 61 dòng đường dùng (Iode131 và Phospho 32 mỗi thuốc 2 đường dùng). Lấy nguyên văn tên, đường dùng, dạng dùng, đơn vị từ bản docx. **Đã so bằng mắt toàn bộ 61 dòng với ảnh bản gốc có chữ ký (trang 79–81): khớp hoàn toàn.**
+- Phụ lục II không phân hạng bệnh viện; trang hiển thị “Không theo phân hạng bệnh viện” và chép nguyên văn quy định của Điều 2 vào phần chú giải. Thêm bộ lọc “Phụ lục” (I/II); STT Phụ lục II có nhãn “PL II”.
+- `tt20.json` lên 1.1.0 (1.194 dòng; thêm trường `annex`, `form`, `unit`, `annexes`, `annexRules`). STT thống nhất dạng chuỗi. CACHE_VERSION lên cph-hub-v1.7.0. 31/31 ca kiểm thử đạt; điện thoại 375 px không cuộn ngang.
+- Chưa nạp Phụ lục III (biểu mẫu thống kê dịch vụ kỹ thuật, không phải danh mục thuốc).
+
 ## 1.6.0 – 2026-10-28
 
 - **TT20: nạp dữ liệu thật** Phụ lục I Thông tư 20/2022/TT-BYT ngày 31/12/2022 từ tệp 20_2022_TT-BYT_548898.docx do người dùng cung cấp: 1.037 thuốc (STT 1–1.037 đủ), 1.133 dòng đường dùng, 28 nhóm, 217 dòng có ghi chú điều kiện/tỷ lệ thanh toán. Chép nguyên văn; ô gộp dọc (cùng thuốc nhiều đường dùng) được chép xuống từng dòng. Giữ 3 dòng văn bản nhắc lại STT 255/234/236 trong mục lao kháng thuốc. Bỏ cờ `sample`.

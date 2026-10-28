@@ -14,7 +14,7 @@
 <div class="lk" id="lookup">
   <header class="lk-head">
     <h1>Tra cứu danh mục thuốc BHYT – Thông tư 20/2022/TT-BYT</h1>
-    <p>Phụ lục I: danh mục thuốc hóa dược và sinh phẩm (1.037 thuốc). Tìm theo tên hoạt chất, đường dùng, nhóm thuốc hoặc nội dung ghi chú, không cần gõ dấu. Lọc theo nhóm thuốc và hạng bệnh viện.</p>
+    <p>Phụ lục I: thuốc hóa dược, sinh phẩm (1.037 thuốc). Phụ lục II: thuốc phóng xạ và chất đánh dấu (59 thuốc). Tìm theo tên, đường dùng, dạng dùng, nhóm thuốc hoặc nội dung ghi chú, không cần gõ dấu. Lọc theo phụ lục, nhóm thuốc và hạng bệnh viện.</p>
   </header>
 
   <div class="lk-sample" role="alert" hidden>
@@ -30,7 +30,7 @@
   </div>
 
   <details class="lk-legend more" id="tierLegend" hidden>
-    <summary>Hạng bệnh viện được sử dụng (Điều 2, khoản 1, điểm d)</summary>
+    <summary>Hạng bệnh viện được sử dụng (Điều 2)</summary>
     <ul></ul>
   </details>
 
@@ -51,9 +51,13 @@
   Lookup.init({
     dataUrl: '../data/tt20.json',
     codeField: null,
-    searchFields: ['name', 'route', 'note', 'group', 'subgroup'],
+    searchFields: ['name', 'route', 'form', 'note', 'group', 'subgroup'],
     primaryFields: ['name'],
     filters: [
+      {
+        field: 'annex', label: 'Phụ lục',
+        options: function (d) { return Object.keys(d.annexes).map(function (k) { return { value: k, label: 'Phụ lục ' + k }; }); }
+      },
       { field: 'group', label: 'Nhóm thuốc' },
       {
         field: 'tiers', label: 'Hạng bệnh viện',
@@ -65,13 +69,17 @@
     onData: function (d) {
       // Định nghĩa nguyên văn các cột hạng (Điều 2)
       var lg = document.getElementById('tierLegend');
+      var esc = function (s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
       lg.querySelector('ul').innerHTML = Object.keys(d.tierDefs).map(function (k) {
-        return '<li><b>' + d.tierLabels[k] + ':</b> ' + d.tierDefs[k].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</li>';
-      }).join('');
+        return '<li><b>' + d.tierLabels[k] + ':</b> ' + esc(d.tierDefs[k]) + '</li>';
+      }).join('') + (d.annexRules && d.annexRules.II ? '<li><b>Phụ lục II:</b> ' + esc(d.annexRules.II) + '</li>' : '');
       lg.hidden = false;
     },
     columns: [
-      { field: 'stt', label: 'STT', cls: 'code', noHighlight: true },
+      {
+        field: 'stt', label: 'STT', cls: 'code',
+        render: function (r) { return (r.annex === 'II' ? '<span class="pl">PL II</span>' : '') + r.stt; }
+      },
       {
         field: 'name', label: 'Hoạt chất',
         render: function (r, d, hl) {
@@ -79,11 +87,18 @@
             '<span class="en">' + hl(r.subgroup || r.group || '') + '</span>';
         }
       },
-      { field: 'route', label: 'Đường dùng, dạng dùng' },
+      {
+        field: 'route', label: 'Đường dùng, dạng dùng',
+        render: function (r, d, hl) {
+          if (r.annex !== 'II') return hl(r.route);
+          return hl(r.route) + '<span class="en">Dạng dùng: ' + hl(r.form) + ' · Đơn vị: ' + hl(r.unit) + '</span>';
+        }
+      },
       {
         field: 'tiers', label: 'Hạng bệnh viện',
         // Hiện đủ 4 cột hạng; hạng được dùng có dấu ✓ và chữ đậm (không chỉ dựa vào màu)
         render: function (r, d) {
+          if (r.annex === 'II') return '<span class="tier" title="' + d.annexRules.II.replace(/"/g, '&quot;') + '">Không theo phân hạng bệnh viện</span>';
           return Object.keys(d.tierLabels).map(function (k) {
             var on = (r.tiers || []).indexOf(k) !== -1;
             return '<span class="tier' + (on ? ' on' : '') + '" title="' + (on ? 'Được sử dụng: ' : 'Không thuộc: ') + d.tierLabels[k] + '">' + (on ? '✓ ' : '✗ ') + d.tierLabels[k] + '</span>';
