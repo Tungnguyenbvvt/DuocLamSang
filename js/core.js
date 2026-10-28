@@ -207,6 +207,13 @@
   }
   function idsToRecs(ids) { return ids.map(function (id) { return state.byId[id]; }).filter(Boolean); }
 
+  var HERO_IMG = 'images/cong-bv.jpg';
+  // Lối tắt trên khung giới thiệu: chỉ hiện khi tài liệu tương ứng có trong danh mục
+  var QUICK = [
+    { id: 'icd10-tra-cuu', label: 'Tra cứu ICD-10' },
+    { id: 'tt20-tra-cuu', label: 'Tra cứu TT20 – BHYT' }
+  ];
+
   function renderHome() {
     var d = state.data;
     var favs = idsToRecs(store.get('favs', []));
@@ -221,9 +228,14 @@
     });
     var catName = state.catFilter && state.catById[state.catFilter] ? state.catById[state.catFilter].name : null;
 
+    var img = '<img src="' + HERO_IMG + '" width="1344" height="768" alt="Phối cảnh cổng Bệnh viện Đa khoa Vũ Thư">';
     var html =
-      '<div class="hero"><h1 id="homeTitle">Cổng tra cứu dược lâm sàng</h1>' +
-      '<p>' + d.records.length + ' tài liệu và công cụ: tóm tắt guideline, thông tin thuốc, so sánh dược lý, thẩm định bài báo, tra cứu ICD-10 và Thông tư 20. Chọn tài liệu ở thanh bên trái hoặc bên dưới.</p></div>' +
+      '<div class="hero"><div class="hero-text"><h1 id="homeTitle">Cổng tra cứu dược lâm sàng</h1>' +
+      '<p>' + d.records.length + ' tài liệu và công cụ: tóm tắt guideline, thông tin thuốc, so sánh dược lý, thẩm định bài báo, tra cứu ICD-10 và Thông tư 20. Chọn tài liệu ở thanh bên trái hoặc bên dưới.</p>' +
+      '<div class="hero-links">' + QUICK.filter(function (q) { return state.byId[q.id]; }).map(function (q) {
+        return '<a href="#/p/' + encodeURIComponent(q.id) + '">' + esc(q.label) + '</a>';
+      }).join('') + '</div></div>' +
+      '<div class="hero-img">' + img + '</div></div>' +
       '<div class="stats">' + d.categories.map(function (c) {
         var n = d.records.filter(function (r) { return r.category === c.id; }).length;
         return '<a class="stat" href="#/c/' + encodeURIComponent(c.id) + '"><b>' + n + '</b><span>' + esc(c.name) + '</span></a>';

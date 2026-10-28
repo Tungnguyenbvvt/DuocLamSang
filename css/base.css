@@ -101,9 +101,17 @@ mark{background:color-mix(in srgb,var(--accent) 25%,#fff);color:inherit;border-r
 
 /* Trang chủ */
 .home{max-width:1180px;margin:0 auto;padding:20px 16px 40px}
-.hero{background:linear-gradient(135deg,var(--sb-bg),var(--accent));color:#fff;border-radius:var(--radius);padding:22px 20px;margin-bottom:16px}
-.hero h1{margin:0 0 6px;font-size:22px;line-height:1.3}
+/* Khung giới thiệu: ảnh cổng bệnh viện làm nền, lớp phủ xanh két mờ dần từ trái sang để chữ trắng dễ đọc */
+.hero{position:relative;overflow:hidden;min-height:300px;display:flex;align-items:flex-end;background:var(--sb-bg);color:#fff;border-radius:var(--radius);padding:28px 24px;margin-bottom:16px}
+.hero-img{position:absolute;inset:0}
+.hero-img img{display:block;width:100%;height:100%;object-fit:cover;object-position:60% 45%}
+.hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,80,80,.94) 0%,rgba(4,80,80,.78) 38%,rgba(4,80,80,.15) 75%,rgba(4,80,80,0) 100%)}
+.hero-text{position:relative;z-index:1;max-width:560px}
+.hero h1{margin:0 0 6px;font-size:26px;line-height:1.3}
 .hero p{margin:0;opacity:.95}
+.hero-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.hero-links a{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.45);color:#fff;text-decoration:none;font-weight:600;font-size:13.5px}
+.hero-links a:hover{background:rgba(255,255,255,.3)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;text-decoration:none;color:var(--tx)}
 .stat:hover{border-color:var(--accent)}
@@ -133,6 +141,8 @@ mark{background:color-mix(in srgb,var(--accent) 25%,#fff);color:inherit;border-r
   .sidebar .sb-close{display:inline-flex}
   .scrim{position:fixed;inset:0;z-index:30;background:rgba(10,16,32,.4)}
   .crumb-cat{display:none}
-  .hero h1{font-size:19px}
+  .hero{min-height:330px;padding:20px 16px}
+  .hero-img::after{background:linear-gradient(0deg,rgba(4,80,80,.96) 0%,rgba(4,80,80,.85) 45%,rgba(4,80,80,0) 78%)}
+  .hero h1{font-size:20px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}

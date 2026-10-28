@@ -1,5 +1,11 @@
 # Nhật ký thay đổi
 
+## 1.8.0 – 2026-10-28
+
+- Trang chủ: khung giới thiệu dùng ảnh phối cảnh cổng BVĐK Vũ Thư (`images/cong-bv.jpg`, 1344×768, 151 KB, do người dùng cung cấp) làm nền, lớp phủ xanh két mờ dần từ trái sang phải để chữ trắng dễ đọc; trên điện thoại lớp phủ chuyển từ dưới lên. Người dùng chọn đề án B trong 3 đề án (A ảnh bìa + thẻ nổi, B ảnh nền chữ đè, C chia đôi).
+- Thêm 2 nút lối tắt trên khung: Tra cứu ICD-10, Tra cứu TT20 – BHYT (chỉ hiện khi tài liệu có trong danh mục). Ảnh có văn bản thay thế (alt).
+- Ảnh được lưu sẵn để dùng ngoại tuyến; CACHE_VERSION lên cph-hub-v1.8.0. Đã kiểm tra ở 1600 px, khung hẹp và điện thoại 375 px.
+
 ## 1.7.0 – 2026-10-28
 
 - **TT20: thêm Phụ lục II** – Danh mục thuốc phóng xạ và chất đánh dấu: 59 thuốc, 61 dòng đường dùng (Iode131 và Phospho 32 mỗi thuốc 2 đường dùng). Lấy nguyên văn tên, đường dùng, dạng dùng, đơn vị từ bản docx. **Đã so bằng mắt toàn bộ 61 dòng với ảnh bản gốc có chữ ký (trang 79–81): khớp hoàn toàn.**
