@@ -19,6 +19,8 @@
 
   function highlight(text, toks) {
     text = String(text == null ? '' : text);
+    // Từ khóa 1 ký tự (vd "2" trong "típ 2") khớp quá nhiều chỗ: chỉ tô khi đó là từ khóa duy nhất
+    if (toks.length > 1) toks = toks.filter(function (t) { return t.length > 1; });
     if (!toks.length) return esc(text);
     var flat = '', map = [];
     for (var i = 0; i < text.length; i++) {
@@ -42,10 +44,14 @@
     return open ? out + '</mark>' : out;
   }
 
-  // Lọc + xếp hạng: khớp đúng mã > mã bắt đầu bằng từ khóa > còn lại (giữ thứ tự gốc)
+  // Mã so sánh không phân biệt dấu chấm và ký hiệu †/* (A00.0 = a000 = A00.0†)
+  function codeKey(s) { return norm(s).replace(/[\s.†*]/g, ''); }
+
+  // Lọc + xếp hạng: khớp đúng mã > mã bắt đầu bằng từ khóa > khớp trong trường chính (tên)
+  // > chỉ khớp ở trường phụ (ghi chú, hướng dẫn); cùng bậc giữ thứ tự gốc
   function search(records, query, cfg, filterVals) {
     var toks = tokens(query);
-    var q = norm(query).replace(/\s+/g, '');
+    var q = codeKey(query);
     var out = [];
     records.forEach(function (r, idx) {
       for (var f in filterVals) {
@@ -54,24 +60,32 @@
         var v = r[f];
         if (Array.isArray(v) ? v.indexOf(want) === -1 : v !== want) return;
       }
+      var t;
       if (toks.length) {
         var hay = r._hay;
-        for (var t = 0; t < toks.length; t++) if (hay.indexOf(toks[t]) === -1) return;
+        for (t = 0; t < toks.length; t++) if (hay.indexOf(toks[t]) === -1) return;
       }
-      var code = cfg.codeField ? norm(r[cfg.codeField]) : '';
-      var rank = !q || !code ? 2 : code === q ? 0 : code.indexOf(q) === 0 ? 1 : 2;
+      var rank = 2;
+      var code = r._code;
+      if (q && code) rank = code === q ? 0 : code.indexOf(q) === 0 ? 1 : 2;
+      if (rank === 2 && toks.length && r._main !== undefined) {
+        for (t = 0; t < toks.length; t++) if (r._main.indexOf(toks[t]) === -1) { rank = 3; break; }
+      }
       out.push({ r: r, rank: rank, idx: idx });
     });
     out.sort(function (a, b) { return a.rank - b.rank || a.idx - b.idx; });
     return out.map(function (x) { return x.r; });
   }
 
+  function joinFields(r, fields) {
+    return fields.map(function (f) { var v = r[f]; return Array.isArray(v) ? v.join(' ') : v; }).join(' ');
+  }
   function prepare(records, cfg) {
     records.forEach(function (r) {
-      r._hay = norm(cfg.searchFields.map(function (f) {
-        var v = r[f];
-        return Array.isArray(v) ? v.join(' ') : v;
-      }).join(' '));
+      r._code = cfg.codeField ? codeKey(r[cfg.codeField]) : '';
+      r._hay = norm(joinFields(r, cfg.searchFields)) + (r._code ? ' ' + r._code : '');
+      // Trường chính chỉ gồm tên: số trong từ khóa ("típ 2") không được khớp nhầm vào mã ("E10.2")
+      if (cfg.primaryFields) r._main = norm(joinFields(r, cfg.primaryFields));
     });
     return records;
   }
@@ -94,9 +108,15 @@
     var filtersEl = root.querySelector('.lk-filters');
     var state = { data: null, list: [], shown: PAGE, filters: {} };
 
+    // col.render(r, data, hl, has) trả về HTML; hl(text) = tô sáng từ khóa + thoát HTML;
+    // has(text) = text chứa từ khóa (để tự mở phần bị thu gọn)
     function cell(col, r, toks) {
-      var v = col.render ? col.render(r, state.data) : r[col.field];
-      return col.render ? v : highlight(v, col.noHighlight ? [] : toks);
+      if (col.render) {
+        return col.render(r, state.data, function (t) { return highlight(t, toks); }, function (t) {
+          var n = norm(t); return toks.some(function (k) { return k.length > 1 && n.indexOf(k) !== -1; });
+        });
+      }
+      return highlight(r[col.field], col.noHighlight ? [] : toks);
     }
 
     function render() {
@@ -158,7 +178,7 @@
         root.querySelector('.lk-sample').hidden = !d.sample;
         root.querySelector('.lk-meta').innerHTML =
           'Dữ liệu phiên bản ' + esc(d.version) + ', cập nhật ' + esc(d.updated) + ' · ' + d.records.length + ' dòng.<br>' +
-          '<b>Nguồn:</b> ' + esc(d.source);
+          '<b>Nguồn:</b> ' + esc(d.source) + (d.extraction ? '<br><b>Cách trích:</b> ' + esc(d.extraction) : '');
         buildFilters();
         render();
         input.disabled = false;
@@ -168,5 +188,5 @@
       });
   }
 
-  window.Lookup = { init: init, _test: { norm: norm, tokens: tokens, search: search, prepare: prepare, highlight: highlight, validate: validate } };
+  window.Lookup = { init: init, _test: { norm: norm, tokens: tokens, codeKey: codeKey, search: search, prepare: prepare, highlight: highlight, validate: validate } };
 })();

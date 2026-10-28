@@ -63,7 +63,7 @@
       {
         field: 'tiers', label: 'Hạng bệnh viện',
         // Hiện đủ 4 hạng, hạng được dùng in đậm có nhãn chữ (không chỉ dựa vào màu)
-        render: function (r, d) {
+        render: function (r, d) { // không tô sáng cột này
           return Object.keys(d.tierLabels).map(function (k) {
             var on = (r.tiers || []).indexOf(k) !== -1;
             return '<span class="tier' + (on ? ' on' : '') + '">' + (on ? '✓ ' : '✗ ') + d.tierLabels[k] + '</span>';

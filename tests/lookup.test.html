@@ -42,6 +42,28 @@
   eq('lọc + tìm kết hợp', codes(T.search(recs, 'x01', cfg, { chapter: 'Chương 2' })), ['Z9']);
   eq('bộ lọc rỗng bị bỏ qua', codes(T.search(recs, '', cfg, { chapter: null })), ['X01.1', 'X01', 'Y20', 'Z9']);
 
+  // Mã không dấu chấm, ký hiệu †/*, xếp hạng tên trước hướng dẫn
+  var cfg3 = { codeField: 'code', searchFields: ['code', 'name', 'guide'], primaryFields: ['name'] };
+  var recs3 = T.prepare([
+    { code: 'K10', name: 'Bệnh thử A', guide: 'Bao gồm: sốt kéo dài' },
+    { code: 'K11.0†', name: 'Sốt thử nghiệm', guide: '' },
+    { code: 'K12*', name: 'Bệnh thử C', guide: 'Loại trừ: sốt cao' },
+    { code: 'K12.1', name: 'Sốt kéo dài thử', guide: '' }
+  ], cfg3);
+  eq('codeKey bỏ dấu chấm và †/*', [T.codeKey('K11.0†'), T.codeKey('k12*'), T.codeKey(' a00.0 ')], ['k110', 'k12', 'a000']);
+  eq('tìm mã không gõ dấu chấm', codes(T.search(recs3, 'k110', cfg3, {})), ['K11.0†']);
+  eq('mã có † vẫn khớp đúng mã', codes(T.search(recs3, 'K11.0', cfg3, {})), ['K11.0†']);
+  eq('mã có * khớp đúng xếp trước mã con', codes(T.search(recs3, 'k12', cfg3, {})), ['K12*', 'K12.1']);
+  eq('khớp tên xếp trước chỉ khớp hướng dẫn', codes(T.search(recs3, 'sot', cfg3, {})), ['K11.0†', 'K12.1', 'K10', 'K12*']);
+  eq('nhiều từ: tên khớp đủ xếp trước', codes(T.search(recs3, 'sot keo dai', cfg3, {})), ['K12.1', 'K10']);
+  var recs5 = T.prepare([
+    { code: 'M10.2', name: 'Bệnh thử típ 1', guide: '' },
+    { code: 'M11', name: 'Bệnh thử típ 2', guide: '' }
+  ], cfg3);
+  eq('số trong từ khóa không xếp hạng theo mã', codes(T.search(recs5, 'benh thu tip 2', cfg3, {})), ['M11', 'M10.2']);
+  var recs4 = T.prepare([{ code: 'Q1', name: 'A', flags: ['female', 'notPrimary'] }, { code: 'Q2', name: 'B' }, { code: 'Q3', name: 'C', flags: ['male'] }], cfg3);
+  eq('lọc cờ (trường mảng, bản ghi thiếu trường)', codes(T.search(recs4, '', cfg3, { flags: 'female' })), ['Q1']);
+
   var cfg2 = { codeField: null, searchFields: ['name'] };
   var drugs = T.prepare([
     { name: 'Thuốc A', tiers: ['dbI', 'II'] },
@@ -52,6 +74,8 @@
   eq('không có codeField vẫn tìm được', T.search(drugs, 'thuoc b', cfg2, {}).map(function (r) { return r.name; }), ['Thuốc B']);
 
   eq('tô sáng giữ nguyên dấu', T.highlight('Tăng áp', ['tang']), '<mark>Tăng</mark> áp');
+  eq('không tô từ khóa 1 ký tự khi có từ khóa khác', T.highlight('típ 2 E12', ['tip', '2']), '<mark>típ</mark> 2 E12');
+  eq('vẫn tô khi từ khóa 1 ký tự là duy nhất', T.highlight('E12', ['2']), 'E1<mark>2</mark>');
   eq('thoát ký tự HTML', T.highlight('<b>&', []), '&lt;b&gt;&amp;');
   eq('tô sáng + thoát HTML', T.highlight('a<b', ['a']), '<mark>a</mark>&lt;b');
 

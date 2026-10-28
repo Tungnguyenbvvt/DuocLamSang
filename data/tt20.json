@@ -2,7 +2,7 @@
   "version": "0.1.0-mau",
   "updated": "2026-10-28",
   "sample": true,
-  "source": "Bộ Y tế. Thông tư số 20/2022/TT-BYT ban hành danh mục và tỷ lệ, điều kiện thanh toán đối với thuốc hóa dược, sinh phẩm, thuốc phóng xạ và chất đánh dấu thuộc phạm vi được hưởng của người tham gia bảo hiểm y tế. Hà Nội: Bộ Y tế; 2022. [Nguồn dự kiến – chưa kiểm chứng ngày ban hành, chưa nạp dữ liệu]",
+  "source": "Bộ Y tế. Thông tư số 20/2022/TT-BYT ban hành danh mục và tỷ lệ, điều kiện thanh toán đối với thuốc hóa dược, sinh phẩm, thuốc phóng xạ và chất đánh dấu thuộc phạm vi được hưởng của người tham gia bảo hiểm y tế. Hà Nội: Bộ Y tế; 2022. [Chưa nạp dữ liệu: tệp TT20.pdf nhận ngày 2026-10-28 là bản scan, lớp chữ nhận dạng (OCR) sai chữ và mất dấu tiếng Việt nên không chép nguyên văn được; cần bản số (Word/Excel/PDF có chữ) của Phụ lục I]",
   "fields": {
     "stt": "STT",
     "name": "Tên hoạt chất",

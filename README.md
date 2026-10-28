@@ -8,7 +8,7 @@ Web app tĩnh (PWA, chạy ngoại tuyến) gom các tài liệu dược lâm s�
 - Tài liệu thông tin thuốc (7)
 - So sánh dược lý lâm sàng (5)
 - Thẩm định bài báo – EBM (2)
-- ICD-10 – công cụ tra cứu mã bệnh (đang dùng **dữ liệu mẫu**)
+- ICD-10 – công cụ tra cứu 15.844 mã bệnh theo Phụ lục Thông tư 06/2026/TT-BYT (trích từ PDF, công cụ trích ở `tools/import-icd10/`)
 - TT20 – công cụ tra cứu danh mục thuốc BHYT theo Thông tư 20/2022/TT-BYT (đang dùng **dữ liệu mẫu**)
 
 ## Cấu trúc
@@ -20,7 +20,7 @@ css/theme.css           Màu theo đơn vị (BVĐK Vũ Thư: sidebar #045050, n
 icons/                  Logo BVĐK Vũ Thư, favicon, icon cài đặt (192, 512, maskable)
 js/core.js              Điều hướng, tìm kiếm không dấu, yêu thích, định tuyến #/p/<id>
 data/pages.json         Danh mục tài liệu (version, updated, source, records)
-data/icd10.json         Dữ liệu tra cứu ICD-10 (hiện là dòng MẪU)
+data/icd10.json         Dữ liệu tra cứu ICD-10 (15.844 mã, TT 06/2026/TT-BYT)
 data/tt20.json          Dữ liệu tra cứu Thông tư 20/2022/TT-BYT (hiện là dòng MẪU)
 js/modules/lookup.js    Module tra cứu dùng chung (tìm không dấu, lọc, bảng/thẻ)
 css/tool.css            Giao diện trang tra cứu

@@ -14,7 +14,7 @@
 <div class="lk" id="lookup">
   <header class="lk-head">
     <h1>Tra cứu mã bệnh ICD-10</h1>
-    <p>Tìm theo mã hoặc tên bệnh tiếng Việt / tiếng Anh, không cần gõ dấu. Lọc theo chương.</p>
+    <p>Danh mục mã bệnh theo Thông tư 06/2026/TT-BYT. Tìm theo mã (có hoặc không dấu chấm), tên bệnh tiếng Việt / tiếng Anh hoặc nội dung hướng dẫn mã hóa, không cần gõ dấu. Lọc theo chương và lưu ý mã hóa.</p>
   </header>
 
   <div class="lk-sample" role="alert" hidden>
@@ -31,12 +31,12 @@
 
   <p class="lk-count" aria-live="polite"></p>
   <table class="lk-table">
-    <thead><tr><th>Mã</th><th>Tên bệnh</th><th>Tên tiếng Anh</th><th>Chương</th></tr></thead>
-    <tbody class="lk-body"><tr class="lk-empty"><td colspan="4">Đang tải dữ liệu…</td></tr></tbody>
+    <thead><tr><th>Mã</th><th>Tên bệnh</th><th>Hướng dẫn mã hóa bổ sung (WHO 2019)</th><th>Lưu ý mã hóa</th><th>Chương</th></tr></thead>
+    <tbody class="lk-body"><tr class="lk-empty"><td colspan="5">Đang tải dữ liệu…</td></tr></tbody>
   </table>
   <button class="lk-more" type="button" hidden>Hiển thị thêm</button>
 
-  <p class="lk-note">Công cụ tham khảo. Mã hóa chính thức theo văn bản hiện hành của Bộ Y tế và quy định của cơ quan bảo hiểm xã hội.</p>
+  <p class="lk-note">Công cụ tham khảo. Dữ liệu trích tự động từ bản PDF của Phụ lục, đã đối chiếu ngẫu nhiên một số dòng nhưng chưa được người thứ hai đối chiếu toàn bộ. Khi mã hóa hồ sơ hoặc thanh toán BHYT, đối chiếu lại với văn bản gốc và quy định của cơ quan bảo hiểm xã hội.</p>
   <p class="lk-meta"></p>
 </div>
 
@@ -45,13 +45,54 @@
   Lookup.init({
     dataUrl: '../data/icd10.json',
     codeField: 'code',
-    searchFields: ['code', 'name', 'nameEn', 'chapter'],
-    filters: [{ field: 'chapter', label: 'Chương' }],
+    searchFields: ['code', 'name', 'nameEn', 'guide', 'guideEn'],
+    primaryFields: ['name', 'nameEn'],
+    filters: [
+      {
+        field: 'chapter', label: 'Chương',
+        options: function (d) {
+          return d.chapters.map(function (c) { return { value: c.id, label: c.id + ' (' + c.range + ') – ' + c.name }; });
+        }
+      },
+      {
+        field: 'flags', label: 'Lưu ý mã hóa',
+        options: function (d) {
+          return Object.keys(d.flagLabels).map(function (k) { return { value: k, label: d.flagLabels[k] }; });
+        }
+      }
+    ],
     columns: [
       { field: 'code', label: 'Mã', cls: 'code' },
-      { field: 'name', label: 'Tên bệnh' },
-      { field: 'nameEn', label: 'Tên tiếng Anh' },
-      { field: 'chapter', label: 'Chương', noHighlight: true }
+      {
+        field: 'name', label: 'Tên bệnh',
+        render: function (r, d, hl) { return '<b>' + hl(r.name) + '</b><span class="en">' + hl(r.nameEn) + '</span>'; }
+      },
+      {
+        field: 'guide', label: 'Hướng dẫn mã hóa bổ sung',
+        render: function (r, d, hl, has) {
+          if (!r.guide && !r.guideEn) return '<span class="none">–</span>';
+          var body = '<span class="guide">' + hl(r.guide || '') + '</span>' + (r.guideEn ? '<span class="en">' + hl(r.guideEn) + '</span>' : '');
+          // Hướng dẫn dài: thu gọn, tự mở khi từ khóa nằm trong đó
+          if ((r.guide || '').length + (r.guideEn || '').length < 160) return body;
+          return '<details class="more"' + (has(r.guide + ' ' + r.guideEn) ? ' open' : '') + '><summary>Xem hướng dẫn</summary>' + body + '</details>';
+        }
+      },
+      {
+        field: 'flags', label: 'Lưu ý mã hóa',
+        render: function (r, d) {
+          return (r.flags || []).map(function (f) {
+            return '<span class="flag flag-' + f + '">' + d.flagLabels[f] + '</span>';
+          }).join('') || '<span class="none">–</span>';
+        }
+      },
+      {
+        field: 'chapter', label: 'Chương', cls: 'chap',
+        render: function (r, d) {
+          var c = d._chapById || (d._chapById = d.chapters.reduce(function (m, x) { m[x.id] = x; return m; }, {}));
+          var ch = c[r.chapter];
+          return '<span title="' + (ch ? ch.range + ' – ' + ch.name.replace(/"/g, '&quot;') : '') + '">' + r.chapter + '</span>';
+        }
+      }
     ]
   });
 </script>

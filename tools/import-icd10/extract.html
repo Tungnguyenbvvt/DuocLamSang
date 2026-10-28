@@ -1,0 +1,46 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>PDF text extract</title></head>
+<body>
+<p id="st">Ready</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="parse.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  // Dump every text item as [x, y, width, height, str] per page, then POST to /save.
+  async function run(file, outName, from, to) {
+    const st = document.getElementById('st');
+    const pdf = await pdfjsLib.getDocument(file).promise;
+    to = Math.min(to || pdf.numPages, pdf.numPages);
+    const pages = [];
+    for (let p = from || 1; p <= to; p++) {
+      const page = await pdf.getPage(p);
+      const vp = page.getViewport({ scale: 1 });
+      const tc = await page.getTextContent();
+      pages.push({ p, w: vp.width, h: vp.height, items: tc.items.filter(i => i.str && i.str.trim()).map(i => [
+        Math.round(i.transform[4] * 10) / 10, Math.round(i.transform[5] * 10) / 10,
+        Math.round(i.width * 10) / 10, Math.round(Math.abs(i.transform[3]) * 10) / 10, i.str]) });
+      if (p % 25 === 0) st.textContent = file + ': page ' + p + '/' + to;
+      page.cleanup();
+    }
+    const body = JSON.stringify({ file, numPages: pdf.numPages, pages });
+    const r = await fetch('/save?name=' + encodeURIComponent(outName), { method: 'POST', body });
+    st.textContent = 'Done ' + file + ' -> ' + outName + ' (' + body.length + ' bytes): ' + await r.text();
+    return { numPages: pdf.numPages, pagesDone: pages.length, bytes: body.length };
+  }
+  window.run = run;
+  // Vẽ một vùng của trang PDF (tọa độ PDF, gốc dưới-trái) lên canvas toàn màn hình để chụp đối chiếu
+  window.show = async (file, p, yTop, yBottom, xLeft, xRight) => {
+    const pdf = window['_pdf_' + file] || (window['_pdf_' + file] = await pdfjsLib.getDocument(file).promise);
+    const page = await pdf.getPage(p);
+    const scale = Math.min(innerWidth / (xRight - xLeft), 6);
+    const vp = page.getViewport({ scale });
+    let c = document.getElementById('cv'); if (!c) { c = document.createElement('canvas'); c.id = 'cv'; document.body.prepend(c); }
+    c.width = vp.width; c.height = vp.height;
+    await page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise;
+    c.style.position = 'absolute'; c.style.left = (-xLeft * scale) + 'px'; c.style.top = (-(vp.height / scale - yTop) * scale) + 'px';
+    document.body.style.margin = 0; document.body.style.overflow = 'hidden';
+    return { scale, shownHeight: (yTop - yBottom) * scale };
+  };
+  window.save = async (name, obj) => (await fetch('/save?name=' + encodeURIComponent(name), { method: 'POST', body: JSON.stringify(obj) })).text();
+</script>
+</body></html>

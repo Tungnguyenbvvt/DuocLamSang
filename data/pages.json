@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "updated": "2026-10-28",
   "source": "Danh mục tài liệu nội bộ Khoa Dược. Nguồn tham khảo gốc của từng tài liệu được ghi trong chính trang tài liệu đó.",
   "categories": [
@@ -39,7 +39,7 @@
     { "id": "ebm-azithromycin-mlt", "title": "Azithromycin dự phòng trong mổ lấy thai ngoài kế hoạch (JAMA 2026)", "file": "pages/azithromycin-du-phong-mo-lay-thai.html", "category": "ebm", "tags": ["Sản khoa", "Kháng sinh"], "review": "chưa kiểm chứng" },
     { "id": "ebm-kuitunen-bjog-2024", "title": "Kuitunen BJOG 2024 – Thẩm định EBM (azithromycin)", "file": "pages/bjog-azithromycin-sr-journal.html", "category": "ebm", "tags": ["Sản khoa", "Kháng sinh"], "review": "chưa kiểm chứng" },
 
-    { "id": "icd10-tra-cuu", "title": "Tra cứu mã bệnh ICD-10", "file": "pages/tra-cuu-icd10.html", "category": "icd10", "tags": ["Mã hóa bệnh tật", "BHYT"], "review": "dữ liệu mẫu" },
+    { "id": "icd10-tra-cuu", "title": "Tra cứu mã bệnh ICD-10 (Thông tư 06/2026/TT-BYT)", "file": "pages/tra-cuu-icd10.html", "category": "icd10", "tags": ["Mã hóa bệnh tật", "BHYT"], "review": "chưa kiểm chứng" },
 
     { "id": "tt20-tra-cuu", "title": "Tra cứu danh mục thuốc BHYT – Thông tư 20/2022/TT-BYT", "file": "pages/tra-cuu-tt20.html", "category": "tt20", "tags": ["BHYT", "Văn bản pháp quy"], "review": "dữ liệu mẫu" }
   ]

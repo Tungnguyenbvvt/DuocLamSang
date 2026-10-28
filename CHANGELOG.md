@@ -1,5 +1,13 @@
 # Nhật ký thay đổi
 
+## 1.5.0 – 2026-10-28
+
+- **ICD-10: nạp dữ liệu thật** từ Phụ lục Thông tư 06/2026/TT-BYT ngày 02/4/2026 (tệp ICD-10.pdf người dùng cung cấp, 1271 trang): 15.844 mã, 22 chương. Giữ nguyên văn tên bệnh tiếng Việt/tiếng Anh, hướng dẫn mã hóa bổ sung WHO 2019 (Việt/Anh) và 6 cờ cột 24–29 (không được dùng là bệnh chính, không khuyến khích dùng là bệnh chính, không dùng vì có mã chi tiết hơn, chỉ dùng mã hóa nguyên nhân tử vong, chỉ/chủ yếu ở nữ, chỉ/chủ yếu ở nam). Bỏ cờ `sample`. Lưu ý: nguồn văn bản là TT 06/2026/TT-BYT, không phải QĐ 4469 như ghi tạm trước đây.
+- Trích bằng tọa độ chữ (PDF.js), công cụ lưu ở `tools/import-icd10/`. Kiểm tra tự động: STT liên tục 1–15.844, mã có/không dấu chấm khớp, không trùng mã, không thiếu tên, cờ trùng mã (trừ ký hiệu †/*). Đối chiếu tay với ảnh trang PDF: M90.6* (trang 712), C57.0 (trang 131), I09.2/I10 (trang 397–398). **Chưa có người thứ hai đối chiếu toàn bộ.**
+- Module tra cứu: tìm mã không cần dấu chấm và bỏ qua †/*; xếp hạng mã đúng > mã bắt đầu bằng từ khóa > khớp tên > chỉ khớp phần hướng dẫn; không tô sáng từ khóa 1 ký tự khi có từ khóa khác; hướng dẫn dài được thu gọn, tự mở khi chứa từ khóa. Trang ICD-10 có thêm bộ lọc theo chương (tên chương nguyên văn) và theo lưu ý mã hóa.
+- **TT20 chưa nạp**: tệp TT20.pdf là bản scan, lớp chữ OCR sai và mất dấu (ví dụ “U6ng”, “N atri thiosulfat”), nên không chép nguyên văn được. Riêng cột hạng bệnh viện (dấu +) thì đọc được chính xác theo tọa độ. Vẫn giữ dữ liệu MẪU.
+- Ca kiểm thử: 31/31 đạt (thêm 10 ca: mã không dấu chấm, †/*, xếp hạng tên trước hướng dẫn, số trong từ khóa, lọc cờ, tô sáng 1 ký tự). Tìm trên 15.844 dòng mất 3–8 ms. Điện thoại 375 px không cuộn ngang. Bộ nhớ offline có icd10.json (CACHE_VERSION cph-hub-v1.5.0).
+
 ## 1.4.0 – 2026-10-28
 
 - Thêm 2 module: **ICD-10** (dải xanh lá #3fae5a) và **TT20 – Danh mục thuốc BHYT** (dải cam #e8743b), mỗi module một trang công cụ tra cứu.
