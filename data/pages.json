@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "updated": "2026-10-28",
   "source": "Danh mục tài liệu nội bộ Khoa Dược. Nguồn tham khảo gốc của từng tài liệu được ghi trong chính trang tài liệu đó.",
   "categories": [
@@ -41,6 +41,6 @@
 
     { "id": "icd10-tra-cuu", "title": "Tra cứu mã bệnh ICD-10 (Thông tư 06/2026/TT-BYT)", "file": "pages/tra-cuu-icd10.html", "category": "icd10", "tags": ["Mã hóa bệnh tật", "BHYT"], "review": "chưa kiểm chứng" },
 
-    { "id": "tt20-tra-cuu", "title": "Tra cứu danh mục thuốc BHYT – Thông tư 20/2022/TT-BYT", "file": "pages/tra-cuu-tt20.html", "category": "tt20", "tags": ["BHYT", "Văn bản pháp quy"], "review": "dữ liệu mẫu" }
+    { "id": "tt20-tra-cuu", "title": "Tra cứu danh mục thuốc BHYT – Thông tư 20/2022/TT-BYT", "file": "pages/tra-cuu-tt20.html", "category": "tt20", "tags": ["BHYT", "Văn bản pháp quy"], "review": "chưa kiểm chứng" }
   ]
 }

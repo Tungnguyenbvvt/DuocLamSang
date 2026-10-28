@@ -179,6 +179,7 @@
         root.querySelector('.lk-meta').innerHTML =
           'Dữ liệu phiên bản ' + esc(d.version) + ', cập nhật ' + esc(d.updated) + ' · ' + d.records.length + ' dòng.<br>' +
           '<b>Nguồn:</b> ' + esc(d.source) + (d.extraction ? '<br><b>Cách trích:</b> ' + esc(d.extraction) : '');
+        if (cfg.onData) cfg.onData(d);
         buildFilters();
         render();
         input.disabled = false;

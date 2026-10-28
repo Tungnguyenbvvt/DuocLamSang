@@ -1,5 +1,13 @@
 # Nhật ký thay đổi
 
+## 1.6.0 – 2026-10-28
+
+- **TT20: nạp dữ liệu thật** Phụ lục I Thông tư 20/2022/TT-BYT ngày 31/12/2022 từ tệp 20_2022_TT-BYT_548898.docx do người dùng cung cấp: 1.037 thuốc (STT 1–1.037 đủ), 1.133 dòng đường dùng, 28 nhóm, 217 dòng có ghi chú điều kiện/tỷ lệ thanh toán. Chép nguyên văn; ô gộp dọc (cùng thuốc nhiều đường dùng) được chép xuống từng dòng. Giữ 3 dòng văn bản nhắc lại STT 255/234/236 trong mục lao kháng thuốc. Bỏ cờ `sample`.
+- **Đối chiếu hạng bệnh viện với bản gốc có chữ ký (TT20.pdf, scan):** 1.131/1.133 dòng khớp (1.115 khớp tự động, 16 dòng OCR sót dấu “+” đã xem ảnh, xác nhận khớp). **2 dòng docx khác bản gốc:** STT 961 Omalizumab (docx c4,c5 – gốc chỉ hạng đặc biệt, I) và STT 967 Tiotropium (docx c4–c7 – gốc đến hạng III, IV). Theo chọn lựa của người dùng, lấy **theo bản gốc 2022**. Đã xem ảnh để đối chiếu thêm ghi chú COVID-19 của Anidulafungin (đúng nguyên văn).
+- Trang TT20: hiện nhóm/phân nhóm dưới tên hoạt chất, 4 cột hạng (✓/✗ kèm chữ), ghi chú nhiều đoạn (thu gọn khi dài), chú giải nguyên văn Điều 2 về các cột hạng; lọc theo 28 nhóm và 4 hạng. Module tra cứu thêm điểm móc `onData`.
+- Công cụ trích lưu ở `tools/import-tt20/`. 31/31 ca kiểm thử đạt. Điện thoại 375 px không cuộn ngang. CACHE_VERSION lên cph-hub-v1.6.0.
+- Chưa nạp Phụ lục II (thuốc phóng xạ và chất đánh dấu, 61 dòng).
+
 ## 1.5.0 – 2026-10-28
 
 - **ICD-10: nạp dữ liệu thật** từ Phụ lục Thông tư 06/2026/TT-BYT ngày 02/4/2026 (tệp ICD-10.pdf người dùng cung cấp, 1271 trang): 15.844 mã, 22 chương. Giữ nguyên văn tên bệnh tiếng Việt/tiếng Anh, hướng dẫn mã hóa bổ sung WHO 2019 (Việt/Anh) và 6 cờ cột 24–29 (không được dùng là bệnh chính, không khuyến khích dùng là bệnh chính, không dùng vì có mã chi tiết hơn, chỉ dùng mã hóa nguyên nhân tử vong, chỉ/chủ yếu ở nữ, chỉ/chủ yếu ở nam). Bỏ cờ `sample`. Lưu ý: nguồn văn bản là TT 06/2026/TT-BYT, không phải QĐ 4469 như ghi tạm trước đây.

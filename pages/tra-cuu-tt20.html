@@ -14,11 +14,11 @@
 <div class="lk" id="lookup">
   <header class="lk-head">
     <h1>Tra cứu danh mục thuốc BHYT – Thông tư 20/2022/TT-BYT</h1>
-    <p>Tìm theo tên hoạt chất, nhóm thuốc hoặc ghi chú, không cần gõ dấu. Lọc theo nhóm thuốc và hạng bệnh viện.</p>
+    <p>Phụ lục I: danh mục thuốc hóa dược và sinh phẩm (1.037 thuốc). Tìm theo tên hoạt chất, đường dùng, nhóm thuốc hoặc nội dung ghi chú, không cần gõ dấu. Lọc theo nhóm thuốc và hạng bệnh viện.</p>
   </header>
 
   <div class="lk-sample" role="alert" hidden>
-    <b>DỮ LIỆU MẪU – chưa phải dữ liệu thật.</b> Các dòng hiện có chỉ để thử giao diện. Không dùng để xác định phạm vi, tỷ lệ hay điều kiện thanh toán BHYT cho đến khi nạp dữ liệu nguyên văn từ Thông tư gốc.
+    <b>DỮ LIỆU MẪU – chưa phải dữ liệu thật.</b> Không dùng để xác định phạm vi, tỷ lệ hay điều kiện thanh toán BHYT.
   </div>
 
   <div class="lk-bar">
@@ -29,48 +29,76 @@
     <div class="lk-filters"></div>
   </div>
 
+  <details class="lk-legend more" id="tierLegend" hidden>
+    <summary>Hạng bệnh viện được sử dụng (Điều 2, khoản 1, điểm d)</summary>
+    <ul></ul>
+  </details>
+
   <p class="lk-count" aria-live="polite"></p>
   <table class="lk-table">
-    <thead><tr><th>STT</th><th>Hoạt chất</th><th>Nhóm thuốc</th><th>Đường dùng</th><th>Hạng bệnh viện</th><th>Ghi chú / điều kiện thanh toán</th></tr></thead>
-    <tbody class="lk-body"><tr class="lk-empty"><td colspan="6">Đang tải dữ liệu…</td></tr></tbody>
+    <thead><tr><th>STT</th><th>Hoạt chất</th><th>Đường dùng, dạng dùng</th><th>Hạng bệnh viện</th><th>Ghi chú (điều kiện, tỷ lệ thanh toán)</th></tr></thead>
+    <tbody class="lk-body"><tr class="lk-empty"><td colspan="5">Đang tải dữ liệu…</td></tr></tbody>
   </table>
   <button class="lk-more" type="button" hidden>Hiển thị thêm</button>
 
-  <p class="lk-note">Công cụ tham khảo. Phạm vi, tỷ lệ và điều kiện thanh toán áp dụng theo văn bản gốc và các văn bản sửa đổi, bổ sung còn hiệu lực.</p>
+  <p class="lk-note">Công cụ tham khảo. Dữ liệu trích tự động từ bản docx của Thông tư; hạng bệnh viện đã đối chiếu với bản gốc có chữ ký. Điều kiện, tỷ lệ thanh toán áp dụng theo văn bản gốc và các văn bản sửa đổi, bổ sung còn hiệu lực; đối chiếu lại khi xử lý hồ sơ thanh toán BHYT.</p>
   <p class="lk-meta"></p>
 </div>
 
 <script src="../js/modules/lookup.js"></script>
 <script>
+  function multiline(html) { return html.replace(/\n/g, '<br>'); }
   Lookup.init({
     dataUrl: '../data/tt20.json',
     codeField: null,
-    searchFields: ['name', 'group', 'route', 'note'],
+    searchFields: ['name', 'route', 'note', 'group', 'subgroup'],
+    primaryFields: ['name'],
     filters: [
       { field: 'group', label: 'Nhóm thuốc' },
       {
         field: 'tiers', label: 'Hạng bệnh viện',
         options: function (d) {
-          return Object.keys(d.tierLabels).map(function (k) { return { value: k, label: 'Hạng ' + d.tierLabels[k] }; });
+          return Object.keys(d.tierLabels).map(function (k) { return { value: k, label: d.tierLabels[k] }; });
         }
       }
     ],
+    onData: function (d) {
+      // Định nghĩa nguyên văn các cột hạng (Điều 2)
+      var lg = document.getElementById('tierLegend');
+      lg.querySelector('ul').innerHTML = Object.keys(d.tierDefs).map(function (k) {
+        return '<li><b>' + d.tierLabels[k] + ':</b> ' + d.tierDefs[k].replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</li>';
+      }).join('');
+      lg.hidden = false;
+    },
     columns: [
       { field: 'stt', label: 'STT', cls: 'code', noHighlight: true },
-      { field: 'name', label: 'Hoạt chất' },
-      { field: 'group', label: 'Nhóm thuốc' },
-      { field: 'route', label: 'Đường dùng' },
+      {
+        field: 'name', label: 'Hoạt chất',
+        render: function (r, d, hl) {
+          return '<b>' + hl(r.name) + '</b>' + (r.repeat ? ' <span class="flag">nhắc lại STT ' + r.stt + '</span>' : '') +
+            '<span class="en">' + hl(r.subgroup || r.group || '') + '</span>';
+        }
+      },
+      { field: 'route', label: 'Đường dùng, dạng dùng' },
       {
         field: 'tiers', label: 'Hạng bệnh viện',
-        // Hiện đủ 4 hạng, hạng được dùng in đậm có nhãn chữ (không chỉ dựa vào màu)
-        render: function (r, d) { // không tô sáng cột này
+        // Hiện đủ 4 cột hạng; hạng được dùng có dấu ✓ và chữ đậm (không chỉ dựa vào màu)
+        render: function (r, d) {
           return Object.keys(d.tierLabels).map(function (k) {
             var on = (r.tiers || []).indexOf(k) !== -1;
-            return '<span class="tier' + (on ? ' on' : '') + '">' + (on ? '✓ ' : '✗ ') + d.tierLabels[k] + '</span>';
+            return '<span class="tier' + (on ? ' on' : '') + '" title="' + (on ? 'Được sử dụng: ' : 'Không thuộc: ') + d.tierLabels[k] + '">' + (on ? '✓ ' : '✗ ') + d.tierLabels[k] + '</span>';
           }).join('');
         }
       },
-      { field: 'note', label: 'Ghi chú / điều kiện thanh toán' }
+      {
+        field: 'note', label: 'Ghi chú',
+        render: function (r, d, hl, has) {
+          if (!r.note) return '<span class="none">–</span>';
+          var body = '<span class="guide">' + multiline(hl(r.note)) + '</span>';
+          if (r.note.length < 220) return body;
+          return '<details class="more"' + (has(r.note) ? ' open' : '') + '><summary>Xem ghi chú (' + r.note.length + ' ký tự)</summary>' + body + '</details>';
+        }
+      }
     ]
   });
 </script>
