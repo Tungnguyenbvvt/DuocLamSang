@@ -1,5 +1,11 @@
 # Nhật ký thay đổi
 
+## 1.9.0 – 2026-10-29
+
+- **Tài liệu thông tin thuốc: thêm 36 thuốc** (từ thư mục “Tờ HDSD đã tổng hợp/File HTML” do người dùng cung cấp), nâng module từ 7 lên 43 tài liệu: Alusi, Angut 300, AtiGlucinol inj, Atropin sulfat, Baci-Subti, Biofazolin, Bioflora, Colchicina SEID, Coldacmin Sinus, Debby, Dimedrol, Drotusc, Duphaston, Efferalgan 150, Elaria 100 mg, Esomeprazole STADA 20 mg, Faskit, Fezidat, Giloba, Glumeben, Glumeform 1000 XR, Glumeron 30 MR, Grafort 3g, Hadumix CAP, Haemostop, Hapacol Caplet 500, Haxium 40, Hidrasec 10 mg Infants, Hidrasec 30 mg Children, Insuact 20, Lacbiosyn, Lipagim 300, Lipanthyl 200M, Medoleb 200 mg, Melanov-M, Mezapulgit.
+- Chép nguyên tệp, không sửa nội dung. Cả 36 tệp cùng khuôn 13 khối với tài liệu hiện có, tự chứa (không tải gì từ máy chủ ngoài). Nhãn mỗi tài liệu gồm lĩnh vực và **tên hoạt chất** lấy từ chính trang (ví dụ Angut 300 → Allopurinol), nên ô tìm kiếm ở sidebar tìm được theo cả biệt dược lẫn hoạt chất của các thuốc mới. Danh sách trong module xếp theo tên A–Z. Tất cả gắn “chưa kiểm chứng”.
+- `pages.json` lên 1.4.0 (62 tài liệu). CACHE_VERSION lên cph-hub-v1.9.0 để tải sẵn các tài liệu mới cho ngoại tuyến.
+
 ## 1.8.0 – 2026-10-28
 
 - Trang chủ: khung giới thiệu dùng ảnh phối cảnh cổng BVĐK Vũ Thư (`images/cong-bv.jpg`, 1344×768, 151 KB, do người dùng cung cấp) làm nền, lớp phủ xanh két mờ dần từ trái sang phải để chữ trắng dễ đọc; trên điện thoại lớp phủ chuyển từ dưới lên. Người dùng chọn đề án B trong 3 đề án (A ảnh bìa + thẻ nổi, B ảnh nền chữ đè, C chia đôi).
