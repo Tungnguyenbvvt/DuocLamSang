@@ -1,5 +1,11 @@
 # Nhật ký thay đổi
 
+## 1.11.0 – 2026-11-03
+
+- Thêm 2 module **Dịch vụ kĩ thuật** và **Phác đồ điều trị**, hiện ở sidebar và trang chủ, ghi “Chưa có dữ liệu” cho đến khi người dùng bổ sung.
+- Thêm trang **Tra cứu thông tin thuốc** (`pages/tra-cuu-thuoc.html`) và nút lối tắt trên khung giới thiệu. Bảng `data/drug-info.json` gồm 43 thuốc, trích từ chính các trang tài liệu bằng `tools/build-search/build.py`; tìm theo tên thuốc, hoạt chất, nhóm, lọc theo lĩnh vực, dùng chung từ điển đồng nghĩa. Bấm tên thuốc mở tài liệu.
+- Ô thống kê Tài liệu thông tin thuốc hiện “43 thuốc”. `pages.json` lên 1.6.0, CACHE_VERSION lên cph-hub-v1.11.0.
+
 ## 1.10.1 – 2026-11-03
 
 - Ô thống kê trang chủ: tên module ở trên (chữ to, đậm), số lượng ở dưới (chữ nhỏ); số lượng các ô thẳng hàng khi tên xuống 2 dòng. CACHE_VERSION lên cph-hub-v1.10.2.

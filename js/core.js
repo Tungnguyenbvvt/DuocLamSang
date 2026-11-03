@@ -73,7 +73,9 @@
     compare: '<path d="M8 3v18M16 3v18M3 8h5M16 16h5"/>',
     search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M8 11h6"/>',
     code: '<path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h5M8 17h3"/>',
-    law: '<path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/>'
+    law: '<path d="M12 3v18M7 21h10M5 7h14"/><path d="M5 7l-3 6a3 3 0 0 0 6 0zM19 7l-3 6a3 3 0 0 0 6 0z"/>',
+    service: '<path d="M4 20l7-7M13 11l5-5M15 4l5 5M9 9l6 6M4 20l-1 1"/>',
+    protocol: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 10h6M9 14h6M9 18h3"/>'
   };
   function catIcon(cat) {
     return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (CAT_ICONS[cat.icon] || CAT_ICONS.book) + '</svg>';
@@ -166,14 +168,13 @@
 
     navGroups.innerHTML = d.categories.map(function (cat) {
       var items = d.records.filter(function (r) { return r.category === cat.id; });
-      if (!items.length) return '';
       var isClosed = closed[cat.id];
       return '<div class="nav-group' + (isClosed ? ' closed' : '') + '" data-cat="' + esc(cat.id) + '">' +
         '<button class="nav-group-btn" type="button" aria-expanded="' + (!isClosed) + '">' +
         catIcon(cat) + '<span>' + esc(cat.name) + '</span>' +
         '<span class="nav-count">' + items.length + '</span>' +
         '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>' +
-        '<ul class="nav-list">' + items.map(function (r) { return docItem(r, [], favs); }).join('') + '</ul></div>';
+        '<ul class="nav-list">' + (items.length ? items.map(function (r) { return docItem(r, [], favs); }).join('') : '<li class="nav-empty">Chưa có dữ liệu.</li>') + '</ul></div>';
     }).join('');
   }
 
@@ -266,7 +267,8 @@
   // Lối tắt trên khung giới thiệu: chỉ hiện khi tài liệu tương ứng có trong danh mục
   var QUICK = [
     { id: 'icd10-tra-cuu', label: 'Tra cứu ICD-10' },
-    { id: 'tt20-tra-cuu', label: 'Tra cứu TT20 – BHYT' }
+    { id: 'tt20-tra-cuu', label: 'Tra cứu TT20 – BHYT' },
+    { id: 'thuoc-tra-cuu', label: 'Tra cứu thông tin thuốc' }
   ];
 
   function renderHome() {
@@ -309,7 +311,7 @@
       allTags.map(function (t) {
         return '<button type="button" class="chip" data-tag="' + esc(t) + '" aria-pressed="' + (state.tagFilter === t) + '">' + esc(t) + '</button>';
       }).join('') + '</div>' +
-      (list.length ? '<div class="cards">' + list.map(cardHtml).join('') + '</div>' : '<p class="empty">Không có tài liệu phù hợp bộ lọc.</p>') +
+      (list.length ? '<div class="cards">' + list.map(cardHtml).join('') + '</div>' : '<p class="empty">' + (catName && !state.tagFilter ? 'Module này chưa có dữ liệu.' : 'Không có tài liệu phù hợp bộ lọc.') + '</p>') +
       '<p class="foot-note">Danh mục phiên bản ' + esc(d.version) + ', cập nhật ' + esc(d.updated) + '. ' + esc(d.source) + '</p>';
 
     homeView.innerHTML = html;

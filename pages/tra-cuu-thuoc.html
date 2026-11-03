@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="vi" data-unit="vu-thu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tra cứu thông tin thuốc</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/tool.css">
+<style>:root{--cat:#f37fae}</style>
+</head>
+<body>
+<div class="lk" id="lookup">
+  <header class="lk-head">
+    <h1>Tra cứu thông tin thuốc</h1>
+    <p>Tìm trong các Tài liệu thông tin thuốc theo tên thuốc, hoạt chất hoặc nhóm thuốc, không cần gõ dấu. Bấm tên thuốc để mở tài liệu.</p>
+  </header>
+
+  <div class="lk-sample" role="alert" hidden></div>
+
+  <div class="lk-bar">
+    <div class="lk-searchwrap">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+      <input class="lk-search" type="search" placeholder="Nhập tên thuốc hoặc hoạt chất…" aria-label="Tìm tên thuốc hoặc hoạt chất" autocomplete="off" disabled>
+    </div>
+    <div class="lk-filters"></div>
+  </div>
+
+  <p class="lk-count" aria-live="polite"></p>
+  <table class="lk-table">
+    <thead><tr><th>Tên thuốc</th><th>Hoạt chất, dạng bào chế</th><th>Nhóm thuốc</th></tr></thead>
+    <tbody class="lk-body"><tr class="lk-empty"><td colspan="3">Đang tải dữ liệu…</td></tr></tbody>
+  </table>
+  <button class="lk-more" type="button" hidden>Hiển thị thêm</button>
+
+  <p class="lk-note">Công cụ tham khảo. Thông tin ở đây trích từ từng tài liệu trong app, các tài liệu đều đang gắn nhãn “chưa kiểm chứng”; đối chiếu tờ hướng dẫn sử dụng cập nhật trước khi áp dụng.</p>
+  <p class="lk-meta"></p>
+</div>
+
+<script src="../js/search.js"></script>
+<script src="../js/modules/lookup.js"></script>
+<script>
+  Lookup.init({
+    dataUrl: '../data/drug-info.json',
+    codeField: null,
+    searchFields: ['name', 'active', 'group', 'tags'],
+    primaryFields: ['name', 'active'],
+    rowKey: function (r) { return r.id; },
+    emptyHint: 'Thử tên hoạt chất hoặc bớt từ khóa. Thuốc chưa có tài liệu trong app sẽ không hiện ở đây.',
+    filters: [{ field: 'area', label: 'Lĩnh vực' }],
+    columns: [
+      {
+        field: 'name', label: 'Tên thuốc',
+        render: function (r, d, hl) { return '<a class="lk-open" data-id="' + r.id + '" href="../index.html#/p/' + r.id + '" target="_top"><b>' + hl(r.name) + '</b></a>'; }
+      },
+      { field: 'active', label: 'Hoạt chất, dạng bào chế' },
+      { field: 'group', label: 'Nhóm thuốc' }
+    ]
+  });
+  // Trong khung app: đổi hash của trang cha, không tải lại cả app
+  document.getElementById('lookup').addEventListener('click', function (e) {
+    var a = e.target.closest('.lk-open');
+    if (!a || window.parent === window) return;
+    e.preventDefault();
+    window.parent.location.hash = '#/p/' + a.getAttribute('data-id');
+  });
+</script>
+</body>
+</html>

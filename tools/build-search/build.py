@@ -22,9 +22,41 @@ def text_of(page):
     return html.unescape(re.sub(r'<[^>]+>', ' ', joined))
 
 catalog = json.loads((ROOT / 'data/pages.json').read_text(encoding='utf-8'))
+def plain(s):
+    return re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', '', s))).strip()
+
+def first(page, *patterns):
+    for p in patterns:
+        m = re.search(p, page, re.S)
+        if m:
+            return plain(m.group(1))
+    return ''
+
+# data/drug-info.json: bảng cho trang Tra cứu thông tin thuốc, trích nguyên văn từ từng tài liệu.
+# Có 2 khuôn trang: dòng dưới tiêu đề (<h1>…<p>) và dòng "Hoạt chất:", "Nhóm:".
+drugs = []
+for rec in catalog['records']:
+    if rec['category'] != 'thong-tin-thuoc' or rec['id'] == 'thuoc-tra-cuu':
+        continue
+    page = (ROOT / rec['file']).read_text(encoding='utf-8')
+    drugs.append({
+        'id': rec['id'],
+        'name': re.split(r'\s[–-]\sTài liệu', rec['title'])[0],
+        'active': first(page, r'</h1>\s*<p>(.*?)</p>', r'Hoạt chất:</span>(.*?)</(?:li|p|div)>', r'Hoạt chất[^<]*</td>\s*<td[^>]*>(.*?)</td>'),
+        'group': first(page, r'</h1>\s*<p>.*?</p>\s*<span class="chip">(.*?)</span>', r'Nhóm(?: dược lý)?:</span>(.*?)</(?:li|p|div)>', r'Nhóm dược lý</td>\s*<td[^>]*>(.*?)</td>'),
+        'area': (rec.get('tags') or [''])[0],
+        'tags': rec.get('tags') or [],
+    })
+missing = [d['id'] for d in drugs if not d['active'] or not d['group']]
+(ROOT / 'data/drug-info.json').write_text(json.dumps({
+    'version': catalog['version'], 'updated': date.today().isoformat(),
+    'source': 'Trích từ các trang Tài liệu thông tin thuốc trong app, tổng hợp từ tờ hướng dẫn sử dụng của nhà sản xuất.',
+    'records': drugs}, ensure_ascii=False, indent=1), encoding='utf-8')
+print(len(drugs), 'thuoc, thieu:', missing)
+
 out = {}
 for rec in catalog['records']:
-    if rec['category'] in ('icd10', 'tt20'):
+    if rec['category'] in ('icd10', 'tt20') or rec['id'] == 'thuoc-tra-cuu':
         continue  # đã có dữ liệu riêng
     words = set(re.findall(r'[a-z0-9]{3,}', norm(text_of((ROOT / rec['file']).read_text(encoding='utf-8')))))
     out[rec['id']] = ' '.join(sorted(w for w in words if not w.isdigit()))

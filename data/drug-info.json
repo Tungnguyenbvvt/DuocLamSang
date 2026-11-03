@@ -1,0 +1,504 @@
+{
+ "version": "1.6.0",
+ "updated": "2026-11-03",
+ "source": "Trích từ các trang Tài liệu thông tin thuốc trong app, tổng hợp từ tờ hướng dẫn sử dụng của nhà sản xuất.",
+ "records": [
+  {
+   "id": "ttt-aginaril-5",
+   "name": "Aginaril 5",
+   "active": "enalapril maleat 5 mg",
+   "group": "thuốc chống tăng huyết áp, ức chế men chuyển angiotensin (C09AA02)",
+   "area": "Tim mạch",
+   "tags": [
+    "Tim mạch",
+    "Enalapril"
+   ]
+  },
+  {
+   "id": "ttt-alusi",
+   "name": "Alusi",
+   "active": "Magnesi trisilicat 500 mg + Nhôm hydroxyd khô 250 mg · Viên nén nhai",
+   "group": "Nhóm kháng acid",
+   "area": "Tiêu hóa",
+   "tags": [
+    "Tiêu hóa",
+    "Kháng acid",
+    "Magnesi trisilicat",
+    "Nhôm hydroxyd"
+   ]
+  },
+  {
+   "id": "ttt-amiodarona",
+   "name": "Amiodarona GP",
+   "active": "amiodaron hydrochlorid 200 mg",
+   "group": "thuốc chống loạn nhịp (C01BD01)",
+   "area": "Tim mạch",
+   "tags": [
+    "Tim mạch",
+    "Chống loạn nhịp",
+    "Amiodaron"
+   ]
+  },
+  {
+   "id": "ttt-amlodac-5",
+   "name": "Amlodac 5",
+   "active": "amlodipin besylat USP, tương đương amlodipin 5 mg",
+   "group": "dẫn chất dihydropyridin, thuốc chẹn kênh calci (mã ATC: HDSD không ghi)",
+   "area": "Tim mạch",
+   "tags": [
+    "Tim mạch",
+    "Amlodipin"
+   ]
+  },
+  {
+   "id": "ttt-angut-300",
+   "name": "Angut 300",
+   "active": "Allopurinol 300 mg · Viên nén",
+   "group": "Ức chế xanthin oxidase",
+   "area": "Gút",
+   "tags": [
+    "Gút",
+    "Allopurinol"
+   ]
+  },
+  {
+   "id": "ttt-atiglucinol-inj",
+   "name": "AtiGlucinol inj",
+   "active": "Phloroglucinol 40 mg + Trimethylphloroglucinol 0,04 mg/4 ml · Dung dịch tiêm",
+   "group": "Chống co thắt hướng cơ (ATC A03AX12)",
+   "area": "Chống co thắt",
+   "tags": [
+    "Chống co thắt",
+    "Phloroglucinol"
+   ]
+  },
+  {
+   "id": "ttt-atropin-sulfat",
+   "name": "Atropin sulfat",
+   "active": "Atropin sulfat 0,25 mg/1 ml · Dung dịch tiêm",
+   "group": "Kháng muscarin (ATC A03BA01)",
+   "area": "Kháng muscarin",
+   "tags": [
+    "Kháng muscarin",
+    "Atropin"
+   ]
+  },
+  {
+   "id": "ttt-baci-subti",
+   "name": "Baci-Subti",
+   "active": "Bacillus subtilis R0179 + Fructose oligosaccharide · Viên nang cứng",
+   "group": "Men vi sinh (bổ sung)",
+   "area": "Men vi sinh",
+   "tags": [
+    "Men vi sinh",
+    "Bacillus subtilis"
+   ]
+  },
+  {
+   "id": "ttt-bexsero",
+   "name": "Bexsero",
+   "active": "Vắc xin não mô cầu nhóm B đa thành phần (tái tổ hợp, hấp phụ)",
+   "group": "Vắc xin não mô cầu · ATC: J07AH09",
+   "area": "Vắc xin",
+   "tags": [
+    "Vắc xin"
+   ]
+  },
+  {
+   "id": "ttt-biofazolin",
+   "name": "Biofazolin",
+   "active": "Cefazolin 1 g (dạng cefazolin natri) · Bột pha dung dịch tiêm",
+   "group": "Cephalosporin thế hệ 1 (ATC J01DB04)",
+   "area": "Kháng sinh",
+   "tags": [
+    "Kháng sinh",
+    "Cefazolin"
+   ]
+  },
+  {
+   "id": "ttt-bioflora",
+   "name": "Bioflora 100 mg",
+   "active": "Saccharomyces boulardii CNCM I-745 100 mg · Bột pha hỗn dịch uống",
+   "group": "Men vi sinh (nấm men)",
+   "area": "Men vi sinh",
+   "tags": [
+    "Men vi sinh",
+    "Saccharomyces boulardii"
+   ]
+  },
+  {
+   "id": "ttt-cefoperazone",
+   "name": "Cefoperazone",
+   "active": "cefoperazon (dưới dạng cefoperazon natri)",
+   "group": "kháng sinh cephalosporin thế hệ 3 (J01DD12)",
+   "area": "Kháng sinh",
+   "tags": [
+    "Kháng sinh",
+    "Cefoperazon"
+   ]
+  },
+  {
+   "id": "ttt-colchicina-seid",
+   "name": "Colchicina SEID",
+   "active": "Colchicin 1 mg · Viên nén",
+   "group": "Chống gút / chống viêm không đặc hiệu",
+   "area": "Gút",
+   "tags": [
+    "Gút",
+    "Colchicin"
+   ]
+  },
+  {
+   "id": "ttt-coldacmin-sinus",
+   "name": "Coldacmin Sinus",
+   "active": "Paracetamol 325 mg + Clorpheniramin maleat 2 mg · Viên nén",
+   "group": "Giảm đau – hạ sốt – kháng histamin (ATC N02BE51)",
+   "area": "Giảm đau – hạ sốt",
+   "tags": [
+    "Giảm đau – hạ sốt",
+    "Paracetamol",
+    "Clorpheniramin"
+   ]
+  },
+  {
+   "id": "ttt-debby",
+   "name": "Debby",
+   "active": "Nifuroxazid 218 mg/5 ml · Hỗn dịch uống",
+   "group": "Kháng sinh đường ruột",
+   "area": "Tiêu hóa",
+   "tags": [
+    "Tiêu hóa",
+    "Kháng sinh đường ruột",
+    "Nifuroxazid"
+   ]
+  },
+  {
+   "id": "ttt-dimedrol",
+   "name": "Dimedrol",
+   "active": "Diphenhydramin hydroclorid 10 mg/1 ml · Dung dịch tiêm",
+   "group": "Kháng histamin H1 thế hệ 1",
+   "area": "Kháng histamin",
+   "tags": [
+    "Kháng histamin",
+    "Diphenhydramin"
+   ]
+  },
+  {
+   "id": "ttt-drotusc",
+   "name": "Drotusc",
+   "active": "Drotaverin hydroclorid 40 mg · Viên nén",
+   "group": "Chống co thắt cơ trơn (ức chế PDE IV)",
+   "area": "Chống co thắt",
+   "tags": [
+    "Chống co thắt",
+    "Drotaverin"
+   ]
+  },
+  {
+   "id": "ttt-duphaston",
+   "name": "Duphaston",
+   "active": "Dydrogesterone 10 mg · Viên nén bao phim",
+   "group": "Progestogen (ATC G03DB01)",
+   "area": "Sản phụ khoa",
+   "tags": [
+    "Sản phụ khoa",
+    "Progestogen",
+    "Dydrogesteron"
+   ]
+  },
+  {
+   "id": "ttt-efferalgan-150",
+   "name": "Efferalgan 150",
+   "active": "Paracetamol 150 mg · Thuốc đạn",
+   "group": "Giảm đau – hạ sốt (ATC N02BE01)",
+   "area": "Giảm đau – hạ sốt",
+   "tags": [
+    "Giảm đau – hạ sốt",
+    "Nhi khoa",
+    "Paracetamol"
+   ]
+  },
+  {
+   "id": "ttt-elaria-100",
+   "name": "Elaria 100 mg",
+   "active": "Diclofenac natri 100 mg · Viên đạn đặt trực tràng",
+   "group": "NSAID (ATC M01AB05)",
+   "area": "NSAID",
+   "tags": [
+    "NSAID",
+    "Diclofenac"
+   ]
+  },
+  {
+   "id": "ttt-esomeprazole-stada-20",
+   "name": "Esomeprazole STADA 20 mg",
+   "active": "Esomeprazole 20 mg · Viên nang chứa vi hạt bao tan trong ruột",
+   "group": "PPI (ức chế bơm proton)",
+   "area": "Tiêu hóa",
+   "tags": [
+    "Tiêu hóa",
+    "PPI",
+    "Esomeprazol"
+   ]
+  },
+  {
+   "id": "ttt-faskit",
+   "name": "Faskit",
+   "active": "Kẽm gluconat 70 mg (tương đương 10 mg kẽm) · Thuốc cốm pha hỗn dịch uống",
+   "group": "Bổ sung kẽm",
+   "area": "Vi chất",
+   "tags": [
+    "Vi chất",
+    "Nhi khoa",
+    "Kẽm"
+   ]
+  },
+  {
+   "id": "ttt-fezidat",
+   "name": "Fezidat",
+   "active": "Sắt fumarat 305 mg + Acid folic 350 mcg · Viên nang cứng",
+   "group": "Thuốc chống thiếu máu (ATC B03AD02)",
+   "area": "Huyết học",
+   "tags": [
+    "Huyết học",
+    "Thiếu máu",
+    "Sắt fumarat",
+    "Acid folic"
+   ]
+  },
+  {
+   "id": "ttt-giloba",
+   "name": "Giloba",
+   "active": "Ginkgo biloba Phytosome® 115 mg (tương đương chiết xuất Ginkgo biloba 40 mg) · Viên nang mềm",
+   "group": "Chiết xuất bạch quả",
+   "area": "Thần kinh",
+   "tags": [
+    "Thần kinh",
+    "Ginkgo biloba"
+   ]
+  },
+  {
+   "id": "ttt-glumeben",
+   "name": "Glumeben",
+   "active": "Metformin HCl 500 mg + Glibenclamid 2,5 mg · Viên nén bao phim",
+   "group": "Biguanid + sulfonylurea (ATC A10BD02)",
+   "area": "Nội tiết",
+   "tags": [
+    "Nội tiết",
+    "Đái tháo đường",
+    "Metformin",
+    "Glibenclamid"
+   ]
+  },
+  {
+   "id": "ttt-glumeform-1000-xr",
+   "name": "Glumeform 1000 XR",
+   "active": "Metformin hydroclorid 1000 mg · Viên nén giải phóng kéo dài",
+   "group": "Biguanid (ATC A10BA02)",
+   "area": "Nội tiết",
+   "tags": [
+    "Nội tiết",
+    "Đái tháo đường",
+    "Metformin"
+   ]
+  },
+  {
+   "id": "ttt-glumeron-30mr",
+   "name": "Glumeron 30 MR",
+   "active": "Gliclazid 30 mg · Viên nén giải phóng có kiểm soát (MR)",
+   "group": "Sulfonylurea thế hệ 2 (ATC A10BB09)",
+   "area": "Nội tiết",
+   "tags": [
+    "Nội tiết",
+    "Đái tháo đường",
+    "Gliclazid"
+   ]
+  },
+  {
+   "id": "ttt-grafort-3g",
+   "name": "Grafort 3g",
+   "active": "Dioctahedral smectite 3 g/20 mL · Hỗn dịch uống",
+   "group": "Chất bảo vệ niêm mạc tiêu hóa",
+   "area": "Tiêu hóa",
+   "tags": [
+    "Tiêu hóa",
+    "Smectit"
+   ]
+  },
+  {
+   "id": "ttt-hadumix-cap",
+   "name": "Hadumix CAP",
+   "active": "Acetylcystein 200 mg · Viên nang cứng",
+   "group": "Thuốc tiêu nhầy (ATC R05CB01)",
+   "area": "Hô hấp",
+   "tags": [
+    "Hô hấp",
+    "Tiêu nhầy",
+    "Acetylcystein"
+   ]
+  },
+  {
+   "id": "ttt-haemostop",
+   "name": "Haemostop",
+   "active": "Acid tranexamic 50 mg/mL · Dung dịch tiêm",
+   "group": "Thuốc cầm máu, chống tiêu fibrin (ATC B02AA02)",
+   "area": "Huyết học",
+   "tags": [
+    "Huyết học",
+    "Cầm máu",
+    "Acid tranexamic"
+   ]
+  },
+  {
+   "id": "ttt-hapacol-caplet-500",
+   "name": "Hapacol Caplet 500",
+   "active": "Acetaminophen (paracetamol) 500 mg · Viên nén",
+   "group": "Giảm đau – hạ sốt (ATC N02BE01)",
+   "area": "Giảm đau – hạ sốt",
+   "tags": [
+    "Giảm đau – hạ sốt",
+    "Paracetamol"
+   ]
+  },
+  {
+   "id": "ttt-haxium-40",
+   "name": "Haxium 40",
+   "active": "Esomeprazole 40 mg (dạng esomeprazole magnesium trihydrat) · Viên nang cứng chứa vi hạt bao tan trong ruột",
+   "group": "PPI (ức chế bơm proton, ATC A02BC05)",
+   "area": "Tiêu hóa",
+   "tags": [
+    "Tiêu hóa",
+    "PPI",
+    "Esomeprazol"
+   ]
+  },
+  {
+   "id": "ttt-hidrasec-10-infants",
+   "name": "Hidrasec 10 mg Infants",
+   "active": "Racecadotril 10 mg · Thuốc bột dùng để uống",
+   "group": "Thuốc điều trị tiêu chảy (ATC A07XA04)",
+   "area": "Tiêu hóa",
+   "tags": [
+    "Tiêu hóa",
+    "Nhi khoa",
+    "Racecadotril"
+   ]
+  },
+  {
+   "id": "ttt-hidrasec-30-children",
+   "name": "Hidrasec 30 mg Children",
+   "active": "Racecadotril 30 mg · Thuốc bột dùng để uống",
+   "group": "Thuốc điều trị tiêu chảy",
+   "area": "Tiêu hóa",
+   "tags": [
+    "Tiêu hóa",
+    "Nhi khoa",
+    "Racecadotril"
+   ]
+  },
+  {
+   "id": "ttt-insuact-20",
+   "name": "Insuact 20",
+   "active": "Atorvastatin 20 mg (dạng atorvastatin calci trihydrat) · Viên nén bao phim",
+   "group": "Statin – ức chế HMG-CoA reductase (ATC C10AA05)",
+   "area": "Tim mạch",
+   "tags": [
+    "Tim mạch",
+    "Rối loạn lipid máu",
+    "Atorvastatin"
+   ]
+  },
+  {
+   "id": "ttt-lacbiosyn",
+   "name": "Lacbiosyn",
+   "active": "Lactobacillus acidophilus 108 CFU/gói* · Thuốc bột uống",
+   "group": "Vi khuẩn sinh acid lactic (ATC A07FA01)",
+   "area": "Men vi sinh",
+   "tags": [
+    "Men vi sinh",
+    "Lactobacillus acidophilus"
+   ]
+  },
+  {
+   "id": "ttt-lipagim-300",
+   "name": "Lipagim 300",
+   "active": "Fenofibrat 300 mg · Viên nang",
+   "group": "Fibrat – hạ lipid máu",
+   "area": "Rối loạn lipid máu",
+   "tags": [
+    "Rối loạn lipid máu",
+    "Fenofibrat"
+   ]
+  },
+  {
+   "id": "ttt-lipanthyl-200m",
+   "name": "Lipanthyl 200M",
+   "active": "Fenofibrate 200 mg (vi hạt) · Viên nang cứng",
+   "group": "Fibrat (ATC C10AB05)",
+   "area": "Rối loạn lipid máu",
+   "tags": [
+    "Rối loạn lipid máu",
+    "Fenofibrat"
+   ]
+  },
+  {
+   "id": "ttt-lipitor",
+   "name": "Lipitor",
+   "active": "atorvastatin (atorvastatin-Hemi calcium 1,5 H2O)",
+   "group": "thuốc hạ lipid máu tổng hợp, chất ức chế men khử HMG-CoA",
+   "area": "Tim mạch",
+   "tags": [
+    "Tim mạch",
+    "Rối loạn lipid máu",
+    "Atorvastatin"
+   ]
+  },
+  {
+   "id": "ttt-medoleb-200",
+   "name": "Medoleb 200 mg",
+   "active": "Celecoxib 200 mg · Viên nang cứng",
+   "group": "NSAID ức chế chọn lọc COX-2 (ATC M01AH01)",
+   "area": "NSAID",
+   "tags": [
+    "NSAID",
+    "Celecoxib"
+   ]
+  },
+  {
+   "id": "ttt-melanov-m",
+   "name": "Melanov-M",
+   "active": "Gliclazid 80 mg + Metformin hydroclorid 500 mg · Viên nén không bao",
+   "group": "Sulfonylurea + biguanid",
+   "area": "Nội tiết",
+   "tags": [
+    "Nội tiết",
+    "Đái tháo đường",
+    "Gliclazid",
+    "Metformin"
+   ]
+  },
+  {
+   "id": "ttt-meronem-iv",
+   "name": "Meronem IV",
+   "active": "meropenem (dạng trihydrate)",
+   "group": "kháng sinh nhóm carbapenem, dùng đường tĩnh mạch",
+   "area": "Kháng sinh",
+   "tags": [
+    "Kháng sinh",
+    "Meropenem"
+   ]
+  },
+  {
+   "id": "ttt-mezapulgit",
+   "name": "Mezapulgit",
+   "active": "Attapulgit hoạt tính 2,5 g + Magnesi carbonat 0,3 g + Nhôm hydroxyd 0,2 g/gói 3,3 g · Thuốc bột pha hỗn dịch uống",
+   "group": "Kháng acid – bảo vệ dạ dày/thực quản (ATC A02AD01)",
+   "area": "Tiêu hóa",
+   "tags": [
+    "Tiêu hóa",
+    "Kháng acid",
+    "Attapulgit"
+   ]
+  }
+ ]
+}

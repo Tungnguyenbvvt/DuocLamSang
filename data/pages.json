@@ -1,14 +1,16 @@
 {
-  "version": "1.5.0",
+  "version": "1.6.0",
   "updated": "2026-11-03",
   "source": "Danh mục tài liệu nội bộ Khoa Dược. Nguồn tham khảo gốc của từng tài liệu được ghi trong chính trang tài liệu đó.",
   "categories": [
     { "id": "guideline", "name": "Tóm tắt guideline", "icon": "book" },
-    { "id": "thong-tin-thuoc", "name": "Tài liệu thông tin thuốc", "icon": "pill" },
+    { "id": "thong-tin-thuoc", "name": "Tài liệu thông tin thuốc", "icon": "pill", "statCount": "43 thuốc" },
     { "id": "so-sanh", "name": "So sánh dược lý lâm sàng", "icon": "compare" },
     { "id": "ebm", "name": "Thẩm định bài báo (EBM)", "icon": "search" },
     { "id": "icd10", "name": "ICD-10", "icon": "code", "statCount": "15.844 mã" },
-    { "id": "tt20", "name": "TT20 – Danh mục thuốc BHYT", "icon": "law", "statCount": "1.096 thuốc" }
+    { "id": "tt20", "name": "TT20 – Danh mục thuốc BHYT", "icon": "law", "statCount": "1.096 thuốc" },
+    { "id": "dich-vu-ky-thuat", "name": "Dịch vụ kĩ thuật", "icon": "service" },
+    { "id": "phac-do-dieu-tri", "name": "Phác đồ điều trị", "icon": "protocol" }
   ],
   "records": [
     { "id": "acg-2026-xo-gan", "title": "ACG 2026 – Chăm sóc dự phòng cho người bệnh xơ gan", "file": "pages/ACG-2026-xo-gan-du-phong-tom-tat.html", "category": "guideline", "tags": ["Tiêu hóa", "Gan mật"], "review": "chưa kiểm chứng" },
@@ -22,6 +24,7 @@
     { "id": "idsa-2026-gram-am", "title": "IDSA 2026 – Phác đồ kháng sinh vi khuẩn Gram âm kháng thuốc", "file": "pages/idsa-2026-gram-am-khang-thuoc.html", "category": "guideline", "tags": ["Kháng sinh", "Nhiễm khuẩn"], "review": "chưa kiểm chứng" },
     { "id": "ssti-s-aureus", "title": "Nhiễm trùng da và mô mềm do Staphylococcus aureus", "file": "pages/nhiem-trung-da-mo-mem-staphylococcus-aureus.html", "category": "guideline", "tags": ["Kháng sinh", "Nhiễm khuẩn", "Da liễu"], "review": "chưa kiểm chứng" },
 
+    { "id": "thuoc-tra-cuu", "title": "Tra cứu thông tin thuốc", "file": "pages/tra-cuu-thuoc.html", "category": "thong-tin-thuoc", "tags": ["Công cụ tra cứu"], "review": "chưa kiểm chứng" },
     { "id": "ttt-aginaril-5", "title": "Aginaril 5 – Tài liệu thông tin thuốc", "file": "pages/Aginaril5_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Enalapril"], "review": "chưa kiểm chứng" },
     { "id": "ttt-alusi", "title": "Alusi – Tài liệu thông tin thuốc", "file": "pages/ALUSI_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tiêu hóa", "Kháng acid", "Magnesi trisilicat", "Nhôm hydroxyd"], "review": "chưa kiểm chứng" },
     { "id": "ttt-amiodarona", "title": "Amiodarona GP – Tài liệu thông tin thuốc", "file": "pages/Amiodarona_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Chống loạn nhịp", "Amiodaron"], "review": "chưa kiểm chứng" },
