@@ -12,6 +12,7 @@
 <body>
 <div id="sum"></div>
 <ol id="out"></ol>
+<script src="../js/search.js"></script>
 <script src="../js/modules/lookup.js"></script>
 <script>
   // Dữ liệu kiểm thử tổng hợp (mã X.. giả), không phải dữ liệu lâm sàng.
@@ -84,6 +85,41 @@
   eq('validate: thiếu records', throws(function () { T.validate({ version: '1', updated: '2026-10-28', source: 's' }); }), true);
   eq('validate: thiếu source', throws(function () { T.validate({ version: '1', updated: '2026-10-28', records: [] }); }), true);
   eq('validate: sai định dạng ngày', throws(function () { T.validate({ version: '1', updated: '28/10/2026', source: 's', records: [] }); }), true);
+
+  // Xếp theo mức liên quan
+  var S = T.S, cfg6 = { codeField: 'code', searchFields: ['code', 'name', 'guide'], primaryFields: ['name'] };
+  var recs6 = T.prepare([
+    { code: 'A1', name: 'Nhiễm thử không gây viêm phổi', guide: '' },
+    { code: 'B1', name: 'Bệnh thử X', guide: 'có viêm phổi' },
+    { code: 'J2', name: 'Viêm phổi do tác nhân thử dài hơn', guide: '' },
+    { code: 'J1', name: 'Viêm phổi, tác nhân thử', guide: '' },
+    { code: 'J3', name: 'Viêm phổi', guide: '' },
+    { code: 'C1', name: 'Phổi thử viêm', guide: '' }
+  ], cfg6);
+  eq('đúng cụm > bắt đầu > trong tên > rải rác > chỉ hướng dẫn', codes(T.search(recs6, 'viem phoi', cfg6, {})), ['J3', 'J1', 'J2', 'A1', 'C1', 'B1']);
+
+  // Từ điển đồng nghĩa (mục giả, không phải dữ liệu lâm sàng)
+  var dict = S.buildDict({ entries: [
+    { term: 'ĐTT', to: ['đau đầu thử'] }, { term: 'Biệt Thử', to: ['chất một', 'chất hai'] }, { term: 'Đã Tắt', to: ['chất một'], active: false }
+  ] });
+  var recs7 = T.prepare([
+    { code: 'D1', name: 'Đau đầu thử nghiệm', guide: '' }, { code: 'D2', name: 'Chất một', guide: '' },
+    { code: 'D3', name: 'Chất hai dạng tiêm', guide: '' }, { code: 'D4', name: 'Amoxicilin', guide: '' },
+    { code: 'D5', name: 'Ceftriaxon', guide: '' }, { code: 'D6', name: 'Cefalexin', guide: '' }
+  ], cfg6);
+  function run(q) { return codes(S.run(recs7, q, {}, dict).list); }
+  eq('viết tắt có dấu đ, gõ không dấu', run('dtt'), ['D1']);
+  eq('biệt dược ra mọi hoạt chất', run('biệt thử'), ['D2', 'D3']);
+  eq('báo mục từ điển đã dùng', S.run(recs7, 'biet thu', {}, dict).used.length, 2);
+  eq('mục đã tắt không có hiệu lực', run('da tat'), []);
+  eq('từ khóa kèm từ khác vẫn mở rộng', run('dtt nghiem'), ['D1']);
+  eq('không khớp giữa từ', S.expand('xdtt', dict).length, 0);
+  eq('gần đúng: ll', run('amoxicillin'), ['D4']);
+  eq('gần đúng: e cuối', run('ceftriaxone'), ['D5']);
+  eq('gần đúng: ph', run('cephalexin'), ['D6']);
+  eq('báo kết quả gần đúng', S.run(recs7, 'amoxicillin', {}, dict).fuzzy, true);
+  eq('khớp đúng thì không dùng gần đúng', S.run(recs7, 'amoxicilin', {}, dict).fuzzy, false);
+  eq('không có từ điển vẫn chạy', S.run(recs7, 'chat mot', {}, null).list.length, 1);
 
   var fail = results.filter(function (r) { return !r.ok; }).length;
   document.getElementById('sum').innerHTML = '<span class="' + (fail ? 'fail' : 'pass') + '">' + (results.length - fail) + '/' + results.length + ' ca đạt</span>';

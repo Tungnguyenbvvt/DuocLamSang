@@ -55,3 +55,7 @@ body{background:var(--bg)}
   .lk-table td::before{content:attr(data-label);display:block;font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.03em}
   .lk-table .lk-empty td::before{content:none}
 }
+
+/* Dòng mở từ ô tìm kiếm ở sidebar; ghi chú từ điển đồng nghĩa */
+.lk-focus td{background:color-mix(in srgb,var(--cat) 14%,transparent)}
+.lk-syn{margin:8px 0 0;font-size:13px;color:var(--mut)}

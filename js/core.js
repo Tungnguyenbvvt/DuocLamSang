@@ -30,54 +30,40 @@
   };
 
   /* ---------- Tiện ích ---------- */
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-  // Chuẩn hóa không dấu tiếng Việt cho tìm kiếm
-  function norm(s) {
-    return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
-      .replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
-  }
-  function tokens(q) { return norm(q).split(/\s+/).filter(Boolean); }
-
-  // Tô sáng các từ khóa trên chuỗi gốc (có dấu), so khớp theo chuỗi đã chuẩn hóa
-  function highlight(text, toks) {
-    text = String(text);
-    if (!toks.length) return esc(text);
-    var flat = '', map = [];
-    for (var i = 0; i < text.length; i++) {
-      var n = norm(text[i]);
-      for (var j = 0; j < n.length; j++) { flat += n[j]; map.push(i); }
-    }
-    var marks = new Array(text.length);
-    toks.forEach(function (t) {
-      var from = 0, at;
-      while ((at = flat.indexOf(t, from)) !== -1) {
-        for (var k = at; k < at + t.length; k++) marks[map[k]] = true;
-        from = at + t.length;
-      }
-    });
-    var out = '', open = false;
-    for (var c = 0; c < text.length; c++) {
-      if (marks[c] && !open) { out += '<mark>'; open = true; }
-      if (!marks[c] && open) { out += '</mark>'; open = false; }
-      out += esc(text[c]);
-    }
-    return open ? out + '</mark>' : out;
-  }
+  var S = window.DlsSearch;
+  var esc = S.esc, highlight = S.highlight;
 
   function isMobile() { return window.matchMedia('(max-width:' + MOBILE_MAX + 'px)').matches; }
   function docHref(rec) { return encodeURI(rec.file); }
-  function haystack(rec) {
-    var cat = state.catById[rec.category];
-    return norm([rec.title, (rec.tags || []).join(' '), cat ? cat.name : ''].join(' '));
+
+  /* ---------- Tìm chung: tài liệu, mã ICD-10, thuốc TT20 ---------- */
+  var ICD_CFG = { codeField: 'code', searchFields: ['code', 'name', 'nameEn', 'guide', 'guideEn'], primaryFields: ['name', 'nameEn'] };
+  var TT20_CFG = { codeField: null, searchFields: ['name', 'route', 'form', 'note', 'group', 'subgroup'], primaryFields: ['name'] };
+  var DOC_CFG = { codeField: null, searchFields: ['title', 'tags', '_catName'], primaryFields: ['title', 'tags'] };
+  var HITS_MAX = 6;
+  var EMPTY_HINT = 'Thử tên hoạt chất, ví dụ atorvastatin thay cho Lipitor, hoặc bớt từ khóa.';
+  var index = { started: false, dict: null, icd: null, tt20: null, pending: 0 };
+
+  function fetchJson(url) {
+    return fetch(url, { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
   }
-  function matches(rec, toks) {
-    if (!toks.length) return true;
-    var h = rec._hay;
-    return toks.every(function (t) { return h.indexOf(t) !== -1; });
+  // Tải khi người dùng bắt đầu tìm, không tải lúc mở app (icd10.json nặng); mỗi nguồn lỗi độc lập
+  function loadIndex() {
+    if (index.started) return;
+    index.started = true;
+    function part(url, use) {
+      index.pending++;
+      fetchJson(url).then(use).catch(function () { /* nguồn này không tham gia tìm kiếm */ }).then(function () {
+        index.pending--;
+        if (search.value.trim()) renderNav();
+      });
+    }
+    part('data/synonyms.json', function (d) { index.dict = S.buildDict(d); });
+    part('data/doc-text.json', function (d) {
+      state.data.records.forEach(function (r) { if (d.docs[r.id]) r._hay += ' ' + d.docs[r.id]; });
+    });
+    part('data/icd10.json', function (d) { index.icd = S.prepare(d.records, ICD_CFG); });
+    part('data/tt20.json', function (d) { index.tt20 = S.prepare(d.records, TT20_CFG); });
   }
 
   /* ---------- Sidebar ---------- */
@@ -93,38 +79,106 @@
     return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (CAT_ICONS[cat.icon] || CAT_ICONS.book) + '</svg>';
   }
 
+  function groupHtml(catId, name, icon, count, body) {
+    return '<div class="nav-group" data-cat="' + esc(catId) + '">' +
+      '<button class="nav-group-btn" type="button" aria-expanded="true">' + icon + '<span>' + esc(name) + '</span>' +
+      '<span class="nav-count">' + count + '</span>' +
+      '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>' +
+      '<ul class="nav-list">' + body + '</ul></div>';
+  }
+  function docItem(r, toks, favs) {
+    var active = state.current && state.current.id === r.id;
+    return '<li><a class="nav-item' + (active ? ' active' : '') + '" href="#/p/' + encodeURIComponent(r.id) + '"' +
+      (active ? ' aria-current="page"' : '') + ' data-id="' + esc(r.id) + '">' +
+      '<span class="dot" aria-hidden="true"></span><span>' + highlight(r.title, toks) + '</span>' +
+      (favs.indexOf(r.id) !== -1 ? '<span class="fav-mark" aria-label="Yêu thích">★</span>' : '') +
+      '</a></li>';
+  }
+  function toolHref(id, q, focus) {
+    return '#/p/' + id + '?q=' + encodeURIComponent(q) + (focus ? '&f=' + encodeURIComponent(focus) : '');
+  }
+  function hitItem(href, code, text, sub, toks) {
+    return '<li><a class="nav-item nav-hit" href="' + esc(href) + '">' + (code ? '<span class="hit-code">' + esc(code) + '</span>' : '') +
+      '<span>' + highlight(text, toks) + (sub ? '<small>' + esc(sub) + '</small>' : '') + '</span></a></li>';
+  }
+  function moreItem(href, n) {
+    return '<li><a class="nav-item nav-all" href="' + esc(href) + '">Xem tất cả ' + n.toLocaleString('vi-VN') + ' kết quả</a></li>';
+  }
+
+  // Một thuốc TT20 có nhiều dòng đường dùng: sidebar chỉ hiện mỗi thuốc một lần
+  function uniqueDrugs(list) {
+    var seen = {}, out = [];
+    list.forEach(function (r) {
+      var key = r.annex + '-' + r.stt;
+      if (seen[key]) { seen[key].routes.push(r.route); return; }
+      seen[key] = { r: r, key: key, routes: [r.route] };
+      out.push(seen[key]);
+    });
+    return out;
+  }
+
+  function renderSearch(q, favs) {
+    var d = state.data, html = '', total = 0, note = '';
+
+    var docs = S.run(d.records, q, {}, index.dict);
+    note = S.noteHtml(docs);
+    total += docs.list.length;
+    if (docs.list.length) {
+      html += groupHtml('docs', 'Tài liệu', catIcon({ icon: 'book' }), docs.list.length, docs.list.slice(0, index.allDocs ? docs.list.length : HITS_MAX).map(function (r) {
+        return docItem(r, docs.toks, favs);
+      }).join('') + (!index.allDocs && docs.list.length > HITS_MAX ?
+        '<li><button class="nav-item nav-all" type="button" data-all-docs>Xem tất cả ' + docs.list.length + ' tài liệu</button></li>' : ''));
+    }
+    if (index.icd) {
+      var icd = S.run(index.icd, q, {}, index.dict);
+      total += icd.list.length;
+      if (icd.list.length) {
+        html += groupHtml('icd10', 'Mã ICD-10', catIcon({ icon: 'code' }), icd.list.length.toLocaleString('vi-VN'), icd.list.slice(0, HITS_MAX).map(function (r) {
+          return hitItem(toolHref('icd10-tra-cuu', r.code, r.code), r.code, r.name, '', icd.toks);
+        }).join('') + (icd.list.length > HITS_MAX ? moreItem(toolHref('icd10-tra-cuu', q), icd.list.length) : ''));
+      }
+      note = note || S.noteHtml(icd);
+    }
+    if (index.tt20) {
+      var tt = S.run(index.tt20, q, {}, index.dict);
+      var drugs = uniqueDrugs(tt.list);
+      total += drugs.length;
+      if (drugs.length) {
+        html += groupHtml('tt20', 'Thuốc TT20', catIcon({ icon: 'law' }), drugs.length.toLocaleString('vi-VN'), drugs.slice(0, HITS_MAX).map(function (x) {
+          return hitItem(toolHref('tt20-tra-cuu', x.r.name, x.key), '', x.r.name, x.routes.filter(Boolean).join(' · '), tt.toks);
+        }).join('') + (drugs.length > HITS_MAX ? moreItem(toolHref('tt20-tra-cuu', q), drugs.length) : ''));
+      }
+      note = note || S.noteHtml(tt);
+    }
+
+    var loading = index.pending > 0 ? '<p class="nav-empty">Đang tải dữ liệu tìm kiếm…</p>' : '';
+    if (!total) return loading || '<p class="nav-empty">Không tìm thấy kết quả. ' + EMPTY_HINT + '</p>';
+    return (note ? '<p class="nav-syn">' + note + '</p>' : '') + html + loading;
+  }
+
   function renderNav() {
     var d = state.data;
-    var toks = tokens(search.value);
+    var q = search.value.trim();
     var closed = store.get('closed', {});
     var favs = store.get('favs', []);
-    var html = '', total = 0;
+    document.querySelector('.nav-home').classList.toggle('active', !state.current);
+    if (q) { loadIndex(); navGroups.innerHTML = renderSearch(q, favs); return; }
 
-    d.categories.forEach(function (cat) {
-      var items = d.records.filter(function (r) { return r.category === cat.id && matches(r, toks); });
-      if (!items.length) return;
-      total += items.length;
-      var isClosed = !toks.length && closed[cat.id];
-      html += '<div class="nav-group' + (isClosed ? ' closed' : '') + '" data-cat="' + esc(cat.id) + '">' +
+    navGroups.innerHTML = d.categories.map(function (cat) {
+      var items = d.records.filter(function (r) { return r.category === cat.id; });
+      if (!items.length) return '';
+      var isClosed = closed[cat.id];
+      return '<div class="nav-group' + (isClosed ? ' closed' : '') + '" data-cat="' + esc(cat.id) + '">' +
         '<button class="nav-group-btn" type="button" aria-expanded="' + (!isClosed) + '">' +
         catIcon(cat) + '<span>' + esc(cat.name) + '</span>' +
         '<span class="nav-count">' + items.length + '</span>' +
         '<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>' +
-        '<ul class="nav-list">' + items.map(function (r) {
-          var active = state.current && state.current.id === r.id;
-          return '<li><a class="nav-item' + (active ? ' active' : '') + '" href="#/p/' + encodeURIComponent(r.id) + '"' +
-            (active ? ' aria-current="page"' : '') + ' data-id="' + esc(r.id) + '">' +
-            '<span class="dot" aria-hidden="true"></span><span>' + highlight(r.title, toks) + '</span>' +
-            (favs.indexOf(r.id) !== -1 ? '<span class="fav-mark" aria-label="Yêu thích">★</span>' : '') +
-            '</a></li>';
-        }).join('') + '</ul></div>';
-    });
-
-    navGroups.innerHTML = total ? html : '<p class="nav-empty">Không tìm thấy tài liệu phù hợp.</p>';
-    document.querySelector('.nav-home').classList.toggle('active', !state.current);
+        '<ul class="nav-list">' + items.map(function (r) { return docItem(r, [], favs); }).join('') + '</ul></div>';
+    }).join('');
   }
 
   navGroups.addEventListener('click', function (e) {
+    if (e.target.closest('[data-all-docs]')) { index.allDocs = true; renderNav(); return; }
     var btn = e.target.closest('.nav-group-btn');
     if (!btn) return;
     var g = btn.parentNode, id = g.getAttribute('data-cat');
@@ -138,7 +192,8 @@
     }
   });
 
-  search.addEventListener('input', function () { renderNav(); });
+  search.addEventListener('input', function () { index.allDocs = false; renderNav(); });
+  search.addEventListener('focus', function () { if (state.data) loadIndex(); });
   search.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       var first = navGroups.querySelector('.nav-item');
@@ -238,10 +293,11 @@
       '<div class="hero-img">' + img + '</div></div>' +
       '<div class="stats">' + d.categories.map(function (c) {
         var n = d.records.filter(function (r) { return r.category === c.id; }).length;
-        return '<a class="stat" href="#/c/' + encodeURIComponent(c.id) + '"><b>' + n + '</b><span>' + esc(c.name) + '</span></a>';
+        return '<a class="stat" href="#/c/' + encodeURIComponent(c.id) + '"><b>' + esc(c.statCount || n) + '</b><span>' + esc(c.name) + '</span></a>';
       }).join('') + '</div>' +
-      '<div class="notice" role="note">Nội dung chỉ dùng tham khảo chuyên môn, không thay thế phán đoán lâm sàng; các tài liệu gắn nhãn “chưa kiểm chứng” cần dược sĩ hoặc bác sĩ khác đối chiếu nguồn trước khi áp dụng. ' +
-      'Ứng dụng không thu thập dữ liệu bệnh nhân. Dữ liệu sức khỏe là dữ liệu cá nhân nhạy cảm theo Nghị định 13/2023/NĐ-CP; đơn vị triển khai chịu trách nhiệm pháp lý và nên đối chiếu với bộ phận pháp chế.</div>';
+      '<details class="notice"><summary>Chỉ dùng tham khảo, không thay thế phán đoán lâm sàng. <span class="notice-more">Xem thêm</span></summary>' +
+      '<p>Nội dung chỉ dùng tham khảo chuyên môn, không thay thế phán đoán lâm sàng; các tài liệu gắn nhãn “chưa kiểm chứng” cần dược sĩ hoặc bác sĩ khác đối chiếu nguồn trước khi áp dụng. ' +
+      'Ứng dụng không thu thập dữ liệu bệnh nhân. Dữ liệu sức khỏe là dữ liệu cá nhân nhạy cảm theo Nghị định 13/2023/NĐ-CP; đơn vị triển khai chịu trách nhiệm pháp lý và nên đối chiếu với bộ phận pháp chế.</p></details>';
 
     if (favs.length) html += '<h2 class="sec-title">★ Yêu thích</h2><div class="cards">' + favs.map(cardHtml).join('') + '</div>';
     if (recent.length) html += '<h2 class="sec-title">Xem gần đây</h2><div class="cards">' + recent.map(cardHtml).join('') + '</div>';
@@ -283,9 +339,9 @@
     btnFav.setAttribute('aria-label', on ? 'Bỏ yêu thích' : 'Đánh dấu yêu thích');
   }
 
-  function openDoc(rec) {
+  function openDoc(rec, params) {
     state.current = rec;
-    var href = docHref(rec);
+    var href = docHref(rec) + (params ? '?' + params : '');
     homeView.hidden = true;
     docView.hidden = false;
     tbActions.hidden = false;
@@ -337,14 +393,14 @@
     catch (e) { var s = frame.getAttribute('src'); frame.setAttribute('src', 'about:blank'); frame.setAttribute('src', s); }
   });
 
-  /* ---------- Định tuyến theo hash: #/  #/c/<nhóm>  #/p/<id> ---------- */
+  /* ---------- Định tuyến theo hash: #/  #/c/<nhóm>  #/p/<id>[?q=<từ khóa>&f=<dòng>] ---------- */
   function route() {
     if (!state.data) return;
-    var h = location.hash.replace(/^#\/?/, '');
-    var parts = h.split('/');
+    var h = location.hash.replace(/^#\/?/, '').split('?');
+    var parts = h[0].split('/');
     if (parts[0] === 'p' && parts[1]) {
       var rec = state.byId[decodeURIComponent(parts[1])];
-      if (rec) { openDoc(rec); return; }
+      if (rec) { openDoc(rec, h[1]); return; }
       history.replaceState(null, '', '#/');
       parts = [''];
     }
@@ -392,7 +448,11 @@
     .then(function (d) {
       state.data = validateData(d);
       d.categories.forEach(function (c) { state.catById[c.id] = c; });
-      d.records.forEach(function (r) { state.byId[r.id] = r; r._hay = haystack(r); });
+      d.records.forEach(function (r) {
+        state.byId[r.id] = r;
+        r._catName = state.catById[r.category] ? state.catById[r.category].name : '';
+      });
+      S.prepare(d.records, DOC_CFG);
       $('dataVer').textContent = 'Danh mục v' + d.version + ' · ' + d.updated;
       route();
     })

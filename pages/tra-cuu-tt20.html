@@ -45,6 +45,7 @@
   <p class="lk-meta"></p>
 </div>
 
+<script src="../js/search.js"></script>
 <script src="../js/modules/lookup.js"></script>
 <script>
   function multiline(html) { return html.replace(/\n/g, '<br>'); }
@@ -53,6 +54,8 @@
     codeField: null,
     searchFields: ['name', 'route', 'form', 'note', 'group', 'subgroup'],
     primaryFields: ['name'],
+    rowKey: function (r) { return r.annex + '-' + r.stt; },
+    emptyHint: 'Thử tên hoạt chất, ví dụ atorvastatin thay cho Lipitor, hoặc bớt từ khóa.',
     filters: [
       {
         field: 'annex', label: 'Phụ lục',

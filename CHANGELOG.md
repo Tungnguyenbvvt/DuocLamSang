@@ -1,5 +1,18 @@
 # Nhật ký thay đổi
 
+## 1.10.0 – 2026-11-03
+
+- **Tìm một lần ra mọi nơi:** ô tìm kiếm ở sidebar hiện 3 nhóm Tài liệu, Mã ICD-10, Thuốc TT20 (mỗi nhóm 6 dòng đầu, có “Xem tất cả”). Bấm một mã hoặc một thuốc mở trang tra cứu đúng dòng đó, tô màu và đưa lên đầu (`#/p/<id>?q=…&f=…`). Dữ liệu ICD-10, TT20 chỉ tải khi bắt đầu tìm.
+- **Tìm theo nội dung tài liệu:** thêm `data/doc-text.json` (158 KB), tạo bằng `tools/build-search/build.py`; **chạy lại mỗi khi thêm hoặc sửa tài liệu**.
+- **Từ điển đồng nghĩa** `data/synonyms.json` 1.0.0 (50 mục, tất cả **chưa kiểm chứng**): 39 biệt dược/tên gọi → hoạt chất, lấy từ chính các trang Tài liệu thông tin thuốc, chỉ gồm thuốc có trong app; 11 viết tắt do người soạn đề xuất, **chưa có văn bản nguồn, chờ dược sĩ duyệt**. Khi từ điển được dùng, kết quả ghi rõ “từ điển chưa kiểm chứng”. Tắt một mục bằng `"active": false`. Biệt dược chưa có trong app (ví dụ Augmentin) chưa tìm được.
+- **Cách viết quốc tế / Việt hóa:** khớp gần đúng theo quy tắc chính tả (ll → l, ph → f, th → t, y → i, bỏ e cuối), chỉ dùng khi không có kết quả đúng chính tả và có ghi chú trên màn hình.
+- **Xếp theo mức liên quan:** đúng mã > mã bắt đầu bằng từ khóa > tên đúng cụm > tên bắt đầu bằng cụm (bỏ qua chữ “Bệnh” đầu tên) > cụm trong tên > từ khóa rải rác > chỉ khớp phần phụ; cùng bậc thì mã nhóm 3 ký tự trước, tên ngắn trước.
+- Logic tìm kiếm gom vào `js/search.js`, dùng chung cho sidebar và trang tra cứu. Thêm 13 ca kiểm thử.
+- Khi không có kết quả: hiện gợi ý cách tìm khác. Ô thống kê ICD-10, TT20 hiện “15.844 mã”, “1.096 thuốc”. Khung lưu ý thu thành 1 dòng, có “Xem thêm”; toàn văn giữ nguyên.
+- Logo còn 96×96 px, 3,5 KB (trước 43 KB). 4 trang tràn ngang trên điện thoại (CKM, ASH, IDSA, statin) được thêm CSS bố cục, không đổi nội dung. 6 tài liệu thuốc cũ có thêm nhãn hoạt chất (Bexsero là vắc xin, không thêm).
+- `pages.json` lên 1.5.0, CACHE_VERSION lên cph-hub-v1.10.0.
+- **Nút “Powered by Netlify” chưa tắt được:** với gói miễn phí, Netlify không cho ẩn nút này. Không dùng CSS để che.
+
 ## 1.9.0 – 2026-10-29
 
 - **Tài liệu thông tin thuốc: thêm 36 thuốc** (từ thư mục “Tờ HDSD đã tổng hợp/File HTML” do người dùng cung cấp), nâng module từ 7 lên 43 tài liệu: Alusi, Angut 300, AtiGlucinol inj, Atropin sulfat, Baci-Subti, Biofazolin, Bioflora, Colchicina SEID, Coldacmin Sinus, Debby, Dimedrol, Drotusc, Duphaston, Efferalgan 150, Elaria 100 mg, Esomeprazole STADA 20 mg, Faskit, Fezidat, Giloba, Glumeben, Glumeform 1000 XR, Glumeron 30 MR, Grafort 3g, Hadumix CAP, Haemostop, Hapacol Caplet 500, Haxium 40, Hidrasec 10 mg Infants, Hidrasec 30 mg Children, Insuact 20, Lacbiosyn, Lipagim 300, Lipanthyl 200M, Medoleb 200 mg, Melanov-M, Mezapulgit.

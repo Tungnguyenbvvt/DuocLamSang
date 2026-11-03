@@ -42,7 +42,9 @@ Mở http://localhost:8080. Không mở trực tiếp `index.html` bằng đúp 
 
 1. Chép tệp HTML vào `pages/` (tên không dấu, không dấu cách).
 2. Thêm một bản ghi vào `data/pages.json` (`id` duy nhất, `title`, `file`, `category`, `tags`, `review`), cập nhật `version` và `updated`.
-3. Tăng `CACHE_VERSION` trong `sw.js`.
+3. Chạy `python tools/build-search/build.py` để ô tìm kiếm tìm được theo nội dung tài liệu mới.
+4. Với thuốc mới, thêm mục biệt dược → hoạt chất vào `data/synonyms.json`, ghi nguồn; mục chưa duyệt để `"review": "chưa kiểm chứng"`.
+5. Tăng `CACHE_VERSION` trong `sw.js`.
 
 ## Nạp dữ liệu thật cho ICD-10 / TT20
 

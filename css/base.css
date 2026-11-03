@@ -52,8 +52,14 @@ svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-l
 .nav-home:hover,.nav-item:hover{background:var(--sb-hover)}
 .nav-home.active,.nav-item.active{background:var(--sb-active);font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 .nav-loading,.nav-empty{color:var(--sb-mut);padding:8px 10px;margin:0}
+.nav-syn{color:var(--sb-tx);font-size:12.5px;line-height:1.45;padding:8px 10px;margin:6px 0 0;border-radius:8px;background:rgba(255,255,255,.08)}
+.nav-hit{align-items:flex-start;font-size:13.5px}
+.nav-hit small{display:block;color:var(--sb-mut);font-size:12px;margin-top:2px}
+.hit-code{flex:none;min-width:46px;font-weight:700;font-variant-numeric:tabular-nums}
+.nav-all{width:100%;border:0;background:none;cursor:pointer;text-align:left;font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:2px}
 
 /* Tiêu đề module: dải màu đặc, mỗi module một màu nhận diện (--cat) */
+.nav-group[data-cat="docs"]{--cat:#7fb8d6}
 .nav-group[data-cat="guideline"]{--cat:#f2b84b}
 .nav-group[data-cat="thong-tin-thuoc"]{--cat:#f37fae}
 .nav-group[data-cat="so-sanh"]{--cat:#5fd4e8}
@@ -115,9 +121,13 @@ mark{background:color-mix(in srgb,var(--accent) 25%,#fff);color:inherit;border-r
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
 .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;text-decoration:none;color:var(--tx)}
 .stat:hover{border-color:var(--accent)}
-.stat b{display:block;font-size:24px;color:var(--accent)}
+.stat b{display:block;font-size:21px;white-space:nowrap;color:var(--accent)}
 .stat span{color:var(--mut);font-size:13px}
 .notice{background:var(--caution-bg);color:var(--caution-ink);border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:16px;line-height:1.5}
+.notice summary{cursor:pointer}
+.notice p{margin:8px 0 2px}
+.notice-more{font-weight:600;text-decoration:underline}
+.notice[open] .notice-more{display:none}
 .sec-title{font-size:16.5px;margin:22px 0 10px;display:flex;align-items:center;gap:8px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer}

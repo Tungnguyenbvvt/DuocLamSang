@@ -1,14 +1,14 @@
 {
-  "version": "1.4.0",
-  "updated": "2026-10-29",
+  "version": "1.5.0",
+  "updated": "2026-11-03",
   "source": "Danh mục tài liệu nội bộ Khoa Dược. Nguồn tham khảo gốc của từng tài liệu được ghi trong chính trang tài liệu đó.",
   "categories": [
     { "id": "guideline", "name": "Tóm tắt guideline", "icon": "book" },
     { "id": "thong-tin-thuoc", "name": "Tài liệu thông tin thuốc", "icon": "pill" },
     { "id": "so-sanh", "name": "So sánh dược lý lâm sàng", "icon": "compare" },
     { "id": "ebm", "name": "Thẩm định bài báo (EBM)", "icon": "search" },
-    { "id": "icd10", "name": "ICD-10", "icon": "code" },
-    { "id": "tt20", "name": "TT20 – Danh mục thuốc BHYT", "icon": "law" }
+    { "id": "icd10", "name": "ICD-10", "icon": "code", "statCount": "15.844 mã" },
+    { "id": "tt20", "name": "TT20 – Danh mục thuốc BHYT", "icon": "law", "statCount": "1.096 thuốc" }
   ],
   "records": [
     { "id": "acg-2026-xo-gan", "title": "ACG 2026 – Chăm sóc dự phòng cho người bệnh xơ gan", "file": "pages/ACG-2026-xo-gan-du-phong-tom-tat.html", "category": "guideline", "tags": ["Tiêu hóa", "Gan mật"], "review": "chưa kiểm chứng" },
@@ -22,10 +22,10 @@
     { "id": "idsa-2026-gram-am", "title": "IDSA 2026 – Phác đồ kháng sinh vi khuẩn Gram âm kháng thuốc", "file": "pages/idsa-2026-gram-am-khang-thuoc.html", "category": "guideline", "tags": ["Kháng sinh", "Nhiễm khuẩn"], "review": "chưa kiểm chứng" },
     { "id": "ssti-s-aureus", "title": "Nhiễm trùng da và mô mềm do Staphylococcus aureus", "file": "pages/nhiem-trung-da-mo-mem-staphylococcus-aureus.html", "category": "guideline", "tags": ["Kháng sinh", "Nhiễm khuẩn", "Da liễu"], "review": "chưa kiểm chứng" },
 
-    { "id": "ttt-aginaril-5", "title": "Aginaril 5 – Tài liệu thông tin thuốc", "file": "pages/Aginaril5_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-aginaril-5", "title": "Aginaril 5 – Tài liệu thông tin thuốc", "file": "pages/Aginaril5_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Enalapril"], "review": "chưa kiểm chứng" },
     { "id": "ttt-alusi", "title": "Alusi – Tài liệu thông tin thuốc", "file": "pages/ALUSI_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tiêu hóa", "Kháng acid", "Magnesi trisilicat", "Nhôm hydroxyd"], "review": "chưa kiểm chứng" },
-    { "id": "ttt-amiodarona", "title": "Amiodarona GP – Tài liệu thông tin thuốc", "file": "pages/Amiodarona_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Chống loạn nhịp"], "review": "chưa kiểm chứng" },
-    { "id": "ttt-amlodac-5", "title": "Amlodac 5 – Tài liệu thông tin thuốc", "file": "pages/Amlodac5_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-amiodarona", "title": "Amiodarona GP – Tài liệu thông tin thuốc", "file": "pages/Amiodarona_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Chống loạn nhịp", "Amiodaron"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-amlodac-5", "title": "Amlodac 5 – Tài liệu thông tin thuốc", "file": "pages/Amlodac5_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Amlodipin"], "review": "chưa kiểm chứng" },
     { "id": "ttt-angut-300", "title": "Angut 300 – Tài liệu thông tin thuốc", "file": "pages/Angut_300_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Gút", "Allopurinol"], "review": "chưa kiểm chứng" },
     { "id": "ttt-atiglucinol-inj", "title": "AtiGlucinol inj – Tài liệu thông tin thuốc", "file": "pages/AtiGlucinol_inj_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Chống co thắt", "Phloroglucinol"], "review": "chưa kiểm chứng" },
     { "id": "ttt-atropin-sulfat", "title": "Atropin sulfat – Tài liệu thông tin thuốc", "file": "pages/Atropin_sulfat_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Kháng muscarin", "Atropin"], "review": "chưa kiểm chứng" },
@@ -33,7 +33,7 @@
     { "id": "ttt-bexsero", "title": "Bexsero – Tài liệu thông tin thuốc", "file": "pages/Bexsero_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Vắc xin"], "review": "chưa kiểm chứng" },
     { "id": "ttt-biofazolin", "title": "Biofazolin – Tài liệu thông tin thuốc", "file": "pages/Biofazolin_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Kháng sinh", "Cefazolin"], "review": "chưa kiểm chứng" },
     { "id": "ttt-bioflora", "title": "Bioflora 100 mg – Tài liệu thông tin thuốc", "file": "pages/Bioflora_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Men vi sinh", "Saccharomyces boulardii"], "review": "chưa kiểm chứng" },
-    { "id": "ttt-cefoperazone", "title": "Cefoperazone – Tài liệu thông tin thuốc", "file": "pages/Cefoperazone_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Kháng sinh"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-cefoperazone", "title": "Cefoperazone – Tài liệu thông tin thuốc", "file": "pages/Cefoperazone_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Kháng sinh", "Cefoperazon"], "review": "chưa kiểm chứng" },
     { "id": "ttt-colchicina-seid", "title": "Colchicina SEID – Tài liệu thông tin thuốc", "file": "pages/Colchicina_SEID_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Gút", "Colchicin"], "review": "chưa kiểm chứng" },
     { "id": "ttt-coldacmin-sinus", "title": "Coldacmin Sinus – Tài liệu thông tin thuốc", "file": "pages/Coldacmin_sinus_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Giảm đau – hạ sốt", "Paracetamol", "Clorpheniramin"], "review": "chưa kiểm chứng" },
     { "id": "ttt-debby", "title": "Debby – Tài liệu thông tin thuốc", "file": "pages/Debby_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tiêu hóa", "Kháng sinh đường ruột", "Nifuroxazid"], "review": "chưa kiểm chứng" },
@@ -60,10 +60,10 @@
     { "id": "ttt-lacbiosyn", "title": "Lacbiosyn – Tài liệu thông tin thuốc", "file": "pages/Lacbiosyn_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Men vi sinh", "Lactobacillus acidophilus"], "review": "chưa kiểm chứng" },
     { "id": "ttt-lipagim-300", "title": "Lipagim 300 – Tài liệu thông tin thuốc", "file": "pages/Lipagim_300_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Rối loạn lipid máu", "Fenofibrat"], "review": "chưa kiểm chứng" },
     { "id": "ttt-lipanthyl-200m", "title": "Lipanthyl 200M – Tài liệu thông tin thuốc", "file": "pages/Lipanthyl_200M_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Rối loạn lipid máu", "Fenofibrat"], "review": "chưa kiểm chứng" },
-    { "id": "ttt-lipitor", "title": "Lipitor – Tài liệu thông tin thuốc", "file": "pages/Lipitor_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Rối loạn lipid máu"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-lipitor", "title": "Lipitor – Tài liệu thông tin thuốc", "file": "pages/Lipitor_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tim mạch", "Rối loạn lipid máu", "Atorvastatin"], "review": "chưa kiểm chứng" },
     { "id": "ttt-medoleb-200", "title": "Medoleb 200 mg – Tài liệu thông tin thuốc", "file": "pages/Medoleb_200mg_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["NSAID", "Celecoxib"], "review": "chưa kiểm chứng" },
     { "id": "ttt-melanov-m", "title": "Melanov-M – Tài liệu thông tin thuốc", "file": "pages/Melanov_M_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Nội tiết", "Đái tháo đường", "Gliclazid", "Metformin"], "review": "chưa kiểm chứng" },
-    { "id": "ttt-meronem-iv", "title": "Meronem IV – Tài liệu thông tin thuốc", "file": "pages/Meronem_IV_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Kháng sinh"], "review": "chưa kiểm chứng" },
+    { "id": "ttt-meronem-iv", "title": "Meronem IV – Tài liệu thông tin thuốc", "file": "pages/Meronem_IV_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Kháng sinh", "Meropenem"], "review": "chưa kiểm chứng" },
     { "id": "ttt-mezapulgit", "title": "Mezapulgit – Tài liệu thông tin thuốc", "file": "pages/Mezapulgit_Tai_lieu_thong_tin_thuoc.html", "category": "thong-tin-thuoc", "tags": ["Tiêu hóa", "Kháng acid", "Attapulgit"], "review": "chưa kiểm chứng" },
 
     { "id": "ss-carbapenem", "title": "So sánh carbapenem – Dược lý lâm sàng", "file": "pages/so-sanh-carbapenem-duoc-ly-lam-sang.html", "category": "so-sanh", "tags": ["Kháng sinh"], "review": "chưa kiểm chứng" },

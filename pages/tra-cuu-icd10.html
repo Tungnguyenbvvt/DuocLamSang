@@ -40,6 +40,7 @@
   <p class="lk-meta"></p>
 </div>
 
+<script src="../js/search.js"></script>
 <script src="../js/modules/lookup.js"></script>
 <script>
   Lookup.init({
@@ -47,6 +48,8 @@
     codeField: 'code',
     searchFields: ['code', 'name', 'nameEn', 'guide', 'guideEn'],
     primaryFields: ['name', 'nameEn'],
+    rowKey: function (r) { return r.code; },
+    emptyHint: 'Thử mã bệnh, tên bệnh khác hoặc bớt từ khóa.',
     filters: [
       {
         field: 'chapter', label: 'Chương',

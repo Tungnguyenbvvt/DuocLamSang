@@ -1,0 +1,464 @@
+{
+ "version": "1.0.0",
+ "updated": "2026-11-03",
+ "source": "Biệt dược → hoạt chất: lấy từ chính các trang Tài liệu thông tin thuốc trong app. Viết tắt: danh sách đề xuất, chưa có văn bản nguồn.",
+ "review": "chưa kiểm chứng",
+ "howto": "Tắt một mục: thêm \"active\": false. Sau khi dược sĩ duyệt: đổi review thành \"đã kiểm chứng\" và ghi reviewedBy, reviewedOn.",
+ "entries": [
+  {
+   "term": "Acetaminophen",
+   "to": [
+    "paracetamol"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-hapacol-caplet-500",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Aginaril",
+   "to": [
+    "enalapril"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-aginaril-5",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Alusi",
+   "to": [
+    "magnesi trisilicat",
+    "nhôm hydroxyd"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-alusi",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Amiodarona",
+   "to": [
+    "amiodaron"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-amiodarona",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Amlodac",
+   "to": [
+    "amlodipin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-amlodac-5",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Angut",
+   "to": [
+    "allopurinol"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-angut-300",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "AtiGlucinol",
+   "to": [
+    "phloroglucinol"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-atiglucinol-inj",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Baci-Subti",
+   "to": [
+    "bacillus subtilis"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-baci-subti",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Biofazolin",
+   "to": [
+    "cefazolin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-biofazolin",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Bioflora",
+   "to": [
+    "saccharomyces boulardii"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-bioflora",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Colchicina",
+   "to": [
+    "colchicin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-colchicina-seid",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Coldacmin",
+   "to": [
+    "paracetamol",
+    "clorpheniramin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-coldacmin-sinus",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Debby",
+   "to": [
+    "nifuroxazid"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-debby",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Dimedrol",
+   "to": [
+    "diphenhydramin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-dimedrol",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Drotusc",
+   "to": [
+    "drotaverin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-drotusc",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Duphaston",
+   "to": [
+    "dydrogesteron"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-duphaston",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Efferalgan",
+   "to": [
+    "paracetamol"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-efferalgan-150",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Elaria",
+   "to": [
+    "diclofenac"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-elaria-100",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Faskit",
+   "to": [
+    "kẽm gluconat"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-faskit",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Fezidat",
+   "to": [
+    "sắt fumarat",
+    "acid folic"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-fezidat",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Giloba",
+   "to": [
+    "ginkgo biloba"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-giloba",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Glumeben",
+   "to": [
+    "metformin",
+    "glibenclamid"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-glumeben",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Glumeform",
+   "to": [
+    "metformin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-glumeform-1000-xr",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Glumeron",
+   "to": [
+    "gliclazid"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-glumeron-30mr",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Grafort",
+   "to": [
+    "smectit"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-grafort-3g",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Hadumix",
+   "to": [
+    "acetylcystein"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-hadumix-cap",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Haemostop",
+   "to": [
+    "acid tranexamic"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-haemostop",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Hapacol",
+   "to": [
+    "paracetamol"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-hapacol-caplet-500",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Haxium",
+   "to": [
+    "esomeprazol"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-haxium-40",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Hidrasec",
+   "to": [
+    "racecadotril"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-hidrasec-10-infants",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Insuact",
+   "to": [
+    "atorvastatin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-insuact-20",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Lacbiosyn",
+   "to": [
+    "lactobacillus acidophilus"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-lacbiosyn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Lipagim",
+   "to": [
+    "fenofibrat"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-lipagim-300",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Lipanthyl",
+   "to": [
+    "fenofibrat"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-lipanthyl-200m",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Lipitor",
+   "to": [
+    "atorvastatin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-lipitor",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Medoleb",
+   "to": [
+    "celecoxib"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-medoleb-200",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Melanov",
+   "to": [
+    "gliclazid",
+    "metformin"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-melanov-m",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Meronem",
+   "to": [
+    "meropenem"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-meronem-iv",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "Mezapulgit",
+   "to": [
+    "attapulgit"
+   ],
+   "type": "biệt dược",
+   "source": "Trang tài liệu trong app: ttt-mezapulgit",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "ĐTĐ",
+   "to": [
+    "đái tháo đường"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "THA",
+   "to": [
+    "tăng huyết áp"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "COPD",
+   "to": [
+    "bệnh phổi tắc nghẽn mạn tính"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "BPTNMT",
+   "to": [
+    "bệnh phổi tắc nghẽn mạn tính"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "NMCT",
+   "to": [
+    "nhồi máu cơ tim"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "NMN",
+   "to": [
+    "nhồi máu não"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "TBMMN",
+   "to": [
+    "tai biến mạch máu não"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "THK",
+   "to": [
+    "thoái hóa khớp"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "GERD",
+   "to": [
+    "trào ngược dạ dày thực quản"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "NKTN",
+   "to": [
+    "nhiễm khuẩn đường tiết niệu"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  },
+  {
+   "term": "CKD",
+   "to": [
+    "bệnh thận mạn"
+   ],
+   "type": "viết tắt",
+   "source": "Viết tắt thông dụng do người soạn đề xuất; chưa có văn bản nguồn",
+   "review": "chưa kiểm chứng"
+  }
+ ]
+}
