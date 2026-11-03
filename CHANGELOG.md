@@ -2,7 +2,7 @@
 
 ## 1.10.1 – 2026-11-03
 
-- Ô thống kê trang chủ: tên module ở trên, số lượng ở dưới; số lượng các ô thẳng hàng khi tên xuống 2 dòng. CACHE_VERSION lên cph-hub-v1.10.1.
+- Ô thống kê trang chủ: tên module ở trên (chữ to, đậm), số lượng ở dưới (chữ nhỏ); số lượng các ô thẳng hàng khi tên xuống 2 dòng. CACHE_VERSION lên cph-hub-v1.10.2.
 
 ## 1.10.0 – 2026-11-03
 
