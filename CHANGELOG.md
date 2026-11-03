@@ -1,5 +1,9 @@
 # Nhật ký thay đổi
 
+## 1.11.2 – 2026-11-03
+
+- Ẩn hàng ô thống kê module ở trang chủ theo yêu cầu người dùng; lối vào module vẫn ở sidebar. CACHE_VERSION lên cph-hub-v1.11.2.
+
 ## 1.11.1 – 2026-11-03
 
 - Ô thống kê trang chủ: thu nhỏ để cả 8 module nằm trên 1 dòng; màn hình hẹp vuốt ngang. CACHE_VERSION lên cph-hub-v1.11.1.

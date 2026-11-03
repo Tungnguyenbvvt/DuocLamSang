@@ -4,11 +4,11 @@
   "source": "Danh mục tài liệu nội bộ Khoa Dược. Nguồn tham khảo gốc của từng tài liệu được ghi trong chính trang tài liệu đó.",
   "categories": [
     { "id": "guideline", "name": "Tóm tắt guideline", "icon": "book" },
-    { "id": "thong-tin-thuoc", "name": "Tài liệu thông tin thuốc", "icon": "pill", "statCount": "43 thuốc" },
+    { "id": "thong-tin-thuoc", "name": "Tài liệu thông tin thuốc", "icon": "pill" },
     { "id": "so-sanh", "name": "So sánh dược lý lâm sàng", "icon": "compare" },
     { "id": "ebm", "name": "Thẩm định bài báo (EBM)", "icon": "search" },
-    { "id": "icd10", "name": "ICD-10", "icon": "code", "statCount": "15.844 mã" },
-    { "id": "tt20", "name": "TT20 – Danh mục thuốc BHYT", "icon": "law", "statCount": "1.096 thuốc" },
+    { "id": "icd10", "name": "ICD-10", "icon": "code" },
+    { "id": "tt20", "name": "TT20 – Danh mục thuốc BHYT", "icon": "law" },
     { "id": "dich-vu-ky-thuat", "name": "Dịch vụ kĩ thuật", "icon": "service" },
     { "id": "phac-do-dieu-tri", "name": "Phác đồ điều trị", "icon": "protocol" }
   ],
