@@ -1,5 +1,9 @@
 # Nhật ký thay đổi
 
+## 1.11.1 – 2026-11-03
+
+- Ô thống kê trang chủ: thu nhỏ để cả 8 module nằm trên 1 dòng; màn hình hẹp vuốt ngang. CACHE_VERSION lên cph-hub-v1.11.1.
+
 ## 1.11.0 – 2026-11-03
 
 - Thêm 2 module **Dịch vụ kĩ thuật** và **Phác đồ điều trị**, hiện ở sidebar và trang chủ, ghi “Chưa có dữ liệu” cho đến khi người dùng bổ sung.
