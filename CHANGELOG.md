@@ -1,5 +1,9 @@
 # Nhật ký thay đổi
 
+## 1.10.1 – 2026-11-03
+
+- Ô thống kê trang chủ: tên module ở trên, số lượng ở dưới; số lượng các ô thẳng hàng khi tên xuống 2 dòng. CACHE_VERSION lên cph-hub-v1.10.1.
+
 ## 1.10.0 – 2026-11-03
 
 - **Tìm một lần ra mọi nơi:** ô tìm kiếm ở sidebar hiện 3 nhóm Tài liệu, Mã ICD-10, Thuốc TT20 (mỗi nhóm 6 dòng đầu, có “Xem tất cả”). Bấm một mã hoặc một thuốc mở trang tra cứu đúng dòng đó, tô màu và đưa lên đầu (`#/p/<id>?q=…&f=…`). Dữ liệu ICD-10, TT20 chỉ tải khi bắt đầu tìm.

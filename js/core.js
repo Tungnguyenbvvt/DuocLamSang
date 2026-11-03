@@ -293,7 +293,7 @@
       '<div class="hero-img">' + img + '</div></div>' +
       '<div class="stats">' + d.categories.map(function (c) {
         var n = d.records.filter(function (r) { return r.category === c.id; }).length;
-        return '<a class="stat" href="#/c/' + encodeURIComponent(c.id) + '"><b>' + esc(c.statCount || n) + '</b><span>' + esc(c.name) + '</span></a>';
+        return '<a class="stat" href="#/c/' + encodeURIComponent(c.id) + '"><span>' + esc(c.name) + '</span><b>' + esc(c.statCount || n) + '</b></a>';
       }).join('') + '</div>' +
       '<details class="notice"><summary>Chỉ dùng tham khảo, không thay thế phán đoán lâm sàng. <span class="notice-more">Xem thêm</span></summary>' +
       '<p>Nội dung chỉ dùng tham khảo chuyên môn, không thay thế phán đoán lâm sàng; các tài liệu gắn nhãn “chưa kiểm chứng” cần dược sĩ hoặc bác sĩ khác đối chiếu nguồn trước khi áp dụng. ' +

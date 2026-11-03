@@ -119,9 +119,9 @@ mark{background:color-mix(in srgb,var(--accent) 25%,#fff);color:inherit;border-r
 .hero-links a{display:inline-flex;align-items:center;height:34px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.45);color:#fff;text-decoration:none;font-weight:600;font-size:13.5px}
 .hero-links a:hover{background:rgba(255,255,255,.3)}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:16px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;text-decoration:none;color:var(--tx)}
+.stat{display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;text-decoration:none;color:var(--tx)}
 .stat:hover{border-color:var(--accent)}
-.stat b{display:block;font-size:21px;white-space:nowrap;color:var(--accent)}
+.stat b{display:block;margin-top:auto;font-size:21px;white-space:nowrap;color:var(--accent)}
 .stat span{color:var(--mut);font-size:13px}
 .notice{background:var(--caution-bg);color:var(--caution-ink);border-radius:10px;padding:10px 14px;font-size:13px;margin-bottom:16px;line-height:1.5}
 .notice summary{cursor:pointer}
