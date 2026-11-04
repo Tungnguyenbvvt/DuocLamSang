@@ -1,5 +1,13 @@
 # Nhật ký thay đổi
 
+## 1.12.0 – 2026-11-04
+
+- Thêm nhóm **Công cụ tính toán** ở sidebar với module đầu tiên **Chức năng thận – CrCl, eGFR, IBW, ABW** (`pages/tinh-chuc-nang-than.html`, logic ở `js/modules/renal.js`).
+- Công thức: Cockcroft–Gault (theo cân nặng thực tế, lý tưởng, hiệu chỉnh), CKD-EPI 2021 không dùng hệ số chủng tộc, eGFR không chuẩn hóa theo diện tích da Mosteller, IBW Devine, cân nặng hiệu chỉnh hệ số 0,4 (Bauer 1983), BMI phân loại theo WHO và ngưỡng châu Á – Thái Bình Dương; giai đoạn G, nhóm albumin niệu A và bản đồ nguy cơ G × A theo KDIGO 2012. Mỗi đại lượng quy đổi đơn vị tại một hàm (creatinine, ACR). Creatinine ngoài 0,1–20 mg/dL bị chặn; người dưới 18 tuổi bị chặn.
+- Ca kiểm thử `tests/renal.test.html`: 46/46 đạt, giá trị mong đợi tính tay từ công thức gốc. Đối chiếu thêm với 1 ca từ ứng dụng ClinpharmAI do người dùng cung cấp: khớp CrCl, eGFR, IBW, ABW, BMI.
+- **Chưa kiểm chứng:** 8 trích dẫn viết theo trí nhớ, chưa đối chiếu bản gốc; chưa có người thứ hai duyệt công thức. Chưa đưa vào bảng hiệu chỉnh liều theo CrCl, tần suất theo dõi theo giai đoạn, hướng dẫn của Bộ Y tế (chưa có văn bản nguồn).
+- `pages.json` lên 1.7.0, CACHE_VERSION lên cph-hub-v1.12.0.
+
 ## 1.11.2 – 2026-11-03
 
 - Ẩn hàng ô thống kê module ở trang chủ theo yêu cầu người dùng; lối vào module vẫn ở sidebar. CACHE_VERSION lên cph-hub-v1.11.2.

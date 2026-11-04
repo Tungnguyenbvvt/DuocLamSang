@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Ca kiểm thử – chức năng thận</title>
+<style>
+  body{font-family:system-ui,sans-serif;margin:16px;font-size:14px}
+  .pass{color:#1b6b34}.fail{color:#b3261e;font-weight:700}
+  #sum{font-size:16px;font-weight:700;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div id="sum"></div>
+<ol id="out"></ol>
+<script src="../js/modules/renal.js"></script>
+<script>
+  // Giá trị mong đợi tính tay độc lập từ công thức gốc (ghi trong từng ca), sai số cho phép ±0,1
+  var R = window.Renal, results = [];
+  function near(name, got, want, tol) {
+    var ok = Math.abs(got - want) <= (tol || 0.1);
+    results.push({ name: name, ok: ok, got: got, want: want });
+  }
+  function eq(name, got, want) {
+    var ok = JSON.stringify(got) === JSON.stringify(want);
+    results.push({ name: name, ok: ok, got: got, want: want });
+  }
+
+  // Quy đổi creatinine
+  near('88,4 µmol/L = 1,0 mg/dL', R.scrMgdl(88.4, 'umol'), 1.0, 1e-9);
+  near('mg/dL giữ nguyên', R.scrMgdl(1.2, 'mgdl'), 1.2, 1e-9);
+  eq('đơn vị lạ báo lỗi', (function () { try { R.scrMgdl(1, 'mmol'); return false; } catch (e) { return true; } })(), true);
+
+  // Cockcroft–Gault: (140−65)×60/(72×1,0) = 62,5
+  near('CG nam 65 tuổi 60 kg SCr 1,0', R.crclCG(65, 60, 1.0, false), 62.5);
+  // (140−70)×50/(72×1,2)×0,85 = 3500/86,4×0,85 = 34,43
+  near('CG nữ 70 tuổi 50 kg SCr 1,2', R.crclCG(70, 50, 1.2, true), 34.43);
+
+  // CKD-EPI 2021: 142 × (1,0/0,9)^−1,2 × 0,9938^65 = 142 × 0,88124 × 0,66749 = 83,53
+  near('CKD-EPI nam 65 tuổi SCr 1,0 (trên κ)', R.egfrCkdEpi2021(65, 1.0, false), 83.53);
+  // 142 × (0,6/0,7)^−0,241 × 0,9938^50 × 1,012 = 142 × 1,03785 × 0,73279 × 1,012 = 109,29
+  near('CKD-EPI nữ 50 tuổi SCr 0,6 (dưới κ)', R.egfrCkdEpi2021(50, 0.6, true), 109.29);
+  // Tại đúng κ: hai nhánh bằng 1 → 142 × 0,9938^40 = 142 × 0,77983 = 110,74
+  near('CKD-EPI nam 40 tuổi SCr = κ 0,9', R.egfrCkdEpi2021(40, 0.9, false), 110.74);
+
+  // Devine: 165 cm = 64,961 in → 50 + 2,3 × 4,961 = 61,41
+  near('IBW nam 165 cm', R.ibwDevine(165, false), 61.41);
+  // 160 cm = 62,992 in → 45,5 + 2,3 × 2,992 = 52,38
+  near('IBW nữ 160 cm', R.ibwDevine(160, true), 52.38);
+  near('IBW nam đúng 152,4 cm = 50', R.ibwDevine(152.4, false), 50, 1e-9);
+  // ABW: 61,41 + 0,4 × (100 − 61,41) = 76,85
+  near('ABW 100 kg, IBW 61,41', R.abw(100, 61.41), 76.85);
+
+  // Phân độ KDIGO tại ngưỡng
+  eq('eGFR 90 → G1', R.kdigoStage(90).id, 'G1');
+  eq('eGFR 89,9 → G2', R.kdigoStage(89.9).id, 'G2');
+  eq('eGFR 45 → G3a', R.kdigoStage(45).id, 'G3a');
+  eq('eGFR 44,9 → G3b', R.kdigoStage(44.9).id, 'G3b');
+  eq('eGFR 15 → G4', R.kdigoStage(15).id, 'G4');
+  eq('eGFR 14,9 → G5', R.kdigoStage(14.9).id, 'G5');
+
+  // compute(): ca đầy đủ, đơn vị µmol/L, ca biên
+  var c = R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 88.4, unit: 'umol' });
+  near('compute µmol/L ra cùng CrCl như mg/dL', c.result.crcl.tbw, 62.5);
+  near('compute eGFR', c.result.egfr, 83.53);
+  eq('compute giai đoạn G2', c.result.stage.id, 'G2');
+  eq('ô trống báo lỗi, không ra kết quả', R.compute({ age: '', sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl' }).result, null);
+  eq('creatinine 0 báo lỗi', R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 0, unit: 'mgdl' }).result, null);
+  eq('chưa chọn giới tính báo lỗi', R.compute({ age: 65, sex: '', height: 165, weight: 60, scr: 1, unit: 'mgdl' }).result, null);
+  eq('trẻ em (16 tuổi) bị chặn', R.compute({ age: 16, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl' }).result, null);
+  var low = R.compute({ age: 65, sex: 'F', height: 150, weight: 45, scr: 1, unit: 'mgdl' });
+  eq('chiều cao < 152,4 cm có cảnh báo', low.warnings.some(function (w) { return /152,4/.test(w); }), true);
+  var hi = R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'umol' });
+  eq('nhập 1 nhưng chọn µmol/L → chặn, không ra kết quả', hi.result === null && hi.errors.some(function (w) { return /Creatinine/.test(w); }), true);
+
+  // BMI, diện tích da, eGFR không chuẩn hóa: 60 / 1,65² = 22,04; √(165 × 60 / 3600) = √2,75 = 1,6583
+  near('BMI 60 kg 165 cm', R.bmi(60, 165), 22.04);
+  near('Diện tích da Mosteller 60 kg 165 cm', R.bsaMosteller(60, 165), 1.6583, 0.0005);
+  // 83,53 × 1,6583 / 1,73 = 80,07
+  near('eGFR không chuẩn hóa', R.egfrAbsolute(83.53, 1.6583), 80.07);
+  eq('BMI 22,9 châu Á → bình thường', R.bmiClass(22.9, R.BMI_ASIA).label, 'Bình thường');
+  eq('BMI 23 châu Á → thừa cân', R.bmiClass(23, R.BMI_ASIA).label, 'Thừa cân');
+  eq('BMI 25 châu Á → béo phì độ I', R.bmiClass(25, R.BMI_ASIA).label, 'Béo phì độ I');
+  eq('BMI 25 WHO → thừa cân', R.bmiClass(25, R.BMI_WHO).label, 'Thừa cân');
+  eq('BMI 40 WHO → béo phì độ III', R.bmiClass(40, R.BMI_WHO).label, 'Béo phì độ III');
+  eq('BMI 18,4 → thiếu cân', R.bmiClass(18.4, R.BMI_WHO).label, 'Thiếu cân');
+
+  // Albumin niệu: 3 mg/mmol × 8,84 = 26,52 mg/g
+  near('ACR 3 mg/mmol = 26,52 mg/g', R.acrMgg(3, 'mgmmol'), 26.52);
+  eq('ACR 29,9 mg/g → A1', R.albuminStage(29.9).id, 'A1');
+  eq('ACR 30 mg/g → A2', R.albuminStage(30).id, 'A2');
+  eq('ACR 300 mg/g → A2', R.albuminStage(300).id, 'A2');
+  eq('ACR 300,1 mg/g → A3', R.albuminStage(300.1).id, 'A3');
+  eq('Nguy cơ G2A1 thấp', R.kdigoRisk('G2', 'A1'), 'low');
+  eq('Nguy cơ G3aA2 cao', R.kdigoRisk('G3a', 'A2'), 'high');
+  eq('Nguy cơ G3bA2 rất cao', R.kdigoRisk('G3b', 'A2'), 'vhigh');
+  var ca = R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl', acr: 5, acrUnit: 'mgmmol' });
+  eq('compute có ACR 5 mg/mmol → G2A2, nguy cơ tăng vừa', [ca.result.aStage.id, ca.result.risk], ['A2', 'mod']);
+  eq('compute không ACR → không phân nhóm A', R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl', acr: '' }).result.aStage, null);
+
+  var fail = results.filter(function (r) { return !r.ok; }).length;
+  document.getElementById('sum').innerHTML = '<span class="' + (fail ? 'fail' : 'pass') + '">' + (results.length - fail) + '/' + results.length + ' ca đạt</span>';
+  document.getElementById('out').innerHTML = results.map(function (r) {
+    return '<li class="' + (r.ok ? 'pass' : 'fail') + '">' + (r.ok ? 'ĐẠT' : 'LỖI') + ' – ' + r.name +
+      (r.ok ? '' : ' | nhận: ' + JSON.stringify(r.got) + ' | cần: ' + JSON.stringify(r.want)) + '</li>';
+  }).join('');
+  window.TEST_RESULT = { total: results.length, fail: fail };
+</script>
+</body>
+</html>

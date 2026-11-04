@@ -1,6 +1,6 @@
 /* Service worker: lưu app shell + danh mục + toàn bộ tài liệu để dùng ngoại tuyến.
    Tăng CACHE_VERSION mỗi khi đổi dữ liệu hoặc mã. */
-var CACHE_VERSION = 'cph-hub-v1.11.2';
+var CACHE_VERSION = 'cph-hub-v1.12.0';
 var RUNTIME = 'cph-runtime-v1';
 var SHELL = [
   './',
@@ -17,6 +17,7 @@ var SHELL = [
   'data/drug-info.json',
   'css/tool.css',
   'js/modules/lookup.js',
+  'js/modules/renal.js',
   'manifest.webmanifest',
   'icons/logo.png',
   'images/cong-bv.jpg',

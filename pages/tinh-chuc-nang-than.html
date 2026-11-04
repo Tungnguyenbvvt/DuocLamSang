@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="vi" data-unit="vu-thu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chức năng thận – CrCl, eGFR, IBW, ABW</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/tool.css">
+<style>
+  :root{--cat:#2f9ea0;--r-low:#2e9e5b;--r-mod:#e2a400;--r-high:#e8743b;--r-vhigh:#c62f2f}
+  .calc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+  .calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+  .calc-grid.two{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:12px}
+  .fld{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.03em}
+  .fld input{height:42px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;font-size:15px;text-transform:none;color:var(--tx);background:#fff;min-width:0}
+  .fld input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+  .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;height:42px;background:#fff}
+  .seg button{flex:1;border:0;background:none;font:inherit;font-size:14px;font-weight:600;color:var(--mut);cursor:pointer;text-transform:none;padding:0 8px}
+  .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  .pair{display:flex;gap:6px}
+  .pair input{flex:1}
+  .pair .seg{flex:0 0 auto}
+  .hint{font-size:12px;color:var(--dim);text-transform:none;font-weight:400;letter-spacing:0}
+  .actions{display:flex;gap:8px;margin-top:12px}
+  .btn{height:40px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:#fff;font:inherit;font-weight:600;cursor:pointer;color:var(--tx)}
+  .msg{border-radius:10px;padding:9px 12px;font-size:13px;margin-top:10px}
+  .msg.err{background:#fde2e1;color:#8b1d1a}
+  .msg.warn{background:var(--caution-bg);color:var(--caution-ink)}
+  .kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:12px}
+  .k{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;text-align:center}
+  .k b{display:block;font-size:22px;color:var(--accent);line-height:1.25}
+  .k span{display:block;font-size:12px;color:var(--mut);margin-top:2px}
+  .k.wide b{font-size:17px}
+  .interp{background:color-mix(in srgb,var(--r-low) 8%,#fff);border:1px solid color-mix(in srgb,var(--r-low) 30%,#fff);border-left:4px solid var(--r-low);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:14px;line-height:1.6}
+  .interp h3{margin:0 0 6px;font-size:13.5px;text-transform:uppercase;letter-spacing:.03em;color:var(--r-low)}
+  .interp ul{margin:0;padding-left:18px}
+  .res{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:6px}
+  .rc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .rc h3{margin:0 0 6px;font-size:13px;color:var(--mut);font-weight:600}
+  .rc table{width:100%;font-size:13.5px;border-collapse:collapse}
+  .rc td{padding:4px 0;border-bottom:1px solid var(--card2)}
+  .rc tr:last-child td{border-bottom:0}
+  .rc td:last-child{text-align:right;font-weight:700;color:var(--tx);white-space:nowrap;padding-left:8px}
+  .rc p{margin:6px 0 0;font-size:12.5px;color:var(--dim)}
+  .sec{font-size:15px;margin:22px 0 8px}
+  .lk-table tr.now td{background:color-mix(in srgb,var(--cat) 16%,#fff);font-weight:600}
+  .pill{display:inline-block;padding:1px 9px;border-radius:999px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
+  .r-low{background:var(--r-low)}.r-mod{background:var(--r-mod);color:#3a2a00}.r-high{background:var(--r-high)}.r-vhigh{background:var(--r-vhigh)}
+  .heat{width:100%;border-collapse:separate;border-spacing:3px;font-size:13px;text-align:center}
+  .heat th{font-size:12px;color:var(--mut);font-weight:600;padding:4px}
+  .heat td{padding:8px 4px;border-radius:6px;color:#fff;font-weight:600}
+  .heat td.r-mod{color:#3a2a00}
+  .heat td.now{outline:3px solid var(--tx);outline-offset:-3px}
+  .heat-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:13.5px;line-height:1.6}
+  .note ul{margin:0;padding-left:18px}
+  .todo{background:var(--caution-bg);color:var(--caution-ink);border-radius:10px;padding:10px 14px;font-size:13px;margin-top:10px}
+  .src{font-size:12.5px;color:var(--mut);padding-left:20px}
+  .src li{margin:3px 0}
+  .preview{background:#fde2e1;color:#8b1d1a;border:1px solid #f1a9a6;border-radius:10px;padding:9px 12px;font-size:13px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="lk">
+  <header class="lk-head">
+    <h1>Chức năng thận – CrCl, eGFR, IBW, ABW</h1>
+    <p>Nhập một lần, tính đồng thời CrCl (Cockcroft–Gault), eGFR (CKD-EPI 2021, không dùng hệ số chủng tộc), cân nặng lý tưởng (Devine), cân nặng hiệu chỉnh, BMI, diện tích da; phân giai đoạn G và nhóm albumin niệu A theo KDIGO. Dành cho người lớn.</p>
+  </header>
+
+  <div class="preview" role="note"><b>Chưa kiểm chứng.</b> Công thức và trích dẫn cần dược sĩ hoặc bác sĩ khác đối chiếu trước khi dùng trên người bệnh.</div>
+
+  <form class="calc" id="f" novalidate autocomplete="off">
+    <div class="calc-grid">
+      <label class="fld">Tuổi (năm)<input id="age" type="number" inputmode="decimal" step="1"></label>
+      <div class="fld">Giới tính
+        <div class="seg" role="group" aria-label="Giới tính">
+          <button type="button" data-sex="M" aria-pressed="false">Nam</button>
+          <button type="button" data-sex="F" aria-pressed="false">Nữ</button>
+        </div>
+      </div>
+      <label class="fld">Chiều cao (cm)<input id="height" type="number" inputmode="decimal" step="0.1"></label>
+      <label class="fld">Cân nặng thực tế (kg)<input id="weight" type="number" inputmode="decimal" step="0.1"></label>
+    </div>
+    <div class="calc-grid two">
+      <div class="fld">Creatinine huyết thanh
+        <div class="pair">
+          <input id="scr" type="number" inputmode="decimal" step="0.01" aria-label="Creatinine huyết thanh">
+          <div class="seg" role="group" aria-label="Đơn vị creatinine">
+            <button type="button" data-scr-unit="mgdl" aria-pressed="false">mg/dL</button>
+            <button type="button" data-scr-unit="umol" aria-pressed="true">µmol/L</button>
+          </div>
+        </div>
+        <span class="hint">1 mg/dL = 88,4 µmol/L.</span>
+      </div>
+      <div class="fld">ACR niệu (không bắt buộc)
+        <div class="pair">
+          <input id="acr" type="number" inputmode="decimal" step="0.1" aria-label="Tỷ số albumin/creatinine niệu">
+          <div class="seg" role="group" aria-label="Đơn vị ACR">
+            <button type="button" data-acr-unit="mgg" aria-pressed="false">mg/g</button>
+            <button type="button" data-acr-unit="mgmmol" aria-pressed="true">mg/mmol</button>
+          </div>
+        </div>
+        <span class="hint">Tỷ số albumin/creatinine niệu. 1 mg/mmol = 8,84 mg/g.</span>
+      </div>
+    </div>
+    <div class="actions"><button class="btn" type="reset">Xóa</button><span class="hint" style="align-self:center">Kết quả cập nhật ngay khi nhập.</span></div>
+    <div id="msgs" aria-live="polite"></div>
+  </form>
+
+  <div id="out" hidden aria-live="polite">
+    <div class="kpi" id="kpi"></div>
+    <div class="interp" id="interp"></div>
+    <div class="res" id="res"></div>
+  </div>
+
+  <h2 class="sec">Giai đoạn mức lọc cầu thận (G) theo KDIGO [5]</h2>
+  <table class="lk-table">
+    <thead><tr><th>Giai đoạn</th><th>eGFR (mL/phút/1,73 m²)</th><th>Mô tả</th></tr></thead>
+    <tbody id="tG"></tbody>
+  </table>
+
+  <h2 class="sec">Nhóm albumin niệu (A) theo KDIGO [5]</h2>
+  <table class="lk-table">
+    <thead><tr><th>Nhóm</th><th>AER (mg/24 giờ)</th><th>ACR (mg/mmol)</th><th>ACR (mg/g)</th><th>Mô tả</th></tr></thead>
+    <tbody id="tA"></tbody>
+  </table>
+
+  <h2 class="sec">Bản đồ nguy cơ tiên lượng CKD (G × A) theo KDIGO [5]</h2>
+  <div class="heat-wrap"><table class="heat" id="heat"></table></div>
+  <p class="hint" style="margin-top:6px">Chẩn đoán bệnh thận mạn cần bất thường cấu trúc hoặc chức năng thận kéo dài trên 3 tháng; một lần xét nghiệm chưa đủ để phân loại.</p>
+
+  <h2 class="sec">Phân loại BMI – WHO [6] và ngưỡng người châu Á – Thái Bình Dương [7]</h2>
+  <table class="lk-table">
+    <thead><tr><th>Phân loại</th><th>BMI – WHO (kg/m²)</th><th>BMI – châu Á (kg/m²)</th></tr></thead>
+    <tbody id="tB"></tbody>
+  </table>
+
+  <h2 class="sec">Lưu ý khi chọn cân nặng và chỉ số chức năng thận</h2>
+  <div class="note">
+    <ul>
+      <li><b>Cân nặng hiệu chỉnh</b> = IBW + 0,4 × (cân nặng thực tế − IBW); hệ số 0,4 xuất phát từ nghiên cứu dược động học aminoglycosid ở người béo phì [4].</li>
+      <li><b>CrCl và eGFR không thay thế được cho nhau:</b> CrCl (mL/phút) là ước tính theo Cockcroft–Gault; eGFR theo CKD-EPI được chuẩn hóa theo 1,73 m² diện tích da. Khi chỉnh liều, dùng đúng chỉ số và đơn vị mà tờ hướng dẫn sử dụng của thuốc đó quy định.</li>
+      <li><b>eGFR không chuẩn hóa</b> (mL/phút) = eGFR × diện tích da / 1,73, diện tích da tính theo Mosteller [8].</li>
+      <li>Cân nặng nào dùng cho CrCl khi người bệnh béo phì hoặc nhẹ cân: theo hướng dẫn của từng thuốc và quy trình của bệnh viện. Trang này hiện cả 3 kết quả, không tự chọn.</li>
+    </ul>
+    <div class="todo"><b>Chưa có trong bản này:</b> bảng hiệu chỉnh liều theo mức CrCl, tần suất theo dõi theo giai đoạn, và hướng dẫn của Bộ Y tế về bệnh thận mạn. Các nội dung này cần văn bản nguồn để chép nguyên văn.</div>
+  </div>
+
+  <h2 class="sec">Tài liệu tham khảo</h2>
+  <ol class="src" id="src"></ol>
+  <p class="lk-note">Công cụ tham khảo, không thay thế phán đoán lâm sàng. Ứng dụng không lưu và không gửi dữ liệu nhập đi đâu. Dữ liệu sức khỏe là dữ liệu cá nhân nhạy cảm theo Nghị định 13/2023/NĐ-CP.</p>
+</div>
+
+<script src="../js/modules/renal.js"></script>
+<script>
+(function () {
+  'use strict';
+  var R = window.Renal, $ = function (id) { return document.getElementById(id); };
+  var state = { sex: '', scrUnit: 'umol', acrUnit: 'mgmmol' };
+  var fmt = function (x, d) { return R.round(x, d).toLocaleString('vi-VN', { minimumFractionDigits: d, maximumFractionDigits: d }); };
+  var esc = function (s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); };
+
+  function toggle(attr, key) {
+    document.querySelectorAll('[data-' + attr + ']').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state[key] = b.getAttribute('data-' + attr);
+        document.querySelectorAll('[data-' + attr + ']').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+        render();
+      });
+    });
+  }
+  toggle('sex', 'sex'); toggle('scr-unit', 'scrUnit'); toggle('acr-unit', 'acrUnit');
+  $('f').addEventListener('input', render);
+  $('f').addEventListener('reset', function () {
+    state.sex = '';
+    document.querySelectorAll('[data-sex]').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+    setTimeout(render, 0);
+  });
+
+  // Bảng tham chiếu, tô dòng/ô ứng với kết quả hiện tại
+  function tables(r) {
+    var G = R.KDIGO_G;
+    $('tG').innerHTML = G.map(function (g, i) {
+      var range = i === 0 ? '≥ 90' : i === G.length - 1 ? '< 15' : g.min + '–' + (G[i - 1].min - 1);
+      return '<tr' + (r && r.stage.id === g.id ? ' class="now"' : '') + '><td data-label="Giai đoạn">' + g.id + '</td><td data-label="eGFR">' + range +
+        '</td><td data-label="Mô tả">' + g.label + ' <span class="en">' + g.en + '</span></td></tr>';
+    }).join('');
+    $('tA').innerHTML = R.KDIGO_A.map(function (a) {
+      return '<tr' + (r && r.aStage && r.aStage.id === a.id ? ' class="now"' : '') + '><td data-label="Nhóm">' + a.id + '</td><td data-label="AER (mg/24 giờ)">' + a.aer +
+        '</td><td data-label="ACR (mg/mmol)">' + a.mgmmol + '</td><td data-label="ACR (mg/g)">' + a.mgg + '</td><td data-label="Mô tả">' + a.label + ' <span class="en">' + a.en + '</span></td></tr>';
+    }).join('');
+    $('heat').innerHTML = '<tr><th></th>' + R.KDIGO_A.map(function (a) { return '<th>' + a.id + '<br>' + a.mgg + ' mg/g</th>'; }).join('') + '</tr>' +
+      G.map(function (g) {
+        return '<tr><th>' + g.id + '</th>' + R.KDIGO_RISK[g.id].map(function (k, j) {
+          var now = r && r.aStage && r.stage.id === g.id && r.aStage.id === 'A' + (j + 1);
+          return '<td class="r-' + k + (now ? ' now' : '') + '" title="' + R.RISK_LABEL[k] + '">' + R.RISK_LABEL[k].replace('Nguy cơ ', '') + '</td>';
+        }).join('') + '</tr>';
+      }).join('');
+    var rows = [['Thiếu cân', '< 18,5', '< 18,5'], ['Bình thường', '18,5–24,9', '18,5–22,9'], ['Thừa cân', '25,0–29,9', '23,0–24,9'],
+      ['Béo phì độ I', '30,0–34,9', '25,0–29,9'], ['Béo phì độ II', '35,0–39,9', '≥ 30,0'], ['Béo phì độ III', '≥ 40,0', '–']];
+    $('tB').innerHTML = rows.map(function (x) {
+      var who = r && r.bmiWho.label === x[0], asia = r && r.bmiAsia.label === x[0];
+      return '<tr' + (who || asia ? ' class="now"' : '') + '><td data-label="Phân loại">' + x[0] + '</td><td data-label="WHO">' + x[1] + (who ? ' ◀' : '') +
+        '</td><td data-label="Châu Á">' + x[2] + (asia ? ' ◀' : '') + '</td></tr>';
+    }).join('');
+  }
+
+  function render() {
+    var v = function (id) { return $(id).value; };
+    var touched = ['age', 'height', 'weight', 'scr'].some(function (k) { return v(k) !== ''; }) || state.sex;
+    var out = R.compute({ age: v('age'), height: v('height'), weight: v('weight'), scr: v('scr'), sex: state.sex, unit: state.scrUnit, acr: v('acr'), acrUnit: state.acrUnit });
+    var msgs = '';
+    if (touched && out.errors.length) msgs += '<div class="msg err">' + out.errors.join('<br>') + '</div>';
+    if (out.warnings.length) msgs += '<div class="msg warn">' + out.warnings.join('<br>') + '</div>';
+    $('msgs').innerHTML = msgs;
+    var r = out.result;
+    $('out').hidden = !r;
+    tables(r);
+    if (!r) return;
+
+    $('kpi').innerHTML = [
+      [fmt(r.crcl.tbw, 1), 'CrCl theo cân nặng thực tế (mL/phút)'],
+      [fmt(r.egfr, 1), 'eGFR CKD-EPI 2021 (mL/phút/1,73 m²)'],
+      [r.stage.id + ' · ' + r.stage.label, 'Giai đoạn G (KDIGO)', 'wide'],
+      [fmt(r.ibw, 1), 'Cân nặng lý tưởng (kg)'],
+      [fmt(r.abw, 1), 'Cân nặng hiệu chỉnh (kg)'],
+      [fmt(r.bmi, 1), 'BMI (kg/m²)'],
+      [fmt(r.bsa, 2), 'Diện tích da (m²)'],
+      [fmt(r.ratio * 100, 0) + '%', 'Cân nặng thực tế / IBW']
+    ].concat(r.aStage ? [[r.aStage.id + ' · ' + r.stage.id + r.aStage.id, 'Nhóm albumin niệu', 'wide']] : []).map(function (k) {
+      return '<div class="k' + (k[2] ? ' ' + k[2] : '') + '"><b>' + esc(k[0]) + '</b><span>' + k[1] + '</span></div>';
+    }).join('');
+
+    var lines = [
+      '<b>CrCl (Cockcroft–Gault)</b> = ' + fmt(r.crcl.tbw, 1) + ' mL/phút theo cân nặng thực tế; ' + fmt(r.crcl.ibw, 1) + ' theo IBW; ' + fmt(r.crcl.abw, 1) + ' theo cân nặng hiệu chỉnh.',
+      '<b>eGFR (CKD-EPI 2021)</b> = ' + fmt(r.egfr, 1) + ' mL/phút/1,73 m² → giai đoạn <b>' + r.stage.id + '</b> (' + r.stage.label.toLowerCase() + '). Không chuẩn hóa: ' + fmt(r.egfrAbs, 1) + ' mL/phút với diện tích da ' + fmt(r.bsa, 2) + ' m².',
+      '<b>BMI</b> = ' + fmt(r.bmi, 1) + ' kg/m²: ' + r.bmiWho.label.toLowerCase() + ' theo WHO; ' + r.bmiAsia.label.toLowerCase() + ' theo ngưỡng châu Á.',
+      '<b>Cân nặng thực tế</b> bằng ' + fmt(r.ratio * 100, 0) + '% IBW' + (r.ratio > 1.2 ? ' (trên 120% IBW)' : r.ratio < 1 ? ' (thấp hơn IBW)' : '') + '.'
+    ];
+    if (r.aStage) {
+      lines.push('<b>ACR</b> = ' + fmt(r.acrMgg, 1) + ' mg/g → nhóm <b>' + r.aStage.id + '</b> (' + r.aStage.label.toLowerCase() + '). Kết hợp <b>' + r.stage.id + r.aStage.id + '</b>: <span class="pill r-' + r.risk + '">' + R.RISK_LABEL[r.risk] + '</span> theo bản đồ KDIGO, nếu bất thường kéo dài trên 3 tháng.');
+    } else {
+      lines.push('Chưa nhập ACR niệu nên chưa phân nhóm albumin niệu và nguy cơ G × A.');
+    }
+    $('interp').innerHTML = '<h3>Diễn giải tổng hợp</h3><ul>' + lines.map(function (l) { return '<li>' + l + '</li>'; }).join('') + '</ul>';
+
+    $('res').innerHTML =
+      '<div class="rc"><h3>CrCl – Cockcroft–Gault [1]</h3><table>' +
+        '<tr><td>Theo cân nặng thực tế (' + fmt(+v('weight'), 1) + ' kg)</td><td>' + fmt(r.crcl.tbw, 1) + ' mL/phút</td></tr>' +
+        '<tr><td>Theo cân nặng lý tưởng (' + fmt(r.ibw, 1) + ' kg)</td><td>' + fmt(r.crcl.ibw, 1) + ' mL/phút</td></tr>' +
+        '<tr><td>Theo cân nặng hiệu chỉnh (' + fmt(r.abw, 1) + ' kg)</td><td>' + fmt(r.crcl.abw, 1) + ' mL/phút</td></tr></table>' +
+        '<p>Creatinine dùng để tính: ' + fmt(r.scrMgdl, 2) + ' mg/dL = ' + fmt(r.scrUmol, 0) + ' µmol/L.</p></div>' +
+      '<div class="rc"><h3>eGFR – CKD-EPI 2021 [2]</h3><table>' +
+        '<tr><td>Chuẩn hóa theo 1,73 m²</td><td>' + fmt(r.egfr, 1) + ' mL/phút/1,73 m²</td></tr>' +
+        '<tr><td>Không chuẩn hóa (diện tích da ' + fmt(r.bsa, 2) + ' m²) [8]</td><td>' + fmt(r.egfrAbs, 1) + ' mL/phút</td></tr>' +
+        '<tr><td>Giai đoạn G</td><td>' + r.stage.id + ' · ' + r.stage.label + '</td></tr></table></div>' +
+      '<div class="rc"><h3>Cân nặng và thể trạng [3] [4] [6] [7]</h3><table>' +
+        '<tr><td>Cân nặng lý tưởng (Devine)</td><td>' + fmt(r.ibw, 1) + ' kg</td></tr>' +
+        '<tr><td>Cân nặng hiệu chỉnh</td><td>' + fmt(r.abw, 1) + ' kg</td></tr>' +
+        '<tr><td>BMI – WHO</td><td>' + fmt(r.bmi, 1) + ' · ' + r.bmiWho.label + '</td></tr>' +
+        '<tr><td>BMI – châu Á</td><td>' + r.bmiAsia.label + '</td></tr>' +
+        '<tr><td>Diện tích da (Mosteller)</td><td>' + fmt(r.bsa, 2) + ' m²</td></tr></table></div>';
+  }
+
+  $('src').innerHTML = R.SOURCES.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
+  render();
+})();
+</script>
+</body>
+</html>
