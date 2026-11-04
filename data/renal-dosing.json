@@ -1,0 +1,339 @@
+{
+ "version": "1.0.0",
+ "updated": "2026-11-04",
+ "source": "Bộ Y tế. Quyết định số 2388/QĐ-BYT ngày 12/8/2024 ban hành tài liệu chuyên môn “Hướng dẫn chẩn đoán và điều trị bệnh thận mạn và một số bệnh lý thận”. Hà Nội: Bộ Y tế; 2024. Bảng 12 (tr. 37–38), Bảng 17 (tr. 46), Bảng 20 (tr. 48), Bảng 21, 22 (tr. 52).",
+ "extraction": "Chép tay theo ảnh trang của tệp PDF do người dùng cung cấp, giữ nguyên chính tả của văn bản (kể cả lỗi chính tả như “Vildagligtin”, “Bênh nhân”). Không dùng lớp chữ trích tự động vì đọc sai ký hiệu ≥.",
+ "review": "chưa kiểm chứng",
+ "records": [
+  {
+   "id": "bang-12",
+   "title": "Bảng 12. Chỉnh liều một số thuốc ƯCMC và ƯCTT trong BTM",
+   "page": "37–38",
+   "basis": "crcl",
+   "columns": [
+    "Thuốc RAASi",
+    "Liều khởi đầu",
+    "Liều tối đa",
+    "Chỉnh liều theo chức năng thận"
+   ],
+   "rows": [
+    [
+     "Benazepril",
+     "10 mg/ngày",
+     "80 mg",
+     "CrCl ≥30 ml/phút: không chỉnh liều. CrCl <30 ml/ phút: Giảm liều khởi đầu còn 5mg/ ngày. Thuốc không qua màng lọc"
+    ],
+    [
+     "Captopril",
+     "12,5 – 25 mg, 2-3 lần/ngày",
+     "50 mg, 3 lần/ngày (có thể 450mg/ngày)",
+     "Thời gian bán hủy gia tăng khi chức năng thận giảm: CrCl 10–50 ml/phút: 75% liều hàng ngày 12–18 giờ; CrCl <10 ml/phút: 50% liều mỗi 24 giờ. Lọc máu: uống sau lọc máu, khoảng 40% qua màng lọc"
+    ],
+    [
+     "Enalapril",
+     "5 mg, 1 lần/ngày",
+     "40 mg",
+     "CrCl ≤30 ml/phút: người lớn liều khởi đầu 2,5 mg 1 lần/ngày; 2,5 mg ngày sau lọc máu; Bênh nhân chưa lọc máu liều dựa vào đáp ứng lâm sàng"
+    ],
+    [
+     "Lisinopril",
+     "10 mg, 1 lần/ngày",
+     "40 mg",
+     "CrCl 10–30 ml/phút: người lớn liều khởi đầu giảm 50%, tối đa 40 mg/ngày\nCrCl <10 ml/phút: liều khởi đầu giảm còn 2,5 mg/ngày. Tối đa 40 mg/ngày"
+    ],
+    [
+     "Perindopril",
+     "2 mg, 1 lần/ngày",
+     "8 mg",
+     "Không sử dụng khi CrCl <30 ml/phút\nPerindopril và chuyển hóa của nó thải qua màng lọc"
+    ],
+    [
+     "Quinapril",
+     "10 mg, 1 lần/ngày",
+     "80 mg",
+     "CrCl 61–89 ml/phút: 10 mg ngày; CrCl 30–60 ml/phút: bắt đầu 5 mg 1 lần ngày; CrCl 10–29 ml/phút : ít dữ liệu sử dụng"
+    ],
+    [
+     "Ramipril",
+     "2,5 mg, 1 lần/ngày",
+     "20 mg",
+     "Dùng 25% liều bình thường khi CrCl <40 ml/ phút\nĐào thải tối thiểu qua màng lọc"
+    ],
+    [
+     "Trandolapril",
+     "1 mg, 1 lần/ngày",
+     "4 mg",
+     "CrCl <30 ml/ phút: giảm liều khởi đầu còn 0,5 mg/ngày"
+    ],
+    [
+     "Candesartan",
+     "16 mg, 1 lần/ngày",
+     "32 mg",
+     "Ở những bệnh nhân có CrCl <30 ml/phút, AUC và Cmax tăng gấp đôi khi dùng liều lặp lại. Không đào thải qua màng lọc thận nhân tạo"
+    ],
+    [
+     "Irbesartan",
+     "150 mg, 1 lần/ngày",
+     "300 mg",
+     "Không cần điều chỉnh liều lượng. Không thải qua lọc thận nhân tạo"
+    ],
+    [
+     "Losartan",
+     "50 mg, 1 lần/ngày",
+     "100 mg",
+     "Không cần điều chỉnh liều lượng. Không thải qua màng lọc thận nhân tạo"
+    ],
+    [
+     "Olmesartan",
+     "20 mg, 1 lần/ngày",
+     "40 mg",
+     "AUC tăng gấp 3 lần ở những bệnh nhân có CrCl <20 ml/phút. Không khuyến cáo điều chỉnh liều ban đầu cho bệnh nhân suy thận từ trung bình đến nặng (CrCl < 40 ml/phút). Chưa được nghiên cứu ở bệnh nhân lọc máu"
+    ],
+    [
+     "Telmisartan",
+     "40 mg, 1 lần/ngày",
+     "80 mg",
+     "Không cần điều chỉnh liều lượng. Không thải qua màng lọc thận nhân tạo"
+    ],
+    [
+     "Valsartan",
+     "80 mg, 1 lần/ngày",
+     "320 mg",
+     "Không có điều chỉnh liều lượng cho CrCl < 30ml/phút- thận trọng khi dùng. Không thải qua màng lọc thận nhân tạo"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "id": "bang-17",
+   "title": "Bảng 17. Liều thuốc ức chế DPP-4 hàng ngày theo chức năng thận",
+   "page": "46",
+   "basis": "egfr",
+   "bands": [
+    60,
+    45,
+    30,
+    15,
+    0
+   ],
+   "caption": "Liều thuốc ức chế DPP4 theo MLCT ước tính (ml/phút/1,73m²)",
+   "columns": [
+    "Nhóm ức chế DPP4",
+    "≥ 60",
+    "45-59",
+    "30-44",
+    "15-29",
+    "< 15"
+   ],
+   "rows": [
+    [
+     "Sitagliptin",
+     "100 mg/ngày",
+     "100 mg/ngày",
+     "50 mg/ngày",
+     "25 mg/ngày",
+     "25 mg/ngày"
+    ],
+    [
+     "Vildagligtin",
+     "100 mg/ngày",
+     "50 mg/ngày",
+     "50 mg/ngày",
+     "50 mg/ngày",
+     "50 mg/ngày"
+    ],
+    [
+     "Saxagliptin",
+     "5 mg/ ngày",
+     "5 mg/ngày",
+     "2,5 mg/ngày",
+     "2,5 mg/ngày",
+     "Không"
+    ],
+    [
+     "Linagliptin",
+     "5 mg/ ngày",
+     "5 mg/ngày",
+     "5 mg/ngày",
+     "5 mg/ngày",
+     "5 mg/ngày"
+    ]
+   ],
+   "notes": [
+    "Các thuốc ức chế DPP-4 không gây hạ đường máu và được dung nạp rất tốt, có thể sử dụng đơn trị liệu hoặc kết hợp với bất kỳ loại thuốc nào khác, ngoại trừ GLP-1 RA. Hầu hết các thuốc ức chế DPP-4 cần chỉnh liều theo chức năng thận ngoại trừ linagliptin.",
+    "(5) Sulfonylurea (SU): SU không phải là thuốc được ưu tiên trong BTM. Glipizide là SU duy nhất có thể dùng được cho bệnh nhân BTM vì được chuyển hóa thành các dẫn chất không hoạt tính, nhưng không dùng khi MLCT thấp <30 ml/phút/1,73 m². Repaglinide được chuyển hóa ở gan với tỉ lệ thải trừ qua thận dưới 10%, nhưng nên bắt đầu với liều thấp 0,5 mg/ngày."
+   ],
+   "insulin": {
+    "title": "(8) Insulin",
+    "intro": "Nhu cầu insulin của mỗi BN rất khác nhau, do đó cần điều chỉnh phù hợp thông qua theo dõi đường máu và MLCT:",
+    "bands": [
+     "MLCT > 50 ml/phút/1,73 m²: không cần điều chỉnh liều.",
+     "MLCT 50-10 ml/phút/1,73 m²: giảm 25% liều insulin trước đó.",
+     "MLCT < 10 ml/phút/1,73 m²: giảm 50% liều insulin trước đó."
+    ]
+   }
+  },
+  {
+   "id": "bang-20",
+   "title": "Bảng 20. Liều các thuốc statin sử dụng trong BTM",
+   "page": "48",
+   "basis": "stage",
+   "stageCols": {
+    "G1": 1,
+    "G2": 1,
+    "G3a": 2,
+    "G3b": 2,
+    "G4": 2,
+    "G5": 2
+   },
+   "columns": [
+    "Statin",
+    "BTM giai đoạn 1-2",
+    "BTM giai đoạn 3a-5, Lọc máu, ghép thận (mg/ngày)"
+   ],
+   "rows": [
+    [
+     "Lovastatin",
+     "Liều thông thường",
+     "Không có nghiên cứu"
+    ],
+    [
+     "Fluvastatin",
+     "Liều thông thường",
+     "80 (ALERT)"
+    ],
+    [
+     "Atorvastatin",
+     "Liều thông thường",
+     "20 (4D)"
+    ],
+    [
+     "Rosuvastatin",
+     "Liều thông thường",
+     "10 (AURORA)"
+    ],
+    [
+     "Simvastatin/Ezetimibe",
+     "Liều thông thường",
+     "20/10 (SHARP)"
+    ],
+    [
+     "Pravastatin",
+     "Liều thông thường",
+     "40"
+    ],
+    [
+     "Simvastatin",
+     "Liều thông thường",
+     "40"
+    ],
+    [
+     "Pitavastatin",
+     "Liều thông thường",
+     "2"
+    ]
+   ],
+   "notes": []
+  },
+  {
+   "id": "bang-21",
+   "title": "Bảng 21. Liều khuyến cáo cho các thuốc hạ acid uric máu ở BTM.",
+   "page": "52",
+   "basis": "stage",
+   "stageCols": {
+    "G3a": 3,
+    "G3b": 3,
+    "G4": 3,
+    "G5": 3
+   },
+   "columns": [
+    "Thuốc",
+    "Nhóm",
+    "Liều",
+    "Lưu ý ở BN CKD (G3-5)",
+    "Khuyến cáo (G5D)"
+   ],
+   "rows": [
+    [
+     "Allopurinol",
+     "Ức chế XO (iXO)",
+     "Khởi đầu: 50-100 mg/ngày\nTối đa: 800mg/ngày",
+     "MLCT ≥ 30\nKhởi đầu 50-100 mg/ngày\nMLCT < 30\nKhởi đầu 50 mg/ngày",
+     "HD: khởi đầu 100 mg sau lọc máu\nPD: khởi đầu 50 mg/ngày"
+    ],
+    [
+     "Febuxostat (b)",
+     "Ức chế XO",
+     "Khởi đầu: 40mg/ngày\nTối đa: 120mg/ngày",
+     "Chưa đủ dữ liệu ở bn với MLCT < 30 ml/phút",
+     "Chưa đủ dữ liệu"
+    ],
+    [
+     "Các thuốc tăng đào thải acid uric qua nước tiểu",
+     "",
+     "Chỉnh liều tùy theo MLCT, cần dùng phối hợp với iXO",
+     "",
+     "Chống chỉ định"
+    ]
+   ],
+   "notes": [
+    "HD: lọc máu chu kỳ, PD: lọc màng bụng",
+    "a: Có thể tăng liều Allopurinol sau mỗi 2-5 tuần cho đến khi đạt mục tiêu acid uric máu",
+    "b: Febuxostat không nên sử dụng ở những bệnh nhân có nguy cơ tim mạch cao."
+   ]
+  },
+  {
+   "id": "bang-22",
+   "title": "Bảng 22. Thuốc chỉ định điều trị cơn gút cấp và chỉnh liều trong BTM",
+   "page": "52",
+   "basis": "stage",
+   "stageCols": {
+    "G3a": 2,
+    "G3b": 2,
+    "G4": 2,
+    "G5": 2
+   },
+   "columns": [
+    "Thuốc",
+    "Chức năng thận bình thường",
+    "BTM (G3-G5)",
+    "Lọc máu"
+   ],
+   "rows": [
+    [
+     "Colchicine",
+     "1-2 mg/ngày, tối đa 2 mg/ngày. Không vượt quá 6 mg trong 4 ngày",
+     "GĐ G3 giảm nửa liều và tăng khoảng cách",
+     "Chống chỉ định"
+    ],
+    [
+     "NSAIDs",
+     "Bất cứ loại nào với liều thông thường",
+     "MLCT< 30: chống chỉ định\nGĐ G3 dùng thận trọng và giảm liều",
+     "Bất cứ loại nào với liều thông thường"
+    ],
+    [
+     "Glucocorticoids (BN chống chỉ định colchicin, NSAIDs)",
+     "0.5 mg/kg/ngày, giảm 5 mg mỗi 2 ngày",
+     "Giống trong chức năng thận bình thường",
+     "Giống trong chức năng thận bình thường"
+    ],
+    [
+     "ACTH analog (tetracosactide depot)",
+     "25-40 mg (TB/TDD) ở BN không đáp ứng điều trị khác",
+     "Không cần chỉnh liều",
+     "Không cần chỉnh liều"
+    ],
+    [
+     "Ức chế IL-1 (gút kháng trị)",
+     "Anakinra liều 100 mg TDD/ngày*\nCanakinumab 150 mg, TDD một liều đơn",
+     "GĐ G4: Anakinra 100 mg/48h\nCanakinumab: không cần chỉnh liều",
+     "Anakinra 100 mg/48h\nCanakinumab: không chỉnh liều"
+    ]
+   ],
+   "notes": [
+    "* Không có chỉ định trong bảng dữ liệu của thuốc, mặc dù có những nghiên cứu hỗ trợ việc sử dụng nó."
+   ]
+  }
+ ]
+}

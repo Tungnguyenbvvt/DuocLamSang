@@ -49,6 +49,12 @@
   .sec{font-size:15px;margin:22px 0 8px}
   .lk-table tr.now td{background:color-mix(in srgb,var(--cat) 16%,#fff);font-weight:600}
   .lk-table ul{margin:0;padding-left:16px}
+  .dose{margin-bottom:16px}
+  .dose h3{font-size:14px;margin:14px 0 6px}
+  .dose td{white-space:pre-line}
+  .lk-table .hl{background:color-mix(in srgb,var(--cat) 16%,#fff);font-weight:600}
+  .dose ul.notes{margin:6px 0 0;padding-left:18px;font-size:13px;color:var(--mut)}
+  .dose .ins li.now{font-weight:700;color:var(--tx)}
   .pill{display:inline-block;padding:1px 9px;border-radius:999px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
   .r-low{background:var(--r-low)}.r-mod{background:var(--r-mod);color:#3a2a00}.r-high{background:var(--r-high);color:#3a1d00}.r-vhigh{background:var(--r-vhigh)}.r-top{background:var(--r-top)}
   .heat{width:100%;border-collapse:separate;border-spacing:3px;font-size:13px;text-align:center}
@@ -192,6 +198,10 @@
   </ul>
   <p class="cite">Chép nguyên văn QĐ 2388/QĐ-BYT, mục 3.2.3 và phần sau Bảng 9 [9].</p></div>
 
+  <h2 class="sec">Chỉnh liều một số thuốc trong bệnh thận mạn – QĐ 2388</h2>
+  <p class="hint" id="doseHint">Nhập thông tin người bệnh ở trên để tô cột ứng với eGFR hoặc giai đoạn hiện tại.</p>
+  <div id="dosing"><p class="hint">Đang tải bảng chỉnh liều…</p></div>
+
   <h2 class="sec">Phân loại BMI – WHO [6] và ngưỡng người châu Á – Thái Bình Dương [7]</h2>
   <table class="lk-table">
     <thead><tr><th>Phân loại</th><th>BMI – WHO (kg/m²)</th><th>BMI – châu Á (kg/m²)</th></tr></thead>
@@ -206,7 +216,6 @@
       <li><b>eGFR không chuẩn hóa</b> (mL/phút) = eGFR × diện tích da / 1,73, diện tích da tính theo Mosteller [8].</li>
       <li>Cân nặng nào dùng cho CrCl khi người bệnh béo phì hoặc nhẹ cân: theo hướng dẫn của từng thuốc và quy trình của bệnh viện. Trang này hiện cả 3 kết quả, không tự chọn.</li>
     </ul>
-    <div class="todo"><b>Chưa có trong bản này:</b> các bảng chỉnh liều thuốc trong QĐ 2388 (Bảng 12 ƯCMC/ƯCTT, Bảng 17 ức chế DPP-4, Bảng 20 statin, Bảng 21 thuốc hạ acid uric, Bảng 22 thuốc điều trị gút cấp).</div>
   </div>
 
   <h2 class="sec">Tài liệu tham khảo</h2>
@@ -294,6 +303,7 @@
     $('msgs').innerHTML = msgs;
     $('out').hidden = !r;
     tables(r);
+    renderDosing(r);
     if (!r) return;
 
     $('kpi').innerHTML = [
@@ -345,6 +355,39 @@
         '<tr><td>BMI – châu Á</td><td>' + r.bmiAsia.label + '</td></tr>' +
         '<tr><td>Diện tích da (Mosteller)</td><td>' + fmt(r.bsa, 2) + ' m²</td></tr></table></div>';
   }
+
+  // Bảng chỉnh liều: dữ liệu ở data/renal-dosing.json, tô cột theo eGFR hoặc giai đoạn G hiện tại
+  var dosing = null, lastR = null;
+  function colToHighlight(t, r) {
+    if (!r) return -1;
+    if (t.basis === 'egfr') return R.dpp4Band(r.egfr) + 1;
+    if (t.basis === 'stage') return t.stageCols[r.stage.id] || -1;
+    return -1;
+  }
+  function renderDosing(r) {
+    lastR = r;
+    if (!dosing) return;
+    $('doseHint').innerHTML = !r ? 'Nhập thông tin người bệnh ở trên để tô cột ứng với eGFR hoặc giai đoạn hiện tại.'
+      : 'Đang tô theo eGFR ' + fmt(r.egfr, 1) + ' mL/phút/1,73 m² (' + EQ_NAME[r.primary] + '), giai đoạn ' + r.stage.id +
+        '. Bảng 12 dùng CrCl: hiện ' + fmt(r.crcl.tbw, 1) + ' mL/phút theo cân nặng thực tế (' + fmt(r.crcl.ibw, 1) + ' theo IBW, ' + fmt(r.crcl.abw, 1) + ' theo cân nặng hiệu chỉnh).';
+    $('dosing').innerHTML = dosing.records.map(function (t) {
+      var hc = colToHighlight(t, r);
+      var head = '<tr>' + t.columns.map(function (c, j) { return '<th' + (j === hc ? ' class="hl"' : '') + '>' + esc(c) + '</th>'; }).join('') + '</tr>';
+      var body = t.rows.map(function (row) {
+        return '<tr>' + row.map(function (c, j) { return '<td data-label="' + esc(t.columns[j]) + '"' + (j === hc ? ' class="hl"' : '') + '>' + esc(c) + '</td>'; }).join('') + '</tr>';
+      }).join('');
+      var ins = t.insulin ? '<h3>' + esc(t.insulin.title) + '</h3><p class="hint">' + esc(t.insulin.intro) + '</p><ul class="notes ins">' +
+        t.insulin.bands.map(function (b, i) { return '<li' + (r && R.insulinBand(r.egfr) === i ? ' class="now"' : '') + '>' + esc(b) + (r && R.insulinBand(r.egfr) === i ? ' ◀' : '') + '</li>'; }).join('') + '</ul>' : '';
+      return '<div class="dose"><h3>' + esc(t.title) + '</h3>' + (t.caption ? '<p class="hint">' + esc(t.caption) + '</p>' : '') +
+        '<table class="lk-table"><thead>' + head + '</thead><tbody>' + body + '</tbody></table>' +
+        (t.notes.length ? '<ul class="notes">' + t.notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul>' : '') + ins +
+        '<p class="cite">Chép nguyên văn QĐ 2388/QĐ-BYT, trang ' + esc(t.page) + ' [9].</p></div>';
+    }).join('');
+  }
+  fetch('../data/renal-dosing.json', { cache: 'no-cache' })
+    .then(function (x) { if (!x.ok) throw new Error('HTTP ' + x.status); return x.json(); })
+    .then(function (d) { dosing = d; renderDosing(lastR); })
+    .catch(function (e) { $('dosing').innerHTML = '<p class="msg err">Không tải được bảng chỉnh liều (' + esc(e.message) + ').</p>'; });
 
   $('src').innerHTML = R.SOURCES.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('');
   render();

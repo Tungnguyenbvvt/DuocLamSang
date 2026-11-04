@@ -121,6 +121,12 @@
   function kdigoRisk(g, a) { return KDIGO_RISK[g][+a.slice(1) - 1]; }
   function kdigoCell(g, a) { return KDIGO_CELL[g][+a.slice(1) - 1]; }
 
+  // [9] Vị trí cột/dòng trong các bảng chỉnh liều (data/renal-dosing.json) ứng với eGFR hiện tại
+  // Bảng 17: ≥ 60 | 45-59 | 30-44 | 15-29 | < 15 → 0..4
+  function dpp4Band(egfr) { return egfr >= 60 ? 0 : egfr >= 45 ? 1 : egfr >= 30 ? 2 : egfr >= 15 ? 3 : 4; }
+  // Insulin (mục 4.5, phần (8)): > 50 | 50-10 | < 10 → 0..2
+  function insulinBand(egfr) { return egfr > 50 ? 0 : egfr >= 10 ? 1 : 2; }
+
   // BMI (kg/m²) và [8] diện tích da Mosteller (m²) = √(chiều cao cm × cân nặng kg / 3600)
   function bmi(weightKg, heightCm) { return weightKg / Math.pow(heightCm / 100, 2); }
   function bsaMosteller(weightKg, heightCm) { return Math.sqrt(heightCm * weightKg / 3600); }
@@ -237,7 +243,7 @@
     egfrMdrd: egfrMdrd, egfrCrCys2021: egfrCrCys2021, ibwDevine: ibwDevine, abw: abw,
     kdigoStage: kdigoStage, KDIGO_G: KDIGO_G, KDIGO_A: KDIGO_A, albuminStage: albuminStage,
     KDIGO_RISK: KDIGO_RISK, KDIGO_CELL: KDIGO_CELL, RISK_LABEL: RISK_LABEL, RISK_TEXT: RISK_TEXT, kdigoRisk: kdigoRisk, kdigoCell: kdigoCell,
-    bmi: bmi, bsaMosteller: bsaMosteller, egfrAbsolute: egfrAbsolute, BMI_WHO: BMI_WHO, BMI_ASIA: BMI_ASIA, bmiClass: bmiClass,
+    dpp4Band: dpp4Band, insulinBand: insulinBand, bmi: bmi, bsaMosteller: bsaMosteller, egfrAbsolute: egfrAbsolute, BMI_WHO: BMI_WHO, BMI_ASIA: BMI_ASIA, bmiClass: bmiClass,
     compute: compute, round: round, SOURCES: SOURCES
   };
 })();

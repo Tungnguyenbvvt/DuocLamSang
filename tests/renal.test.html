@@ -127,6 +127,16 @@
   eq('có cystatin C → phân giai đoạn theo công thức kết hợp', cc.result.primary, 'crCys');
   eq('mặc định IDMS → CKD-EPI 2021', R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl' }).result.primary, 'ckdEpi2021');
 
+  // Cột bảng chỉnh liều theo eGFR (QĐ 2388 Bảng 17, phần Insulin)
+  eq('DPP-4: eGFR 60 → cột ≥ 60', R.dpp4Band(60), 0);
+  eq('DPP-4: eGFR 59,9 → cột 45-59', R.dpp4Band(59.9), 1);
+  eq('DPP-4: eGFR 30 → cột 30-44', R.dpp4Band(30), 2);
+  eq('DPP-4: eGFR 14,9 → cột < 15', R.dpp4Band(14.9), 4);
+  eq('Insulin: eGFR 50,1 → không chỉnh', R.insulinBand(50.1), 0);
+  eq('Insulin: eGFR 50 → giảm 25%', R.insulinBand(50), 1);
+  eq('Insulin: eGFR 10 → giảm 25%', R.insulinBand(10), 1);
+  eq('Insulin: eGFR 9,9 → giảm 50%', R.insulinBand(9.9), 2);
+
   var fail = results.filter(function (r) { return !r.ok; }).length;
   document.getElementById('sum').innerHTML = '<span class="' + (fail ? 'fail' : 'pass') + '">' + (results.length - fail) + '/' + results.length + ' ca đạt</span>';
   document.getElementById('out').innerHTML = results.map(function (r) {

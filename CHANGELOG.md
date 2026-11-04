@@ -1,5 +1,11 @@
 # Nhật ký thay đổi
 
+## 1.14.0 – 2026-11-04
+
+- **Module Chức năng thận: thêm bảng chỉnh liều thuốc trong bệnh thận mạn** theo QĐ 2388/QĐ-BYT, chép theo ảnh trang gốc: Bảng 12 (14 thuốc ƯCMC/ƯCTT, tr. 37–38), Bảng 17 (4 thuốc ức chế DPP-4, tr. 46) kèm phần Sulfonylurea và Insulin, Bảng 20 (8 statin, tr. 48), Bảng 21 (thuốc hạ acid uric) và Bảng 22 (thuốc điều trị cơn gút cấp, tr. 52). Giữ nguyên chính tả văn bản.
+- Dữ liệu tách riêng ở `data/renal-dosing.json` 1.0.0 (có `source`, `extraction`, `review: chưa kiểm chứng`). Cột ứng với người bệnh được tô tự động: Bảng 17 và mục Insulin theo eGFR; Bảng 20, 21, 22 theo giai đoạn G. Bảng 12 ghi theo CrCl nên không tô, trang hiện CrCl theo 3 cân nặng để đối chiếu.
+- 73/73 ca kiểm thử đạt (thêm 8 ca ngưỡng cột DPP-4 và Insulin). CACHE_VERSION lên cph-hub-v1.14.0.
+
 ## 1.13.0 – 2026-11-04
 
 - **Module Chức năng thận bổ sung theo QĐ 2388/QĐ-BYT (12/8/2024) và CV 8101/BYT-KCB (30/12/2024)** do người dùng cung cấp. Nội dung bảng chép theo ảnh trang gốc (lớp chữ trích tự động của PDF đọc sai một số ký hiệu ≥ thành >, nên không dùng).
