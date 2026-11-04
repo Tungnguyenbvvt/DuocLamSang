@@ -84,18 +84,48 @@
   eq('BMI 40 WHO → béo phì độ III', R.bmiClass(40, R.BMI_WHO).label, 'Béo phì độ III');
   eq('BMI 18,4 → thiếu cân', R.bmiClass(18.4, R.BMI_WHO).label, 'Thiếu cân');
 
-  // Albumin niệu: 3 mg/mmol × 8,84 = 26,52 mg/g
-  near('ACR 3 mg/mmol = 26,52 mg/g', R.acrMgg(3, 'mgmmol'), 26.52);
-  eq('ACR 29,9 mg/g → A1', R.albuminStage(29.9).id, 'A1');
-  eq('ACR 30 mg/g → A2', R.albuminStage(30).id, 'A2');
-  eq('ACR 300 mg/g → A2', R.albuminStage(300).id, 'A2');
-  eq('ACR 300,1 mg/g → A3', R.albuminStage(300.1).id, 'A3');
+  // Tỷ số niệu (QĐ 2388 Bảng 1: mg/g × 0,113 = mg/mmol): 3 / 0,113 = 26,549 mg/g
+  near('uACR 3 mg/mmol = 26,55 mg/g', R.urineMgg(3, 'mgmmol'), 26.549, 0.01);
+  // Ngưỡng Bảng 8, so theo đúng đơn vị nhập
+  eq('uACR 29,9 mg/g → A1', R.albuminStage(29.9, 'mgg', 'uacr').id, 'A1');
+  eq('uACR 30 mg/g → A2', R.albuminStage(30, 'mgg', 'uacr').id, 'A2');
+  eq('uACR 300 mg/g → A2', R.albuminStage(300, 'mgg', 'uacr').id, 'A2');
+  eq('uACR 300,1 mg/g → A3', R.albuminStage(300.1, 'mgg', 'uacr').id, 'A3');
+  eq('uACR 3 mg/mmol → A2 (không lệch do quy đổi)', R.albuminStage(3, 'mgmmol', 'uacr').id, 'A2');
+  eq('uACR 30,1 mg/mmol → A3', R.albuminStage(30.1, 'mgmmol', 'uacr').id, 'A3');
+  eq('uPCR 149 mg/g → A1', R.albuminStage(149, 'mgg', 'upcr').id, 'A1');
+  eq('uPCR 500 mg/g → A2', R.albuminStage(500, 'mgg', 'upcr').id, 'A2');
+  eq('uPCR 51 mg/mmol → A3', R.albuminStage(51, 'mgmmol', 'upcr').id, 'A3');
+  // Bảng 9 (KDIGO 2024): 5 mức nguy cơ, ô ghi số lần khám mỗi năm
   eq('Nguy cơ G2A1 thấp', R.kdigoRisk('G2', 'A1'), 'low');
-  eq('Nguy cơ G3aA2 cao', R.kdigoRisk('G3a', 'A2'), 'high');
+  eq('Nguy cơ G3aA1 vừa', R.kdigoRisk('G3a', 'A1'), 'mod');
+  eq('Nguy cơ G1A3 cao', R.kdigoRisk('G1', 'A3'), 'high');
   eq('Nguy cơ G3bA2 rất cao', R.kdigoRisk('G3b', 'A2'), 'vhigh');
-  var ca = R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl', acr: 5, acrUnit: 'mgmmol' });
-  eq('compute có ACR 5 mg/mmol → G2A2, nguy cơ tăng vừa', [ca.result.aStage.id, ca.result.risk], ['A2', 'mod']);
-  eq('compute không ACR → không phân nhóm A', R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl', acr: '' }).result.aStage, null);
+  eq('Nguy cơ G4A1 rất cao', R.kdigoRisk('G4', 'A1'), 'vhigh');
+  eq('Nguy cơ G4A3 cao nhất', R.kdigoRisk('G4', 'A3'), 'top');
+  eq('Nguy cơ G5A1 cao nhất', R.kdigoRisk('G5', 'A1'), 'top');
+  eq('Ô G3bA1 = Điều trị 2', R.kdigoCell('G3b', 'A1'), 'Điều trị 2');
+  eq('Ô G1A1 = Sàng lọc 1', R.kdigoCell('G1', 'A1'), 'Sàng lọc 1');
+  var ca = R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl', urine: 5, urineUnit: 'mgmmol', urineKind: 'uacr' });
+  eq('compute uACR 5 mg/mmol → G2A2, nguy cơ vừa, Điều trị 1', [ca.result.aStage.id, ca.result.risk, ca.result.cell], ['A2', 'mod', 'Điều trị 1']);
+  eq('compute không nhập tỷ số niệu → không phân nhóm A', R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl', urine: '' }).result.aStage, null);
+
+  // Các công thức eGFR khác trong QĐ 2388 Bảng 5 / CV 8101
+  // CKD-EPI 2009: 141 × (1/0,9)^−1,209 × 0,993^65 = 141 × 0,880398 × 0,633466 = 78,64
+  near('CKD-EPI 2009 nam 65 tuổi SCr 1,0', R.egfrCkdEpi2009(65, 1.0, false), 78.64);
+  // MDRD (IDMS): 175 × 1 × 65^−0,203 = 175 × 0,428524 = 74,99
+  near('MDRD IDMS nam 65 tuổi SCr 1,0', R.egfrMdrd(65, 1.0, false, 'idms'), 74.99);
+  // MDRD (Jaffe): 186 × 0,428524 = 79,71
+  near('MDRD Jaffe nam 65 tuổi SCr 1,0', R.egfrMdrd(65, 1.0, false, 'jaffe'), 79.71);
+  // CKD-EPI cr-cys: 135 × 0,944296 × 0,840627 × 0,775700 = 83,13
+  near('CKD-EPI cr-cys nam 65 tuổi SCr 1,0 sCys 1,0', R.egfrCrCys2021(65, 1.0, 1.0, false), 83.13);
+  // 135 × 1,034335 × 1,044075 × 0,822521 × 0,963 = 115,48
+  near('CKD-EPI cr-cys nữ 50 tuổi SCr 0,6 sCys 0,7', R.egfrCrCys2021(50, 0.6, 0.7, true), 115.48);
+  var cj = R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl', method: 'jaffe' });
+  eq('kỹ thuật Jaffe → phân giai đoạn theo CKD-EPI 2009', cj.result.primary, 'ckdEpi2009');
+  var cc = R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl', method: 'jaffe', cys: 1.0 });
+  eq('có cystatin C → phân giai đoạn theo công thức kết hợp', cc.result.primary, 'crCys');
+  eq('mặc định IDMS → CKD-EPI 2021', R.compute({ age: 65, sex: 'M', height: 165, weight: 60, scr: 1, unit: 'mgdl' }).result.primary, 'ckdEpi2021');
 
   var fail = results.filter(function (r) { return !r.ok; }).length;
   document.getElementById('sum').innerHTML = '<span class="' + (fail ? 'fail' : 'pass') + '">' + (results.length - fail) + '/' + results.length + ' ca đạt</span>';

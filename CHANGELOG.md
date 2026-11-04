@@ -1,5 +1,15 @@
 # Nhật ký thay đổi
 
+## 1.13.0 – 2026-11-04
+
+- **Module Chức năng thận bổ sung theo QĐ 2388/QĐ-BYT (12/8/2024) và CV 8101/BYT-KCB (30/12/2024)** do người dùng cung cấp. Nội dung bảng chép theo ảnh trang gốc (lớp chữ trích tự động của PDF đọc sai một số ký hiệu ≥ thành >, nên không dùng).
+- Thêm công thức: CKD-EPI 2009 (khi định lượng creatinine bằng Jaffe), MDRD (A = 175 IDMS / 186 Jaffe), CKD-EPI creatinine – cystatin C 2021. Phân giai đoạn: có cystatin C thì theo công thức kết hợp, không thì theo kỹ thuật định lượng creatinine. Không dùng hệ số chủng tộc. Đã đối chiếu hệ số CKD-EPI 2021 hiện có: khớp văn bản.
+- Thêm ô nhập kỹ thuật định lượng creatinine, cystatin C, uACR hoặc uPCR (mg/g hoặc mg/mmol). Hệ số quy đổi tỷ số niệu đổi sang 0,113 theo Bảng 1; phân nhóm A so trực tiếp theo đơn vị nhập theo Bảng 8.
+- Phân tầng nguy cơ đổi sang Bảng 9 (KDIGO 2024): 5 mức màu, ô ghi “Sàng lọc/Điều trị” và số lần khám mỗi năm; chép nguyên văn phần giải thích 5 màu. Bảng 9 và Bảng 8 ghi ngưỡng A2/A3 khác nhau tại 300 mg/g; trang ghi rõ và xếp theo Bảng 8.
+- Thêm bảng chép nguyên văn: các công thức (ý nghĩa, điều kiện áp dụng, đặc điểm), tiêu chuẩn chẩn đoán BTM (Bảng 6), giai đoạn BTM (Bảng 7), nhóm albumin/protein nước tiểu (Bảng 8), các lưu ý đánh giá chức năng thận (mục 3.2.3). Cảnh báo khi không đạt điều kiện áp dụng của Bảng 5 (cân nặng ngoài 30% IBW; béo phì).
+- 65/65 ca kiểm thử đạt (thêm 19 ca). CACHE_VERSION lên cph-hub-v1.13.0.
+- Chưa đưa vào: các bảng chỉnh liều thuốc trong QĐ 2388 (Bảng 12, 17, 20, 21, 22).
+
 ## 1.12.0 – 2026-11-04
 
 - Thêm nhóm **Công cụ tính toán** ở sidebar với module đầu tiên **Chức năng thận – CrCl, eGFR, IBW, ABW** (`pages/tinh-chuc-nang-than.html`, logic ở `js/modules/renal.js`).
