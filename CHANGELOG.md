@@ -1,5 +1,9 @@
 # Nhật ký thay đổi
 
+## 1.15.3 – 2026-11-06
+
+- Trang chủ: mục “Xem gần đây” và dãy chip lọc của “Tất cả tài liệu” chỉ hiện 2 dòng đầu, có nút “Xem thêm (N)” / “Thu gọn”; số dòng tính theo bố cục thật nên đúng trên mọi độ rộng màn hình. Chip đang chọn nằm ở phần ẩn thì tự mở. “Xem gần đây” lưu tới 12 tài liệu (trước 6). CACHE_VERSION lên cph-hub-v1.15.3.
+
 ## 1.15.2 – 2026-11-06
 
 - Sắp xếp lại thứ tự module ở sidebar theo yêu cầu người dùng: Tài liệu thông tin thuốc, Tương tác thuốc, Công cụ tính toán, ICD-10, TT20, Dịch vụ kĩ thuật, Phác đồ điều trị, Tóm tắt guideline, So sánh dược lý lâm sàng, Thẩm định bài báo (EBM). `pages.json` lên 1.9.0, CACHE_VERSION lên cph-hub-v1.15.2.

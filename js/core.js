@@ -7,7 +7,7 @@
   var APP_NAME = 'DượcLâmSàng BVĐKVũThư';
   var DATA_URL = 'data/pages.json';
   var MOBILE_MAX = 900;
-  var RECENT_MAX = 6;
+  var RECENT_MAX = 12;
 
   var $ = function (id) { return document.getElementById(id); };
   var app = $('app'), sidebar = $('sidebar'), scrim = $('scrim');
@@ -300,11 +300,11 @@
       'Ứng dụng không thu thập dữ liệu bệnh nhân. Dữ liệu sức khỏe là dữ liệu cá nhân nhạy cảm theo Nghị định 13/2023/NĐ-CP; đơn vị triển khai chịu trách nhiệm pháp lý và nên đối chiếu với bộ phận pháp chế.</p></details>';
 
     if (favs.length) html += '<h2 class="sec-title">★ Yêu thích</h2><div class="cards">' + favs.map(cardHtml).join('') + '</div>';
-    if (recent.length) html += '<h2 class="sec-title">Xem gần đây</h2><div class="cards">' + recent.map(cardHtml).join('') + '</div>';
+    if (recent.length) html += '<h2 class="sec-title">Xem gần đây</h2><div class="cards" data-clamp="recent">' + recent.map(cardHtml).join('') + '</div>';
 
     html += '<h2 class="sec-title">' + (catName ? esc(catName) : 'Tất cả tài liệu') + ' <span class="nav-count">' + list.length + '</span>' +
       (catName ? ' <a href="#/" style="font-size:13px;font-weight:500">Bỏ lọc</a>' : '') + '</h2>' +
-      '<div class="chips" role="group" aria-label="Lọc theo chuyên khoa">' +
+      '<div class="chips" data-clamp="chips" role="group" aria-label="Lọc theo chuyên khoa">' +
       '<button type="button" class="chip" data-tag="" aria-pressed="' + (!state.tagFilter) + '">Tất cả</button>' +
       allTags.map(function (t) {
         return '<button type="button" class="chip" data-tag="' + esc(t) + '" aria-pressed="' + (state.tagFilter === t) + '">' + esc(t) + '</button>';
@@ -313,9 +313,41 @@
       '<p class="foot-note">Danh mục phiên bản ' + esc(d.version) + ', cập nhật ' + esc(d.updated) + '. ' + esc(d.source) + '</p>';
 
     homeView.innerHTML = html;
+    clampRows();
   }
 
+  // Khu vực có data-clamp chỉ hiện 2 dòng đầu, kèm nút “Xem thêm”; tính theo vị trí thật nên đúng ở mọi độ rộng màn hình
+  var CLAMP_ROWS = 2;
+  var opened = {};
+  function clampRows() {
+    homeView.querySelectorAll('[data-clamp]').forEach(function (box) {
+      var key = box.getAttribute('data-clamp');
+      var items = Array.prototype.slice.call(box.children);
+      items.forEach(function (el) { el.classList.remove('clamped'); });
+      var old = box.nextElementSibling;
+      if (old && old.classList.contains('more-btn')) old.remove();
+      var tops = [];
+      items.forEach(function (el) { if (tops.indexOf(el.offsetTop) === -1) tops.push(el.offsetTop); });
+      tops.sort(function (a, b) { return a - b; });
+      if (tops.length <= CLAMP_ROWS) return;
+      var limit = tops[CLAMP_ROWS - 1];
+      var extra = items.filter(function (el) { return el.offsetTop > limit; });
+      // Chip đang chọn nằm ở phần bị ẩn thì mở sẵn để người dùng thấy bộ lọc đang áp dụng
+      if (extra.some(function (el) { return el.getAttribute('aria-pressed') === 'true' && el.getAttribute('data-tag'); })) opened[key] = true;
+      if (!opened[key]) extra.forEach(function (el) { el.classList.add('clamped'); });
+      box.insertAdjacentHTML('afterend', '<button type="button" class="more-btn" data-more="' + key + '" aria-expanded="' + !!opened[key] + '">' +
+        (opened[key] ? 'Thu gọn' : 'Xem thêm (' + extra.length + ')') + '</button>');
+    });
+  }
+  var clampTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(clampTimer);
+    clampTimer = setTimeout(function () { if (!homeView.hidden) clampRows(); }, 150);
+  });
+
   homeView.addEventListener('click', function (e) {
+    var more = e.target.closest('[data-more]');
+    if (more) { var k = more.getAttribute('data-more'); opened[k] = !opened[k]; clampRows(); return; }
     var chip = e.target.closest('.chip');
     if (!chip) return;
     state.tagFilter = chip.getAttribute('data-tag') || null;

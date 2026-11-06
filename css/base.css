@@ -129,6 +129,10 @@ mark{background:color-mix(in srgb,var(--accent) 25%,#fff);color:inherit;border-r
 .notice[open] .notice-more{display:none}
 .sec-title{font-size:16.5px;margin:22px 0 10px;display:flex;align-items:center;gap:8px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.clamped{display:none!important}
+.more-btn{display:block;margin:-2px 0 12px;padding:6px 14px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--accent);font:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.cards + .more-btn{margin-top:10px}
+.more-btn:hover{border-color:var(--accent)}
 .chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 12px;font-size:13px;cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
