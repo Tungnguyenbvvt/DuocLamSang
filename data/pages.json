@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0",
+  "version": "1.8.0",
   "updated": "2026-11-03",
   "source": "Danh mục tài liệu nội bộ Khoa Dược. Nguồn tham khảo gốc của từng tài liệu được ghi trong chính trang tài liệu đó.",
   "categories": [
@@ -10,6 +10,7 @@
     { "id": "icd10", "name": "ICD-10", "icon": "code" },
     { "id": "tt20", "name": "TT20 – Danh mục thuốc BHYT", "icon": "law" },
     { "id": "cong-cu-tinh", "name": "Công cụ tính toán", "icon": "calc" },
+    { "id": "tuong-tac", "name": "Tương tác thuốc", "icon": "warn" },
     { "id": "dich-vu-ky-thuat", "name": "Dịch vụ kĩ thuật", "icon": "service" },
     { "id": "phac-do-dieu-tri", "name": "Phác đồ điều trị", "icon": "protocol" }
   ],
@@ -82,6 +83,8 @@
     { "id": "icd10-tra-cuu", "title": "Tra cứu mã bệnh ICD-10 (Thông tư 06/2026/TT-BYT)", "file": "pages/tra-cuu-icd10.html", "category": "icd10", "tags": ["Mã hóa bệnh tật", "BHYT"], "review": "chưa kiểm chứng" },
 
     { "id": "tinh-chuc-nang-than", "title": "Chức năng thận – CrCl, eGFR, IBW, ABW", "file": "pages/tinh-chuc-nang-than.html", "category": "cong-cu-tinh", "tags": ["Thận", "Công cụ tính toán"], "review": "chưa kiểm chứng" },
+
+    { "id": "tuong-tac-5948", "title": "Tương tác thuốc chống chỉ định – QĐ 5948/QĐ-BYT", "file": "pages/tuong-tac-thuoc.html", "category": "tuong-tac", "tags": ["Tương tác thuốc", "Văn bản pháp quy"], "review": "chưa kiểm chứng" },
 
     { "id": "tt20-tra-cuu", "title": "Tra cứu danh mục thuốc BHYT – Thông tư 20/2022/TT-BYT", "file": "pages/tra-cuu-tt20.html", "category": "tt20", "tags": ["BHYT", "Văn bản pháp quy"], "review": "chưa kiểm chứng" }
   ]

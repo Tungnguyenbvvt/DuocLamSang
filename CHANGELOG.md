@@ -1,5 +1,12 @@
 # Nhật ký thay đổi
 
+## 1.15.0 – 2026-11-06
+
+- **Module mới: Tương tác thuốc** (nhóm mới ở sidebar) – trang `pages/tuong-tac-thuoc.html` tra Danh mục tương tác thuốc chống chỉ định ban hành kèm QĐ 5948/QĐ-BYT ngày 30/12/2021: 633 cặp theo hoạt chất (Bảng 3.1) và 68 cặp theo nhóm đặc tính dược lý (Bảng 3.2), kèm cơ chế, hậu quả, xử trí, 7 chú thích nhóm thuốc, bảng con thuốc kéo dài khoảng QT và bảng tên khác của hoạt chất.
+- Kiểm tra tương tác giữa 2–10 thuốc (từng cặp) và tra mọi tương tác của 1 thuốc; ô nhập có gợi ý kèm số tương tác, không cần gõ dấu. Mức độ theo văn bản: không in đậm = chống chỉ định trong mọi trường hợp; in đậm = chống chỉ định có điều kiện (Bảng 3.1: 369 và 264 cặp; Bảng 3.2: 53 và 15 cặp).
+- Dữ liệu `data/tuong-tac-5948.json` trích bằng `tools/import-qd5948/build.py` từ bản Word do người dùng cung cấp (bản PDF có chữ ký là bản scan, không trích chữ được). Đã nối lại các từ bị ngắt giữa chừng khi chuyển định dạng (23 chỗ tự động theo từ điển của chính văn bản, 17 chỗ ghi tay trong FIXES) và sửa 1 lỗi mất chữ của bản Word (STT 521 “Lopinavir/rito avir” → “Lopinavir/ritonavir” theo bản scan). Đối chiếu với bản scan: STT 1–4, 316–317, 520–523 khớp tên, mức độ và nội dung. **Chưa đối chiếu toàn bộ 701 cặp.**
+- 21 ca kiểm thử trên dữ liệu thật (`tests/interact.test.html`). `pages.json` lên 1.8.0, CACHE_VERSION lên cph-hub-v1.15.0.
+
 ## 1.14.0 – 2026-11-04
 
 - **Module Chức năng thận: thêm bảng chỉnh liều thuốc trong bệnh thận mạn** theo QĐ 2388/QĐ-BYT, chép theo ảnh trang gốc: Bảng 12 (14 thuốc ƯCMC/ƯCTT, tr. 37–38), Bảng 17 (4 thuốc ức chế DPP-4, tr. 46) kèm phần Sulfonylurea và Insulin, Bảng 20 (8 statin, tr. 48), Bảng 21 (thuốc hạ acid uric) và Bảng 22 (thuốc điều trị cơn gút cấp, tr. 52). Giữ nguyên chính tả văn bản.

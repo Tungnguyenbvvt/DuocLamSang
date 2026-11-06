@@ -56,7 +56,7 @@ print(len(drugs), 'thuoc, thieu:', missing)
 
 out = {}
 for rec in catalog['records']:
-    if rec['category'] in ('icd10', 'tt20') or rec['id'] == 'thuoc-tra-cuu':
+    if rec['category'] in ('icd10', 'tt20') or rec['id'] in ('thuoc-tra-cuu', 'tuong-tac-5948'):
         continue  # đã có dữ liệu riêng
     words = set(re.findall(r'[a-z0-9]{3,}', norm(text_of((ROOT / rec['file']).read_text(encoding='utf-8')))))
     out[rec['id']] = ' '.join(sorted(w for w in words if not w.isdigit()))

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Ca kiểm thử – tương tác thuốc QĐ 5948</title>
+<style>
+  body{font-family:system-ui,sans-serif;margin:16px;font-size:14px}
+  .pass{color:#1b6b34}.fail{color:#b3261e;font-weight:700}
+  #sum{font-size:16px;font-weight:700;margin-bottom:10px}
+</style>
+</head>
+<body>
+<div id="sum">Đang chạy…</div>
+<ol id="out"></ol>
+<script src="../js/modules/interact.js"></script>
+<script>
+  // Chạy trên dữ liệu thật: giá trị mong đợi đọc từ bản scan QĐ 5948 (ghi STT trong tên ca)
+  var I = window.Interact, results = [];
+  function eq(name, got, want) { results.push({ name: name, ok: JSON.stringify(got) === JSON.stringify(want), got: got, want: want }); }
+  function ids(list) { return list.map(function (h) { return h.rec.id; }).sort(); }
+  fetch('../data/tuong-tac-5948.json').then(function (r) { return r.json(); }).then(function (d) {
+    var X = I.build(d);
+    eq('đủ 633 + 68 cặp', [d.records.filter(function (r) { return r.table === '3.1'; }).length, d.records.filter(function (r) { return r.table === '3.2'; }).length], [633, 68]);
+    eq('STT 1 Aceclofenac – Ketorolac, không in đậm', [d.records[0].a, d.records[0].b, d.records[0].level], ['Aceclofenac', 'Ketorolac', 'abs']);
+    eq('STT 2 Acenocoumarol – Tamoxifen, in đậm', [d.records[1].level], ['cond']);
+    eq('STT 521 tên đã sửa theo bản scan', d.records[520].a, 'Lopinavir/ritonavir');
+    eq('cặp trực tiếp, không phân biệt thứ tự (STT 1)', ids(I.pair(X, 'ketorolac', 'aceclofenac')).indexOf('I-1') !== -1, true);
+    eq('gõ không dấu, khác hoa thường', ids(I.pair(X, 'ACID TRANEXAMIC', 'ethinyl estradiol')).indexOf('I-4') !== -1, true);
+    eq('không khớp một phần từ (sulpirid ≠ amisulpirid)', I.lookup(X, 'sulpirid').some(function (h) { return /amisulpirid/i.test(h.rec.a + h.rec.b) && !/(^|[^a-z])sulpirid/i.test(h.rec.a + h.rec.b); }), false);
+    eq('tên khác: cyclosporin = ciclosporin', I.lookup(X, 'cyclosporin').length, I.lookup(X, 'ciclosporin').length);
+    eq('nhóm qua chú thích: ibuprofen + ketorolac → Bảng 3.2 STT 7', ids(I.pair(X, 'ibuprofen', 'ketorolac')).indexOf('G-7') !== -1, true);
+    eq('nhóm qua ngoặc: simvastatin + clarithromycin → Bảng 3.2 STT 16', ids(I.pair(X, 'simvastatin', 'clarithromycin')).indexOf('G-16') !== -1, true);
+    eq('QT: domperidon + azithromycin → Bảng 3.2 STT 13', ids(I.pair(X, 'domperidon', 'azithromycin')).indexOf('G-13') !== -1, true);
+    eq('QT chỉ theo bảng con: clorpromazin + sotalol không có trong bảng con', ids(I.pair(X, 'clorpromazin', 'sotalol')).indexOf('G-13'), -1);
+    eq('QT: sotalol + citalopram có', ids(I.pair(X, 'sotalol', 'citalopram')).indexOf('G-13') !== -1, true);
+    var c = I.check(X, ['Atropin', 'Rifampicin', '', 'atropin']);
+    eq('kiểm tra nhiều thuốc bỏ ô trống và thuốc trùng', c.drugs, ['Atropin', 'Rifampicin']);
+    eq('atropin + rifampicin: không có tương tác', c.hits.length, 0);
+    var c2 = I.check(X, ['Kali clorid (dạng uống giải phóng kéo dài)', 'Atropin']);
+    eq('kali clorid giải phóng kéo dài + atropin → Bảng 3.2 STT 64', c2.hits.map(function (h) { return h.rec.id; }).indexOf('G-64') !== -1, true);
+    var c3 = I.check(X, ['clarithromycin', 'simvastatin', 'colchicin']);
+    eq('3 thuốc: kết quả chống chỉ định tuyệt đối xếp trước', c3.hits.length > 0 && c3.hits.every(function (h, i, a) { return i === 0 || !(a[i - 1].rec.level === 'cond' && h.rec.level === 'abs'); }), true);
+    eq('tên quá ngắn bị bỏ qua', I.lookup(X, 'ac').length, 0);
+    var s = I.suggest(X, 'amio', 5);
+    eq('gợi ý: amio → Amiodaron đứng đầu', s[0] && s[0].name, 'Amiodaron');
+    eq('gợi ý có số tương tác > 0', s.every(function (v) { return v.count > 0; }), true);
+    eq('gợi ý không dấu: "ciclo" ra Ciclosporin', I.suggest(X, 'ciclo', 3).map(function (v) { return v.name; }).indexOf('Ciclosporin') !== -1, true);
+
+    var fail = results.filter(function (r) { return !r.ok; }).length;
+    document.getElementById('sum').innerHTML = '<span class="' + (fail ? 'fail' : 'pass') + '">' + (results.length - fail) + '/' + results.length + ' ca đạt</span>';
+    document.getElementById('out').innerHTML = results.map(function (r) {
+      return '<li class="' + (r.ok ? 'pass' : 'fail') + '">' + (r.ok ? 'ĐẠT' : 'LỖI') + ' – ' + r.name + (r.ok ? '' : ' | nhận: ' + JSON.stringify(r.got) + ' | cần: ' + JSON.stringify(r.want)) + '</li>';
+    }).join('');
+    window.TEST_RESULT = { total: results.length, fail: fail };
+  });
+</script>
+</body>
+</html>

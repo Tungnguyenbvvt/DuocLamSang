@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="vi" data-unit="vu-thu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tương tác thuốc chống chỉ định – QĐ 5948/QĐ-BYT</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/theme.css">
+<link rel="stylesheet" href="../css/tool.css">
+<style>
+  :root{--cat:#d9534f;--abs:#c62f2f;--abs-bg:#fdeceb;--cond:#b7791f;--cond-bg:#fff6e0}
+  .legend{background:var(--abs-bg);border:1px solid #f3c2bf;border-radius:12px;padding:10px 14px;font-size:13.5px;line-height:1.55;margin-bottom:14px}
+  .legend p{margin:4px 0}
+  .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+  .dot.abs{background:var(--abs)}.dot.cond{background:#e8b10e}
+  .legend details{margin-top:6px;font-size:12.5px;color:var(--mut)}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+  .box h2{font-size:14.5px;margin:0 0 10px}
+  .row{display:flex;gap:8px;margin-bottom:8px;position:relative}
+  .ac{position:relative;flex:1;min-width:0}
+  .ac input{width:100%;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit;font-size:15px;background:#fff;color:var(--tx)}
+  .ac input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 20%,transparent)}
+  .del{flex:none;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;font-size:18px;color:var(--mut)}
+  .sug{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:20;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.14);max-height:320px;overflow-y:auto;margin:0;padding:4px;list-style:none}
+  .sug li{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;cursor:pointer;font-size:14.5px}
+  .sug li[aria-selected="true"],.sug li:hover{background:color-mix(in srgb,var(--accent) 10%,#fff)}
+  .sug .tag{flex:none;font-size:11.5px;font-weight:600;color:var(--abs);background:var(--abs-bg);border-radius:6px;padding:2px 7px}
+  .sug .cnt{color:var(--mut);font-size:13px}
+  .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+  .btn{height:42px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:#fff;font:inherit;font-weight:600;cursor:pointer;color:var(--tx)}
+  .btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+  .hint{font-size:12.5px;color:var(--dim);margin:8px 0 0}
+  .empty{text-align:center;padding:18px 10px;color:var(--mut)}
+  .empty b{display:block;font-size:17px;margin-bottom:4px}
+  .empty.ok b{color:#2e9e5b}
+  .sum{font-size:14px;margin:0 0 10px}
+  .ix{border:1px solid var(--line);border-left:5px solid var(--abs);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:#fff}
+  .ix.cond{border-left-color:#e8b10e}
+  .ix-head{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;margin-bottom:6px}
+  .lv{font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;background:var(--abs-bg);color:var(--abs)}
+  .ix.cond .lv{background:var(--cond-bg);color:var(--cond)}
+  .ix-head b{font-size:15.5px}
+  .ref{font-size:12px;color:var(--mut);margin-left:auto}
+  .ix-pair{font-size:13px;color:var(--mut);margin-bottom:8px}
+  .ix dl{margin:0;display:grid;grid-template-columns:90px 1fr;gap:6px 12px;font-size:14px;line-height:1.55}
+  .ix dt{font-weight:600;color:var(--mut)}
+  .ix dd{margin:0;white-space:pre-line}
+  .ix details{margin-top:8px;font-size:13px;color:var(--mut)}
+  @media (max-width:560px){.ix dl{grid-template-columns:1fr}.ix dt{margin-top:4px}.ref{margin-left:0}}
+  .src{font-size:12.5px;color:var(--mut);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+</style>
+</head>
+<body>
+<div class="lk">
+  <header class="lk-head">
+    <h1>Tương tác thuốc chống chỉ định</h1>
+    <p>Danh mục ban hành kèm Quyết định số 5948/QĐ-BYT ngày 30/12/2021 của Bộ Y tế: 633 cặp theo hoạt chất (Bảng 3.1) và 68 cặp theo nhóm đặc tính dược lý (Bảng 3.2). Gõ tên hoạt chất, không cần gõ dấu.</p>
+  </header>
+
+  <div class="legend" id="legend">
+    <p><span class="dot abs"></span><b>Chống chỉ định trong mọi trường hợp</b> (tên hoạt chất không in đậm trong văn bản)</p>
+    <p><span class="dot cond"></span><b>Chống chỉ định có điều kiện</b> (tên hoạt chất in đậm trong văn bản): chỉ chống chỉ định trong một số bối cảnh, hoặc tốt nhất nên tránh</p>
+    <details><summary>Định nghĩa nguyên văn trong QĐ 5948</summary><p id="lvAbs"></p><p id="lvCond"></p></details>
+  </div>
+
+  <section class="box" aria-labelledby="hMulti">
+    <h2 id="hMulti">Kiểm tra tương tác giữa nhiều thuốc (tối đa 10 thuốc)</h2>
+    <div id="rows"></div>
+    <div class="actions">
+      <button class="btn" type="button" id="add">+ Thêm thuốc</button>
+      <button class="btn pri" type="button" id="run">Kiểm tra</button>
+      <button class="btn" type="button" id="clear">Xóa hết</button>
+    </div>
+    <p class="hint">Cần nhập ít nhất 2 thuốc. Công cụ kiểm tra từng cặp 2 thuốc trong danh sách; danh mục chỉ gồm tương tác giữa 2 thuốc, không đánh giá tương tác cộng dồn từ 3 thuốc trở lên.</p>
+    <div id="multiOut" aria-live="polite"></div>
+  </section>
+
+  <section class="box" aria-labelledby="hOne">
+    <h2 id="hOne">Tra mọi tương tác của một thuốc</h2>
+    <div class="row"><div class="ac"><input id="one" type="search" placeholder="Nhập 1 thuốc, chọn từ gợi ý hoặc nhấn Enter" autocomplete="off" aria-label="Tên thuốc cần tra"></div></div>
+    <div id="oneOut" aria-live="polite"></div>
+  </section>
+
+  <p class="src"><b>Nguồn:</b> <span id="src"></span><br><b>Cách trích:</b> <span id="extract"></span> Dữ liệu phiên bản <span id="ver"></span>.<br>
+    Không tìm thấy tương tác không có nghĩa là phối hợp an toàn: danh mục chỉ gồm các cặp chống chỉ định; cần tra thêm cơ sở dữ liệu tương tác thuốc khác khi cần. Công cụ không lưu và không gửi dữ liệu nhập đi đâu.</p>
+</div>
+
+<script src="../js/modules/interact.js"></script>
+<script>
+(function () {
+  'use strict';
+  var I = window.Interact, idx = null, MAX = 10;
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var LV = { abs: 'Chống chỉ định trong mọi trường hợp', cond: 'Chống chỉ định có điều kiện' };
+
+  // Ô nhập có gợi ý: danh sách thả xuống, mũi tên lên/xuống, Enter chọn, Esc đóng
+  function autocomplete(input, onPick) {
+    var list = document.createElement('ul'), items = [], at = -1;
+    list.className = 'sug'; list.hidden = true; list.setAttribute('role', 'listbox');
+    input.parentNode.appendChild(list);
+    input.setAttribute('role', 'combobox'); input.setAttribute('aria-autocomplete', 'list');
+    function close() { list.hidden = true; at = -1; }
+    function show() {
+      if (!idx) return;
+      items = I.suggest(idx, input.value, 12);
+      at = -1;
+      if (!items.length || !input.value.trim()) { close(); return; }
+      var k = I.norm(input.value.trim());
+      list.innerHTML = items.map(function (v, i) {
+        var n = I.norm(v.name), p = n.indexOf(k);
+        var nm = p === -1 ? esc(v.name) : esc(v.name.slice(0, p)) + '<b>' + esc(v.name.slice(p, p + k.length)) + '</b>' + esc(v.name.slice(p + k.length));
+        return '<li role="option" data-i="' + i + '"><span class="tag">Tương tác</span><span>' + nm + ' <span class="cnt">– ' + v.count + ' tương tác</span></span></li>';
+      }).join('');
+      list.hidden = false;
+    }
+    function mark() { [].forEach.call(list.children, function (li, i) { li.setAttribute('aria-selected', String(i === at)); if (i === at) li.scrollIntoView({ block: 'nearest' }); }); }
+    function pick(i) { input.value = items[i].name; close(); onPick && onPick(input.value); }
+    input.addEventListener('input', show);
+    input.addEventListener('focus', show);
+    input.addEventListener('blur', function () { setTimeout(close, 150); });
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowDown' && !list.hidden) { at = Math.min(items.length - 1, at + 1); mark(); e.preventDefault(); }
+      else if (e.key === 'ArrowUp' && !list.hidden) { at = Math.max(0, at - 1); mark(); e.preventDefault(); }
+      else if (e.key === 'Enter') { if (!list.hidden && at >= 0) { pick(at); } else { close(); onPick && onPick(input.value, true); } e.preventDefault(); }
+      else if (e.key === 'Escape') close();
+    });
+    list.addEventListener('mousedown', function (e) { var li = e.target.closest('li'); if (li) { e.preventDefault(); pick(+li.getAttribute('data-i')); } });
+    // Bấm ra ngoài ô hoặc bấm nút Kiểm tra thì đóng danh sách gợi ý
+    document.addEventListener('mousedown', function (e) { if (!input.parentNode.contains(e.target)) close(); });
+    document.addEventListener('sug:close', close);
+  }
+  function closeAll() { document.dispatchEvent(new CustomEvent('sug:close')); }
+
+  function addRow(value) {
+    if ($('rows').children.length >= MAX) return;
+    var row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = '<div class="ac"><input type="search" autocomplete="off" placeholder="Tên thuốc ' + ($('rows').children.length + 1) + '" aria-label="Tên thuốc"></div>' +
+      '<button class="del" type="button" aria-label="Xóa thuốc này">×</button>';
+    $('rows').appendChild(row);
+    var input = row.querySelector('input');
+    input.value = value || '';
+    autocomplete(input, function (v, enter) { if (enter) run(); else { var next = row.nextElementSibling; if (next) next.querySelector('input').focus(); } });
+    row.querySelector('.del').addEventListener('click', function () {
+      if ($('rows').children.length > 2) row.remove(); else input.value = '';
+      $('multiOut').innerHTML = '';
+    });
+    $('add').disabled = $('rows').children.length >= MAX;
+    return input;
+  }
+
+  function noteBlock(rec, qt) {
+    var parts = [];
+    var seen = {};
+    (rec.a + rec.b).replace(/[¹²³⁵⁶⁷]/g, function (c) {
+      var n = { '¹': '1', '²': '2', '³': '3', '⁵': '5', '⁶': '6', '⁷': '7' }[c];
+      if (!seen[n]) { seen[n] = 1; parts.push('<p><sup>' + n + '</sup> ' + esc(idx.data.notes[n]) + '</p>'); }
+      return c;
+    });
+    if (qt) parts.push('<p><sup>4</sup> Bảng thuốc kéo dài khoảng QT – dòng ' + esc(qt.a) + ': ' + esc(qt.b.join(', ')) + '</p>');
+    return parts.length ? '<details><summary>Chú thích nhóm thuốc (cuối Bảng 3.2)</summary>' + parts.join('') + '</details>' : '';
+  }
+  function card(rec, title, qt) {
+    return '<article class="ix ' + rec.level + '"><div class="ix-head"><span class="lv">' + LV[rec.level] + '</span><b>' + title + '</b>' +
+      '<span class="ref">Bảng ' + rec.table + ' · STT ' + rec.stt + '</span></div>' +
+      '<div class="ix-pair">Theo danh mục: ' + esc(rec.a) + ' ↔ ' + esc(rec.b) + '</div>' +
+      '<dl><dt>Cơ chế</dt><dd>' + esc(rec.mech) + '</dd><dt>Hậu quả</dt><dd>' + esc(rec.effect) + '</dd><dt>Xử trí</dt><dd>' + esc(rec.manage) + '</dd></dl>' +
+      noteBlock(rec, qt) + '</article>';
+  }
+
+  function run() {
+    if (!idx) return;
+    closeAll();
+    var drugs = [].map.call($('rows').querySelectorAll('input'), function (i) { return i.value; });
+    var res = I.check(idx, drugs);
+    if (res.drugs.length < 2) { $('multiOut').innerHTML = '<p class="hint">Nhập ít nhất 2 thuốc khác nhau.</p>'; return; }
+    if (!res.hits.length) {
+      $('multiOut').innerHTML = '<div class="empty ok"><b>Không tìm thấy tương tác chống chỉ định giữa các thuốc đã nhập</b>' +
+        'Kiểm tra ' + res.drugs.length + ' thuốc theo QĐ 5948. Không có trong danh mục không có nghĩa là an toàn tuyệt đối.</div>';
+      return;
+    }
+    var nAbs = res.hits.filter(function (h) { return h.rec.level === 'abs'; }).length;
+    $('multiOut').innerHTML = '<p class="sum">Tìm thấy <b>' + res.hits.length + '</b> tương tác' + (nAbs ? ', trong đó <b>' + nAbs + '</b> chống chỉ định trong mọi trường hợp' : '') + '.</p>' +
+      res.hits.map(function (h) { return card(h.rec, esc(h.x) + ' + ' + esc(h.y), h.qt); }).join('');
+  }
+
+  function runOne(v) {
+    if (!idx) return;
+    closeAll();
+    v = String(v || '').trim();
+    if (!v) { $('oneOut').innerHTML = ''; return; }
+    var res = I.lookup(idx, v);
+    if (!res.length) {
+      $('oneOut').innerHTML = '<div class="empty"><b>Không có tương tác chống chỉ định nào của “' + esc(v) + '” trong danh mục</b>Thử chọn tên từ danh sách gợi ý; danh mục dùng tên Việt hóa (ví dụ ciclosporin, clarithromycin).</div>';
+      return;
+    }
+    res.sort(function (a, b) { return (a.rec.level === 'abs' ? 0 : 1) - (b.rec.level === 'abs' ? 0 : 1) || a.partner.localeCompare(b.partner, 'vi'); });
+    $('oneOut').innerHTML = '<p class="sum"><b>' + esc(v) + '</b>: ' + res.length + ' tương tác chống chỉ định.</p>' +
+      res.map(function (h) { return card(h.rec, esc(v) + ' + ' + esc(h.partner), h.qt); }).join('');
+  }
+
+  $('add').addEventListener('click', function () { var i = addRow(); if (i) i.focus(); });
+  $('run').addEventListener('click', run);
+  $('clear').addEventListener('click', function () { $('rows').innerHTML = ''; addRow(); addRow(); $('multiOut').innerHTML = ''; });
+  addRow(); addRow();
+  autocomplete($('one'), function (v) { runOne(v); });
+
+  fetch('../data/tuong-tac-5948.json', { cache: 'no-cache' })
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (d) {
+      idx = I.build(d);
+      $('src').textContent = d.source; $('extract').textContent = d.extraction; $('ver').textContent = d.version + ' (' + d.updated + ')';
+      $('lvAbs').textContent = d.levels.abs; $('lvCond').textContent = d.levels.cond;
+      var q = new URLSearchParams(location.search).get('q');
+      if (q) { $('one').value = q; runOne(q); }
+    })
+    .catch(function (e) { $('multiOut').innerHTML = '<p class="hint">Không tải được dữ liệu tương tác (' + esc(e.message) + ').</p>'; });
+})();
+</script>
+</body>
+</html>

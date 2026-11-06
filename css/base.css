@@ -67,6 +67,7 @@ svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-l
 .nav-group[data-cat="icd10"]{--cat:#3fae5a}
 .nav-group[data-cat="tt20"]{--cat:#e8743b}
 .nav-group[data-cat="cong-cu-tinh"]{--cat:#2f9ea0}
+.nav-group[data-cat="tuong-tac"]{--cat:#d9534f}
 .nav-group[data-cat="dich-vu-ky-thuat"]{--cat:#6f9de8}
 .nav-group[data-cat="phac-do-dieu-tri"]{--cat:#c7b23c}
 .nav-group{--cat:var(--accent);margin-top:12px}
