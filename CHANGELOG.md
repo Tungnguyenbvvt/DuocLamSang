@@ -1,5 +1,9 @@
 # Nhật ký thay đổi
 
+## 1.15.2 – 2026-11-06
+
+- Sắp xếp lại thứ tự module ở sidebar theo yêu cầu người dùng: Tài liệu thông tin thuốc, Tương tác thuốc, Công cụ tính toán, ICD-10, TT20, Dịch vụ kĩ thuật, Phác đồ điều trị, Tóm tắt guideline, So sánh dược lý lâm sàng, Thẩm định bài báo (EBM). `pages.json` lên 1.9.0, CACHE_VERSION lên cph-hub-v1.15.2.
+
 ## 1.15.1 – 2026-11-06
 
 - Trang Tương tác thuốc: bỏ phần ghi chú “tên hoạt chất (không) in đậm trong văn bản” và mục định nghĩa nguyên văn ở khung chú giải theo yêu cầu người dùng. CACHE_VERSION lên cph-hub-v1.15.1.
