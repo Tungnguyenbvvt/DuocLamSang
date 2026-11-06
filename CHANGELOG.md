@@ -1,5 +1,9 @@
 # Nhật ký thay đổi
 
+## 1.15.1 – 2026-11-06
+
+- Trang Tương tác thuốc: bỏ phần ghi chú “tên hoạt chất (không) in đậm trong văn bản” và mục định nghĩa nguyên văn ở khung chú giải theo yêu cầu người dùng. CACHE_VERSION lên cph-hub-v1.15.1.
+
 ## 1.15.0 – 2026-11-06
 
 - **Module mới: Tương tác thuốc** (nhóm mới ở sidebar) – trang `pages/tuong-tac-thuoc.html` tra Danh mục tương tác thuốc chống chỉ định ban hành kèm QĐ 5948/QĐ-BYT ngày 30/12/2021: 633 cặp theo hoạt chất (Bảng 3.1) và 68 cặp theo nhóm đặc tính dược lý (Bảng 3.2), kèm cơ chế, hậu quả, xử trí, 7 chú thích nhóm thuốc, bảng con thuốc kéo dài khoảng QT và bảng tên khác của hoạt chất.

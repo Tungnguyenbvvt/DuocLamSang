@@ -14,7 +14,7 @@
   .legend p{margin:4px 0}
   .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
   .dot.abs{background:var(--abs)}.dot.cond{background:#e8b10e}
-  .legend details{margin-top:6px;font-size:12.5px;color:var(--mut)}
+
   .box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
   .box h2{font-size:14.5px;margin:0 0 10px}
   .row{display:flex;gap:8px;margin-bottom:8px;position:relative}
@@ -59,9 +59,8 @@
   </header>
 
   <div class="legend" id="legend">
-    <p><span class="dot abs"></span><b>Chống chỉ định trong mọi trường hợp</b> (tên hoạt chất không in đậm trong văn bản)</p>
-    <p><span class="dot cond"></span><b>Chống chỉ định có điều kiện</b> (tên hoạt chất in đậm trong văn bản): chỉ chống chỉ định trong một số bối cảnh, hoặc tốt nhất nên tránh</p>
-    <details><summary>Định nghĩa nguyên văn trong QĐ 5948</summary><p id="lvAbs"></p><p id="lvCond"></p></details>
+    <p><span class="dot abs"></span><b>Chống chỉ định trong mọi trường hợp</b></p>
+    <p><span class="dot cond"></span><b>Chống chỉ định có điều kiện</b>: chỉ chống chỉ định trong một số bối cảnh, hoặc tốt nhất nên tránh</p>
   </div>
 
   <section class="box" aria-labelledby="hMulti">
@@ -211,9 +210,7 @@
     .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function (d) {
       idx = I.build(d);
-      $('src').textContent = d.source; $('extract').textContent = d.extraction; $('ver').textContent = d.version + ' (' + d.updated + ')';
-      $('lvAbs').textContent = d.levels.abs; $('lvCond').textContent = d.levels.cond;
-      var q = new URLSearchParams(location.search).get('q');
+      $('src').textContent = d.source; $('extract').textContent = d.extraction; $('ver').textContent = d.version + ' (' + d.updated + ')';      var q = new URLSearchParams(location.search).get('q');
       if (q) { $('one').value = q; runOne(q); }
     })
     .catch(function (e) { $('multiOut').innerHTML = '<p class="hint">Không tải được dữ liệu tương tác (' + esc(e.message) + ').</p>'; });
